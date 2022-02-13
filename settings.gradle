@@ -1,1 +1,1 @@
-include ':grocerystoresystem/GroceryStoreSystem-Backend'
+include ':GroceryStoreSystem-Backend'
