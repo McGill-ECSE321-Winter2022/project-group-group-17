@@ -1,12 +1,12 @@
 package mcgill.ecse321.grocerystoresystem;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class GroceryStoreSystemBackendApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
