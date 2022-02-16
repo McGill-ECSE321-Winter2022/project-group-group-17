@@ -1,8 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+;
 
 @Entity
 public class Address {
@@ -13,11 +12,11 @@ public class Address {
 	private int address_ID;
 	
 	// Address Associations
-	@OneToOne(optional="false") 
+	@OneToOne(optional=false) 
 	private Person person;
-	@OneToOne(optional="false")
+	@OneToOne(optional=false)
 	private PaymentMethod payment;
-	@OneToOne(optional="false")
+	@OneToOne(optional=false)
 	private DeliveryOrder order;
 	
 	private boolean isLocal;

@@ -2,9 +2,7 @@ package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class SpecialDay {
@@ -13,7 +11,8 @@ public class SpecialDay {
 	private int specialday_id;
 	
 	// SpecialDay Associations
-	@ManyToOne(mappedBy = "closedDays", fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "closedDays")
 	private Calendar calendar;
 	
 	private LocalDateTime startTimestamp;

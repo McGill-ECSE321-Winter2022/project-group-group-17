@@ -1,12 +1,12 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class Calendar {	
 	
   // Calendar Associations
-  @OneToOne(optional="false", fetch = FetchType.LAZY)
+  @OneToOne(optional=false, fetch = FetchType.LAZY)
   private StoreHour openingTime;
   @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
   private SpecialDay closedDays;

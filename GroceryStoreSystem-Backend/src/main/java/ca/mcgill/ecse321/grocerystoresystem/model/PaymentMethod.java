@@ -1,12 +1,14 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.time.LocalDateTime;
+
+import javax.persistence.*;
 
 @Entity
 public class PaymentMethod {
-	
+	@Id
+	@GeneratedValue
+	private int paymentMethod_ID;
 	private String name;
 	private String cardNum;
 	private LocalDateTime  expiryDate;
@@ -14,7 +16,8 @@ public class PaymentMethod {
 	
 	@OneToOne(mappedBy = "payment")
 	private Address address;
-	@ManyToOne(mappedBy = "methods",fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name ="methods")
 	private Person person;
 	
 	public PaymentMethod(String name, String cardNum, LocalDateTime expiryDate, String cVC) {

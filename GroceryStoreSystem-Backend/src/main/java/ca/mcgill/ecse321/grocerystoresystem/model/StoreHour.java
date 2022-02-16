@@ -2,9 +2,7 @@ package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.time.LocalTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class StoreHour {

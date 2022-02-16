@@ -3,9 +3,7 @@ package ca.mcgill.ecse321.grocerystoresystem.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Shift {
@@ -18,7 +16,8 @@ public class Shift {
 	// Shift Associations
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Calendar calendar;
-	@ManyToOne(mappedBy = "shifts", fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "shifts")
 	private Employee employee;
 	
 	private LocalDate date;
