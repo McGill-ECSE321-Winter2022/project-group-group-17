@@ -9,7 +9,7 @@ public class PaymentMethod {
 	
 	private String name;
 	private String cardNum;
-	private Date  expiryDate;
+	private LocalDateTime  expiryDate;
 	private String cVC;
 	
 	@OneToOne(mappedBy = "payment")
@@ -47,11 +47,11 @@ public class PaymentMethod {
 	public void setCVC(String cVC) {
 		this.cVC = cVC;
 	}
-	public  Date getExpiryDate() {
+	public  LocalDateTime getExpiryDate() {
 		return expiryDate;
 	}
 	
-	public void setExpiryDate(Date expiryDate) {
+	public void setExpiryDate(LocalDateTime expiryDate) {
 		this.expiryDate = expiryDate;
 	}
 	public int getPaymentMethod_ID() {
