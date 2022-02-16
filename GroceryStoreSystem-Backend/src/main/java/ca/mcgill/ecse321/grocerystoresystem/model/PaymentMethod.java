@@ -17,7 +17,7 @@ public class PaymentMethod {
 	@ManyToOne(mappedBy = "methods",fetch = FetchType.LAZY)
 	private Person person;
 	
-	public PaymentMethod(String name, String cardNum, Date expiryDate, String cVC) {
+	public PaymentMethod(String name, String cardNum, LocalDateTime expiryDate, String cVC) {
 		this.name = name;
 		this.cardNum = cardNum;
 		this.expiryDate = expiryDate;
