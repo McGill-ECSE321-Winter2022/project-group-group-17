@@ -10,6 +10,12 @@ public class Item {
 	@GeneratedValue
 	private int item_ID;
 	
+	// Item Associations
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "items")
+	private Order order;
+	
+	
 	private int item_price;
 	private String name;
 	private int inventoryAmount;
