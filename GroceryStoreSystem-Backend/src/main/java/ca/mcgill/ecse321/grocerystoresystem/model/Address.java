@@ -9,7 +9,10 @@ public class Address {
 	
 	@Id
 	@GeneratedValue
+	
 	private int address_ID;
+	
+	private boolean isLocal;
 	
 	private String streetName;
 	private String streetNum;
@@ -19,12 +22,20 @@ public class Address {
 	
 	private String country;
 	
-	public Address(String streetName, String streetNum, String city, String postalCode, String country) {
+	public Address(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
 		this.streetName = streetName;
 		this.streetNum = streetNum;
 		this.city = city;
 		this.postalCode = postalCode;
 		this.country = country;
+		this.isLocal = isLocal;
+	}
+	public boolean isLocal() {
+		return isLocal;
+	}
+
+	public void setLocal(boolean isLocal) {
+		this.isLocal = isLocal;
 	}
 
 	public String getStreetName() {
