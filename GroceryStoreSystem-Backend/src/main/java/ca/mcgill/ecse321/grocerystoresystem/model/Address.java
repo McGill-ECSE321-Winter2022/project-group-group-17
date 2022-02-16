@@ -17,6 +17,8 @@ public class Address {
 	private Person person;
 	@OneToOne(optional="false")
 	private PaymentMethod payment;
+	@OneToOne(optional="false")
+	private DeliveryOrder order;
 	
 	private boolean isLocal;
 	

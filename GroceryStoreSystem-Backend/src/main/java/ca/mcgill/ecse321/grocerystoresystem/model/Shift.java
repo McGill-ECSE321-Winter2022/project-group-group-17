@@ -17,6 +17,8 @@ public class Shift {
 	// Shift Associations
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Calendar calendar;
+	@ManyToOne(mappedBy = "shifts", fetch = FetchType.LAZY)
+	private Employee employee;
 	
 	private LocalDate date;
 	private LocalTime startTime;

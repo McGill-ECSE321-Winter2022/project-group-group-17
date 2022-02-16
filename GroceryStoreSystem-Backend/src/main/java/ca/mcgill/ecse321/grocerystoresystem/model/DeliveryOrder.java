@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 @Entity
 public class DeliveryOrder extends Order {
 
-	
+  // DeliveryOrder Associations
+  @OneToOne(mappedBy = "order")
+  private Address address;
+  
+  
 	private LocalDateTime deliveryTime;
 	
 	public DeliveryOrder(int total_cost, LocalDateTime order_timestamp, boolean isPaid, LocalDateTime deliveryTime) {
