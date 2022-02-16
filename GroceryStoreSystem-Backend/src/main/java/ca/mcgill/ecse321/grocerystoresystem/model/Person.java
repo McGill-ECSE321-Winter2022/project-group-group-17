@@ -10,6 +10,15 @@ public abstract class Person {
 	@GeneratedValue
 	private int person_ID;
 	
+	// Person Associations
+	@OneToOne(mappedBy = "person")
+	private Address address;
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+	private PaymentMethod methods;
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+	private Order orders;
+	
+	
 	private String first_name;
 	private String last_name;
 	private String email;

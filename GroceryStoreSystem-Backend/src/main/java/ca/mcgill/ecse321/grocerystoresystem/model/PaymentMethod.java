@@ -12,6 +12,11 @@ public class PaymentMethod {
 	private Date  expiryDate;
 	private String cVC;
 	
+	@OneToOne(mappedBy = "payment")
+	private Address address;
+	@ManyToOne(mappedBy = "methods",fetch = FetchType.LAZY)
+	private Person person;
+	
 	public PaymentMethod(String name, String cardNum, Date expiryDate, String cVC) {
 		this.name = name;
 		this.cardNum = cardNum;

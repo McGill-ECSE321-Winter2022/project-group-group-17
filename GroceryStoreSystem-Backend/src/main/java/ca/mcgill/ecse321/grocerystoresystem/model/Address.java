@@ -12,6 +12,12 @@ public class Address {
 	
 	private int address_ID;
 	
+	// Address Associations
+	@OneToOne(optional="false") 
+	private Person person;
+	@OneToOne(optional="false")
+	private PaymentMethod payment;
+	
 	private boolean isLocal;
 	
 	private String streetName;

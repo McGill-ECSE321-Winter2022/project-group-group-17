@@ -12,6 +12,10 @@ public class SpecialDay {
 	@GeneratedValue
 	private int specialday_id;
 	
+	// SpecialDay Associations
+	@ManyToOne(mappedBy = "closedDays", fetch = FetchType.LAZY)
+	private Calendar calendar;
+	
 	private LocalDateTime startTimestamp;
 	private LocalDateTime endTimestamp;
 	

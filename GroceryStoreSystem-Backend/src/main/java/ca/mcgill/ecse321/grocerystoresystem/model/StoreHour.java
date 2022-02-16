@@ -17,6 +17,10 @@ public class StoreHour {
 	private LocalTime endTime;
 	private Weekdays weekday;
 	
+	// StoreHour Associations
+	@OneToOne(mappedBy="openingTime")
+	private Calendar calendar;
+	
 	private StoreHour(LocalTime startTime, LocalTime endTime, Weekdays weekday) {
 		this.startTime = startTime;
 		this.endTime = endTime;

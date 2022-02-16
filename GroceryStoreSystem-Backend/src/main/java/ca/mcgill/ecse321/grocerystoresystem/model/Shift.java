@@ -14,6 +14,10 @@ public class Shift {
 	@GeneratedValue
 	private int shift_ID;
 	
+	// Shift Associations
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Calendar calendar;
+	
 	private LocalDate date;
 	private LocalTime startTime;
 	private LocalTime endTime;
