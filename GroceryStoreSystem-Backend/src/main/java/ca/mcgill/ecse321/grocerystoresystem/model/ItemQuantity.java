@@ -1,15 +1,21 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Quantity {
+public class ItemQuantity {
 
 	@Id
 	@GeneratedValue
 	private int quantity_id;
+	
+	// ItemQuantity Associations
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "orderItems")
+	private Order order;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderItems")
+	private Item specificItem;
 	
 	private int itemNum;
 	
