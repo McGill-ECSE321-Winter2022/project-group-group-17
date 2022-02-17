@@ -9,12 +9,12 @@ public class Address {
 	@Id
 	@GeneratedValue
 	
-	private int addressID;
+	private String addressID;
 	
 	// Address Associations
-	@OneToOne(optional=false) 
+	@OneToMany(mappedBy = "address")
 	private Person person;
-	@OneToOne(optional=false)
+	@OneToMany(mappedBy = "address")
 	private DeliveryOrder order;
 	
 	private boolean isLocal;
@@ -27,8 +27,9 @@ public class Address {
 	
 	private String country;
 	
-	public Address(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
-		this.streetName = streetName;
+	public Address(String addressID, String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+		this.addressID = addressID;
+	    this.streetName = streetName;
 		this.streetNum = streetNum;
 		this.city = city;
 		this.postalCode = postalCode;
@@ -83,7 +84,12 @@ public class Address {
 		this.country = country;
 	}
 
-	public int getAddressID() {
+	public String getAddressID() {
 		return addressID;
 	}
+	
+	public void setAddressID(String addressID) {
+	  this.addressID = addressID;
+	}
+	
 }
