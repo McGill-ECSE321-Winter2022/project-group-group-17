@@ -19,7 +19,7 @@ public class ItemQuantity {
 	
 	private int itemNum;
 	
-	public Quantity(int itemNum) {
+	public ItemQuantity(int itemNum) {
 		this.itemNum = itemNum;
 	}
 
