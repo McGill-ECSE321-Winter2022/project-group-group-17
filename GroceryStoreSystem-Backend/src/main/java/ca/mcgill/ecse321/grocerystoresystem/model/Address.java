@@ -1,7 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import javax.persistence.*;
-;
+
 
 @Entity
 public class Address {
@@ -9,13 +9,11 @@ public class Address {
 	@Id
 	@GeneratedValue
 	
-	private int address_ID;
+	private int addressID;
 	
 	// Address Associations
 	@OneToOne(optional=false) 
 	private Person person;
-	@OneToOne(optional=false)
-	private PaymentMethod payment;
 	@OneToOne(optional=false)
 	private DeliveryOrder order;
 	
@@ -85,7 +83,7 @@ public class Address {
 		this.country = country;
 	}
 
-	public int getAddress_ID() {
-		return address_ID;
+	public int getAddressID() {
+		return addressID;
 	}
 }

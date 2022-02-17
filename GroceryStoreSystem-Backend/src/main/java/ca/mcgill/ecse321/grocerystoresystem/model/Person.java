@@ -12,8 +12,6 @@ public abstract class Person {
 	@OneToOne(mappedBy = "person")
 	private Address address;
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-	private PaymentMethod methods;
-	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 	private Order orders;
 	
 	
