@@ -31,11 +31,11 @@ public abstract class Order {
 		this.orderID = orderID;
 	}
 
-	public LocalDateTime getorderTimeStamp() {
+	public LocalDateTime getOrderTimeStamp() {
 		return orderTimeStamp;
 	}
 
-	public void setorderTimeStamp(LocalDateTime orderTimeStamp) {
+	public void setOrderTimeStamp(LocalDateTime orderTimeStamp) {
 		this.orderTimeStamp = orderTimeStamp;
 	}
 
