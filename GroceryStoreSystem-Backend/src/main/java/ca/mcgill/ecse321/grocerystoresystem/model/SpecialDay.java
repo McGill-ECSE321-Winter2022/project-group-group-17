@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class SpecialDay {
 	@Id
 	@GeneratedValue
-	private int specialday_id;
+	private String specialDayID;
 	
 	// SpecialDay Associations
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -39,7 +39,7 @@ public class SpecialDay {
 		this.endTimestamp = endTimestamp;
 	}
 
-	public int getSpecialday_id() {
-		return specialday_id;
+	public String getSpecialday_id() {
+		return specialDayID;
 	}
 }

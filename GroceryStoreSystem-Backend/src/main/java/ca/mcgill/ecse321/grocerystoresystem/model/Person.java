@@ -74,7 +74,7 @@ public abstract class Person {
 		this.password = password;
 	}
 
-	public int getPerson_ID() {
-		return person_ID;
-	}
+//	public int getPerson_ID() {
+//		return person_ID;
+//	}
 }

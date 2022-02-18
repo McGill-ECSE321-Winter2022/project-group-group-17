@@ -6,24 +6,25 @@ import javax.persistence.*;
 public class Item {
 	@Id
 	@GeneratedValue
-	private int item_ID;
+	private String itemID;
 	
 	// Item Associations
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "items")
 	private Order order;
+	@OneToMany(mappedBy = "specificItem", cascade = CascadeType.ALL)
+	private ItemQuantity portionNum;
 	
-	
-	private int item_price;
+	private int itemPrice;
 	private String name;
 	private int inventoryAmount;
 	private boolean isDeliverable;
 	private String portionUnit;
 	private InventoryType inventoryType;
 	
-	public Item(String name, int item_price, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType) {
+	public Item(String name, String itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType) {
 		this.name = name;
-		this.item_price = item_price;
+		this.itemPrice = itemPrice;
 		this.inventoryAmount = inventoryAmount;
 		this.isDeliverable = isDeliverable;
 		this.portionUnit = portionUnit;
@@ -31,12 +32,12 @@ public class Item {
 	}
 	
 
-	public int getItem_price() {
-		return item_price;
+	public int getItemPrice() {
+		return itemPrice;
 	}
 
-	public void setItem_price(int item_price) {
-		this.item_price = item_price;
+	public void setItemPrice(String itemPrice) {
+		this.itemPrice = itemPrice;
 	}
 
 	public String getName() {
@@ -77,8 +78,12 @@ public class Item {
 		this.inventoryType = inventoryType;
 	}
 
-	public int getItem_ID() {
-		return item_ID;
+	public String getItemID() {
+		return itemID;
 	}
+	
+//	public void setItemID(String itemID) {
+//	    this.itemID = itemID;
+//	}
 	
 }
