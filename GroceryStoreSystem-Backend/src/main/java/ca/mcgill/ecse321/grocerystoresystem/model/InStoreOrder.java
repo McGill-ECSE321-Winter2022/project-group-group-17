@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 
 @Entity
