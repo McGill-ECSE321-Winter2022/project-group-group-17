@@ -18,9 +18,10 @@ public class SpecialDay {
 	private LocalDateTime startTimestamp;
 	private LocalDateTime endTimestamp;
 	
-	public SpecialDay(LocalDateTime startTimestamp, LocalDateTime endTimestamp) {
+	public SpecialDay(LocalDateTime startTimestamp, LocalDateTime endTimestamp, String specialDayID) {
 		this.startTimestamp = startTimestamp;
 		this.endTimestamp = endTimestamp;
+		this.specialDayID = specialDayID;
 	}
 
 	public LocalDateTime getStartTimestamp() {
@@ -39,7 +40,10 @@ public class SpecialDay {
 		this.endTimestamp = endTimestamp;
 	}
 
-	public String getSpecialday_id() {
+	public String getSpecialdayID() {
 		return specialDayID;
+	}
+	public void setSpecialDayID(String specialDayID) {
+		this.specialDayID = specialDayID;
 	}
 }

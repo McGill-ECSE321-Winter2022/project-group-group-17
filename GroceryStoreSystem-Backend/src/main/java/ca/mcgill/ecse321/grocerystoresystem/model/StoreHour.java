@@ -9,7 +9,7 @@ public class StoreHour {
 
 	@Id
 	@GeneratedValue
-	private int storehour_id;
+	private String storeHourID;
 	
 	private LocalTime startTime;
 	private LocalTime endTime;
@@ -19,10 +19,11 @@ public class StoreHour {
 	@OneToOne(mappedBy="openingTime")
 	private Calendar calendar;
 	
-	private StoreHour(LocalTime startTime, LocalTime endTime, Weekdays weekday) {
+	private StoreHour(LocalTime startTime, LocalTime endTime, Weekdays weekday, String storeHourID ) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.weekday = weekday;
+		this.storeHourID = storeHourID;
 	}
 
 	public LocalTime getStartTime() {
@@ -49,7 +50,11 @@ public class StoreHour {
 		this.weekday = weekday;
 	}
 
-	public int getStorehour_id() {
-		return storehour_id;
+	public String getStoreHourID() {
+		return storeHourID;
+	}
+	public void setStoreHourID (String storeHourID){
+		this.storeHourID = storeHourID;
 	}
 }
+

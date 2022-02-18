@@ -2,42 +2,49 @@ package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public abstract class Order {
 	
+	
+	
 	@Id
 	@GeneratedValue
-	private int order_ID;
+	private String orderID;
+	// Order Associations 
+	@OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
+	private ItemQuantity portionNum;
+	@ManyToOne (fetch = FetchType.LAZY)
+	@JoinColumn (name = "orders")
+	private Person person;
 	
-	private LocalDateTime order_timestamp;
-	private int total_cost;
 	
+	private LocalDateTime orderTimeStamp;
+	private int totalCost;
 	private boolean isPaid;
 	
-	public Order(int total_cost, LocalDateTime order_timestamp, boolean isPaid) {
-		this.total_cost = total_cost;
-		this.order_timestamp = order_timestamp;
+	public Order(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, String orderID) {
+		this.totalCost = totalCost;
+		this.orderTimeStamp = orderTimeStamp;
 		this.isPaid = isPaid;
+		this.orderID = orderID;
 	}
 
-	public LocalDateTime getOrder_timestamp() {
-		return order_timestamp;
+	public LocalDateTime getorderTimeStamp() {
+		return orderTimeStamp;
 	}
 
-	public void setOrder_timestamp(LocalDateTime order_timestamp) {
-		this.order_timestamp = order_timestamp;
+	public void setorderTimeStamp(LocalDateTime orderTimeStamp) {
+		this.orderTimeStamp = orderTimeStamp;
 	}
 
-	public int getTotal_cost() {
-		return total_cost;
+	public int getTotalCost() {
+		return totalCost;
 	}
 
-	public void setTotal_cost(int total_cost) {
-		this.total_cost = total_cost;
+	public void setTotalCost(int totalCost) {
+		this.totalCost = totalCost;
 	}
 
 	public boolean isPaid() {
@@ -48,7 +55,10 @@ public abstract class Order {
 		this.isPaid = isPaid;
 	}
 
-	public int getOrder_ID() {
-		return order_ID;
+	public String getOrderID() {
+		return orderID;
+	}
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
 	}
 }

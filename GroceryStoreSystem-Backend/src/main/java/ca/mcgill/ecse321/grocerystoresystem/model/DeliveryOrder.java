@@ -14,8 +14,8 @@ public class DeliveryOrder extends Order {
   
 	private LocalDateTime deliveryTime;
 	
-	public DeliveryOrder(int total_cost, LocalDateTime order_timestamp, boolean isPaid, LocalDateTime deliveryTime) {
-		super(total_cost, order_timestamp, isPaid);
+	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, String orderID) {
+		super(totalCost, orderTimeStamp, isPaid, orderID);
 		this.deliveryTime = deliveryTime;
 	}
 

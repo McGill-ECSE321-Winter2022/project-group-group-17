@@ -87,8 +87,8 @@ public class Address {
 		return addressID;
 	}
 	
-//	public void setAddressID(String addressID) {
-//	  this.addressID = addressID;
-//	}
+	public void setAddressID(String addressID) {
+	  this.addressID = addressID;
+	}
 	
 }

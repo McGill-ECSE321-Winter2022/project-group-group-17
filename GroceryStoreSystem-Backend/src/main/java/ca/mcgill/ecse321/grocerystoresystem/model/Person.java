@@ -6,12 +6,12 @@ import javax.persistence.*;
 public abstract class Person {
 	@Id
 	@GeneratedValue
-	@Column(unique=true)
+	@Column(unique=true)  // The email acts as the ID for person which is why it`s unique
     private String email;
 	
 	// Person Associations
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn("person")
+	@JoinColumn(name = "person")
 	private Address address;
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
 	private Order orders;

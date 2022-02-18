@@ -25,7 +25,8 @@ public class Shift {
 	private LocalTime endTime;
 	private ShiftStatus shiftStatus;
 	
-	public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
+	public Shift(String shiftID,LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
+		this.shiftID = shiftID;
 		this.date = date;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -58,6 +59,9 @@ public class Shift {
 
 	public String getShiftID() {
 		return shiftID;
+	}
+	public void setShiftID(String shiftID) {
+		this.shiftID = shiftID;
 	}
 	
 	public ShiftStatus getShiftStatus() {

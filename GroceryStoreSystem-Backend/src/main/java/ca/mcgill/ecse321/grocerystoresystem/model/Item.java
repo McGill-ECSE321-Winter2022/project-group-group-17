@@ -22,13 +22,14 @@ public class Item {
 	private String portionUnit;
 	private InventoryType inventoryType;
 	
-	public Item(String name, String itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType) {
+	public Item(String name, int itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType, String itemID) {
 		this.name = name;
 		this.itemPrice = itemPrice;
 		this.inventoryAmount = inventoryAmount;
 		this.isDeliverable = isDeliverable;
 		this.portionUnit = portionUnit;
 		this.inventoryType = inventoryType;
+		this.itemID = itemID;
 	}
 	
 
@@ -36,7 +37,7 @@ public class Item {
 		return itemPrice;
 	}
 
-	public void setItemPrice(String itemPrice) {
+	public void setItemPrice(int itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 
@@ -82,8 +83,8 @@ public class Item {
 		return itemID;
 	}
 	
-//	public void setItemID(String itemID) {
-//	    this.itemID = itemID;
-//	}
+	public void setItemID(String itemID) {
+	    this.itemID = itemID;
+	}
 	
 }

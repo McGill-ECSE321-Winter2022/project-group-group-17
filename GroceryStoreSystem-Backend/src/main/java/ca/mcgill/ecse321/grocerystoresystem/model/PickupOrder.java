@@ -8,12 +8,11 @@ import javax.persistence.Entity;
 public class PickupOrder extends Order {
 
 	private LocalDateTime pickupDate;
-	private int basketNum;
+
 	
-	public PickupOrder(int total_cost, LocalDateTime order_timestamp, boolean isPaid, LocalDateTime pickupDate, int basketNum) {
-		super(total_cost, order_timestamp, isPaid);
+	public PickupOrder(int total_cost, LocalDateTime order_timestamp, boolean isPaid, LocalDateTime pickupDate, String orderID) {
+		super(total_cost, order_timestamp, isPaid, orderID);
 		this.pickupDate = pickupDate;
-		this.basketNum = basketNum;
 	}
 
 	public LocalDateTime getPickupDate() {
@@ -24,11 +23,4 @@ public class PickupOrder extends Order {
 		this.pickupDate = pickupDate;
 	}
 
-	public int getBasketNum() {
-		return basketNum;
-	}
-
-	public void setBasketNum(int basketNum) {
-		this.basketNum = basketNum;
-	}
 }
