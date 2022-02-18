@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class DeliveryOrder extends Order {
