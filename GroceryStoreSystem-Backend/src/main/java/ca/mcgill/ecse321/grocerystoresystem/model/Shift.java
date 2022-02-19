@@ -10,7 +10,7 @@ public class Shift {
 	
 	@Id
 	@GeneratedValue
-	private String shiftID;
+	private int shiftID;
 	
 	
 	// Shift Associations
@@ -25,7 +25,7 @@ public class Shift {
 	private LocalTime endTime;
 	private ShiftStatus shiftStatus;
 	
-	public Shift(String shiftID,LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
+	public Shift(int shiftID,LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
 		this.shiftID = shiftID;
 		this.date = date;
 		this.startTime = startTime;
@@ -57,10 +57,10 @@ public class Shift {
 		this.endTime = endTime;
 	}
 
-	public String getShiftID() {
+	public int getShiftID() {
 		return shiftID;
 	}
-	public void setShiftID(String shiftID) {
+	public void setShiftID(int shiftID) {
 		this.shiftID = shiftID;
 	}
 	

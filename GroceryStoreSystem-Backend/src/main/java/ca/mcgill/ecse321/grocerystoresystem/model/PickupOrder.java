@@ -10,7 +10,7 @@ public class PickupOrder extends Order {
 	private LocalDateTime pickupDate;
 
 	
-	public PickupOrder(int total_cost, LocalDateTime order_timestamp, boolean isPaid, LocalDateTime pickupDate, String orderID) {
+	public PickupOrder(int total_cost, LocalDateTime order_timestamp, boolean isPaid, LocalDateTime pickupDate, int orderID) {
 		super(total_cost, order_timestamp, isPaid, orderID);
 		this.pickupDate = pickupDate;
 	}

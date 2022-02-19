@@ -6,7 +6,9 @@ import javax.persistence.*;
 public abstract class Person {
 	@Id
 	@GeneratedValue
-	@Column(unique=true)  // The email acts as the ID for person which is why it`s unique
+	private int personID;
+	
+	@Column(unique=true)
     private String email;
 	
 	// Person Associations

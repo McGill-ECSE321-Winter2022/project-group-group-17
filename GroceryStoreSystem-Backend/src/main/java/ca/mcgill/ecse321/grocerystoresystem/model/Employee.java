@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 public class Employee extends Person {
-
   // Employee Associations
   @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
   private Shift shifts;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Item {
 	@Id
 	@GeneratedValue
-	private String itemID;
+	private int itemID;
 	
 	// Item Associations
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -22,7 +22,7 @@ public class Item {
 	private String portionUnit;
 	private InventoryType inventoryType;
 	
-	public Item(String name, int itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType, String itemID) {
+	public Item(String name, int itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType, int itemID) {
 		this.name = name;
 		this.itemPrice = itemPrice;
 		this.inventoryAmount = inventoryAmount;
@@ -79,11 +79,11 @@ public class Item {
 		this.inventoryType = inventoryType;
 	}
 
-	public String getItemID() {
+	public int getItemID() {
 		return itemID;
 	}
 	
-	public void setItemID(String itemID) {
+	public void setItemID(int itemID) {
 	    this.itemID = itemID;
 	}
 	

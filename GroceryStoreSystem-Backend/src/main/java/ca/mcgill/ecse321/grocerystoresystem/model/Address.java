@@ -8,7 +8,7 @@ public class Address {
 	
 	@Id
 	@GeneratedValue
-	private String addressID;
+	private int addressID;
 	
 	// Address Associations
 	@OneToMany(mappedBy = "address")
@@ -26,7 +26,7 @@ public class Address {
 	
 	private String country;
 	
-	public Address(String addressID, String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+	public Address(int addressID, String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
 		this.addressID = addressID;
 	    this.streetName = streetName;
 		this.streetNum = streetNum;
@@ -83,11 +83,11 @@ public class Address {
 		this.country = country;
 	}
 
-	public String getAddressID() {
+	public int getAddressID() {
 		return addressID;
 	}
 	
-	public void setAddressID(String addressID) {
+	public void setAddressID(int addressID) {
 	  this.addressID = addressID;
 	}
 	

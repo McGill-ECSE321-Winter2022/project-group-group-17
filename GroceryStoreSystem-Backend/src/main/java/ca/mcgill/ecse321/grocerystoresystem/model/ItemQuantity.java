@@ -7,7 +7,7 @@ public class ItemQuantity {
 
 	@Id
 	@GeneratedValue
-	private String quantityID;
+	private int quantityID;
 	
 	// ItemQuantity Associations
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -19,7 +19,7 @@ public class ItemQuantity {
 	
 	private int itemNum;
 	
-	public ItemQuantity(int itemNum, String quantityID ) {
+	public ItemQuantity(int itemNum, int quantityID ) {
 		this.itemNum = itemNum;
 		this.quantityID = quantityID;
 	}
@@ -32,10 +32,10 @@ public class ItemQuantity {
 		this.itemNum = itemNum;
 	}
 
-	public String getQuantityID() {
+	public int getQuantityID() {
 		return quantityID;
 	}
-	public void setQuantityID(String quantityID){
+	public void setQuantityID(int quantityID){
 		this.quantityID = quantityID;
 	}
 }

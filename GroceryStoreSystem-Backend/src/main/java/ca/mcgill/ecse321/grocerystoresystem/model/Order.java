@@ -11,7 +11,7 @@ public abstract class Order {
 	
 	@Id
 	@GeneratedValue
-	private String orderID;
+	private int orderID;
 	// Order Associations 
 	@OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
 	private ItemQuantity portionNum;
@@ -24,7 +24,7 @@ public abstract class Order {
 	private int totalCost;
 	private boolean isPaid;
 	
-	public Order(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, String orderID) {
+	public Order(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, int orderID) {
 		this.totalCost = totalCost;
 		this.orderTimeStamp = orderTimeStamp;
 		this.isPaid = isPaid;
@@ -55,10 +55,10 @@ public abstract class Order {
 		this.isPaid = isPaid;
 	}
 
-	public String getOrderID() {
+	public int getOrderID() {
 		return orderID;
 	}
-	public void setOrderID(String orderID) {
+	public void setOrderID(int orderID) {
 		this.orderID = orderID;
 	}
 }
