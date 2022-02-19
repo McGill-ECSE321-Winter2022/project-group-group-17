@@ -10,8 +10,8 @@ public class Employee extends Person {
   private Shift shifts;
   private EmployeeStatus empStatus;
   
-	public Employee(String first_name, String last_name, String email, String username, String password, EmployeeStatus empStatus ) {
-		super(first_name, last_name, email, username, password);
+	public Employee(String first_name, String last_name, String email,  String password, EmployeeStatus empStatus ) {
+		super(first_name, last_name, email, password);
 		this.empStatus = empStatus;
 	}
 	public EmployeeStatus getEmpStatus() {
