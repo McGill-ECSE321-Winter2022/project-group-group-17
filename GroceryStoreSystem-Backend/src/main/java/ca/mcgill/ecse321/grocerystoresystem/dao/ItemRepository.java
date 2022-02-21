@@ -6,5 +6,5 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Item;
 
 public interface ItemRepository extends CrudRepository<Item, Integer>{
 
-	Item findItemByID(Integer itemID);
+	Item findItemByItemID(Integer id);
 }
