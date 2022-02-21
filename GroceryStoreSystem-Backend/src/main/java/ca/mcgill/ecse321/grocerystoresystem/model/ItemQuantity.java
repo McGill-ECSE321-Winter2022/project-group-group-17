@@ -11,7 +11,7 @@ public class ItemQuantity {
 	
 	// ItemQuantity Associations
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "orderItems")
+	@JoinColumn(name = "order")
 	private Order order;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderItems")

@@ -8,7 +8,8 @@ import javax.persistence.*;
 public class DeliveryOrder extends Order {
 
   // DeliveryOrder Associations
-  @OneToOne(mappedBy = "order")
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "address")
   private Address address;
   
   

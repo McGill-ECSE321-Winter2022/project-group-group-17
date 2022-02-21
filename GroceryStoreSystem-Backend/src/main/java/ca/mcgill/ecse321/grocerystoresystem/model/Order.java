@@ -1,8 +1,16 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public abstract class Order {
@@ -14,7 +22,7 @@ public abstract class Order {
 	private int orderID;
 	// Order Associations 
 	@OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
-	private ItemQuantity portionNum;
+	private Set<ItemQuantity> portionNum;
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn (name = "orders")
 	private Person person;

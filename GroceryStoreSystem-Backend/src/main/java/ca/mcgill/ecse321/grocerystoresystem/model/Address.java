@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 
@@ -11,10 +13,12 @@ public class Address {
 	private int addressID;
 	
 	// Address Associations
-	@OneToMany(mappedBy = "address")
-	private Person person;
-	@OneToMany(mappedBy = "address")
-	private DeliveryOrder order;
+	@OneToMany(cascade={CascadeType.ALL})
+	private Set<Person> persons;
+	
+	
+	@OneToMany(cascade={CascadeType.ALL})
+	private Set<DeliveryOrder> orders;
 	
 	private boolean isLocal;
 	
