@@ -10,6 +10,8 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Person;
 
 public interface DeliveryOrderRepository extends CrudRepository<DeliveryOrder, Integer>{
 
-	List<DeliveryOrder> findDeliveryOrderByAddress(Address addressID);
-	List<DeliveryOrder> findDeliveryOrderByPerson(Person email);
+
+	List<DeliveryOrder> findByAddress(Address id);
+	List<DeliveryOrder> findByPerson(Person email);
+
 }

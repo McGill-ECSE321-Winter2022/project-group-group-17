@@ -6,5 +6,5 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 
 public interface AddressRepository extends CrudRepository<Address, Integer>{
 	
-	Address findAddressByID(Integer addressID);
+	Address findAddressByAddressID(Integer addressID);
 }

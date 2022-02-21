@@ -6,6 +6,6 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
 
 public interface OwnerRepository extends CrudRepository<Owner, Integer>{
 
-	Owner findOwnerbyEmail (String email);
+	Owner findOwnerByEmail (String email);
 	
 }

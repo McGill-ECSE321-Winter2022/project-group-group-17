@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,7 +18,7 @@ public abstract class Person {
 	@JoinColumn(name = "person")
 	private Address address;
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-	private Order orders;
+	private Set<Order> orders;
 	// maybe add one for superclass?
 	
 	private String firstName;
