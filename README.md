@@ -10,7 +10,7 @@ The Grocery Store System that our team will develop will allow the people of a s
 
 |Name     | Github | Major | Year |
 |---------------|--------|-------|------|
-|Mario Bouzakhm |[Mariobouzakhm](https://github.com/Mariobouzakhm)|Software Engineering| U2
+|Mario Bouzakhm |[Mariobouzakhm](https://github.com/Mariobouzakhm)|Software Engineering| U1
 |Rui Du         |[ruiding-code](https://github.com/ruiding-code)|Mechanical Engineering|U3
 |Onyekachi Ezekwem|[Kachi-Ezekwem](https://github.com/Kachi-Ezekwem)|Mechanical Engineering|U3
 |Yash Khapre    |[yash-k23](https://github.com/yash-k23)|Chemical Engineering|U3
