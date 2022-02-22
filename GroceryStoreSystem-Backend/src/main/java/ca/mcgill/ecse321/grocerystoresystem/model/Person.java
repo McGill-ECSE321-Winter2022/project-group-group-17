@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@Table(name="Person")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Person {
 	@Id
 	@GeneratedValue
@@ -14,7 +16,7 @@ public abstract class Person {
     private String email;
 	
 	// Person Associations
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="addressid")
 	private Address person_address;
 	
@@ -35,6 +37,14 @@ public abstract class Person {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public Person(String firstName, String lastName, String email, String password, Address address) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.person_address = address;
 	}
 
 	public int getPersonID() {

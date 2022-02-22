@@ -19,12 +19,17 @@ public class TestSpecialDayPersistence {
 	@Autowired
 	private SpecialDayRepository specialDayRepository;
 
-	
+	/**
+	 * Cleaning the database after the test
+	 */	
 	@AfterEach
 	public void clearDatabases() {
 		this.specialDayRepository.deleteAll();
 	}
 	
+	/**
+	 * Read and Write test for SpecialDay Class.
+	 */
 	@Test
 	public void testPersistAndLoadSpecialDay() {
 		LocalDateTime startTime = LocalDateTime.of(2021, 2, 13, 15, 56);

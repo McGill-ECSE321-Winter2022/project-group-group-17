@@ -20,11 +20,17 @@ public class TestStoreHourPersistence {
 	@Autowired
 	private StoreHourRepository storeHourRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.storeHourRepository.deleteAll();
 	}
 	
+	/**
+	 * Read and Write test for StoreHour Class.
+	 */
 	@Test
 	public void testPersistAndLoadStoreHour() {
 		LocalTime startTime = LocalTime.of(8, 30);

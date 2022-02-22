@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -105,4 +104,7 @@ public class Address {
 	  this.addressID = addressID;
 	}
 	
+	public List<Person> getAssociatedPersons() {
+		return this.persons;
+	}
 }

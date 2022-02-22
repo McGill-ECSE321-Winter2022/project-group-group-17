@@ -19,11 +19,17 @@ public class TestInStoreOrderPersistence {
 	@Autowired
 	private InStoreOrderRepository inOrderStoreRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.inOrderStoreRepository.deleteAll();
 	}
 	
+	/**
+	 * Read and Write test for InStoreOrder Class.
+	 */
 	@Test
 	public void testPersistAndLoadInStoreOrder() {
 		int totalCost = 100;

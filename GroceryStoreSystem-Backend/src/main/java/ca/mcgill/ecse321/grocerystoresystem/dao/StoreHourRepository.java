@@ -6,7 +6,13 @@ import ca.mcgill.ecse321.grocerystoresystem.model.StoreHour;
 
 public interface StoreHourRepository extends CrudRepository<StoreHour, Integer >{
 
+	/**
+	 * Find StoreHour based on their ID
+	 */
 	StoreHour findStoreHourByStoreHourID(Integer storeHourID);
 	
+	/**
+	 * Returns true if their is a Store Hour in the database with the passed ID as parameter
+	 */
 	boolean existsByStoreHourID(Integer storeHourID);
 }

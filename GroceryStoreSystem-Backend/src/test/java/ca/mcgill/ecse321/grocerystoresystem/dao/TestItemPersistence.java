@@ -19,11 +19,16 @@ public class TestItemPersistence {
 	@Autowired
 	private ItemRepository itemRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.itemRepository.deleteAll();
 	}
-	
+	/**
+	 * Read and Write test for Item Class.
+	 */
 	@Test
 	public void testPersistAndLoadItem() {
 		int itemPrice = 5;

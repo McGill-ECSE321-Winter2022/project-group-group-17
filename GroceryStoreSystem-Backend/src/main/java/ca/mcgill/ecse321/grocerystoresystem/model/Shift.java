@@ -15,7 +15,7 @@ public class Shift {
 	
 	// Shift Associations
 	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-	private Calendar calendar;
+	private Calendar calendar_shifts;
 	@ManyToOne(fetch = FetchType.LAZY, optional=true)
 	@JoinColumn(name = "shifts")
 	private Employee employee;

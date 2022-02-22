@@ -12,8 +12,7 @@ public class SpecialDay {
 	
 	// SpecialDay Associations
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "closedDays")
-	private Calendar calendar;
+	private Calendar calendar_days;
 	
 	private LocalDateTime startTimestamp;
 	private LocalDateTime endTimestamp;

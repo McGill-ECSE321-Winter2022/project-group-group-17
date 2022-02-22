@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "calendar")
 public class Calendar {	
 	
 	@Id
@@ -20,16 +21,20 @@ public class Calendar {
 	private int calendarID;
 	
 	// Calendar Associations
-	@OneToOne(optional=false, fetch = FetchType.LAZY)
-	private StoreHour openingTime;
+	@OneToMany(mappedBy = "calendar_opening")
+	private List<StoreHour> openingTime;
 	  
-	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "calendar_days")
 	private Set<SpecialDay> closedDays;
 	  
-	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "calendar_shifts")
 	private Set<Shift> shifts;
   
 	public Calendar() {
 		
+	}
+	
+	public int getCalendarID() {
+		return this.calendarID;
 	}
 }

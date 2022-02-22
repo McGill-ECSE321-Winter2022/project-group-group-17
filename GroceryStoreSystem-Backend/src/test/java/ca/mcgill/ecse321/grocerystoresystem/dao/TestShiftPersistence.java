@@ -21,11 +21,17 @@ public class TestShiftPersistence {
 	@Autowired
 	private ShiftRepository shiftRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.shiftRepository.deleteAll();
 	}
 	
+	/**
+	 * Read and Write test for Shift Class.
+	 */
 	@Test
 	public void testPersistAndLoadShift() {
 		LocalDate date = LocalDate.of(2021, 10, 28);

@@ -19,12 +19,17 @@ public class TestPickupOrderPersistence {
 	@Autowired
 	private PickupOrderRepository pickupOrderRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.pickupOrderRepository.deleteAll();
 	}
 	
-	
+	/**
+	 * Read and Write test for PickupOrder Class.
+	 */
 	@Test
 	public void testPersistAndLoadDeliveryOrder() {
 		int totalCost = 100;
