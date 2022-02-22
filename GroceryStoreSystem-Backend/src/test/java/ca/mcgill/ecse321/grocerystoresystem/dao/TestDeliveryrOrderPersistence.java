@@ -19,12 +19,17 @@ public class TestDeliveryrOrderPersistence {
 	@Autowired
 	private DeliveryOrderRepository deliveryOrderRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.deliveryOrderRepository.deleteAll();
 	}
 	
-	
+	/**
+	 * Read and Write test for Delivery Order Class.
+	 */
 	@Test
 	public void testPersistAndLoadDeliveryOrder() {
 		int totalCost = 100;

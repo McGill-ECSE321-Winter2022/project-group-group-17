@@ -9,7 +9,13 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Person;
 
 public interface InStoreOrderRepository extends CrudRepository<InStoreOrder, Integer>{
 	
+	/**
+	 * Find InStoreOrder based on their ID
+	 */
 	InStoreOrder findInStoreOrderByOrderID(Integer orderID);
 	
+	/**
+	 * Returns true if their is an in store order in the database with the passed ID as parameter
+	 */
 	boolean existsByOrderID(Integer orderID);
 }

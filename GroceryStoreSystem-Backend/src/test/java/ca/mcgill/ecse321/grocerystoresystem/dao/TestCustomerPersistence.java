@@ -18,11 +18,17 @@ public class TestCustomerPersistence {
 	@Autowired
 	private CustomerRepository customerRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.customerRepository.deleteAll();
 	}
 	
+	/**
+	 * Read and Write test for Customer Class.
+	 */
 	@Test
 	public void testPersistAndLoadCustomer() {
 		

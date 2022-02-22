@@ -6,8 +6,14 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Customer;
 
 public interface CustomerRepository extends CrudRepository<Customer, Integer>{
 
+	/**
+	 * Find Customer based on their ID
+	 */
 	Customer findCustomerByEmail(String email);
 	
+	/**
+	 * Returns true if their is an customer in the database with the passed ID as parameter
+	 */
 	boolean existsByPersonID(Integer personID);
 	
 }

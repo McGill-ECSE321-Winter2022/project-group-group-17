@@ -19,11 +19,17 @@ public class TestEmployeePersistence {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach()
 	public void clearDatabases() {
 		this.employeeRepository.deleteAll();
 	}
 	
+	/**
+	 * Read and Write test for Employee Class.
+	 */
 	@Test
 	public void testPersistAndLoadEmployee() {
 		String first_name = "James";

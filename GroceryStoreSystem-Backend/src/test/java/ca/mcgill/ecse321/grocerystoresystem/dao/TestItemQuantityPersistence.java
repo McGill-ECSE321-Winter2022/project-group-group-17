@@ -18,11 +18,17 @@ public class TestItemQuantityPersistence {
 	@Autowired
 	private ItemQuantityRepository itemQuantityRepository;
 	
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.itemQuantityRepository.deleteAll();
 	}
 	
+	/**
+	 * Read and Write test for ItemQuantity Class.
+	 */
 	@Test
 	public void testPersistAndLoadItemQuantity() {
 		int itemNum = 5;

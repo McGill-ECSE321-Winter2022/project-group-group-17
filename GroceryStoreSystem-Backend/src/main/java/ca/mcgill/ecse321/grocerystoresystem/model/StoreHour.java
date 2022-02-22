@@ -16,10 +16,11 @@ public class StoreHour {
 	private Weekdays weekday;
 	
 	// StoreHour Associations
-	@OneToOne(mappedBy="openingTime")
-	private Calendar calendar;
+	@ManyToOne()
+	@JoinColumn(name="calendarid")
+	private Calendar calendar_opening;
 	
-	private StoreHour() {};
+	public StoreHour() {};
 	
 	public StoreHour(LocalTime startTime, LocalTime endTime, Weekdays weekday) {
 		this.startTime = startTime;

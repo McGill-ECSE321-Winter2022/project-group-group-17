@@ -18,12 +18,17 @@ public class TestOwnerPersistence {
 	@Autowired
 	private OwnerRepository ownerRepository;
 
+	/**
+	 * Cleaning the database after the test
+	 */
 	@AfterEach
 	public void clearDatabases() {
 		this.ownerRepository.deleteAll();
 	}
 	
-	
+	/**
+	 * Read and Write test for Owner Class.
+	 */
 	@Test
 	public void testPersistAndLoadOwner() {
 		String first_name = "Walker";
