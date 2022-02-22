@@ -10,6 +10,8 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Order;
 
 public interface ItemQuantityRepository extends CrudRepository<ItemQuantity, Integer>{
 
-	List<ItemQuantity> findBySpecificItem(Item id);
+	ItemQuantity findItemQuantityByQuantityID(Integer quantityID);
+	
+	boolean existsByQuantityID(Integer quantityID);
 	
 }

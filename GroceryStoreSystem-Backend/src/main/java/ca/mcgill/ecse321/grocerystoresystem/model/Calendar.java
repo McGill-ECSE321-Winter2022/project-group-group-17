@@ -19,13 +19,15 @@ public class Calendar {
 	@GeneratedValue
 	private int calendarID;
 	
-  // Calendar Associations
-  @OneToOne(optional=false, fetch = FetchType.LAZY)
-  private StoreHour openingTime;
-  @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
-  private Set<SpecialDay> closedDays;
-  @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
-  private Set<Shift> shifts;
+	// Calendar Associations
+	@OneToOne(optional=false, fetch = FetchType.LAZY)
+	private StoreHour openingTime;
+	  
+	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
+	private Set<SpecialDay> closedDays;
+	  
+	@OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
+	private Set<Shift> shifts;
   
 	public Calendar() {
 		

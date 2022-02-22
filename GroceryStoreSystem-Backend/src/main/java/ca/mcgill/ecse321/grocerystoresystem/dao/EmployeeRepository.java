@@ -8,4 +8,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
 
 	Employee findEmployeeByEmail(String email);
 	
+	boolean existsByPersonID(Integer personID);
+	
 }

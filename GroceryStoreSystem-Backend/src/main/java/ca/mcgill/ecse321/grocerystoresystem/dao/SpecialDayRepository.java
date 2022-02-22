@@ -10,4 +10,9 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Calendar;
 public interface SpecialDayRepository extends CrudRepository<SpecialDay, Integer>{
 
 	List<SpecialDay> findByCalendar(Calendar id);
+	
+	SpecialDay findSpecialDayBySpecialDayID(Integer specialDayID);
+	
+	boolean existsBySpecialDayID(Integer specialDayID);
+	
 }

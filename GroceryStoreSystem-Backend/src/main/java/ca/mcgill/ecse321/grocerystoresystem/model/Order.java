@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -8,29 +9,45 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Order")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Order {
-	
-	
 	
 	@Id
 	@GeneratedValue
 	private int orderID;
+	
 	// Order Associations 
-	@OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
-	private Set<ItemQuantity> portionNum;
+	@OneToMany (mappedBy = "order_quantity", cascade = CascadeType.ALL)
+	private List<ItemQuantity> portionNum;
+	
 	@ManyToOne (fetch = FetchType.LAZY)
-	@JoinColumn (name = "orders")
-	private Person person;
+	private Person order_person;
 	
 	
 	private LocalDateTime orderTimeStamp;
 	private int totalCost;
 	private boolean isPaid;
+	
+	
+	public Order() {
+		
+	}
+	
+	public Order(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid) {
+		this.totalCost = totalCost;
+		this.orderTimeStamp = orderTimeStamp;
+		this.isPaid = isPaid;
+	}
 	
 	public Order(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, int orderID) {
 		this.totalCost = totalCost;

@@ -18,10 +18,17 @@ public class SpecialDay {
 	private LocalDateTime startTimestamp;
 	private LocalDateTime endTimestamp;
 	
+	public SpecialDay() {};
+	
 	public SpecialDay(LocalDateTime startTimestamp, LocalDateTime endTimestamp, int specialDayID) {
 		this.startTimestamp = startTimestamp;
 		this.endTimestamp = endTimestamp;
 		this.specialDayID = specialDayID;
+	}
+	
+	public SpecialDay(LocalDateTime startTimestamp, LocalDateTime endTimestamp) {
+		this.startTimestamp = startTimestamp;
+		this.endTimestamp = endTimestamp;
 	}
 
 	public LocalDateTime getStartTimestamp() {

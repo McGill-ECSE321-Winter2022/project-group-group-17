@@ -1,27 +1,26 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
-
 @Entity
+@Table(name = "Address")
 public class Address {
 	
 	@Id
 	@GeneratedValue
 	private int addressID;
 	
-	// Address Associations
-	@OneToMany(cascade={CascadeType.ALL})
-	private Set<Person> persons;
+	@OneToMany(mappedBy = "person_address")
+	private List<Person> persons;
 	
-	
-	@OneToMany(cascade={CascadeType.ALL})
-	private Set<DeliveryOrder> orders;
+	@OneToMany(mappedBy = "delivery_address")
+	private List<DeliveryOrder> orders;
 	
 	private boolean isLocal;
-	
+
 	private String streetName;
 	private String streetNum;
 	
@@ -29,6 +28,17 @@ public class Address {
 	private String postalCode;
 	
 	private String country;
+	
+	public Address() {};
+	
+	public Address(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+		this.streetName = streetName;
+		this.streetNum = streetNum;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.country = country;
+		this.isLocal = isLocal;
+	}
 	
 	public Address(int addressID, String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
 		this.addressID = addressID;

@@ -19,7 +19,15 @@ public class StoreHour {
 	@OneToOne(mappedBy="openingTime")
 	private Calendar calendar;
 	
-	private StoreHour(LocalTime startTime, LocalTime endTime, Weekdays weekday, int storeHourID ) {
+	private StoreHour() {};
+	
+	public StoreHour(LocalTime startTime, LocalTime endTime, Weekdays weekday) {
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.weekday = weekday;
+	}
+	
+	public StoreHour(LocalTime startTime, LocalTime endTime, Weekdays weekday, int storeHourID ) {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.weekday = weekday;

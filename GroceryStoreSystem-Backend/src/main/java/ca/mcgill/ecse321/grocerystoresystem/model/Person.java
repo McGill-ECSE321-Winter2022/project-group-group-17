@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -9,16 +10,16 @@ public abstract class Person {
 	@Id
 	@GeneratedValue
 	private int personID;
-	
-	@Column(unique=true)
+
     private String email;
 	
 	// Person Associations
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "person")
-	private Address address;
-	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-	private Set<Order> orders;
+	@JoinColumn(name="addressid")
+	private Address person_address;
+	
+	@OneToMany(mappedBy = "order_person", cascade = CascadeType.ALL)
+	private List<Order> orders;
 	// maybe add one for superclass?
 	
 	private String firstName;
@@ -27,6 +28,8 @@ public abstract class Person {
 	private String password;
 	
 	
+	public Person() {} ;
+	
 	public Person(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -34,6 +37,10 @@ public abstract class Person {
 		this.password = password;
 	}
 
+	public int getPersonID() {
+		return this.personID;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
