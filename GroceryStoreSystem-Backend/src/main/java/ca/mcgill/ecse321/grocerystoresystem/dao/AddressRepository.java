@@ -7,4 +7,6 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 public interface AddressRepository extends CrudRepository<Address, Integer>{
 	
 	Address findAddressByAddressID(Integer addressID);
+	
+	boolean existsByAddressID(Integer addressID);
 }

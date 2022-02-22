@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,7 +20,7 @@ public class Item {
 	
 	// Item Associations
 	@OneToMany(mappedBy = "specificItem", cascade = CascadeType.ALL)
-	private Set<ItemQuantity> portionNum;
+	private List<ItemQuantity> portionNum;
 	
 	private int itemPrice;
 	private String name;
@@ -27,6 +28,8 @@ public class Item {
 	private boolean isDeliverable;
 	private String portionUnit;
 	private InventoryType inventoryType;
+	
+	public Item() {};
 	
 	public Item(String name, int itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType, int itemID) {
 		this.name = name;
@@ -36,6 +39,15 @@ public class Item {
 		this.portionUnit = portionUnit;
 		this.inventoryType = inventoryType;
 		this.itemID = itemID;
+	}
+	
+	public Item(String name, int itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType) {
+		this.name = name;
+		this.itemPrice = itemPrice;
+		this.inventoryAmount = inventoryAmount;
+		this.isDeliverable = isDeliverable;
+		this.portionUnit = portionUnit;
+		this.inventoryType = inventoryType;
 	}
 	
 

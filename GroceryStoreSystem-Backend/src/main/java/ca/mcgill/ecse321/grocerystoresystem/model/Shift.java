@@ -14,9 +14,9 @@ public class Shift {
 	
 	
 	// Shift Associations
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional=true)
 	private Calendar calendar;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional=true)
 	@JoinColumn(name = "shifts")
 	private Employee employee;
 	
@@ -24,6 +24,15 @@ public class Shift {
 	private LocalTime startTime;
 	private LocalTime endTime;
 	private ShiftStatus shiftStatus;
+	
+	public Shift() {};
+	
+	public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
+		this.date = date;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.shiftStatus = shiftStatus;
+	}
 	
 	public Shift(int shiftID,LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
 		this.shiftID = shiftID;
