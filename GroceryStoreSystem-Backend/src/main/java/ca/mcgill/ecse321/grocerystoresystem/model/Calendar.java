@@ -21,14 +21,14 @@ public class Calendar {
 	private int calendarID;
 	
 	// Calendar Associations
-	@OneToMany(mappedBy = "calendar_opening")
-	private List<StoreHour> openingTime;
-	  
-	@OneToMany(mappedBy = "calendar_days")
-	private Set<SpecialDay> closedDays;
-	  
-	@OneToMany(mappedBy = "calendar_shifts")
-	private Set<Shift> shifts;
+//	@OneToMany(mappedBy = "calendar_opening")
+//	private List<StoreHour> openingTime;
+//
+//	@OneToMany(mappedBy = "calendar_days")
+//	private Set<SpecialDay> closedDays;
+//
+//	@OneToMany(mappedBy = "calendar_shifts")
+//	private Set<Shift> shifts;
   
 	public Calendar() {
 		

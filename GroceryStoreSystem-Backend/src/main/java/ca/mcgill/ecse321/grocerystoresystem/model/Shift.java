@@ -13,11 +13,11 @@ public class Shift {
 	private int shiftID;
 	
 	
-	// Shift Associations
-	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-	private Calendar calendar_shifts;
-	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-	@JoinColumn(name = "shifts")
+//	// Shift Associations
+//	@ManyToOne(fetch = FetchType.LAZY, optional=true)
+//	private Calendar calendar_shifts;
+
+	@ManyToOne
 	private Employee employee;
 	
 	private LocalDate date;

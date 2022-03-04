@@ -7,9 +7,9 @@ import javax.persistence.*;
 @Entity
 public class DeliveryOrder extends Order {
 
-	// DeliveryOrder Associations
-	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-	private Address delivery_address;
+//	// DeliveryOrder Associations
+//	@ManyToOne(fetch = FetchType.LAZY, optional=true)
+//	private Address delivery_address;
   
   
 	private LocalDateTime deliveryTime;
@@ -34,12 +34,12 @@ public class DeliveryOrder extends Order {
 		this.deliveryTime = deliveryTime;
 	}
 	
-	public Address getAddress() {
-		return this.delivery_address;
-	}
-	
-	public void setAddress(Address address) {
-		this.delivery_address = address;
-	}
+//	public Address getAddress() {
+//		return this.delivery_address;
+//	}
+//
+//	public void setAddress(Address address) {
+//		this.delivery_address = address;
+//	}
 
 }

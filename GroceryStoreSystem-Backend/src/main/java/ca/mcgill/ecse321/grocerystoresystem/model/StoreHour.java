@@ -15,10 +15,10 @@ public class StoreHour {
 	private LocalTime endTime;
 	private Weekdays weekday;
 	
-	// StoreHour Associations
-	@ManyToOne()
-	@JoinColumn(name="calendarid")
-	private Calendar calendar_opening;
+//	// StoreHour Associations
+//	@ManyToOne()
+//	@JoinColumn(name="calendarid")
+//	private Calendar calendar_opening;
 	
 	public StoreHour() {};
 	

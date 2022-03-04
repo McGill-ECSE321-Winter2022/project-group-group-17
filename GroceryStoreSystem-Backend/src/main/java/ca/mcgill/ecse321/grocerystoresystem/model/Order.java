@@ -26,12 +26,12 @@ public abstract class Order {
 	@GeneratedValue
 	private int orderID;
 	
-	// Order Associations 
-	@OneToMany (mappedBy = "order_quantity", cascade = CascadeType.ALL)
-	private List<ItemQuantity> portionNum;
-	
-	@ManyToOne (fetch = FetchType.LAZY)
-	private Person order_person;
+//	// Order Associations
+//	@OneToMany (mappedBy = "order_quantity", cascade = CascadeType.ALL)
+//	private List<ItemQuantity> portionNum;
+//
+//	@ManyToOne (fetch = FetchType.LAZY)
+//	private Person order_person;
 	
 	
 	private LocalDateTime orderTimeStamp;

@@ -12,7 +12,7 @@ public interface ShiftRepository extends CrudRepository<Shift, Integer>{
 	/**
 	 * Find Shift List based on the Employee associated with them
 	 */
-	List<Shift> findByEmployee(Employee email);
+//	List<Shift> findByEmployee(Employee email);
 	
 	/**
 	 * Find Shift based on their ID

@@ -19,8 +19,8 @@ public class Item {
 	private int itemID;
 	
 	// Item Associations
-	@OneToMany(mappedBy = "specificItem", cascade = CascadeType.ALL)
-	private List<ItemQuantity> portionNum;
+//	@OneToMany(mappedBy = "specificItem", cascade = CascadeType.ALL)
+//	private List<ItemQuantity> portionNum;
 	
 	private int itemPrice;
 	private String name;

@@ -9,7 +9,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Integer>{
 	/**
 	 * Find Employee based on their ID
 	 */	
-	Employee findEmployeeByEmail(String email);
+	Employee findEmployeeByPersonID(Integer personID);
 	
 	/**
 	 * Returns true if their is an employee in the database with the passed ID as parameter

@@ -15,14 +15,12 @@ public abstract class Person {
 
     private String email;
 	
-	// Person Associations
-	@ManyToOne()
-	@JoinColumn(name="addressid")
+//	// Person Associations
+	@ManyToOne
 	private Address person_address;
-	
-	@OneToMany(mappedBy = "order_person", cascade = CascadeType.ALL)
-	private List<Order> orders;
-	// maybe add one for superclass?
+//
+//	@OneToMany(mappedBy = "order_person", cascade = CascadeType.ALL)
+//	private List<Order> orders;
 	
 	private String firstName;
 	private String lastName;
@@ -81,6 +79,10 @@ public abstract class Person {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Address getAddress() {
+		return this.person_address;
 	}
 
 }
