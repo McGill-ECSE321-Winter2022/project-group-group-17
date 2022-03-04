@@ -10,11 +10,10 @@ public class ItemQuantity {
 	private int quantityID;
 	
 	// ItemQuantity Associations
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	private Order order_quantity;
-    
-	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-    @JoinColumn(name = "orderItems")
+
+	@ManyToOne
 	private Item specificItem;
 	
 	private int itemNum;

@@ -11,7 +11,7 @@ public class SpecialDay {
 	private int specialDayID;
 	
 	// SpecialDay Associations
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	private Calendar calendar_days;
 	
 	private LocalDateTime startTimestamp;

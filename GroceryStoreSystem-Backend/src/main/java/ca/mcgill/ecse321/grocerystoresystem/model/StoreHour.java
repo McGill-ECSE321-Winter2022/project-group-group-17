@@ -16,9 +16,8 @@ public class StoreHour {
 	private Weekdays weekday;
 	
 	// StoreHour Associations
-	@ManyToOne()
-	@JoinColumn(name="calendarid")
-	private Calendar calendar_opening;
+	@ManyToOne
+	private Calendar shop_calendar;
 	
 	public StoreHour() {};
 	
