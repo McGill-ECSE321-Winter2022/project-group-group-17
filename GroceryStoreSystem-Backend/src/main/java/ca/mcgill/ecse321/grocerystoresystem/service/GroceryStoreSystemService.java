@@ -42,6 +42,27 @@ public class GroceryStoreSystemService {
 	@Autowired 
 	StoreHourRepository storeHourRepository;
 	
-	
+	@Transactional
+	public Address createAddress(int addressID,String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+		Address address = new Address();
+		address.setAddressID(addressID);
+		address.setCity(city);
+		address.setCountry(country);
+		address.setLocal(isLocal);
+		address.setPostalCode(postalCode);
+		address.setStreetName(streetName);
+		address.setStreetNum(streetNum);
+		addressRepository.save(address);
+		return address;
+	}	
+	@Transactional
+	public Address getAddress(int addressID) {
+		Address address = addressRepository.findAddressByAddressID(addressID);
+		return address;
+	}
+	@Transactional
+	public List<Address> getAllAddresses(){
+		return toList(addressRepository.findAll()); 
+	}
 	
 }
