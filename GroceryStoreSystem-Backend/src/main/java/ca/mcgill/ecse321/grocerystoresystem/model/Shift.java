@@ -11,11 +11,10 @@ public class Shift {
 	@Id
 	@GeneratedValue
 	private int shiftID;
-	
-	
-//	// Shift Associations
-//	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-//	private Calendar calendar_shifts;
+
+	// Shift Associations
+	@ManyToOne
+	private Calendar calendar_shifts;
 
 	@ManyToOne
 	private Employee employee;
@@ -32,6 +31,11 @@ public class Shift {
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.shiftStatus = shiftStatus;
+	}
+
+	public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, Employee employee) {
+		this(date, startTime, endTime, shiftStatus);
+		this.employee = employee;
 	}
 	
 	public Shift(int shiftID,LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
@@ -78,6 +82,14 @@ public class Shift {
 	}
 	public void setShiftStatus(ShiftStatus shiftStatus) {
 		this.shiftStatus = shiftStatus;
+	}
+
+	public Employee getEmployee() {
+		return this.employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 	
 	

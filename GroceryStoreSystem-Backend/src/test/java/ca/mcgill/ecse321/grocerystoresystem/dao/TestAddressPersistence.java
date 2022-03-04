@@ -56,38 +56,4 @@ public class TestAddressPersistence {
 		assertEquals(retrievedAddress.getCity(), address.getCity());
 		assertEquals(retrievedAddress.getCountry(), address.getCountry());
 	}
-
-	@Test
-	public void testPersistAndLoadPersonAddress() {
-		String streetName = "Huntington Street";
-		String streetNum = "123";
-		String city = "DrummondVille";
-		String postalCode = "H3A1B9";
-		String country = "Canada";
-		boolean isLocal = true;
-
-		Address address = new Address(streetName, streetNum, city, postalCode, country, isLocal);
-
-		this.addressRepository.save(address);
-
-		String first_name = "Mario";
-		String last_name = "Bouzakhm";
-
-		String email = "mariobouzakhm03@gmail.com";
-		String password = "12345678";
-
-		Customer customer = new Customer(first_name, last_name, email, password, address);
-		this.customerRepository.save(customer);
-
-		Address retrievedAddress = this.addressRepository.findAddressByAddressID(address.getAddressID());
-		assertNotNull(retrievedAddress);
-		assertEquals(retrievedAddress.getCity(), address.getCity());
-		assertEquals(retrievedAddress.getCountry(), address.getCountry());
-
-		List<Person> associatedPersons = retrievedAddress.getAssociatedPersons();
-		System.out.println(associatedPersons.size());
-		for(Person person: associatedPersons) {
-			System.out.println(person.toString());
-		}
-	}
 }

@@ -19,16 +19,16 @@ public class Calendar {
 	@Id
 	@GeneratedValue
 	private int calendarID;
-	
-	// Calendar Associations
-//	@OneToMany(mappedBy = "calendar_opening")
-//	private List<StoreHour> openingTime;
-//
-//	@OneToMany(mappedBy = "calendar_days")
-//	private Set<SpecialDay> closedDays;
-//
-//	@OneToMany(mappedBy = "calendar_shifts")
-//	private Set<Shift> shifts;
+
+	//Calendar Associations
+	@OneToMany(targetEntity = StoreHour.class)
+	private List<StoreHour> openingTimes;
+
+	@OneToMany(targetEntity = SpecialDay.class)
+	private List<SpecialDay> closedDays;
+
+	@OneToMany(targetEntity = Shift.class)
+	private List<Shift> employeeShifts;
   
 	public Calendar() {
 		
@@ -36,5 +36,17 @@ public class Calendar {
 	
 	public int getCalendarID() {
 		return this.calendarID;
+	}
+
+	public List<StoreHour> getOpeningTimes() {
+		return this.openingTimes;
+	}
+
+	public List<SpecialDay> getClosedDays() {
+		return this.closedDays;
+	}
+
+	public List<Shift> getEmployeeShifts() {
+		return this.employeeShifts;
 	}
 }

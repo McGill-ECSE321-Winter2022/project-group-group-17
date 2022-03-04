@@ -15,10 +15,8 @@ public class Address {
 	@OneToMany(targetEntity = Person.class, fetch = FetchType.EAGER)
 	private List<Person> persons;
 
-
-//	private List<Person> persons;
-//
-//	private List<DeliveryOrder> orders;
+	@OneToMany(targetEntity = DeliveryOrder.class)
+	private List<DeliveryOrder> orders;
 	
 	private boolean isLocal;
 

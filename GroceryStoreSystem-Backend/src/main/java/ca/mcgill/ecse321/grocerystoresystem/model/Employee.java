@@ -2,13 +2,15 @@ package ca.mcgill.ecse321.grocerystoresystem.model;
 
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
 public class Employee extends Person {
+
 	// Employee Associations
-    @OneToMany(targetEntity = Shift.class)
+	@OneToMany(targetEntity = Shift.class, fetch = FetchType.EAGER)
     private List<Shift> shifts;
 
 	private EmployeeStatus empStatus;
@@ -34,5 +36,4 @@ public class Employee extends Person {
 	public void setEmpStatus(EmployeeStatus empStatus) {
 		this.empStatus = empStatus;
 	}
-
 }

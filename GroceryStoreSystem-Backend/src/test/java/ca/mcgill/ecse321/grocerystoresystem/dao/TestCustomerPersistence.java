@@ -23,7 +23,8 @@ public class TestCustomerPersistence {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	@Autowired AddressRepository addressRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	/**
 	 * Cleaning the database after the test

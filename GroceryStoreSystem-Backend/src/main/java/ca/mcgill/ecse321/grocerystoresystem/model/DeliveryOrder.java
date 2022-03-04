@@ -7,23 +7,22 @@ import javax.persistence.*;
 @Entity
 public class DeliveryOrder extends Order {
 
-//	// DeliveryOrder Associations
-//	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-//	private Address delivery_address;
-  
+	// DeliveryOrder Associations
+	@ManyToOne
+	private Address delivery_address;
   
 	private LocalDateTime deliveryTime;
 	
 	public DeliveryOrder() {};
 	
-	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, int orderID) {
-		super(totalCost, orderTimeStamp, isPaid, orderID);
-		this.deliveryTime = deliveryTime;
-	}
-	
 	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime) {
 		super(totalCost, orderTimeStamp, isPaid);
 		this.deliveryTime = deliveryTime;
+	}
+
+	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address delivery_address) {
+		this(totalCost, orderTimeStamp, isPaid, deliveryTime);
+		this.delivery_address = delivery_address;
 	}
 
 	public LocalDateTime getDeliveryTime() {
@@ -34,12 +33,12 @@ public class DeliveryOrder extends Order {
 		this.deliveryTime = deliveryTime;
 	}
 	
-//	public Address getAddress() {
-//		return this.delivery_address;
-//	}
-//
-//	public void setAddress(Address address) {
-//		this.delivery_address = address;
-//	}
+	public Address getAddress() {
+		return this.delivery_address;
+	}
+
+	public void setAddress(Address address) {
+		this.delivery_address = address;
+	}
 
 }

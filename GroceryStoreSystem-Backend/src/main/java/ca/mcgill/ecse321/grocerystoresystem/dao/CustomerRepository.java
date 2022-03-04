@@ -11,7 +11,6 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer>{
 	 */
 	Customer findCustomerByPersonID(Integer personID);
 
-
 	/**
 	 * Returns true if their is an customer in the database with the passed ID as parameter
 	 */

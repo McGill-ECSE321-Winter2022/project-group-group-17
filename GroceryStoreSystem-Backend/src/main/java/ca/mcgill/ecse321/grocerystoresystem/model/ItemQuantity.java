@@ -9,13 +9,12 @@ public class ItemQuantity {
 	@GeneratedValue
 	private int quantityID;
 	
-//	// ItemQuantity Associations
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	private Order order_quantity;
-//
-//	@ManyToOne(fetch = FetchType.LAZY, optional=true)
-//    @JoinColumn(name = "orderItems")
-//	private Item specificItem;
+	// ItemQuantity Associations
+	@ManyToOne
+	private Order order_quantity;
+
+	@ManyToOne
+	private Item specificItem;
 	
 	private int itemNum;
 	

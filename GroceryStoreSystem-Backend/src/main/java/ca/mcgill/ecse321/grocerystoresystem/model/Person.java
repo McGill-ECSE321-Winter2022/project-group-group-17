@@ -19,8 +19,8 @@ public abstract class Person {
 	@ManyToOne
 	private Address person_address;
 //
-//	@OneToMany(mappedBy = "order_person", cascade = CascadeType.ALL)
-//	private List<Order> orders;
+	@OneToMany(targetEntity = Order.class)
+	private List<Order> orders;
 	
 	private String firstName;
 	private String lastName;
