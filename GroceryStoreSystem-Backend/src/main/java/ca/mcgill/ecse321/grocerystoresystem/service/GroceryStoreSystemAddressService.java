@@ -87,13 +87,32 @@ public class GroceryStoreSystemAddressService {
 			}
 		}
 	}
-
-	
 	@Transactional
-	public Address getAddress(int addressID) {
+	public Address getAddressWithID(int addressID) {
 		Address address = addressRepository.findAddressByAddressID(addressID);
 		return address;
 	}
+	@Transactional
+	public List<Address> getAddressWithStreetName(String streetName) {
+		return toList (addressRepository.findAddressByStreetName(streetName)); 
+	}
+	@Transactional
+	public List<Address> getAddressWithStreetNum(String streetNum) {
+		return toList (addressRepository.findAddressByStreetNum(streetNum)); 
+	}
+	@Transactional
+	public List<Address> getAddressWithPostalCode(String postalCode) {
+		return toList (addressRepository.findAddressByPostalCode(postalCode));
+	}
+	@Transactional
+	public List<Address> getAddressWithCity(String city) {
+		return toList (addressRepository.findAddressByStreetName(city)); 
+	}
+	@Transactional
+	public List<Address> getAddressWithIsLocal(boolean isLocal) {
+		return toList (addressRepository.findAddressByIsLocal(isLocal)); 
+	}
+	
 	@Transactional
 	public List<Address> getAllAddresses(){
 		return toList(addressRepository.findAll()); 
