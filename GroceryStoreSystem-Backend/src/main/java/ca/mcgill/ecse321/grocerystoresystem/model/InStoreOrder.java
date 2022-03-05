@@ -14,8 +14,6 @@ public class InStoreOrder extends Order {
         super(totalCost, orderTimeStamp, isPaid);
     }
 	
-    public InStoreOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, int orderID) {
-        super(totalCost, orderTimeStamp, isPaid, orderID);
-    }
+
 
 }
