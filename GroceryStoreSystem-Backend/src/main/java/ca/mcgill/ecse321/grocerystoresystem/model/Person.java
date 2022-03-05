@@ -85,4 +85,8 @@ public abstract class Person {
 		return this.person_address;
 	}
 
+	public void setAddress(Address address) {
+		this.person_address = address;
+	}
+
 }
