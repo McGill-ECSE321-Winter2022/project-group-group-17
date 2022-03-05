@@ -1,9 +1,8 @@
 package ca.mcgill.ecse321.grocerystoresystem.dao;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDateTime;
 
+import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,11 +12,16 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class TestDeliveryrOrderPersistence {
 	@Autowired
 	private DeliveryOrderRepository deliveryOrderRepository;
+
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	/**
 	 * Cleaning the database after the test
@@ -25,6 +29,7 @@ public class TestDeliveryrOrderPersistence {
 	@AfterEach
 	public void clearDatabases() {
 		this.deliveryOrderRepository.deleteAll();
+		this.addressRepository.deleteAll();
 	}
 	
 	/**
@@ -41,9 +46,34 @@ public class TestDeliveryrOrderPersistence {
 		this.deliveryOrderRepository.save(order);
 		
 		assertTrue(this.deliveryOrderRepository.existsByOrderID(order.getOrderID()));
-		
 	}
-	
-	
 
+	@Test
+	public void testPersistAndLoadDeliveryOrderAddress() {
+		String streetName = "Huntington Street";
+		String streetNum = "123";
+		String city = "DrummondVille";
+		String postalCode = "H3A1B9";
+		String country = "Canada";
+		boolean isLocal = true;
+
+		Address address = new Address(streetName, streetNum, city, postalCode, country, isLocal);
+
+		this.addressRepository.save(address);
+
+		int totalCost = 100;
+		LocalDateTime orderTime = LocalDateTime.of(2021, 12, 28, 15, 36);
+		LocalDateTime deliveryTime = LocalDateTime.of(2021, 12, 29, 9, 30);
+		boolean isPaid = true;
+
+		DeliveryOrder order = new DeliveryOrder(totalCost, orderTime, isPaid, deliveryTime, address);
+		this.deliveryOrderRepository.save(order);
+
+
+		DeliveryOrder retrievedOrder = this.deliveryOrderRepository.findDeliveryOrderByOrderID(order.getOrderID());
+		assertNotNull(retrievedOrder);
+		assertEquals(retrievedOrder.getAddress().getAddressID(), address.getAddressID());
+		assertEquals(retrievedOrder.getAddress().getCity(), address.getCity());
+		assertEquals(retrievedOrder.getAddress().getCountry(), address.getCountry());
+	}
 }

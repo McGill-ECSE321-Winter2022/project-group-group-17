@@ -11,11 +11,11 @@ public class Address {
 	@Id
 	@GeneratedValue
 	private int addressID;
-	
-	@OneToMany(mappedBy = "person_address")
+
+	@OneToMany(targetEntity = Person.class, fetch = FetchType.EAGER)
 	private List<Person> persons;
-	
-	@OneToMany(mappedBy = "delivery_address")
+
+	@OneToMany(targetEntity = DeliveryOrder.class)
 	private List<DeliveryOrder> orders;
 	
 	private boolean isLocal;
@@ -101,9 +101,9 @@ public class Address {
 	}
 	
 	public void setAddressID(int addressID) {
-	  this.addressID = addressID;
+		this.addressID = addressID;
 	}
-	
+
 	public List<Person> getAssociatedPersons() {
 		return this.persons;
 	}

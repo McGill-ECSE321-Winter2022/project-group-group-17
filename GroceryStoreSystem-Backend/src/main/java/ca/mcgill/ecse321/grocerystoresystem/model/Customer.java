@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 @Entity
 public class Customer extends Person {
-
-	
 	public Customer() {
 		super(null, null, null, null);
 		
