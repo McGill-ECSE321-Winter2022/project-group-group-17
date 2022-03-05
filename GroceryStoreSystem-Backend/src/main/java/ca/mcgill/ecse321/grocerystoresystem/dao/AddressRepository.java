@@ -17,6 +17,7 @@ public interface AddressRepository extends CrudRepository<Address, Integer>{
 	List <Address> findAddressByCountry(String country);
 	List <Address> findAddressByPostalCode(String postalCode);
 	List <Address> findAddressByIsLocal(boolean isLocal);
+	List <Address> findAddressByStreetNumAndStreetName(String streetNum, String streetName);
 	/**
 	 * Returns true if their is an address in the database with the passed ID as parameter
 	 */
