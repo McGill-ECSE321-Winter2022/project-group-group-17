@@ -93,4 +93,9 @@ public abstract class Person {
 	public void setLoginStatus(boolean loginStatus){
 		this.loginStatus=loginStatus;
 	}
+
+	public Address getAddress() {
+		return this.person_address;
+	}
+
 }
