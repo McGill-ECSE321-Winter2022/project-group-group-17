@@ -1,7 +1,4 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
-
-//import java.sql.Date;
-//import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 

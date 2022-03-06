@@ -63,8 +63,8 @@ public class TestShiftPersistence {
 		String email = "james.white@gmail.com";
 		String password = "12345678";
 		EmployeeStatus status = EmployeeStatus.hired;
-
-		Employee employee = new Employee(first_name, last_name, email, password, status);
+		boolean loginStatus = true;
+		Employee employee = new Employee(first_name, last_name, email, password, status, loginStatus );
 		this.employeeRepository.save(employee);
 
 		LocalDate date = LocalDate.of(2021, 10, 28);
