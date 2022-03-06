@@ -26,23 +26,26 @@ public abstract class Person {
 	private String lastName;
 	
 	private String password;
+	private boolean loginStatus;
 	
 	
 	public Person() {} ;
 	
-	public Person(String firstName, String lastName, String email, String password) {
+	public Person(String firstName, String lastName, String email, String password, boolean loginStatus) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.loginStatus = loginStatus;
 	}
 	
-	public Person(String firstName, String lastName, String email, String password, Address address) {
+	public Person(String firstName, String lastName, String email, String password, Address address, boolean loginStatus) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.person_address = address;
+		this.loginStatus = loginStatus;
 	}
 
 	public int getPersonID() {
@@ -89,4 +92,11 @@ public abstract class Person {
 		this.person_address = address;
 	}
 
+	public boolean isLoginStatus() {
+		return loginStatus;
+	}
+
+	public void setLoginStatus(boolean loginStatus) {
+		this.loginStatus = loginStatus;
+	}
 }

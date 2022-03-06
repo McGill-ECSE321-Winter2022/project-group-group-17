@@ -16,16 +16,16 @@ public class Employee extends Person {
 	private EmployeeStatus empStatus;
 
     public Employee() {
-    	super(null, null, null, null);
+    	super(null, null, null, null, false);
     };
 
-	public Employee(String first_name, String last_name, String email,  String password, EmployeeStatus empStatus ) {
-		super(first_name, last_name, email, password);
+	public Employee(String first_name, String last_name, String email,  String password, EmployeeStatus empStatus, boolean loginStatus) {
+		super(first_name, last_name, email, password, loginStatus);
 		this.empStatus = empStatus;
 	}
 
-	public Employee(String first_name, String last_name, String email, String password, EmployeeStatus empStatus, Address address) {
-		super(first_name, last_name, email, password, address);
+	public Employee(String first_name, String last_name, String email, String password, EmployeeStatus empStatus, Address address, boolean loginStatus) {
+		super(first_name, last_name, email, password, address, loginStatus);
 		this.empStatus = empStatus;
 
 	}
