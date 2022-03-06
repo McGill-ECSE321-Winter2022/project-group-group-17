@@ -14,14 +14,10 @@ import ca.mcgill.ecse321.grocerystoresystem.dao.*;
 public class StoreHourService {
     
     @Autowired
-    CalendarRepository calendarRepository;
-    @Autowired
     StoreHourRepository storeHourRepository;
-    @Autowired
-    SpecialDay specialDayRepository;
 
     @Transactional
-    public StoreHour createStoreHour (LocalTime startTime, LocalTime endTime, Weekdays weekday){
+    public StoreHour createStoreHour (LocalTime startTime, LocalTime endTime, Weekdays weekday, int storeHourID){
         if (endTime == null||startTime ==null || startTime.isAfter(endTime)) throw new IllegalArgumentException("Must enter valid start and end time");
         if (weekday == null) throw new IllegalArgumentException("Must enter valid weekday");
 
@@ -32,7 +28,7 @@ public class StoreHourService {
     }
     @Transactional
     public void deleteStoreHour (int storeHourID){
-
+        if (!storeHourRepository.existsByStoreHourID(storeHourID)) throw new IllegalArgumentException("store hour does not exist");
         StoreHour hour = storeHourRepository.findStoreHourByStoreHourID(storeHourID);
         storeHourRepository.delete(hour);
         return;
@@ -42,7 +38,7 @@ public class StoreHourService {
 
     @Transactional 
     public StoreHour updateStoreHour (int storeHourID, LocalTime startTime, LocalTime endTime){
-
+        if (!storeHourRepository.existsByStoreHourID(storeHourID)) throw new IllegalArgumentException("store hour does not exist");
         StoreHour hour = storeHourRepository.findStoreHourByStoreHourID(storeHourID);
         hour.setStartTime(startTime);
         hour.setEndTime(endTime);
@@ -52,7 +48,7 @@ public class StoreHourService {
 
     @Transactional 
     public StoreHour getStoreHour (int storeHourID){
-
+        if (!storeHourRepository.existsByStoreHourID(storeHourID)) throw new IllegalArgumentException("store hour does not exist");
         return storeHourRepository.findStoreHourByStoreHourID(storeHourID);
 
     }
