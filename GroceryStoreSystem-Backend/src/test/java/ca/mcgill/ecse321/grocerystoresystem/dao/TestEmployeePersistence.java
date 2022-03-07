@@ -45,7 +45,6 @@ public class TestEmployeePersistence {
 		String email = "james.white@gmail.com";
 		String password = "12345678";
 		EmployeeStatus status = EmployeeStatus.hired;
-		
 		Employee employee = new Employee(first_name, last_name, email, password, status, false);
 		this.employeeRepository.save(employee);
 		

@@ -46,7 +46,6 @@ public class TestCustomerPersistence {
 		
 		String email = "mariobouzakhm03@gmail.com";
 		String password = "12345678";
-		
 		Customer customer = new Customer(first_name, last_name, email, password, false);
 		this.customerRepository.save(customer);
 		
@@ -71,7 +70,6 @@ public class TestCustomerPersistence {
 
 		String email = "mariobouzakhm03@gmail.com";
 		String password = "12345678";
-
 		Customer customer = new Customer(first_name, last_name, email, password, address, false);
 		this.customerRepository.save(customer);
 

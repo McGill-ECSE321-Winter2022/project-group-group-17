@@ -23,8 +23,7 @@ public class Employee extends Person {
 		super(first_name, last_name, email, password, loginStatus);
 		this.empStatus = empStatus;
 	}
-
-	public Employee(String first_name, String last_name, String email, String password, EmployeeStatus empStatus, Address address, boolean loginStatus) {
+	public Employee(String first_name, String last_name, String email,  String password, EmployeeStatus empStatus, Address address, boolean loginStatus) {
 		super(first_name, last_name, email, password, address, loginStatus);
 		this.empStatus = empStatus;
 

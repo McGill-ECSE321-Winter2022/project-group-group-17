@@ -12,7 +12,8 @@ import ca.mcgill.ecse321.grocerystoresystem.model.Employee;
 
 public interface ShiftRepository extends CrudRepository<Shift, Integer>{
 
-	/**
+  
+  /**
 	 * Find Shift based on their ID
 	 */
 	Shift findShiftByShiftID(Integer shiftID);
