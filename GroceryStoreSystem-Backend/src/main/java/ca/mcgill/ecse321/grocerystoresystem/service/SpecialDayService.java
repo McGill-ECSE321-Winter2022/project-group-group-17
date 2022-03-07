@@ -144,4 +144,23 @@ public class SpecialDayService {
     return true;
   }
   
+  /*
+   * Delete specialDay given specialDayID
+   */
+  @Transactional
+  public boolean deleteSpecialDayByID(int specialDayID) {
+    if (specialDayID <= 0) {
+      throw new IllegalArgumentException("Please enter a valid personID");
+    }
+    
+    SpecialDay sDay = specialDayRepository.findSpecialDayBySpecialDayID(specialDayID);
+    
+    if(sDay == null) {
+      throw new NullPointerException("Cannot find Customer with this personID");
+    }
+    
+    specialDayRepository.delete(sDay);
+    return true;
+  }
+  
 }
