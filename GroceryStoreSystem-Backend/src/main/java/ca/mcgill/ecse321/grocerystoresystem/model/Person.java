@@ -15,34 +15,39 @@ public abstract class Person {
 
     private String email;
 	
-//	// Person Associations
-	@ManyToOne
+	// Person Associations
+	@ManyToOne()
+	@JoinColumn(name="addressid")
 	private Address person_address;
-//
-	@OneToMany(targetEntity = Order.class)
+	
+	@OneToMany(mappedBy = "order_person", cascade = CascadeType.ALL)
 	private List<Order> orders;
+	// maybe add one for superclass?
 	
 	private String firstName;
 	private String lastName;
 	
 	private String password;
+	private boolean loginStatus;
 	
 	
 	public Person() {} ;
 	
-	public Person(String firstName, String lastName, String email, String password) {
+	public Person(String firstName, String lastName, String email, String password, boolean loginStatus) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.loginStatus = loginStatus;
 	}
 	
-	public Person(String firstName, String lastName, String email, String password, Address address) {
+	public Person(String firstName, String lastName, String email, String password, Address address, boolean loginStatus) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.person_address = address;
+		this.loginStatus = loginStatus;
 	}
 
 	public int getPersonID() {
@@ -79,6 +84,14 @@ public abstract class Person {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean getLoginStatus(){
+		return loginStatus;
+	}
+
+	public void setLoginStatus(boolean loginStatus){
+		this.loginStatus=loginStatus;
 	}
 
 	public Address getAddress() {
