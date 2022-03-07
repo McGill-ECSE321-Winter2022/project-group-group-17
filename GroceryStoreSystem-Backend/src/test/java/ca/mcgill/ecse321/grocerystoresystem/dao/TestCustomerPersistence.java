@@ -46,8 +46,7 @@ public class TestCustomerPersistence {
 		
 		String email = "mariobouzakhm03@gmail.com";
 		String password = "12345678";
-		boolean loginStatus = true;
-		Customer customer = new Customer(first_name, last_name, email, password,loginStatus);
+		Customer customer = new Customer(first_name, last_name, email, password, false);
 		this.customerRepository.save(customer);
 		
 		assertTrue(this.customerRepository.existsById(customer.getPersonID()));
@@ -71,9 +70,7 @@ public class TestCustomerPersistence {
 
 		String email = "mariobouzakhm03@gmail.com";
 		String password = "12345678";
-		boolean loginStatus = true;
-
-		Customer customer = new Customer(first_name, last_name, email, password, address,loginStatus);
+		Customer customer = new Customer(first_name, last_name, email, password, address, false);
 		this.customerRepository.save(customer);
 
 		Customer retrievedCustomer = this.customerRepository.findCustomerByPersonID(customer.getPersonID());
