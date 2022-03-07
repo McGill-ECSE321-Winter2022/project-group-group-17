@@ -145,7 +145,7 @@ public class OwnerController {
         }
     }
 
-    private OwnerDto convertToDto(Owner o) {
+    private OwnerDto convertToDto(Owner o) throws NullPointerException{
         if(o == null) {
             throw new NullPointerException("Owner is null");
         }
@@ -157,7 +157,7 @@ public class OwnerController {
         return new OwnerDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail());
     }
 
-    private AddressDto convertToDto(Address a) {
+    private AddressDto convertToDto(Address a) throws NullPointerException{
         if(a == null) {
             throw new NullPointerException("Address is null");
         }

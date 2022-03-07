@@ -170,7 +170,7 @@ public class ShiftController {
         }
     }
 
-    private ShiftDto convertToDto(Shift s) {
+    private ShiftDto convertToDto(Shift s) throws NullPointerException{
         if(s == null) {
             throw new NullPointerException("Service is null");
         }
@@ -182,7 +182,7 @@ public class ShiftController {
         return new ShiftDto(s.getShiftID(), s.getDate(), s.getStartTime(), s.getEndTime(), s.getShiftStatus());
     }
 
-    private EmployeeDto convertToDto(Employee o) {
+    private EmployeeDto convertToDto(Employee o) throws NullPointerException{
         if(o == null) {
             throw new NullPointerException("Owner is null");
         }
@@ -194,7 +194,7 @@ public class ShiftController {
         return new EmployeeDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail(),  o.getEmpStatus());
     }
 
-    private AddressDto convertToDto(Address a) {
+    private AddressDto convertToDto(Address a) throws NullPointerException{
         if(a == null) {
             throw new NullPointerException("Address is null");
         }
