@@ -106,15 +106,18 @@ public class CustomerService {
    */
   @Transactional
   public Customer getCustomer(int personID) {
-    if(customerRepository.findCustomerByPersonID(personID) == null) {
-      throw new IllegalArgumentException("Cannot find customer with specified ID");
-    }
     
     if (personID <= 0) {
       throw new IllegalArgumentException("Please enter a valid personID");
     }
     
-    return customerRepository.findCustomerByPersonID(personID);
+    Customer customer = customerRepository.findCustomerByPersonID(personID);
+    
+    if(customer == null) {
+      throw new IllegalArgumentException("Cannot find customer with specified ID");
+    }
+    
+    return customer;
   }
   
   
