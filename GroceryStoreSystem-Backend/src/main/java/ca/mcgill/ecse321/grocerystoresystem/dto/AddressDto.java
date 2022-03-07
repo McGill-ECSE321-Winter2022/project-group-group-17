@@ -40,4 +40,28 @@ public class AddressDto {
     public String getCountry() {
         return country;
     }
+
+    public void setLocal(boolean local) {
+        isLocal = local;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public void setStreetNum(String streetNum) {
+        this.streetNum = streetNum;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

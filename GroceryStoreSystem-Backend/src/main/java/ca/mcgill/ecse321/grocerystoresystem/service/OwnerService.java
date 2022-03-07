@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
 
+import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.OwnerRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
@@ -15,6 +16,9 @@ public class OwnerService {
 
     @Autowired
     private OwnerRepository ownerRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     @Transactional
     public Owner createOwner() {
@@ -36,7 +40,7 @@ public class OwnerService {
         owner.setFirstName(first_name);
         owner.setLastName(last_name);
         owner.setEmail(email);
-        owner.setEmail(password);
+        owner.setPassword(password);
 
         ownerRepository.save(owner);
 
@@ -68,6 +72,13 @@ public class OwnerService {
         Owner owner = ownerRepository.findOwnerByPersonID(personID);
         if(owner == null) throw new NullPointerException("Owner not found");
         ownerRepository.delete(owner);
+
+        return true;
+    }
+
+    @Transactional
+    public boolean deleteOwners() {
+        ownerRepository.deleteAll();
 
         return true;
     }
@@ -150,6 +161,33 @@ public class OwnerService {
         if(owners.size() == 0) throw new NullPointerException("No owners found");
 
         return owners;
+    }
+
+    @Transactional
+    public Owner updateOwnerAddressByID(int personID, int addressID) {
+        Owner owner = ownerRepository.findOwnerByPersonID(personID);
+        if(owner == null) throw new NullPointerException("Owner not found");
+
+        Address address = addressRepository.findAddressByAddressID(addressID);
+        if(address == null) throw new NullPointerException("Address not found");
+
+        owner.setAddress(address);
+        ownerRepository.save(owner);
+
+        return owner;
+    }
+
+    @Transactional
+    public Owner updateOwnerPasswordById(int personID, String password) {
+        if(password == null || password.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid password");
+
+        Owner owner = this.ownerRepository.findOwnerByPersonID(personID);
+        if(owner == null) throw new NullPointerException("Owner not found");
+
+        owner.setPassword(password);
+        ownerRepository.save(owner);
+
+        return owner;
     }
 
     @Transactional

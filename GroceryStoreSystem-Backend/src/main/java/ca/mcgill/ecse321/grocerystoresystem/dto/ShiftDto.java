@@ -11,10 +11,36 @@ public class ShiftDto {
     private LocalTime endTime;
     private ShiftStatus shiftStatus;
 
+    private EmployeeDto employeeDto;
+
     public ShiftDto(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.shiftStatus = shiftStatus;
+    }
+
+    public ShiftDto(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, EmployeeDto employeeDto) {
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.shiftStatus = shiftStatus;
+        this.employeeDto = employeeDto;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setShiftStatus(ShiftStatus shiftStatus) {
         this.shiftStatus = shiftStatus;
     }
 
@@ -32,5 +58,13 @@ public class ShiftDto {
 
     public ShiftStatus getShiftStatus() {
         return shiftStatus;
+    }
+
+    public EmployeeDto getEmployeeDto() {
+        return employeeDto;
+    }
+
+    public void setEmployeeDto(EmployeeDto employeeDto) {
+        this.employeeDto = employeeDto;
     }
 }

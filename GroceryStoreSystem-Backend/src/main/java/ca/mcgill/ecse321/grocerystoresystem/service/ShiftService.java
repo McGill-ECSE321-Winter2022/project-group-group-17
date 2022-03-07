@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
 
+import ca.mcgill.ecse321.grocerystoresystem.dao.EmployeeRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.ShiftRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Employee;
 import ca.mcgill.ecse321.grocerystoresystem.model.Shift;
@@ -18,6 +19,9 @@ public class ShiftService {
 
     @Autowired
     private ShiftRepository shiftRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Transactional
     public Shift createShift() {
@@ -163,6 +167,33 @@ public class ShiftService {
         if(shifts == null || shifts.size() == 0) throw new NullPointerException("Shifts not found");
 
         return shifts;
+    }
+
+    @Transactional
+    public Shift updateShiftStatus(int shiftId, ShiftStatus status) {
+        if (status == null) throw new IllegalArgumentException("Please provide valid arguments: Invalid Shift status");
+
+        Shift shift = this.shiftRepository.findShiftByShiftID(shiftId);
+        if(shift == null) throw new NullPointerException("Shift not found");
+
+        shift.setShiftStatus(status);
+        shiftRepository.save(shift);
+
+        return shift;
+    }
+
+    @Transactional
+    public Shift updateShiftEmployee(int shiftId, int employeeID) {
+        Shift shift = this.shiftRepository.findShiftByShiftID(shiftId);
+        if(shift == null) throw new NullPointerException("Shift not found");
+
+        Employee employee = this.employeeRepository.findEmployeeByPersonID(employeeID);
+        if(employee == null) throw new NullPointerException("Employee not found");
+
+        shift.setEmployee(employee);
+        shiftRepository.save(shift);
+
+        return shift;
     }
 
     @Transactional
