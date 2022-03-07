@@ -11,13 +11,13 @@ public class DeliveryOrderDto {
 	private LocalDateTime orderTimeStamp;
 	private boolean isPaid;
 	private LocalDateTime deliveryTime;
-	private Address deliveryAddress;
+	private AddressDto deliveryAddress;
 	
 	public DeliveryOrderDto() {
 	}
 
 	public DeliveryOrderDto(int id, int totalCost, LocalDateTime orderTimeStamp, boolean isPaid,
-			LocalDateTime deliveryTime, Address deliveryAddress ) {
+			LocalDateTime deliveryTime, AddressDto deliveryAddress ) {
 		this.id = id;
 		this.totalCost = totalCost;
 		this.orderTimeStamp = orderTimeStamp;
@@ -55,7 +55,7 @@ public class DeliveryOrderDto {
 		this.deliveryTime = deliveryTime;
 	}
 
-	public void setDeliveryAddress(Address deliveryAddress) {
+	public void setDeliveryAddress(AddressDto deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
 	}
 
@@ -75,7 +75,7 @@ public class DeliveryOrderDto {
 		return deliveryTime;
 	}
 	
-	public Address getDeliveryAddress() {
+	public AddressDto getDeliveryAddress() {
 		return deliveryAddress;
 	}
 }
