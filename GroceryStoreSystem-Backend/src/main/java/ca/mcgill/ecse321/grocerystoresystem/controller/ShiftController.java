@@ -176,10 +176,10 @@ public class ShiftController {
         }
 
         if(s.getEmployee() != null) {
-            return new ShiftDto(s.getDate(), s.getStartTime(), s.getEndTime(), s.getShiftStatus(), convertToDto(s.getEmployee()));
+            return new ShiftDto(s.getShiftID(), s.getDate(), s.getStartTime(), s.getEndTime(), s.getShiftStatus(), convertToDto(s.getEmployee()));
         }
 
-        return new ShiftDto(s.getDate(), s.getStartTime(), s.getEndTime(), s.getShiftStatus());
+        return new ShiftDto(s.getShiftID(), s.getDate(), s.getStartTime(), s.getEndTime(), s.getShiftStatus());
     }
 
     private EmployeeDto convertToDto(Employee o) {
@@ -188,10 +188,10 @@ public class ShiftController {
         }
 
         if(o.getAddress() != null) {
-            return new EmployeeDto(o.getFirstName(), o.getLastName(), o.getEmail(), o.getPassword(), o.getEmpStatus(), convertToDto(o.getAddress()));
+            return new EmployeeDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail(), o.getEmpStatus(), convertToDto(o.getAddress()));
         }
 
-        return new EmployeeDto(o.getFirstName(), o.getLastName(), o.getEmail(), o.getPassword(), o.getEmpStatus());
+        return new EmployeeDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail(),  o.getEmpStatus());
     }
 
     private AddressDto convertToDto(Address a) {
@@ -199,7 +199,7 @@ public class ShiftController {
             throw new NullPointerException("Address is null");
         }
 
-        return new AddressDto(a.isLocal(), a.getStreetName(), a.getStreetNum(), a.getCity(), a.getPostalCode(), a.getCountry());
+        return new AddressDto(a.getAddressID(), a.isLocal(), a.getStreetName(), a.getStreetNum(), a.getCity(), a.getPostalCode(), a.getCountry());
     }
 
 }

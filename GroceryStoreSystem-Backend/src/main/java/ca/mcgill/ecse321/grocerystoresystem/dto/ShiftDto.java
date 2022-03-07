@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class ShiftDto {
+    private int id;
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -13,19 +14,29 @@ public class ShiftDto {
 
     private EmployeeDto employeeDto;
 
-    public ShiftDto(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
+    public ShiftDto(int id, LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
+        this.id = id;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.shiftStatus = shiftStatus;
     }
 
-    public ShiftDto(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, EmployeeDto employeeDto) {
+    public ShiftDto(int id, LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, EmployeeDto employeeDto) {
+        this.id = id;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.shiftStatus = shiftStatus;
         this.employeeDto = employeeDto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDate(LocalDate date) {

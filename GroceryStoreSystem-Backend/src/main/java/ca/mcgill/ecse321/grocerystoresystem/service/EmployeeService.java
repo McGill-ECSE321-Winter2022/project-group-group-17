@@ -38,8 +38,8 @@ public class EmployeeService {
 
     }
     @Transactional
-    public Employee getEmployee(String email){
-        Employee employee= employeeRepository.findEmployeeByEmail(email);
+    public Employee getEmployee(int peronID){
+        Employee employee= employeeRepository.findEmployeeByPersonID(peronID);
         if (employee == null) throw new IllegalArgumentException("Please enter a valid employee email");
         return employee;
 
@@ -52,15 +52,13 @@ public class EmployeeService {
 
     }
     @Transactional
-    public Employee deleteEmployee(String email){
-
-        if (email ==null || employeeRepository.findEmployeeByEmail(email)!=null) throw new IllegalArgumentException("Enter a valid employee email");
-        Employee e=employeeRepository.findEmployeeByEmail(email);
+    public Employee deleteEmployee(int personID){
+        Employee e=employeeRepository.findEmployeeByPersonID(personID);
+        if(e == null) throw new NullPointerException("Employee not found");
         employeeRepository.delete(e); 
         return e;
-    
-
     }
+
     @Transactional
     public Employee login (String email, String password){
         if (email==null) throw new IllegalArgumentException("Please enter a valid email");

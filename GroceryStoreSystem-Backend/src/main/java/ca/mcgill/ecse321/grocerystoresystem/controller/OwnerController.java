@@ -151,10 +151,10 @@ public class OwnerController {
         }
 
         if(o.getAddress() != null) {
-            return new OwnerDto(o.getFirstName(), o.getLastName(), o.getEmail(), o.getPassword(), convertToDto(o.getAddress()));
+            return new OwnerDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail(),convertToDto(o.getAddress()));
         }
 
-        return new OwnerDto(o.getFirstName(), o.getLastName(), o.getEmail(), o.getPassword());
+        return new OwnerDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail());
     }
 
     private AddressDto convertToDto(Address a) {
@@ -162,6 +162,6 @@ public class OwnerController {
             throw new NullPointerException("Address is null");
         }
 
-        return new AddressDto(a.isLocal(), a.getStreetName(), a.getStreetNum(), a.getCity(), a.getPostalCode(), a.getCountry());
+        return new AddressDto(a.getAddressID(), a.isLocal(), a.getStreetName(), a.getStreetNum(), a.getCity(), a.getPostalCode(), a.getCountry());
     }
 }

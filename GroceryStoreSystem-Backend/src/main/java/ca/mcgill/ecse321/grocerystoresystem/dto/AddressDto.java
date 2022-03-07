@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.grocerystoresystem.dto;
 
 public class AddressDto {
+    private int id;
+
     private boolean isLocal;
     private String streetName;
     private String streetNum;
@@ -8,13 +10,21 @@ public class AddressDto {
     private String postalCode;
     private String country;
 
-    public AddressDto(boolean isLocal, String streetName, String streetNum, String city, String postalCode, String country) {
+    public AddressDto(int id, boolean isLocal, String streetName, String streetNum, String city, String postalCode, String country) {
         this.isLocal = isLocal;
         this.streetName = streetName;
         this.streetNum = streetNum;
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isLocal() {
