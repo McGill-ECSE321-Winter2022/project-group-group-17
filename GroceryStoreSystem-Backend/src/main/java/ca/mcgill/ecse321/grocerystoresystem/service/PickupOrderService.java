@@ -1,6 +1,8 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,9 +31,28 @@ public class PickupOrderService {
 		return pickupOrder;
 	}
 	
+	
+	@Transactional 
+	public PickupOrder getPickupOrderByID(int id) {
+		return pickupOrderRepository.findPickupOrderByOrderID(id);
+	}
+	
+	@Transactional
+	public List<PickupOrder> getAllPickupOrders(){
+		return toList(pickupOrderRepository.findAll());
+	}
+	
+	
 	private void validateTotalCost(int totalCost) {
 		if (totalCost<0) throw new IllegalArgumentException("Please submit a valid total cost");
 	}
 	
-
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
+	}
+	
 }
