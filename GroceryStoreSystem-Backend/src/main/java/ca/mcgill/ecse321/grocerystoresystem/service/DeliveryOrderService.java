@@ -65,7 +65,7 @@ public class DeliveryOrderService {
 	@Transactional
 	public boolean deleteDeliveryOrder(int id) {
 		DeliveryOrder deliveryOrder = deliveryOrderRepository.findDeliveryOrderByOrderID(id);
-		if (deliveryOrder == null) throw new NullPointerException("Owner not found");
+		if (deliveryOrder == null) throw new NullPointerException("Order not found");
 		deliveryOrderRepository.delete(deliveryOrder);
 		
 		return true;
