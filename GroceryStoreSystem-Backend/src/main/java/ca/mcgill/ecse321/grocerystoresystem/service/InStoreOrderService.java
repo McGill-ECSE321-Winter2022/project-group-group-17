@@ -37,7 +37,20 @@ public class InStoreOrderService {
 	public List<InStoreOrder> getAllInStoreOrders(){
 		return toList(inStoreOrderRepository.findAll());
 	}
-
+	
+	@Transactional
+	public boolean deleteInStoreOrderWithID(int id) {
+		InStoreOrder inStoreOrder = inStoreOrderRepository.findInStoreOrderByOrderID(id);
+		if (inStoreOrder == null) throw new NullPointerException("Order was not found");
+		inStoreOrderRepository.delete(inStoreOrder);
+		
+		return true;
+	}
+	@Transactional
+	public boolean deleteInStoreOrders() {
+		inStoreOrderRepository.deleteAll();
+		return true;
+	}
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
 		for (T t : iterable) {

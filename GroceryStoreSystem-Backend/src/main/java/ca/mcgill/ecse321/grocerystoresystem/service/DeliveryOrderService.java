@@ -33,15 +33,22 @@ public class DeliveryOrderService {
 	}
 	
 	@Transactional
-	public DeliveryOrder createDeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address delivery_address) {
+	public DeliveryOrder createDeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address deliveryAddress) {
 		validateTotalCost(totalCost);
 		DeliveryOrder deliveryOrder = new DeliveryOrder();
 		deliveryOrder.setOrderTimeStamp(orderTimeStamp);
 		deliveryOrder.setPaid(isPaid);
 		deliveryOrder.setDeliveryTime(deliveryTime);
 		deliveryOrder.setTotalCost(totalCost);
-		deliveryOrder.setAddress(delivery_address);
+		deliveryOrder.setAddress(deliveryAddress);
 		
+		return deliveryOrder;
+	}
+	
+	@Transactional
+	public DeliveryOrder updateDeliveryAddressWithId(int id, Address deliveryAddress) {
+		DeliveryOrder deliveryOrder = getDeliveryOrderByID(id);
+		deliveryOrder.setAddress(deliveryAddress);
 		return deliveryOrder;
 	}
 	
@@ -54,6 +61,22 @@ public class DeliveryOrderService {
 	public List<DeliveryOrder> getAllDeliveryOrders(){
 		return toList(deliveryOrderRepository.findAll());
 	}
+	
+	@Transactional
+	public boolean deleteDeliveryOrder(int id) {
+		DeliveryOrder deliveryOrder = deliveryOrderRepository.findDeliveryOrderByOrderID(id);
+		if (deliveryOrder == null) throw new NullPointerException("Owner not found");
+		deliveryOrderRepository.delete(deliveryOrder);
+		
+		return true;
+	}
+	
+	@Transactional
+    public boolean deleteDeliveryOrders() {
+        deliveryOrderRepository.deleteAll();
+
+        return true;
+    }
 	
 	private void validateTotalCost(int totalCost) {
 		if (totalCost<0) throw new IllegalArgumentException("Please submit a valid totalCost");
