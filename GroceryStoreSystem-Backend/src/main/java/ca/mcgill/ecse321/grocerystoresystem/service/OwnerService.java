@@ -24,8 +24,7 @@ public class OwnerService {
     public Owner createOwner() {
         Owner owner = new Owner();
 
-        ownerRepository.save(owner);
-        return owner;
+        return ownerRepository.save(owner);
     }
 
 
@@ -42,9 +41,8 @@ public class OwnerService {
         owner.setEmail(email);
         owner.setPassword(password);
 
-        ownerRepository.save(owner);
+        return ownerRepository.save(owner);
 
-        return owner;
     }
 
     @Transactional
@@ -62,25 +60,24 @@ public class OwnerService {
         owner.setPassword(password);
         owner.setAddress(address);
 
-        ownerRepository.save(owner);
-
-        return owner;
+        return ownerRepository.save(owner);
     }
 
     @Transactional
     public boolean deleteOwner(int personID) {
         Owner owner = ownerRepository.findOwnerByPersonID(personID);
         if(owner == null) throw new NullPointerException("Owner not found");
+
         ownerRepository.delete(owner);
 
-        return true;
+        return this.isOwnerByID(owner.getPersonID());
     }
 
     @Transactional
     public boolean deleteOwners() {
         ownerRepository.deleteAll();
 
-        return true;
+        return this.getAllOwners().size() == 0;
     }
 
     @Transactional
@@ -154,13 +151,13 @@ public class OwnerService {
     }
 
     @Transactional
-    public List<Owner> findOwnerByEmail(String email) {
+    public Owner findOwnerByEmail(String email) {
         if(email == null || email.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Email");
 
-        List<Owner> owners = this.ownerRepository.findOwnerByEmail("No owners found");
-        if(owners.size() == 0) throw new NullPointerException("No owners found");
+        Owner owner = this.ownerRepository.findOwnerByEmail(email);
+        if(owner == null) throw new NullPointerException("No owners found");
 
-        return owners;
+        return owner;
     }
 
     @Transactional
@@ -172,9 +169,7 @@ public class OwnerService {
         if(address == null) throw new NullPointerException("Address not found");
 
         owner.setAddress(address);
-        ownerRepository.save(owner);
-
-        return owner;
+        return ownerRepository.save(owner);
     }
 
     @Transactional
@@ -185,9 +180,7 @@ public class OwnerService {
         if(owner == null) throw new NullPointerException("Owner not found");
 
         owner.setPassword(password);
-        ownerRepository.save(owner);
-
-        return owner;
+        return ownerRepository.save(owner);
     }
 
     @Transactional

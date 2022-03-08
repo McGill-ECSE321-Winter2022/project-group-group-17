@@ -4,13 +4,15 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.Person;
 
+import java.util.List;
+
 public interface PersonRepository extends CrudRepository<Person, Integer> {
 	
 	/**
 	 * Find Person based on their ID
 	 */
 	Person findPersonByPersonID(Integer personID);
-	
+
 	/**
 	 * Returns true if their is a Person in the database with the passed ID as parameter
 	 */

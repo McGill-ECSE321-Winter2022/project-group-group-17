@@ -15,6 +15,7 @@ public interface DeliveryOrderRepository extends CrudRepository<DeliveryOrder, I
 	 * Find DeliveryOrder based on their ID
 	 */
 	DeliveryOrder findDeliveryOrderByOrderID(Integer orderID);
+
 	
 	/**
 	 * Returns true if their is an delivery order in the database with the passed ID as parameter
