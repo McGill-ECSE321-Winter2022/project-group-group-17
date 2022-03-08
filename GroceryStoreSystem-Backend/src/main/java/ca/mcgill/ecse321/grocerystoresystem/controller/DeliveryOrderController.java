@@ -76,9 +76,8 @@ public class DeliveryOrderController {
 
 	@DeleteMapping(value={"/deliveryorders/delete/", "/deliveryorders/delete"})
     public boolean deleteDeliveryOrders() {
-        deliveryOrderService.deleteDeliveryOrders();
+        return deliveryOrderService.deleteDeliveryOrders();
 
-        return true;
     }
 	
 	private DeliveryOrderDto convertToDto(DeliveryOrder deliveryOrder) {
