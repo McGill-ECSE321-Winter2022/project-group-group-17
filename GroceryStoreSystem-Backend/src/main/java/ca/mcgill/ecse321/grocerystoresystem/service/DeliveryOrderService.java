@@ -29,6 +29,8 @@ public class DeliveryOrderService {
 		deliveryOrder.setDeliveryTime(deliveryTime);
 		deliveryOrder.setTotalCost(totalCost);
 		
+		deliveryOrderRepository.save(deliveryOrder);
+		
 		return deliveryOrder;
 	}
 	
@@ -42,6 +44,8 @@ public class DeliveryOrderService {
 		deliveryOrder.setTotalCost(totalCost);
 		deliveryOrder.setAddress(deliveryAddress);
 		
+		deliveryOrderRepository.save(deliveryOrder);
+		
 		return deliveryOrder;
 	}
 	
@@ -49,6 +53,9 @@ public class DeliveryOrderService {
 	public DeliveryOrder updateDeliveryAddressWithId(int id, Address deliveryAddress) {
 		DeliveryOrder deliveryOrder = getDeliveryOrderByID(id);
 		deliveryOrder.setAddress(deliveryAddress);
+		
+		deliveryOrderRepository.save(deliveryOrder);
+		
 		return deliveryOrder;
 	}
 	

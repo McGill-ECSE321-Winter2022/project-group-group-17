@@ -25,6 +25,8 @@ public class InStoreOrderService {
 		inStoreOrder.setPaid(isPaid);
 		inStoreOrder.setTotalCost(totalCost);
 		
+		inStoreOrderRepository.save(inStoreOrder);
+		
 		return inStoreOrder;
 	}
 	
