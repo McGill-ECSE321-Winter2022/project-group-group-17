@@ -16,6 +16,16 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 	
+    @GetMapping(value={"/address/get/id/", "/address/get/id"})
+    public AddressDto getAddressWithId(@RequestParam int id) {
+        try {
+            return convertToDto(addressService.getAddressWithID(id));
+        }
+        catch (NullPointerException e) {
+            return null;
+        }
+    }
+	
 	@GetMapping(value = { "/addresses", "/addresses/" })
 	public List<AddressDto> getAllAddresses() {
 		return addressService.getAllAddresses().stream().map(p -> convertToDto(p)).collect(Collectors.toList());
@@ -86,7 +96,7 @@ public class AddressController {
 	
 private AddressDto convertToDto(Address e) {
 	if (e == null) {
-		throw new IllegalArgumentException("There is no such Address!");
+		throw new IllegalArgumentException("There is no such Address");
 	}
 	AddressDto addressDto = new AddressDto(e.getAddressID(),e.isLocal(),e.getStreetName(),e.getStreetNum(),e.getCity(),e.getPostalCode(), e.getCountry());
 	
