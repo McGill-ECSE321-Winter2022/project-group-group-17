@@ -157,7 +157,7 @@ public class OwnerController {
         return new OwnerDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail());
     }
 
-    private AddressDto convertToDto(Address a) throws NullPointerException{
+    private AddressDto convertToDto(Address a) throws NullPointerException {
         if(a == null) {
             throw new NullPointerException("Address is null");
         }

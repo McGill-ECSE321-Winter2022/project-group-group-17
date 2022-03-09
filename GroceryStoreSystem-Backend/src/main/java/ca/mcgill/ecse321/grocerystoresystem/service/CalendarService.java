@@ -2,10 +2,13 @@ package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.CalendarRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Calendar;
+import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CalendarService {
@@ -45,5 +48,17 @@ public class CalendarService {
         return calendarRepository.existsByCalendarID(calendarID);
     }
 
+    @Transactional
+    public List<Calendar> getAllCalendars() {
+        return toList(calendarRepository.findAll());
+    }
+
+    private <T> List<T> toList(Iterable<T> iterable){
+        List<T> resultList = new ArrayList<T>();
+        for (T t : iterable) {
+            resultList.add(t);
+        }
+        return resultList;
+    }
 
 }
