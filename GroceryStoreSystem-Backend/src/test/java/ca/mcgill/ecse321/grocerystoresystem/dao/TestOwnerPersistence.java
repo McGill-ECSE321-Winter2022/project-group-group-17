@@ -44,7 +44,7 @@ public class TestOwnerPersistence {
 		String email = "walker.68.white@hotmail.com";
 		String password = "12398945354";
 		
-		Owner owner = new Owner(first_name, last_name, email, password);
+		Owner owner = new Owner(first_name, last_name, email, password, false);
 		this.ownerRepository.save(owner);
 		
 		assertTrue(this.ownerRepository.existsByPersonID(owner.getPersonID()));
@@ -69,7 +69,7 @@ public class TestOwnerPersistence {
 		String email = "walker.68.white@hotmail.com";
 		String password = "12398945354";
 
-		Owner owner = new Owner(first_name, last_name, email, password, address);
+		Owner owner = new Owner(first_name, last_name, email, password, address, false);
 		this.ownerRepository.save(owner);
 
 		Owner retrievedOwner = this.ownerRepository.findOwnerByPersonID(owner.getPersonID());

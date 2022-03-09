@@ -1,11 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.dao;
-<<<<<<< Updated upstream
 
-=======
 import java.util.List;
->>>>>>> Stashed changes
 import org.springframework.data.repository.CrudRepository;
-
 import ca.mcgill.ecse321.grocerystoresystem.model.Customer;
 
 public interface CustomerRepository extends CrudRepository<Customer, Integer>{

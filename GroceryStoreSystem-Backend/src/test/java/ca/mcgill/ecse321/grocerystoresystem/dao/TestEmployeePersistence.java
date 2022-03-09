@@ -45,8 +45,7 @@ public class TestEmployeePersistence {
 		String email = "james.white@gmail.com";
 		String password = "12345678";
 		EmployeeStatus status = EmployeeStatus.hired;
-		
-		Employee employee = new Employee(first_name, last_name, email, password, status);
+		Employee employee = new Employee(first_name, last_name, email, password, status, false);
 		this.employeeRepository.save(employee);
 		
 		assertTrue(this.employeeRepository.existsByPersonID(employee.getPersonID()));
@@ -73,7 +72,7 @@ public class TestEmployeePersistence {
 
 		EmployeeStatus empStatus = EmployeeStatus.resigned;
 
-		Employee customer = new Employee(first_name, last_name, email, password, empStatus, address);
+		Employee customer = new Employee(first_name, last_name, email, password, empStatus, address, false);
 		this.employeeRepository.save(customer);
 
 		Employee retrievedEmployee = this.employeeRepository.findEmployeeByPersonID(customer.getPersonID());
