@@ -29,6 +29,13 @@ public class SpecialDayService {
   @Autowired
   private SpecialDayRepository specialDayRepository;
   
+  /*
+   * Get specialDay given specialDayID
+   */
+  @Transactional
+  public SpecialDay getSpecialDay(int specialDayID) {
+    return specialDayRepository.findSpecialDayBySpecialDayID(specialDayID);
+  }
   
   /*
    * Get all closed days with calendarID
@@ -54,25 +61,60 @@ public class SpecialDayService {
     }
     
     for(Shift s : shiftRepository.findAll()) {
-      
+     
       if((s.getDate()).compareTo(sDay.getStartTimestamp().toLocalDate()) == 0){
         
         if((s.getStartTime().isAfter(sDay.getStartTimestamp().toLocalTime())) && (s.getEndTime().isBefore(sDay.getEndTimestamp().toLocalTime()))) {
           
           specialShifts.add(s);
-          
         }
       }
     }
-    
+    if (specialShifts.isEmpty()) {
+      throw new IllegalArgumentException("There are no shifts assigned on this special day!");
+    } 
     return specialShifts;
+  }
+  
+  /*
+   * Get all employees assigned on a special day given a specialDayID
+   */
+  @Transactional
+  public List<Employee> getEmployeesOnSpecialShifts(int specialDayID){
+    List<Shift> specialShifts = new ArrayList<>();
+    List<Employee> employees = new ArrayList<>();
+    SpecialDay sDay = specialDayRepository.findSpecialDayBySpecialDayID(specialDayID);
+    
+    if(sDay == null) {
+      throw new IllegalArgumentException("Cannot find specialDay with given ID");
+    }
+    
+    for(Shift s : shiftRepository.findAll()) {
+     
+      if((s.getDate()).compareTo(sDay.getStartTimestamp().toLocalDate()) == 0){
+        
+        if((s.getStartTime().isAfter(sDay.getStartTimestamp().toLocalTime())) && (s.getEndTime().isBefore(sDay.getEndTimestamp().toLocalTime()))) {
+          specialShifts.add(s);
+        }
+      }
+    }
+    if (specialShifts.isEmpty()) {
+      throw new IllegalArgumentException("There are no shifts assigned on the specified special day!");
+    }
+    for (Shift shift : specialShifts) {
+      employees.add(shift.getEmployee());
+    }
+    if (employees.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find any employees assigned on the specified special day!");
+    }
+    return employees;
   }
 
   /*
    * Update special days
    */
   @Transactional
-  public boolean updateSpecialDay(int specialDayID, LocalDateTime startTime, LocalDateTime endTime) {
+  public SpecialDay updateSpecialDay(int specialDayID, LocalDateTime startTime, LocalDateTime endTime) {
    
     SpecialDay s = specialDayRepository.findSpecialDayBySpecialDayID(specialDayID);
     if(s == null) {
@@ -87,14 +129,14 @@ public class SpecialDayService {
     s.setEndTimestamp(endTime);
     
     specialDayRepository.save(s);
-    return true;
+    return s;
   }
   
   /*
    * Update Shift on SpecialDay
    */
   @Transactional
-  public boolean updateSpecificDayShift(int shiftID, int specialDayID, LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, int personID) {
+  public Shift updateSpecificDayShift(int shiftID, int specialDayID, LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, int personID) {
     Shift s = shiftRepository.findShiftByShiftID(shiftID);
     SpecialDay sDay = specialDayRepository.findSpecialDayBySpecialDayID(specialDayID);
     Employee employee = employeeRepository.findEmployeeByPersonID(personID);
@@ -141,7 +183,7 @@ public class SpecialDayService {
     specialDayRepository.save(sDay);
     employeeRepository.save(employee);
     
-    return true;
+    return s;
   }
   
   /*

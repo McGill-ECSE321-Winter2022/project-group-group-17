@@ -120,6 +120,85 @@ public class CustomerService {
     return customer;
   }
   
+  /*
+   * Get customer with specified email
+   */
+  @Transactional
+  public Customer getCustomerByEmail(String email) {
+    
+    if (!email.contains("@")) {
+      throw new IllegalArgumentException("Please enter a valid email");
+    }
+    
+    Customer customer = customerRepository.findCustomerByEmail(email);
+    
+    if(customer == null) {
+      throw new IllegalArgumentException("Cannot find customer with specified email");
+    }
+    
+    return customer;
+  }
+  
+  /*
+   * Get customers with specified first name
+   */
+  @Transactional
+  public List<Customer> getCustomerByFirstName(String firstName) {
+    
+    if (firstName == null) {
+      throw new IllegalArgumentException("Please enter a valid first name");
+    }
+    
+    List<Customer> customers = customerRepository.findCustomersByFirstName(firstName);
+    
+    if(customers.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find customers with specified first name");
+    }
+    
+    return customers;
+  }
+  
+  /*
+   * Get customers with specified last name
+   */
+  @Transactional
+  public List<Customer> getCustomerByLastName(String lastName) {
+    
+    if (lastName == null) {
+      throw new IllegalArgumentException("Please enter a valid last name");
+    }
+    
+    List<Customer> customers = customerRepository.findCustomersByLastName(lastName);
+    
+    if(customers.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find customers with specified last name");
+    }
+    
+    return customers;
+  }
+  
+  /*
+   * Get customers with specified first and last name
+   */
+  @Transactional
+  public List<Customer> getCustomerByFullName(String firstName, String lastName) {
+    
+    if (firstName == null) {
+      throw new IllegalArgumentException("Please enter a valid first name");
+    }
+    
+    if (lastName == null) {
+      throw new IllegalArgumentException("Please enter a valid last name");
+    }
+   
+    List<Customer> customers = customerRepository.findCustomersByFirstNameAndLastName(firstName, lastName);
+    
+    if(customers.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find customers with specified first name");
+    }
+    
+    return customers;
+  }
   
   /*
    * Delete customer given personID
@@ -143,21 +222,59 @@ public class CustomerService {
   }
   
   /*
-   * Validate person credentials via PersonID
+   * Checks if person is Customer by personID
    */
   @Transactional
-  public boolean validateCustomerByID(int personID) {
-      if (personID <= 0) {
-        throw new IllegalArgumentException("Please enter a valid PersonID");
+  public boolean isCustomerByID(int personID) {
+      return customerRepository.existsByPersonID(personID);
+  }
+
+  /*
+   * Checks if person is Customer by first name
+   */
+  @Transactional
+  public boolean isCustomerByFirstName(String firstName) {
+      if(firstName == null || firstName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid first Name!");
       }
-      Customer customerExists = customerRepository.findCustomerByPersonID(personID);
-      if (customerExists == null) {
-        throw new NullPointerException("Cannot find Person with given ID");
+      return customerRepository.existsByFirstName(firstName);
+  }
+
+  /*
+   * Checks if person is Customer by last name
+   */
+  @Transactional
+  public boolean isCustomerByLastName(String lastName) {
+      if(lastName == null || lastName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid last Name!");
       }
-      if(!(customerRepository.findCustomerByPersonID(personID) instanceof Customer)) {
-        throw new IllegalArgumentException("This person with given ID is not a customer!");
+      return customerRepository.existsByFirstName(lastName);
+  }
+
+  /*
+   * Checks if person is Customer by first and last name
+   */
+  @Transactional
+  public boolean isCustomerByFirstAndLastName(String firstName, String lastName) {
+      if(firstName == null || firstName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid first Name!");
       }
-      return true;
+      if(lastName == null || lastName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid last Name!");
+      }
+
+      return customerRepository.existsByFirstNameAndLastName(firstName, lastName);
+  }
+
+  /*
+   * Checks if person is Customer by email
+   */
+  @Transactional
+  public boolean isCustomerByEmail(String email) {
+      if(email == null || email.length() == 0 || !(email.contains("@"))) {
+        throw new IllegalArgumentException("Please provide a valid email!");
+      }
+      return customerRepository.existsByEmail(email);
   }
   
   /*
@@ -259,4 +376,22 @@ public class CustomerService {
     }
   }
   
+  /*
+   * update a customer's password
+   */
+  @Transactional
+  public Customer updateCustomerPasswordById(int personID, String password) {
+    
+      if(password.length() < 8 || password == null) {
+        throw new IllegalArgumentException("Please enter a password with at least 8 characters");
+      }
+
+      Customer customer = customerRepository.findCustomerByPersonID(personID);
+      if(customer == null) {
+        throw new NullPointerException("Customer not found");
+      }
+      customer.setPassword(password);
+      customerRepository.save(customer);
+      return customer;
+  }
 }
