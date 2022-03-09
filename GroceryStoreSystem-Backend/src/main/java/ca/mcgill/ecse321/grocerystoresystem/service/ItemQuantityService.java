@@ -25,6 +25,7 @@ public class ItemQuantityService {
 		}catch(IllegalArgumentException e){
 			System.out.println(e);	
 		}
+		itemQuantityRepository.save(itemQuantity);
 		return itemQuantity;
 	}
 	@Transactional

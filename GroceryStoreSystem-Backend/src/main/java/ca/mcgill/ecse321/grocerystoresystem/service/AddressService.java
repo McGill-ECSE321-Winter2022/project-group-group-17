@@ -67,7 +67,7 @@ public class AddressService {
 	}
 
 	@Transactional
-	public boolean deleteOwner(int addressID) {
+	public boolean deleteAddress(int addressID) {
 		Address address = addressRepository.findAddressByAddressID(addressID);
 		if(address == null) throw new NullPointerException("Address not found");
 		addressRepository.delete(address);
