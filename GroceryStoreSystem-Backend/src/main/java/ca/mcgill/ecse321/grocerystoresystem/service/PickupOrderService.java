@@ -31,6 +31,20 @@ public class PickupOrderService {
 		return pickupOrder;
 	}
 	
+	@Transactional
+	public PickupOrder createPickupOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime pickupDateTime, int orderID) {
+		validateTotalCost(totalCost);
+		PickupOrder pickupOrder = new PickupOrder();
+		pickupOrder.setOrderTimeStamp(orderTimeStamp);
+		pickupOrder.setPaid(isPaid);
+		pickupOrder.setPickupDate(pickupDateTime);
+		pickupOrder.setTotalCost(totalCost);
+		pickupOrder.setOrderID(orderID);
+		
+		pickupOrderRepository.save(pickupOrder);
+		
+		return pickupOrder;
+	}
 	
 	@Transactional 
 	public PickupOrder getPickupOrderByID(int id) {
