@@ -1,15 +1,11 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
-import ca.mcgill.ecse321.grocerystoresystem.dao.SpecialDayRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dto.AddressDto;
-import ca.mcgill.ecse321.grocerystoresystem.dto.CalendarDto;
-import ca.mcgill.ecse321.grocerystoresystem.dto.CustomerDto;
 import ca.mcgill.ecse321.grocerystoresystem.dto.EmployeeDto;
 import ca.mcgill.ecse321.grocerystoresystem.dto.ShiftDto;
 import ca.mcgill.ecse321.grocerystoresystem.dto.SpecialDayDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.SpecialDay;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
-import ca.mcgill.ecse321.grocerystoresystem.model.Customer;
 import ca.mcgill.ecse321.grocerystoresystem.model.Employee;
 import ca.mcgill.ecse321.grocerystoresystem.model.Shift;
 import ca.mcgill.ecse321.grocerystoresystem.model.ShiftStatus;
