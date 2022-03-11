@@ -70,7 +70,7 @@ public class OwnerService {
 
         ownerRepository.delete(owner);
 
-        return this.isOwnerByID(owner.getPersonID());
+        return !this.isOwnerByID(owner.getPersonID());
     }
 
     @Transactional
