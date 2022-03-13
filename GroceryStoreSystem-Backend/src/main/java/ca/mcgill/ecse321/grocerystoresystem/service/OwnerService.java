@@ -2,8 +2,10 @@ package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.OwnerRepository;
+import ca.mcgill.ecse321.grocerystoresystem.dao.PersonRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
+import ca.mcgill.ecse321.grocerystoresystem.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class OwnerService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Transactional
     public Owner createOwner() {
         Owner owner = new Owner();
@@ -34,6 +39,8 @@ public class OwnerService {
         if(last_name == null || last_name.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Last Name");
         if(email == null || email.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Email");
         if(password == null || password.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Password");
+
+        if(personRepository.existsPersonByEmail(email)) throw new IllegalArgumentException("Email already exists in the database");
 
         Owner owner = new Owner();
         owner.setFirstName(first_name);
@@ -52,6 +59,8 @@ public class OwnerService {
         if(email == null || email.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Email");
         if(password == null || password.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Password");
         if(address == null) throw new IllegalArgumentException("Please provide valid arguments: Address");
+
+        if(personRepository.existsPersonByEmail(email)) throw new IllegalArgumentException("Email already exists in the database");
 
         Owner owner = new Owner();
         owner.setFirstName(first_name);
@@ -181,6 +190,32 @@ public class OwnerService {
 
         owner.setPassword(password);
         return ownerRepository.save(owner);
+    }
+
+    @Transactional
+    public boolean logIn(String email, String password) {
+        List<Person> persons = personRepository.findPersonByEmail(email);
+        if(persons.size() == 0) throw new IllegalArgumentException("No account with that email or password");
+
+        Person person = persons.get(0);
+        if(person.getPassword().equals(password)) {
+            person.setLoginStatus(true);
+
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException("No account with that email or password");
+        }
+    }
+
+    @Transactional
+    public boolean logOut(Person person) {
+        if(!person.getLoginStatus()) {
+            throw new IllegalArgumentException("Person not loggoed in");
+        }
+
+        person.setLoginStatus(false);
+        return true;
     }
 
     @Transactional

@@ -14,8 +14,18 @@ public interface PersonRepository extends CrudRepository<Person, Integer> {
 	Person findPersonByPersonID(Integer personID);
 
 	/**
+	 * Find Person based on Email
+	 */
+	List<Person> findPersonByEmail(String email);
+
+	/**
 	 * Returns true if their is a Person in the database with the passed ID as parameter
 	 */
 	boolean existsPersonByPersonID(Integer personID);
+
+	/**
+	 * Returns true if there is a Person in the database with the specified email
+	 */
+	boolean existsPersonByEmail(String email);
 
 }
