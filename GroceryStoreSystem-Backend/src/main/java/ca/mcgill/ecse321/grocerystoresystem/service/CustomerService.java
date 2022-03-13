@@ -20,8 +20,10 @@ public class CustomerService {
   @Autowired
   private AddressRepository addressRepository;
   
-  /*
-   * Create a new customer profile
+  /**
+   * @author Yash Khapre
+   * @param int personID, String firstName, String lastName, String email, String password, String city, String country, String postalCode, String streetName, String streetNum, Boolean isLocal
+   * Method to create a new customer profile using all attributes of a customer
    */
   @Transactional
   public Customer createCustomer(int personID, String firstName, String lastName, String email, String password, String city, String country, String postalCode, 
@@ -29,139 +31,241 @@ public class CustomerService {
     if(firstName == null || lastName == null || firstName.isEmpty() || lastName.isEmpty() || email == null || email.isEmpty() || email.contains("@") == false) {
       throw new IllegalArgumentException("Please enter a valid name and email");
     }
-    
     if(password.length() < 8 || password == null) {
       throw new IllegalArgumentException("Please enter a password with at least 8 characters");
     }
-    
     if (city.isEmpty() || country.isEmpty() || postalCode.isEmpty() || streetName.isEmpty() || streetNum.isEmpty() || city==null || 
         country == null || postalCode == null || streetName == null || streetNum == null || isLocal == null) {  
       throw new IllegalArgumentException("Please enter a valid address");
     }
-    
     if(customerRepository.existsByPersonID(personID)) {
       throw new IllegalArgumentException("Customer already exists!");
     }
-    
     Address newAddress = new Address(streetName, streetNum, city, postalCode, country, isLocal);
-    
     Customer newOnlineCustomer = new Customer(firstName, lastName, email, password, newAddress, false);
     customerRepository.save(newOnlineCustomer);
-    
-    return newOnlineCustomer;
-    
+    return newOnlineCustomer;    
   }
   
-  /*
-   * Customer login using email, password, personID
+  /**
+   * @author Yash Khapre
+   * @Param String email, String password, int personID
+   * Customer login method
    */
   @Transactional
   public Customer login(String email, String password, int personID) {
     if (email == null || email.contains("@") == false) {
       throw new IllegalArgumentException("Please enter a valid email");
-    }
-    
+    } 
     Customer customer = customerRepository.findCustomerByPersonID(personID);
-    
     if (customer.getEmail().equals(email) == false) {
       throw new IllegalArgumentException("Incorrect email inputted!");
     }
-    
     if (customer.getPassword().equals(password) == false) {
       throw new IllegalArgumentException("Incorrect password inputted!");
     }
-    
     customer.setLoginStatus(true);
     customerRepository.save(customer);
     return customer;
   }  
   
-  
-  /*
-   * Customer logout using personID
+  /**
+   * @author Yash Khapre
+   * @param String email, int personID
+   * Customer logout method
    */
   @Transactional
   public boolean logout(String email, int personID) {
     if (email == null || email.contains("@") == false) {
       throw new IllegalArgumentException("Please enter a valid email");
     }
-    
     Customer customer = customerRepository.findCustomerByPersonID(personID);
-    
     if (customer.getEmail().equals(email) == false) {
       throw new IllegalArgumentException("Incorrect email inputted!");
     }
-    
     if (customer.getLoginStatus() == false) {
       throw new IllegalArgumentException("Account is currently not logged in!");
     }
-    
     customer.setLoginStatus(false);
     customerRepository.save(customer);
     return true;
   }
   
-  /*
-   * Get customer with a personID
+  /**
+   * @author Yash Khapre
+   * @param int personID
+   * Get a customer given a personID method
    */
   @Transactional
   public Customer getCustomer(int personID) {
-    
     if (personID <= 0) {
       throw new IllegalArgumentException("Please enter a valid personID");
     }
-    
     Customer customer = customerRepository.findCustomerByPersonID(personID);
-    
     if(customer == null) {
       throw new IllegalArgumentException("Cannot find customer with specified ID");
     }
-    
     return customer;
   }
   
+  /**
+   * @author Yash Khapre
+   * @param String email
+   * Get a customer given a specific email
+   */
+  @Transactional
+  public Customer getCustomerByEmail(String email) {
+    if (!email.contains("@")) {
+      throw new IllegalArgumentException("Please enter a valid email");
+    }
+    Customer customer = customerRepository.findCustomerByEmail(email);
+    if(customer == null) {
+      throw new IllegalArgumentException("Cannot find customer with specified email");
+    }
+    return customer;
+  }
   
-  /*
-   * Delete customer given personID
+  /**
+   * @author Yash Khapre
+   * @param String firstName
+   * Method to get all customers with specified first name
+   */
+  @Transactional
+  public List<Customer> getCustomerByFirstName(String firstName) {
+    if (firstName == null) {
+      throw new IllegalArgumentException("Please enter a valid first name");
+    }    
+    List<Customer> customers = customerRepository.findCustomersByFirstName(firstName);
+    if(customers.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find customers with specified first name");
+    }
+    return customers;
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param String lastName
+   * Method to get all customers with specified last name
+   */
+  @Transactional
+  public List<Customer> getCustomerByLastName(String lastName) {    
+    if (lastName == null) {
+      throw new IllegalArgumentException("Please enter a valid last name");
+    }    
+    List<Customer> customers = customerRepository.findCustomersByLastName(lastName);
+    if(customers.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find customers with specified last name");
+    }    
+    return customers;
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param String firstName, String lastName
+   * Method to get all customers with specified first and last names
+   */
+  @Transactional
+  public List<Customer> getCustomerByFullName(String firstName, String lastName) {    
+    if (firstName == null) {
+      throw new IllegalArgumentException("Please enter a valid first name");
+    }    
+    if (lastName == null) {
+      throw new IllegalArgumentException("Please enter a valid last name");
+    }   
+    List<Customer> customers = customerRepository.findCustomersByFirstNameAndLastName(firstName, lastName);    
+    if(customers.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find customers with specified first name");
+    }    
+    return customers;
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param int personID
+   * Delete a customer given a personID method
    */
   @Transactional
   public boolean deleteCustomerByID(int personID) {
     if (personID <= 0) {
       throw new IllegalArgumentException("Please enter a valid personID");
-    }
-    
-    Customer c = customerRepository.findCustomerByPersonID(personID);
-    
+    }    
+    Customer c = customerRepository.findCustomerByPersonID(personID);    
     if(c == null) {
       throw new NullPointerException("Cannot find Customer with this personID");
-    }
-    
+    }    
     customerRepository.delete(c);
     addressRepository.delete(c.getAddress());
-    
     return true;
   }
   
-  /*
-   * Validate person credentials via PersonID
+  /**
+   * @author Yash Khapre
+   * @param int personID
+   * Method that checks if a person is a Customer using personID
    */
   @Transactional
-  public boolean validateCustomerByID(int personID) {
-      if (personID <= 0) {
-        throw new IllegalArgumentException("Please enter a valid PersonID");
+  public boolean isCustomerByID(int personID) {
+      return customerRepository.existsByPersonID(personID);
+  }
+
+  /**
+   * @author Yash Khapre
+   * @param String firstName
+   * Method that checks if person is Customer using first name
+   */
+  @Transactional
+  public boolean isCustomerByFirstName(String firstName) {
+      if(firstName == null || firstName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid first Name!");
       }
-      Customer customerExists = customerRepository.findCustomerByPersonID(personID);
-      if (customerExists == null) {
-        throw new NullPointerException("Cannot find Person with given ID");
+      return customerRepository.existsByFirstName(firstName);
+  }
+
+  /**
+   * @author Yash Khapre
+   * @param String lastName
+   * Method that checks if a person is a Customer using specified last name
+   */
+  @Transactional
+  public boolean isCustomerByLastName(String lastName) {
+      if(lastName == null || lastName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid last Name!");
       }
-      if(!(customerRepository.findCustomerByPersonID(personID) instanceof Customer)) {
-        throw new IllegalArgumentException("This person with given ID is not a customer!");
+      return customerRepository.existsByFirstName(lastName);
+  }
+
+  /**
+   * @author Yash Khapre
+   * @param String firstName, String lastName
+   * Method that checks if person is Customer by first and last name
+   */
+  @Transactional
+  public boolean isCustomerByFirstAndLastName(String firstName, String lastName) {
+      if(firstName == null || firstName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid first Name!");
       }
-      return true;
+      if(lastName == null || lastName.length() == 0) {
+        throw new IllegalArgumentException("Please provide a valid last Name!");
+      }
+      return customerRepository.existsByFirstNameAndLastName(firstName, lastName);
+  }
+
+  /**
+   * @author Yash Khapre
+   * @param String email
+   * Checks if a person is a Customer using email
+   */
+  @Transactional
+  public boolean isCustomerByEmail(String email) {
+      if(email == null || email.length() == 0 || !(email.contains("@"))) {
+        throw new IllegalArgumentException("Please provide a valid email!");
+      }
+      return customerRepository.existsByEmail(email);
   }
   
-  /*
-   * Get all customers in grocery store system
+  /**
+   * @author Yash Khapre
+   * Method that gets all customers in grocery store system
    */
   @Transactional
   public List<Customer> getAllCustomers() {
@@ -172,8 +276,9 @@ public class CustomerService {
       return customerList;
   }
   
-  /*
-   * Get all customers who are local
+  /**
+   * @author Yash Khapre
+   * Method that gets all customers who are local
    */
   @Transactional
   public List<Customer> getLocalCustomers(){
@@ -186,8 +291,9 @@ public class CustomerService {
     return localCustomers; 
   }
   
-  /*
-   * Get all customers who are not local
+  /**
+   * @author Yash Khapre
+   * Method that gets all customers who are not local
    */
   @Transactional
   public List<Customer> getNonLocalCustomers(){
@@ -200,8 +306,9 @@ public class CustomerService {
     return foreignCustomers; 
   }
   
-  /*
-   * Get all logged in customers
+  /**
+   * @author Yash Khapre
+   * Method that gets all logged-in customers
    */
   @Transactional
   public List<Customer> getLoggedInCustomers(){
@@ -210,13 +317,14 @@ public class CustomerService {
       if(c.getLoginStatus() == true) {
         loggedInUsers.add(c);
       }
-    }
-    
+    }  
     return loggedInUsers;
   }
   
-  /*
-   * Update a customer's profile
+  /**
+   * @author Yash Khapre
+   * @param String firstName, String lastName, String email, String password, String city, String country, String postalCode, String streetName, String streetNum, Boolean isLocal, int personID
+   * Method that updates a specific customer's profile
    */
   @Transactional
   public Customer updateProfile(String firstName, String lastName, String email, String password, String city, String country, String postalCode, 
@@ -259,4 +367,24 @@ public class CustomerService {
     }
   }
   
+  /**
+   * @author Yash Khapre
+   * @param int personID, String password
+   * Method to update a customer's password
+   */
+  @Transactional
+  public Customer updateCustomerPasswordById(int personID, String password) {
+    
+      if(password.length() < 8 || password == null) {
+        throw new IllegalArgumentException("Please enter a password with at least 8 characters");
+      }
+
+      Customer customer = customerRepository.findCustomerByPersonID(personID);
+      if(customer == null) {
+        throw new NullPointerException("Customer not found");
+      }
+      customer.setPassword(password);
+      customerRepository.save(customer);
+      return customer;
+  }
 }
