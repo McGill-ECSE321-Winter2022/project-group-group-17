@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.OwnerRepository;
+import ca.mcgill.ecse321.grocerystoresystem.dao.PersonRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +34,10 @@ public class TestOwnerService {
 
     @InjectMocks
     private AddressService addressService;
+
+    @Mock
+    private PersonRepository personRepository;
+
 
     private static final int OWNER_KEY = 1001;
     private static final int NO_OWNER_KEY = 234;
@@ -182,6 +187,8 @@ public class TestOwnerService {
                 return null;
             }
         });
+
+        lenient().when(personRepository.findPersonByEmail(anyString())).thenAnswer((InvocationOnMock invocation) -> new ArrayList<>());
 
         lenient().when(ownerRepository.existsByPersonID(anyInt())).thenAnswer(
                 (InvocationOnMock invocation) -> invocation.getArgument(0).equals(OWNER_KEY));
