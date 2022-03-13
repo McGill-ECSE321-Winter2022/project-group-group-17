@@ -137,7 +137,7 @@ public class TestOwnerService {
 
         lenient().when(ownerRepository.findOwnerByFirstName(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
             if(invocation.getArgument(0).equals(FIRST_NAME)) {
-                 List<Owner> owners = new ArrayList<>();
+                 List<Owner> owners = createOwners2();
                  owners.add(createOwner());
 
                  return owners;
@@ -259,7 +259,7 @@ public class TestOwnerService {
     @Test
     public void testCreateOwnerFail1() {
         Owner savedOwner = null;
-        String error = null;
+        String error =  "";
 
         try {
             savedOwner = this.ownerService.createOwner(null, LAST_NAME, EMAIL, PASSWORD);
@@ -274,7 +274,7 @@ public class TestOwnerService {
     @Test
     public void testCreateOwnerFail2() {
         Owner savedOwner = null;
-        String error = null;
+        String error =  "";
 
         try {
             savedOwner = this.ownerService.createOwner(FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, null);
@@ -309,7 +309,7 @@ public class TestOwnerService {
     public void testGetOwnerByIDUnsuccessful() {
         assertEquals(1, ownerService.getAllOwners().size());
         Owner owner = null;
-        String error = null;
+        String error =  "";
         try {
             owner = ownerService.findOwnerByID(NO_OWNER_KEY);
         }
@@ -333,21 +333,14 @@ public class TestOwnerService {
             fail(exp.getMessage());
         }
 
-        assertEquals(owners.size(), 1);
-        Owner owner = owners.get(0);
-
-        assertNotNull(owner);
-        assertEquals(OWNER_KEY, owner.getPersonID());
-        assertEquals(FIRST_NAME, owner.getFirstName());
-        assertEquals(LAST_NAME, owner.getLastName());
-        assertEquals(EMAIL, owner.getEmail());
-        assertEquals(PASSWORD, owner.getPassword());
+        assertEquals(owners.size(), 2);
+        assertNotNull(owners);
     }
 
     @Test
     public void testGetOwnerByFirstNameUnsuccessful() {
         List<Owner> owners = null;
-        String error = null;
+        String error =  "";
         try {
             owners = this.ownerService.findOwnerByFirstName("Marioo");
         }
@@ -376,7 +369,7 @@ public class TestOwnerService {
     @Test
     public void testGetOwnerByLastNameUnsuccessful() {
         List<Owner> owners = null;
-        String error = null;
+        String error =  "";
         try {
             owners = this.ownerService.findOwnerByLastName("helloworld");
         }
@@ -430,7 +423,7 @@ public class TestOwnerService {
     @Test
     public void testGetOwnerByEmailUnsuccessful() {
         Owner owner = null;
-        String error = null;
+        String error =  "";
         try {
             owner = this.ownerService.findOwnerByEmail("email");
         }
@@ -445,7 +438,7 @@ public class TestOwnerService {
     @Test
     public void testGetOwnerByFullNameUnsuccessful() {
         List<Owner> owners = null;
-        String error = null;
+        String error =  "";
         try {
             owners = this.ownerService.findOwnerByName("M", "M");
         }

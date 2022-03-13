@@ -279,7 +279,7 @@ public class TestShiftService {
     @Test
     public void testShiftGetIDUnsuccessful() {
         Shift shift = null;
-        String error = null;
+        String error =  "";
         try {
             shift = shiftService.findShiftByID(100001);
         }
