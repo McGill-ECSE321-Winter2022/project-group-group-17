@@ -27,11 +27,11 @@ public class StoreHourService {
 
     }
     @Transactional
-    public void deleteStoreHour (int storeHourID){
-        if (!storeHourRepository.existsByStoreHourID(storeHourID)) throw new IllegalArgumentException("store hour does not exist");
+    public boolean deleteStoreHour (int storeHourID){
+        if (!storeHourRepository.existsByStoreHourID(storeHourID)) return false;
         StoreHour hour = storeHourRepository.findStoreHourByStoreHourID(storeHourID);
         storeHourRepository.delete(hour);
-        return;
+        return true;
     }
    // @Transactional 
   //  public void deleteStoreHourByWeekday
