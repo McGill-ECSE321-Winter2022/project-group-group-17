@@ -13,7 +13,13 @@ public interface InStoreOrderRepository extends CrudRepository<InStoreOrder, Int
 	 * Find InStoreOrder based on their ID
 	 */
 	InStoreOrder findInStoreOrderByOrderID(Integer orderID);
-	
+
+	/**
+	 * Find all InStoreOrder that have the same person ID
+	 */
+
+	List<InStoreOrder> findInStoreOrderByPersonPersonID(int personID);
+
 	/**
 	 * Returns true if their is an in store order in the database with the passed ID as parameter
 	 */

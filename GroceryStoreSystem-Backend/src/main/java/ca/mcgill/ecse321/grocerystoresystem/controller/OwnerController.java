@@ -67,9 +67,9 @@ public class OwnerController {
     }
 
     @GetMapping(value = {"/owner/get/email/", "/owner/get/email"})
-    public List<OwnerDto> getOwnerWithEmail(@RequestParam String email) {
+    public OwnerDto getOwnerWithEmail(@RequestParam String email) {
         try {
-            return ownerService.findOwnerByEmail(email).stream().map(this::convertToDto).collect(Collectors.toList());
+            return convertToDto(ownerService.findOwnerByEmail(email));
         }
         catch (NullPointerException exp) {
             return null;

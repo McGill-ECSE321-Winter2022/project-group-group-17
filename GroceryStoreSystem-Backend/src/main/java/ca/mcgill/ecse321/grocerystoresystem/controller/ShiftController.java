@@ -160,13 +160,23 @@ public class ShiftController {
         }
     }
 
-    @DeleteMapping(value = {"/shift/delete/", "/shift/delete"})
-    public ShiftDto deleteShift(@RequestParam int id) {
+    @DeleteMapping(value = {"/shifts/delete/"})
+    public boolean deleteShifts() {
         try {
-            return convertToDto(this.shiftService.deleteShift(id));
+            return this.shiftService.deleteAllShifts();
         }
         catch(NullPointerException exp) {
-            return null;
+            return false;
+        }
+    }
+
+    @DeleteMapping(value = {"/shift/delete/", "/shift/delete"})
+    public boolean deleteShift(@RequestParam int id) {
+        try {
+            return this.shiftService.deleteShift(id);
+        }
+        catch(NullPointerException exp) {
+            return false;
         }
     }
 
@@ -201,5 +211,4 @@ public class ShiftController {
 
         return new AddressDto(a.getAddressID(), a.isLocal(), a.getStreetName(), a.getStreetNum(), a.getCity(), a.getPostalCode(), a.getCountry());
     }
-
 }

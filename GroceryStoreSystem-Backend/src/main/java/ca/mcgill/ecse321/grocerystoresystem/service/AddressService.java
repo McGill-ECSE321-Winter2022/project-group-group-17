@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
 
-
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import  ca.mcgill.ecse321.grocerystoresystem.dao.*; //imports all the classes
 import  ca.mcgill.ecse321.grocerystoresystem.model.*;
+
 
 @Service 
 public class AddressService {

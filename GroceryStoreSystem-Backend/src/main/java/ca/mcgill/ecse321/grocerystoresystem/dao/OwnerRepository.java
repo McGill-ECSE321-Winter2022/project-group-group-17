@@ -26,7 +26,7 @@ public interface OwnerRepository extends CrudRepository<Owner, Integer>{
 	/**
 	 * Find Owner based on their email address
 	 */
-	List<Owner> findOwnerByEmail(String email);
+	Owner findOwnerByEmail(String email);
 
 	/**
 	 * Find Owner based on their first and last name
