@@ -47,7 +47,6 @@ public class StoreHourDto {
     public Weekdays getWeekday(){
         return weekday;
     }
-
     public void setWeekday(Weekdays weekday){
         this.weekday=weekday;
 
