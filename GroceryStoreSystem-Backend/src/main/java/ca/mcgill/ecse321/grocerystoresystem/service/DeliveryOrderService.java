@@ -61,7 +61,9 @@ public class DeliveryOrderService {
 	
 	@Transactional 
 	public DeliveryOrder getDeliveryOrderByID(int id) {
-		return deliveryOrderRepository.findDeliveryOrderByOrderID(id);
+		DeliveryOrder deliveryOrder = deliveryOrderRepository.findDeliveryOrderByOrderID(id);
+		if (deliveryOrder == null) throw new NullPointerException("Order not found");
+		return deliveryOrder;
 	}
 	
 	@Transactional
