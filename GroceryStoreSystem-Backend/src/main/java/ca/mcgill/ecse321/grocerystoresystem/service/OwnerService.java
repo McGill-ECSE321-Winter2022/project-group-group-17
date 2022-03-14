@@ -197,6 +197,8 @@ public class OwnerService {
         List<Person> persons = personRepository.findPersonByEmail(email);
         if(persons.size() == 0) throw new IllegalArgumentException("No account with that email or password");
 
+        if(persons.size() > 1) throw new IllegalArgumentException("More than 1 person associated with email");
+
         Person person = persons.get(0);
         if(person.getPassword().equals(password)) {
             person.setLoginStatus(true);
@@ -209,9 +211,15 @@ public class OwnerService {
     }
 
     @Transactional
-    public boolean logOut(Person person) {
+    public boolean logOut(int personID) {
+        Person person = personRepository.findPersonByPersonID(personID);
+
+        if(person == null) {
+            throw new NullPointerException("Person not found");
+        }
+
         if(!person.getLoginStatus()) {
-            throw new IllegalArgumentException("Person not loggoed in");
+            throw new IllegalArgumentException("Person not logged in");
         }
 
         person.setLoginStatus(false);

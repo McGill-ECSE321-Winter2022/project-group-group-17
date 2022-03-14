@@ -21,6 +21,11 @@ public interface DeliveryOrderRepository extends CrudRepository<DeliveryOrder, I
 	 */
 
 	List<DeliveryOrder> findDeliveryOrderByPersonPersonID(int personID);
+
+	/**
+	 * Find all delivery orders associated with an address id
+	 */
+	List<DeliveryOrder> findDeliveryOrderByDeliveryAddressAddressID(int addressID);
 	
 	/**
 	 * Returns true if their is an delivery order in the database with the passed ID as parameter

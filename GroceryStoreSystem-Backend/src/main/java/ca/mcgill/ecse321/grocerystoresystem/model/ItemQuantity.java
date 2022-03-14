@@ -13,6 +13,7 @@ public class ItemQuantity {
 	@ManyToOne
 	private Order order;
 
+
 	@ManyToOne
 	private Item specificItem;
 	
@@ -42,5 +43,21 @@ public class ItemQuantity {
 	}
 	public void setQuantityID(int quantityID){
 		this.quantityID = quantityID;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Item getSpecificItem() {
+		return specificItem;
+	}
+
+	public void setSpecificItem(Item specificItem) {
+		this.specificItem = specificItem;
 	}
 }
