@@ -20,9 +20,9 @@ public class DeliveryOrder extends Order {
 		this.deliveryTime = deliveryTime;
 	}
 
-	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address delivery_address) {
+	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address deliveryAddress) {
 		this(totalCost, orderTimeStamp, isPaid, deliveryTime);
-		this.delivery_address = delivery_address;
+		this.delivery_address = deliveryAddress;
 	}
 
 	public LocalDateTime getDeliveryTime() {
