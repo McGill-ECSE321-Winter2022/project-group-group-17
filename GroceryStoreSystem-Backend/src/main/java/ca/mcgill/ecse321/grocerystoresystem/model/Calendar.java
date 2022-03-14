@@ -33,7 +33,24 @@ public class Calendar {
 	public Calendar() {
 		
 	}
-	
+
+
+	public void setCalendarID(int calendarID) {
+		this.calendarID = calendarID;
+	}
+
+	public void setOpeningTimes(List<StoreHour> openingTimes) {
+		this.openingTimes = openingTimes;
+	}
+
+	public void setClosedDays(List<SpecialDay> closedDays) {
+		this.closedDays = closedDays;
+	}
+
+	public void setEmployeeShifts(List<Shift> employeeShifts) {
+		this.employeeShifts = employeeShifts;
+	}
+
 	public int getCalendarID() {
 		return this.calendarID;
 	}
