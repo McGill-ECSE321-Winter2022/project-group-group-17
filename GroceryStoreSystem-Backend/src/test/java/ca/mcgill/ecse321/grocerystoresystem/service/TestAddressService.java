@@ -314,7 +314,7 @@ public class TestAddressService {
 			address = this.addressService.getAddressWithID(NO_ADDRESS_KEY);
 			
 		}catch(NullPointerException e) {
-			fail(e.getMessage());
+			error = e.getMessage();
 		}
 		assertNull(address);	
 		assertEquals(error,"Address not found");
@@ -429,6 +429,51 @@ public class TestAddressService {
 		 }
 		 assertNull(addresses);
 		 assertEquals("There are no addresses with that street name and number", error);
+	}
+	@Test 
+	public void testGetAddressByCitySuccessful() {
+		 List<Address> addresses = new ArrayList<>();
+	
+		try {
+			addresses = this.addressService.getAddressWithCity(CITY);
+			
+		}catch(NullPointerException e) {
+			fail(e.getMessage());
+		}
+		assertEquals(addresses.size(),2);	
+		Address address = addresses.get(0);
+		Address address2 = addresses.get(1);
+		
+		assertNotNull(address);
+		assertNotNull(address2);
+		
+		assertEquals(address.getStreetName(), STREET_NAME);
+		assertEquals(address.getStreetNum(), STREET_NUM);
+		assertEquals(address.getCity(), CITY);
+		assertEquals(address.getPostalCode(),POSTAL_CODE);
+		assertEquals(address.getCountry(), COUNTRY);
+		assertEquals(address.isLocal(), IS_LOCAL);
+		assertEquals(address.getAddressID(), ADDRESS_KEY);	
+		
+		assertEquals(address2.getStreetName(), STREET_NAME_2);
+		assertEquals(address2.getStreetNum(), STREET_NUM_2);
+		assertEquals(address2.getCity(), CITY_2);
+		assertEquals(address2.getPostalCode(),POSTAL_CODE_2);
+		assertEquals(address2.getCountry(), COUNTRY_2);
+		assertEquals(address2.isLocal(), IS_LOCAL_2);
+		assertEquals(address2.getAddressID(), ADDRESS_KEY_2);		
+	}
+	@Test
+	public void testGetAddressByCityUnsuccessful() {
+		 List<Address> addresses = null;
+		 String error = null;
+		 try {
+			 addresses = this.addressService.getAddressWithCity("NewYork"); 
+		 } catch(NullPointerException e){
+			 error = (e.getMessage());
+		 }
+		 assertNull(addresses);
+		 assertEquals("There are no addresses with that city name.", error);
 	}
 	
 	}
