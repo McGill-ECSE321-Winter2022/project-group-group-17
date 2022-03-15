@@ -231,7 +231,7 @@ public class TestAddressService {
 		Address savedAddress = null;
 		String error = null;
 		try {
-			savedAddress = this.addressService.createAddress(null,STREET_NUM, CITY, POSTAL_CODE, COUNTRY, IS_LOCAL);
+			savedAddress = this.addressService.createAddress("",STREET_NUM, CITY, POSTAL_CODE, COUNTRY, IS_LOCAL);
 		}catch(IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -243,7 +243,7 @@ public class TestAddressService {
 		Address savedAddress = null;
 		String error = null;
 		try {
-			savedAddress = this.addressService.createAddress(STREET_NAME,null, CITY, POSTAL_CODE, COUNTRY, IS_LOCAL);
+			savedAddress = this.addressService.createAddress(STREET_NAME,"", CITY, POSTAL_CODE, COUNTRY, IS_LOCAL);
 		}catch(IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -255,7 +255,7 @@ public class TestAddressService {
 		Address savedAddress = null;
 		String error = null;
 		try {
-			savedAddress = this.addressService.createAddress(STREET_NAME,STREET_NUM, null, POSTAL_CODE, COUNTRY, IS_LOCAL);
+			savedAddress = this.addressService.createAddress(STREET_NAME,STREET_NUM, "", POSTAL_CODE, COUNTRY, IS_LOCAL);
 		}catch(IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -267,7 +267,7 @@ public class TestAddressService {
 		Address savedAddress = null;
 		String error = null;
 		try {
-			savedAddress = this.addressService.createAddress(STREET_NAME,STREET_NUM, CITY, null, COUNTRY, IS_LOCAL);
+			savedAddress = this.addressService.createAddress(STREET_NAME,STREET_NUM, CITY, "", COUNTRY, IS_LOCAL);
 		}catch(IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -279,7 +279,7 @@ public class TestAddressService {
 		Address savedAddress = null;
 		String error = null;
 		try {
-			savedAddress = this.addressService.createAddress(ADDRESS_KEY,STREET_NAME,STREET_NUM, CITY, POSTAL_CODE, null, IS_LOCAL);
+			savedAddress = this.addressService.createAddress(ADDRESS_KEY,STREET_NAME,STREET_NUM, CITY, POSTAL_CODE, "", IS_LOCAL);
 		}catch(IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -365,6 +365,19 @@ public class TestAddressService {
 		 assertNull(addresses);
 		 assertEquals("There are no addresses with that street name", error);
 	}
+	@Test 
+	public void testGetAddressByStreetNameUnsuccessful2() {
+		 List<Address> addresses = null;
+		 String error = null;
+		 
+		 try {
+			 addresses = this.addressService.getAddressWithStreetName("");
+		 } catch(IllegalArgumentException e){
+			 error = e.getMessage();
+		 }
+		 assertNull(addresses);
+		 assertEquals("Please provide a valid street name", error);
+	}
 	@Test
 	public void testGetAddressByStreetNumSuccessful() {
 		 List<Address> addresses = new ArrayList<>();
@@ -398,6 +411,19 @@ public class TestAddressService {
 		 assertNull(addresses);
 		 assertEquals("There are no addresses with that street number", error);
 	}
+	@Test 
+	public void testGetAddressByStreetNumberUnsuccessful2() {
+		 List<Address> addresses = null;
+		 String error = null;
+		 
+		 try {
+			 addresses = this.addressService.getAddressWithStreetNum("");
+		 } catch(IllegalArgumentException  e){
+			 error = e.getMessage();
+		 }
+		 assertNull(addresses);
+		 assertEquals("Please provide a valid street number", error);
+	}
 	@Test
 	public void testGetAddressByStreetNumAndNameSuccessful() {
 		 List<Address> addresses = new ArrayList<>();
@@ -429,6 +455,30 @@ public class TestAddressService {
 		 }
 		 assertNull(addresses);
 		 assertEquals("There are no addresses with that street name and number", error);
+	}
+	@Test
+	public void testGetAddressByStreetNumAndNameUnsuccessful2() {
+		 List<Address> addresses = null;
+		 String error = null;
+		 try {
+			 addresses = this.addressService.getAddressWithStreetNumAndName("", "0000"); 
+		 } catch(IllegalArgumentException  e){
+			 error = (e.getMessage());
+		 }
+		 assertNull(addresses);
+		 assertEquals("Please provide a valid street name", error);
+	}
+	@Test
+	public void testGetAddressByStreetNumAndNameUnsuccessful3() {
+		 List<Address> addresses = null;
+		 String error = null;
+		 try {
+			 addresses = this.addressService.getAddressWithStreetNumAndName("Monkland", ""); 
+		 } catch(IllegalArgumentException e){
+			 error = (e.getMessage());
+		 }
+		 assertNull(addresses);
+		 assertEquals("Please provide a valid street  number", error);
 	}
 	@Test 
 	public void testGetAddressByCitySuccessful() {
@@ -475,5 +525,49 @@ public class TestAddressService {
 		 assertNull(addresses);
 		 assertEquals("There are no addresses with that city name.", error);
 	}
+	@Test
+	public void testGetAddressByCityUnsuccessful2() {
+		 List<Address> addresses = null;
+		 String error = null;
+		 try {
+			 addresses = this.addressService.getAddressWithCity(""); 
+		 } catch(IllegalArgumentException e){
+			 error = (e.getMessage());
+		 }
+		 assertNull(addresses);
+		 assertEquals("Please provide a valid city name.", error);
+	}
+	@Test 
+	public void testGetAddressByIsLocalSuccessful() {
+		 List<Address> addresses = new ArrayList<>();
 	
+		try {
+			addresses = this.addressService.getAddressWithIsLocal(IS_LOCAL);
+			
+		}catch(NullPointerException e) {
+			fail(e.getMessage());
+		}
+		assertEquals(addresses.size(),2);	
+		Address address = addresses.get(0);
+		Address address2 = addresses.get(1);
+		
+		assertNotNull(address);
+		assertNotNull(address2);
+
+		assertEquals(address.getStreetName(), STREET_NAME);
+		assertEquals(address.getStreetNum(), STREET_NUM);
+		assertEquals(address.getCity(), CITY);
+		assertEquals(address.getPostalCode(),POSTAL_CODE);
+		assertEquals(address.getCountry(), COUNTRY);
+		assertEquals(address.isLocal(), IS_LOCAL);
+		assertEquals(address.getAddressID(), ADDRESS_KEY);	
+		
+		assertEquals(address2.getStreetName(), STREET_NAME_2);
+		assertEquals(address2.getStreetNum(), STREET_NUM_2);
+		assertEquals(address2.getCity(), CITY_2);
+		assertEquals(address2.getPostalCode(),POSTAL_CODE_2);
+		assertEquals(address2.getCountry(), COUNTRY_2);
+		assertEquals(address2.isLocal(), IS_LOCAL_2);
+		assertEquals(address2.getAddressID(), ADDRESS_KEY_2);	
+		}
 	}

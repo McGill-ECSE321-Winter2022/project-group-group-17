@@ -150,7 +150,7 @@ public class AddressService {
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);
 		}
-		if(streetNum == null || streetNum.length() == 0)throw new IllegalArgumentException("Please provide a valid street number.");
+		if(streetNum == null || streetNum.length() == 0)throw new IllegalArgumentException("Please provide a valid street number");
 		if(streetName == null || streetName.length() == 0) throw new IllegalArgumentException("Please provide a valid street name");	
 		
 		List<Address> addresses = this.addressRepository.findAddressByStreetNumAndStreetName(streetNum, streetName);
@@ -164,7 +164,7 @@ public class AddressService {
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);
 		}
-		if(postalCode == null || postalCode.length() == 0)throw new IllegalArgumentException("Please provide a valid street number.");
+		if(postalCode == null || postalCode.length() == 0)throw new IllegalArgumentException("Please provide a valid postal code.");
 		List<Address> addresses = this.addressRepository.findAddressByPostalCode(postalCode);
 		if (addresses.size()==0) throw new NullPointerException("There are no addresses with that postal code.");
 		
