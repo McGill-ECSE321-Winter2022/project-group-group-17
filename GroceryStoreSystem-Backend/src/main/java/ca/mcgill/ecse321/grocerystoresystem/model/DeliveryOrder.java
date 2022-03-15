@@ -9,7 +9,7 @@ public class DeliveryOrder extends Order {
 
 	// DeliveryOrder Associations
 	@ManyToOne
-	private Address delivery_address;
+	private Address deliveryAddress;
   
 	private LocalDateTime deliveryTime;
 	
@@ -20,9 +20,9 @@ public class DeliveryOrder extends Order {
 		this.deliveryTime = deliveryTime;
 	}
 
-	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address delivery_address) {
+	public DeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address deliveryAddress) {
 		this(totalCost, orderTimeStamp, isPaid, deliveryTime);
-		this.delivery_address = delivery_address;
+		this.deliveryAddress = deliveryAddress;
 	}
 
 	public LocalDateTime getDeliveryTime() {
@@ -34,11 +34,11 @@ public class DeliveryOrder extends Order {
 	}
 	
 	public Address getAddress() {
-		return this.delivery_address;
+		return this.deliveryAddress;
 	}
 
 	public void setAddress(Address address) {
-		this.delivery_address = address;
+		this.deliveryAddress = address;
 	}
 
 }

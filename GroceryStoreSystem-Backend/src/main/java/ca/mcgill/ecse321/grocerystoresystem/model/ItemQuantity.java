@@ -11,7 +11,7 @@ public class ItemQuantity {
 	
 	// ItemQuantity Associations
 	@ManyToOne
-	private Order order_quantity;
+	private Order order;
 
 	@ManyToOne
 	private Item specificItem;

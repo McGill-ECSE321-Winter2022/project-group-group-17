@@ -31,7 +31,7 @@ public abstract class Order {
 	private List<ItemQuantity> portionNum;
 
 	@ManyToOne
-	private Person order_person;
+	private Person person;
 	
 	
 	private LocalDateTime orderTimeStamp;
@@ -85,5 +85,21 @@ public abstract class Order {
 	}
 	public void setOrderID(int orderID) {
 		this.orderID = orderID;
+	}
+
+	public List<ItemQuantity> getPortionNum() {
+		return portionNum;
+	}
+
+	public void setPortionNum(List<ItemQuantity> portionNum) {
+		this.portionNum = portionNum;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 }

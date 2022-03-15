@@ -14,8 +14,11 @@ public interface ItemQuantityRepository extends CrudRepository<ItemQuantity, Int
 	 * Find ItemQuantity based on their ID
 	 */
 	ItemQuantity findItemQuantityByQuantityID(Integer quantityID);
+
 	List <ItemQuantity> findItemQuantityByItemNum(Integer itemNum);
-	
+
+	List<ItemQuantity> findItemQuantitiesByOrderOrderID(Integer orderID);
+
 	/**
 	 * Returns true if their is an item quantity in the database with the passed ID as parameter
 	 */

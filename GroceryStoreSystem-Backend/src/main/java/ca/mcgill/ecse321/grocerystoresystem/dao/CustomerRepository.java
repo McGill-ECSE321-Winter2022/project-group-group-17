@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Customer;
 
+import java.util.List;
+
 public interface CustomerRepository extends CrudRepository<Customer, Integer>{
 
 	/**

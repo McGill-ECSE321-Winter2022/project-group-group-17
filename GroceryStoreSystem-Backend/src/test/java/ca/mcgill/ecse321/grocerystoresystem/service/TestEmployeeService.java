@@ -207,12 +207,23 @@ public class TestEmployeeService{
 
     Answer<?> returnParamAsAnswer = (InvocationOnMock invocation) -> {return invocation.getArgument(0);};
     lenient().when(employeeRepository.save(any(Employee.class))).thenAnswer(returnParamAsAnswer);
+
+
+
+
 }
 
+   @Test
+    public void testCreateEmployee() {
+        Employee savedEmployee = this.employeeService.createEmployee();
 
-
-
-
+        assertNotNull(savedEmployee);
+        assertNull(savedEmployee.getFirstName());
+        assertNull(savedEmployee.getLastName());
+        assertNull(savedEmployee.getEmail());
+        assertNull(savedEmployee.getPassword());
+        assertEquals(savedEmployee.getPersonID(), 0);
+    }
 
 
 
