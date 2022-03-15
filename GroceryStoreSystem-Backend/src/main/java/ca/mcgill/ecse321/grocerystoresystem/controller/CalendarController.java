@@ -41,7 +41,7 @@ public class CalendarController {
     }
 
     @DeleteMapping(value = {"/calendar/delete/", "/calendar/delete"})
-    public CalendarDto deleteMapping(@RequestParam int id) {
+    public CalendarDto deleteCalendar(@RequestParam int id) {
         try {
             return convertToDto(calendarService.deleteCalendar(id));
         }

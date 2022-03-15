@@ -140,7 +140,7 @@ public class ShiftController {
     }
 
     @PostMapping(value = {"/shift/update/status", "/shift/update/status/"})
-    public ShiftDto updateShiftEmployee(@RequestParam int shiftID, @RequestParam ShiftStatus status) {
+    public ShiftDto updateShiftStatus(@RequestParam int shiftID, @RequestParam ShiftStatus status) {
         try {
             return convertToDto(this.shiftService.updateShiftStatus(shiftID, status));
         }
