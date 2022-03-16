@@ -31,6 +31,41 @@ public class AddressService {
 	 * It also check the validity of each parameter input and throws exceptions when the user violates certain rules. 
 	 */
 	@Transactional
+	public Address createAddress(Integer addressID,String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+		Address address = new Address();
+		try {
+			checkEmptyInput(streetName);
+			checkEmptyInput(streetNum);
+			checkEmptyInput(city);
+			checkEmptyInput(postalCode);
+			checkEmptyInput(country);
+			checkEmptyInput(isLocal);
+			
+		}catch(IllegalArgumentException e){
+			System.out.println(e);
+		}
+		
+		try {
+			checkAlpha(streetName);
+			checkAlpha(city);
+			checkAlpha(country);
+			checkAlphaNum(streetNum);
+			checkAlphaNum(postalCode);
+			
+			address.setCity(city);
+			address.setCountry(country);
+			address.setLocal(isLocal);
+			address.setPostalCode(postalCode);
+			address.setStreetName(streetName);
+			address.setStreetNum(streetNum);
+			}catch(IllegalArgumentException e) {
+			System.out.println(e);
+		}
+
+		addressRepository.save(address);
+		return address;
+	}
+	@Transactional
 	public Address createAddress(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
 		Address address = new Address();
 		try {

@@ -6,8 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 
-import java.util.List;
-
  public interface AddressRepository extends CrudRepository<Address, Integer>{
 	/**
 	 * Find Address based on their ID
@@ -25,4 +23,10 @@ import java.util.List;
 	 * Returns true if their is an address in the database with the passed ID as parameter
 	 */
 	boolean existsByAddressID(Integer addressID);
+	boolean existsByStreetName(String streetName);
+	boolean existsByStreetNum(String streetNum);
+	boolean existsByCity(String city);
+	boolean existsByCountry(String country);
+	boolean existsByPostalCode(String postalCode);
+	boolean existsByStreetNumAndStreetName(String streetNum, String streetName);
 }
