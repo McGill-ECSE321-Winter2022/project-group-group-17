@@ -67,6 +67,31 @@ public class ItemService {
 	}
 	
 	
+	@Transactional
+	public Item decreaseInventoryAmount(int id, int amount) {
+		Item item = itemRepository.findItemByItemID(id);
+		
+		item.setInventoryAmount(item.getInventoryAmount() - amount);
+		
+		itemRepository.save(item);
+		
+		return item;
+	}
+	
+	@Transactional
+	public Item increaseInventoryAmount(int id, int amount) {
+		
+		Item item = itemRepository.findItemByItemID(id);
+		
+		item.setInventoryAmount(item.getInventoryAmount() + amount);
+		
+		itemRepository.save(item);
+		
+		return item;
+		
+	}
+	
+	
 	private void validateItemPrice(int itemPrice) {
 		if (itemPrice < 0) throw new IllegalArgumentException("Please submit a valid item price.");
 	}
