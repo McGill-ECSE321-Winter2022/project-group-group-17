@@ -264,33 +264,33 @@ public class OwnerControllerTest {
 
     }
 
-//    @Test
-//    public void testCreateAndUpdateAddress() {
-//        final int id = given()
-//                .param("firstname", "Mario")
-//                .param("lastname", "Bouzakhm")
-//                .param("email", "mariobouzakhm02@gmail.com")
-//                .param("password", "12345678")
-//                .post("/owner/create").then()
-//                .statusCode(200)
-//                .extract().response().body().path("id");
-//
-//        final int addressID = given()
-//                .param("streetName", "Drummond")
-//                .param("streetNum", "1233")
-//                .param("city", "Montreal")
-//                .param("postalCode", "H3VC1D")
-//                .param("country", "Canada")
-//                .param("isLocal", false)
-//                .post("/address/create/")
-//                .then().statusCode(200)
-//                .extract().response().body().path("id");
-//
-//        given()
-//                .param("id", id)
-//                .param("addressID", addressID)
-//                .post("/owner/update/address/")
-//                .then().statusCode(200)
-//                .extract().response().body().prettyPrint();
-//    }
+    @Test
+    public void testCreateAndUpdateAddress() {
+        final int id = given()
+                .param("firstname", "Mario")
+                .param("lastname", "Bouzakhm")
+                .param("email", "mariobouzakhm02@gmail.com")
+                .param("password", "12345678")
+                .post("/owner/create").then()
+                .statusCode(200)
+                .extract().response().body().path("id");
+
+        final int addressID = given()
+                .param("streetName", "Drummond")
+                .param("streetNum", "1233")
+                .param("city", "Montreal")
+                .param("postalCode", "H3VC1D")
+                .param("country", "Canada")
+                .param("isLocal", false)
+                .post("/address/create/")
+                .then().statusCode(200)
+                .extract().response().body().path("id");
+
+        given()
+                .param("id", id)
+                .param("addressID", addressID)
+                .post("/owner/update/address/")
+                .then().statusCode(200)
+                .extract().response().body().prettyPrint();
+    }
 }
