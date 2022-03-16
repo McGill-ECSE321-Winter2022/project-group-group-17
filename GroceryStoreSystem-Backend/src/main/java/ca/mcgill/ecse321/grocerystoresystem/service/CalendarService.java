@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.CalendarRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Calendar;
-import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +24,14 @@ public class CalendarService {
     }
 
     @Transactional
-    public Calendar deleteCalendar(int calendarID) {
+    public boolean deleteCalendar(int calendarID) {
         Calendar calendar = calendarRepository.findCalendarByCalendarID(calendarID);
 
         if(calendar == null) throw new NullPointerException("Calendar not found");
+
         calendarRepository.delete(calendar);
 
-        return calendar;
+        return !calendarRepository.existsByCalendarID(calendar.getCalendarID());
     }
 
     @Transactional

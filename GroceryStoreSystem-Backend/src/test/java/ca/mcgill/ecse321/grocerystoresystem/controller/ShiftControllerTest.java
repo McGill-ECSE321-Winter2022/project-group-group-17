@@ -63,7 +63,7 @@ public class ShiftControllerTest {
 
         String str = when().get("/shift/check/id?id="+id).then()
                 .statusCode(200)
-                .extract().response().body().prettyPrint();
+                .extract().response().body().asPrettyString();
 
         assertEquals(str, "true");
 
@@ -95,7 +95,7 @@ public class ShiftControllerTest {
                 .param("date", "2022.01.02")
                 .get("/shift/check/date")
                 .then().statusCode(200)
-                .extract().response().body().prettyPrint();
+                .extract().response().body().asPrettyString();
 
         assertEquals(str, "true");
 
@@ -126,7 +126,7 @@ public class ShiftControllerTest {
                 .param("status", "assigned")
                 .get("/shift/check/status")
                 .then().statusCode(200)
-                .extract().response().body().prettyPrint();
+                .extract().response().body().asPrettyString();
 
         assertEquals(str, "true");
     }
@@ -171,38 +171,175 @@ public class ShiftControllerTest {
                 .param("id", employeeID)
                 .get("/shift/check/employee")
                 .then().statusCode(200)
-                .extract().response().body().prettyPrint();
+                .extract().response().body().asPrettyString();
 
         assertEquals(str, "true");
     }
 
     @Test
     public void testCreateAndGetByDateAndTimes() {
+        given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .param("status", "assigned")
+                .post("/shift/create");
+        given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .param("status", "assigned")
+                .post("/shift/create");
 
+        given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .get("/shift/get/datetime")
+                .then().statusCode(200)
+                .body("size()", equalTo(2));
+
+
+        String str =
+                given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .get("/shift/check/datetime")
+                .then().statusCode(200)
+                .extract().response().body().asPrettyString();
+
+        assertEquals(str, "true");
     }
 
     @Test
     public void testCreateAndGetByEmployeeAndDateAndTimes() {
+        final int id = given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .param("status", "assigned")
+                .post("/shift/create")
+                .then().statusCode(200)
+                .extract().response().body().path("id");
 
+
+        final int employeeID = given()
+                .param("firstname", "Mario")
+                .param("lastname", "Bouzakhm")
+                .param("email", "mariobouzakhm03@gmail.com")
+                .param("password", "12345678")
+                .param("empStatus", "hired")
+                .post("/employee/create")
+                .then().statusCode(200)
+                .extract().response().body().path("id");
+
+        given()
+                .param("shiftID", id)
+                .param("employeeID", employeeID)
+                .post("/shift/update/employee")
+                .then().statusCode(200);
+
+        given()
+                .param("id", employeeID)
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .get("/shift/get/empdatetime")
+                .then().statusCode(200)
+                .body("[0].id", equalTo(id))
+                .body("[0].employeeDto.id", equalTo(employeeID));
+
+        String str = given()
+                .param("id", employeeID)
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .get("/shift/check/empdatetime")
+                .then().statusCode(200)
+                .extract().response().body().asPrettyString();
+
+        assertEquals(str, "true");
     }
 
     @Test
     public void testCreateAndDeleteShift() {
+        final int id = given()
+                .param("date", "2022.01.02")
+                .param("starttime", "08.30.00")
+                .param("endtime", "17.00.00")
+                .param("status", "assigned")
+                .post("/shift/create")
+                .then().statusCode(200)
+                .body("date", equalTo("2022-01-02"))
+                .extract().response().body().path("id");
 
+
+        when().get("/shift/get/id?id=" + id).then()
+                .statusCode(200)
+                .body("id", equalTo(id))
+                .body("date", equalTo("2022-01-02"))
+                .body("startTime", equalTo("08:30:00"))
+                .body("endTime", equalTo("17:00:00"))
+                .body("shiftStatus", equalTo("assigned"));
+
+
+        String str = given()
+                .param("id", id)
+                .delete("/shift/delete/")
+                .then().statusCode(200)
+                .extract().response().body().asPrettyString();
+
+        assertEquals(str, "true");
     }
 
     @Test
     public void testCreateAndGetAllAndDeleteAll() {
+        given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .param("status", "assigned")
+                .post("/shift/create");
+        given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .param("status", "assigned")
+                .post("/shift/create");
 
+        when().get("/shifts/")
+                .then().statusCode(200)
+                .body("size()", equalTo(2));
+
+        String str = when().delete("/shifts/delete")
+                .then().statusCode(200)
+                .extract().response().body().asPrettyString();
+
+        assertEquals(str, "true");
+
+        when().get("/shifts/")
+                .then().statusCode(200)
+                .body("size()", equalTo(0));
     }
 
-    @Test
-    public void testCreateAndGetAndUpdateEmployeeAndDelete() {
-
-    }
 
     @Test
     public void testCreateAndGetAndUpdateStatus() {
+        final int id = given()
+                .param("date", "2022.01.02")
+                .param("starttime", "10.00.00")
+                .param("endtime", "17.00.00")
+                .param("status", "assigned")
+                .post("/shift/create")
+                .then().statusCode(200)
+                .extract().response().body().path("id");
 
+        given()
+                .param("shiftID", id)
+                .param("status", "available")
+                .post("/shift/update/status")
+                .then().statusCode(200)
+                .body("shiftStatus", equalTo("available"));
     }
 }

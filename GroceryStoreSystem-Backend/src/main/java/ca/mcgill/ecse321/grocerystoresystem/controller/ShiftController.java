@@ -160,7 +160,7 @@ public class ShiftController {
         }
     }
 
-    @DeleteMapping(value = {"/shifts/delete/"})
+    @DeleteMapping(value = {"/shifts/delete/", "/shifts/delete"})
     public boolean deleteShifts() {
         try {
             return this.shiftService.deleteAllShifts();
