@@ -33,6 +33,23 @@ dependencies {
 	testRuntimeOnly  'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
 
-tasks.named('test') {
+task unitTest(type: Test) {
+
+	systemProperty "spring.profiles.active", (System.getenv("SPRING_PROFILES_ACTIVE") ?: "ci")
+
+	useJUnitPlatform { excludeTags "integration" }
+}
+
+task integrationTest(type: Test) {
+
+	systemProperty "spring.profiles.active", (System.getenv("SPRING_PROFILES_ACTIVE") ?: "ci")
+
+	useJUnitPlatform { includeTags "integration" }
+}
+
+test {
+
+	systemProperty "spring.profiles.active", (System.getenv("SPRING_PROFILES_ACTIVE") ?: "ci")
+
 	useJUnitPlatform()
 }

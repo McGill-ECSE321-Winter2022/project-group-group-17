@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dao.PersonRepository;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,9 +26,15 @@ public class OwnerControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
+
+        this.personRepository.deleteAll();
+
     }
 
     @AfterEach
@@ -71,6 +78,8 @@ public class OwnerControllerTest {
 
     @Test
     public void testCreateAndQueryOwnerFirstName() {
+        when().delete("/owners/delete").then().statusCode(200);
+
         given()
                 .param("firstname", "Mario")
                 .param("lastname", "Bouzakhm")
@@ -102,6 +111,9 @@ public class OwnerControllerTest {
 
     @Test
     public void testCreateAndQueryOwnerLastName() {
+
+        when().delete("/owners/delete").then().statusCode(200);
+
         given()
                 .param("firstname", "Mario")
                 .param("lastname", "Bouzakhm")
@@ -133,6 +145,8 @@ public class OwnerControllerTest {
 
     @Test
     public void testCreateAndQueryOwnerFullName() {
+        when().delete("/owners/delete").then().statusCode(200);
+
         given()
                 .param("firstname", "Mario")
                 .param("lastname", "Bouzakhm")
@@ -224,6 +238,9 @@ public class OwnerControllerTest {
 
     @Test
     public void testCreateAndDeleteMultipleOwners() {
+
+        when().delete("/owners/delete").then().statusCode(200);
+
         given()
                 .param("firstname", "Mario")
                 .param("lastname", "Bouzakhm")

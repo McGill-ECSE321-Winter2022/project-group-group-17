@@ -195,7 +195,7 @@ public class OwnerService {
     @Transactional
     public boolean logIn(String email, String password) {
         List<Person> persons = personRepository.findPersonByEmail(email);
-        if(persons.size() == 0) throw new IllegalArgumentException("No account with that email or password");
+        if(persons.size() == 0) throw new NullPointerException("No account with that email or password");
 
         if(persons.size() > 1) throw new IllegalArgumentException("More than 1 person associated with email");
 
