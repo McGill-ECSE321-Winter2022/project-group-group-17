@@ -32,8 +32,7 @@ public abstract class Order {
 
 	@ManyToOne
 	private Person person;
-	
-	
+
 	private LocalDateTime orderTimeStamp;
 	private int totalCost;
 	private boolean isPaid;
