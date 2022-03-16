@@ -31,12 +31,49 @@ public class SpecialDayService {
   
   /**
    * @author Yash Khapre
+   * @param int specialDayID, LocalDateTime startTime, LocalDateTime endTime
+   * Method to create a specialDay
+   */
+  @Transactional
+  public SpecialDay createSpecialDay(int specialDayID, LocalDateTime startTime, LocalDateTime endTime) {
+    SpecialDay sDay = new SpecialDay();
+    
+    if(specialDayID < 0) {
+      throw new IllegalArgumentException("Please enter a valid specialDayID");
+    }
+    if(startTime == null) {
+      throw new IllegalArgumentException("Please enter a valid start time!");
+    }
+    if(endTime == null) {
+      throw new IllegalArgumentException("Please enter a valid end time!");
+    }
+    if(startTime.isAfter(endTime)) {
+      throw new IllegalArgumentException("The start time cannot be after the end time!");
+    } 
+    sDay.setSpecialDayID(specialDayID);
+    sDay.setStartTimestamp(startTime);
+    sDay.setEndTimestamp(endTime);
+    return sDay;
+  }
+  
+  /**
+   * @author Yash Khapre
    * @param int specialDayID
    * Method to get a specialDay given a specialDayID
    */
   @Transactional
   public SpecialDay getSpecialDay(int specialDayID) {
     return specialDayRepository.findSpecialDayBySpecialDayID(specialDayID);
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param int specialDayID
+   * Method that checks if a specialDay exists using specialDayID
+   */
+  @Transactional
+  public boolean isSpecialDayByID(int specialDayID) {
+      return specialDayRepository.existsBySpecialDayID(specialDayID);
   }
   
   /**
