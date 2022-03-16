@@ -19,7 +19,6 @@ public class PickupOrderService {
 	PickupOrderRepository pickupOrderRepository;
 	ItemQuantityRepository itemQuantityRepository;
 	
-	ItemQuantityService itemQuantityService;
 	
 	@Transactional
 	public PickupOrder createPickupOrder() {
