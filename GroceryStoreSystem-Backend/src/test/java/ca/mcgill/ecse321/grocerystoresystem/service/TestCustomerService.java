@@ -327,7 +327,74 @@ public class TestCustomerService {
         assertNull(savedCustomer);
         assertEquals(error, "Please provide valid Address");
     }
-
+    
+    @Test
+    public void testLoginSuccessful() {
+      Customer c = createCustomer();
+      try {
+        c = customerService.login(EMAIL, PASSWORD, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        fail(exp.getMessage());
+      }
+      assertEquals(c.getLoginStatus(), true);
+      assertEquals(c.getEmail(), EMAIL);
+      assertEquals(c.getPassword(), PASSWORD);
+      assertEquals(c.getPersonID(), CUSTOMER_KEY);
+    }
+    
+    @Test
+    public void testLogoutSuccessful() {
+      Customer c = createCustomer();
+      c.setLoginStatus(true);
+      customerRepository.save(c);
+      try {
+        c = customerService.logout(EMAIL, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        fail(exp.getMessage());
+      }
+      assertFalse(c.getLoginStatus());
+    }
+    
+    @Test
+    public void testLoginFail() {
+      Customer c = createCustomer();
+      String error = "";
+      try {
+        c = customerService.login(EMAIL, PASSWORD2, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertFalse(c.getLoginStatus());
+      assertEquals(error, "Incorrect password inputted!");
+    }
+    
+    @Test
+    public void testLoginFail2() {
+      Customer c = createCustomer();
+      String error = "";
+      try {
+        c = customerService.login(EMAIL2, PASSWORD, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertFalse(c.getLoginStatus());
+      assertEquals(error, "Incorrect email inputted!");
+    }
+    
+    @Test
+    public void testLogoutFail() {
+      Customer c = createCustomer();
+      c.setLoginStatus(true);
+      String error = "";
+      try {
+        c = customerService.logout(EMAIL2, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertTrue(c.getLoginStatus());
+      assertEquals(error, "Incorrect email inputted!");
+    }
+    
     @Test
     public void testGetCustomerByIDSuccessful() {
         Customer customer = null;
