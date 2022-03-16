@@ -32,7 +32,9 @@ public class InStoreOrderService {
 	
 	@Transactional
 	public InStoreOrder getInStoreOrderByID(int id) {
-		return inStoreOrderRepository.findInStoreOrderByOrderID(id);
+		InStoreOrder inStoreOrder = inStoreOrderRepository.findInStoreOrderByOrderID(id);
+		if (inStoreOrder == null) throw new NullPointerException("Order was not found");
+		return inStoreOrder;
 	}
 	
 	@Transactional

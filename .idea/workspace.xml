@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/InStoreOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/InStoreOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dto/InStoreOrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dto/InStoreOrderDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/model/ItemQuantity.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/model/ItemQuantity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/GroceryStoreSystem-Backend/project-group-group-17.GroceryStoreSystem-Backend.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dao/InStoreOrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dao/InStoreOrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/InStoreOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/InStoreOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestDeliveryOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestDeliveryOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestInStoreOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestInStoreOrderService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +27,21 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -119,11 +143,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1647234647693</updated>
-      <workItem from="1647234651940" duration="4872000" />
+      <workItem from="1647234651940" duration="5561000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

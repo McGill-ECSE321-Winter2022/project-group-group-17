@@ -140,6 +140,23 @@ public class TestDeliveryOrderService {
 		 assertNull(savedOrder);
 		 assertEquals("Please submit a valid totalCost", error);
 	 }
+
+	@Test
+	public void successfullyGetDeliveryOrderByID() {
+		DeliveryOrder deliveryOrder = null;
+
+		try {
+			deliveryOrder = deliveryOrderService.getDeliveryOrderByID(ORDER_ID);
+		} catch(NullPointerException exception) {
+			fail(exception.getMessage());
+		}
+
+		assertNotNull(deliveryOrder);
+		assertEquals(TOTAL_COST, deliveryOrder.getTotalCost());
+		assertEquals(ORDER_TIME_STAMP, deliveryOrder.getOrderTimeStamp());
+		assertEquals(IS_PAID, deliveryOrder.isPaid());
+		assertEquals(DELIVERY_TIME, deliveryOrder.getDeliveryTime());
+	}
 	
 	private DeliveryOrder createDeliveryOrder() {
 		DeliveryOrder deliveryOrder = new DeliveryOrder();
@@ -147,7 +164,7 @@ public class TestDeliveryOrderService {
 		deliveryOrder.setTotalCost(TOTAL_COST);
 		deliveryOrder.setOrderTimeStamp(ORDER_TIME_STAMP);
 		deliveryOrder.setPaid(IS_PAID);
-		deliveryOrder.setOrderTimeStamp(ORDER_TIME_STAMP);
+		deliveryOrder.setDeliveryTime(DELIVERY_TIME);
 		return deliveryOrder;
 	}
 	

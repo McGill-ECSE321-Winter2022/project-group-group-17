@@ -17,11 +17,16 @@ public interface InStoreOrderRepository extends CrudRepository<InStoreOrder, Int
 	/**
 	 * Find all InStoreOrder that have the same person ID
 	 */
-
-	List<InStoreOrder> findInStoreOrderByPersonPersonID(int personID);
+	List<InStoreOrder> findInStoreOrderByPersonPersonID(Integer personID);
 
 	/**
-	 * Returns true if their is an in store order in the database with the passed ID as parameter
+	 * Returns true if there is an in store order in the database with the passed ID as parameter
 	 */
 	boolean existsByOrderID(Integer orderID);
+
+	/**
+	 * returns true if there is an in store order associated with the person with personID
+	 * @param personID
+	 */
+	boolean existsInStoreOrderByPersonPersonID(Integer personID);
 }

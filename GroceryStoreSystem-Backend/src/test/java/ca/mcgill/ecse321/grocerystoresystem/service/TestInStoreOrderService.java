@@ -86,6 +86,95 @@ public class TestInStoreOrderService {
 		 assertEquals("Please submit a valid totalCost", error);
 	 }
 	
+	@Test
+	public void successfullyGetInStoreOrderByID() {
+		InStoreOrder inStoreOrder = null;
+		
+		try {
+			inStoreOrder = inStoreOrderService.getInStoreOrderByID(ORDER_ID);
+		} catch(NullPointerException exception) {
+			fail(exception.getMessage());
+		}
+		
+		assertNotNull(inStoreOrder);
+		assertEquals(TOTAL_COST, inStoreOrder.getTotalCost());
+		assertEquals(ORDER_TIME_STAMP, inStoreOrder.getOrderTimeStamp());
+		assertEquals(IS_PAID, inStoreOrder.isPaid());
+	}
+	
+	@Test
+	public void unsuccessfullyGetInStoreOrderByID() {
+		InStoreOrder inStoreOrder = null;
+		String error = "";
+		
+		try {
+			inStoreOrder = inStoreOrderService.getInStoreOrderByID(01234);
+		} catch(NullPointerException exception) {
+			error = exception.getMessage();
+		}
+		
+		assertNull(inStoreOrder);
+		assertEquals("Order was not found", error);
+	}
+	
+	/**
+	@Test
+	public void unsuccessfullyGetInStoreOrders() {
+		
+		List<InStoreOrder> orders = inStoreOrderService.getAllInStoreOrders();
+		InStoreOrder inStoreOrder = null;
+		
+		assertEquals(1, orders.size());
+		inStoreOrder = orders.get(0);
+		
+		assertEquals(ORDER_ID, inStoreOrder.getOrderID());
+		assertEquals(TOTAL_COST, inStoreOrder.getTotalCost());
+		assertEquals(ORDER_TIME_STAMP, inStoreOrder.getOrderTimeStamp());
+		assertEquals(IS_PAID, inStoreOrder.isPaid());
+	}
+	**/
+	
+	/**
+	@Test
+	public void successfullyDeleteInStoreOrder() {
+		InStoreOrder order = null;
+		boolean deleted = inStoreOrderService.deleteInStoreOrderWithID(ORDER_ID);
+		String error = "";
+		
+		try {
+			order = inStoreOrderService.getInStoreOrderByID(ORDER_ID);
+		} catch(NullPointerException exception) {
+			error = exception.getMessage();
+		}
+		
+		assertNull(order);
+		assertTrue(deleted);
+		assertEquals("Order was not found", error);
+		
+	}
+	**/
+	
+	@Test
+	public void unsuccessfullyDeleteInStoreOrder() {
+		InStoreOrder order = new InStoreOrder();
+		order.setOrderID(123);
+		boolean deleted = false;
+		String error = "";
+		
+		try {
+			deleted = inStoreOrderService.deleteInStoreOrderWithID(012);
+
+		} catch (NullPointerException exception) {
+			error = exception.getMessage();
+		}
+		
+		assertFalse(deleted);
+		assertNotNull(order);
+		assertEquals("Order was not found", error);
+		
+		
+	}
+	
 	private InStoreOrder createInStoreOrder() {
 		InStoreOrder inStoreOrder = new InStoreOrder();
 		inStoreOrder.setOrderID(ORDER_ID);
