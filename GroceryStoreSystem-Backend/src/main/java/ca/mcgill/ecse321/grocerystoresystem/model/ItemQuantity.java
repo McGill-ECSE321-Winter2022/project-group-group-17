@@ -60,4 +60,6 @@ public class ItemQuantity {
 	public void setSpecificItem(Item specificItem) {
 		this.specificItem = specificItem;
 	}
+
 }
+
