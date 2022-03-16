@@ -1,16 +1,17 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
+import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
-import ca.mcgill.ecse321.grocerystoresystem.model.InStoreOrder;
 import ca.mcgill.ecse321.grocerystoresystem.dto.AddressDto;
 import ca.mcgill.ecse321.grocerystoresystem.dto.DeliveryOrderDto;
-import ca.mcgill.ecse321.grocerystoresystem.dto.InStoreOrderDto;
 import ca.mcgill.ecse321.grocerystoresystem.service.DeliveryOrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
@@ -87,7 +88,8 @@ public class DeliveryOrderController {
         
         return new DeliveryOrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(), 
         		deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(), 
-        		deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()));
+        		deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()),
+				convertToDto(deliveryOrder.getPortionNum()));
     }
 	
 	private AddressDto convertToDto(Address a) throws NullPointerException {
@@ -97,4 +99,22 @@ public class DeliveryOrderController {
 
         return new AddressDto(a.getAddressID(), a.isLocal(), a.getStreetName(), a.getStreetNum(), a.getCity(), a.getPostalCode(), a.getCountry());
     }
+
+    private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities){
+		List<ItemQuantityDto> itemQuantityDtos = new ArrayList<>();
+
+		for (ItemQuantity itemQuantity : itemQuantities){
+			ItemQuantityDto itemQuantityDto = convertToDto(itemQuantity);
+			itemQuantityDtos.add(itemQuantityDto);
+		}
+
+		return itemQuantityDtos;
+	}
+
+	private ItemQuantityDto convertToDto (ItemQuantity itemQuantity){
+		if (itemQuantity == null){
+			throw new NullPointerException("Item Quantity is null");
+		}
+		return new ItemQuantityDto(itemQuantity.getItemNum());
+	}
 }

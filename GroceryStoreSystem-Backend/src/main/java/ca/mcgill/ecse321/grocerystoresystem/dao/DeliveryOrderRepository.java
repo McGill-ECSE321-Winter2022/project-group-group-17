@@ -6,11 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
 import ca.mcgill.ecse321.grocerystoresystem.model.InStoreOrder;
-import ca.mcgill.ecse321.grocerystoresystem.model.Address; 
+import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Person;
 
 public interface DeliveryOrderRepository extends CrudRepository<DeliveryOrder, Integer>{
-	
+
 	/**
 	 * Find DeliveryOrder based on their ID
 	 */
@@ -21,7 +21,12 @@ public interface DeliveryOrderRepository extends CrudRepository<DeliveryOrder, I
 	 */
 
 	List<DeliveryOrder> findDeliveryOrderByPersonPersonID(int personID);
-	
+
+	/**
+	 * Find all delivery orders associated with an address id
+	 */
+	List<DeliveryOrder> findDeliveryOrderByDeliveryAddressAddressID(int addressID);
+
 	/**
 	 * Returns true if their is an delivery order in the database with the passed ID as parameter
 	 */

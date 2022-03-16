@@ -2,12 +2,11 @@ package ca.mcgill.ecse321.grocerystoresystem.dto;
 
 public class ItemQuantityDto {
 	private int id;
-	private int itemQuantity;
+	private int itemNum;
 
-	public ItemQuantityDto(int id, int itemQuantity) {
+	public ItemQuantityDto(int itemNum){
 		super();
-		this.id = id;
-		this.itemQuantity = itemQuantity;
+		this.itemNum = itemNum;
 	}
 
 	public int getId() {
@@ -16,10 +15,10 @@ public class ItemQuantityDto {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getItemQuantity() {
-		return itemQuantity;
+	public int getItemNum() {
+		return itemNum;
 	}
-	public void setItemQuantity(int itemQuantity) {
-		this.itemQuantity = itemQuantity;
+	public void setItemNum(int itemNum) {
+		this.itemNum = itemNum;
 	}
 }
