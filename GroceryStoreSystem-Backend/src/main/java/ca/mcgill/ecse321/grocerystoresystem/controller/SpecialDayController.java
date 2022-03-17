@@ -33,7 +33,7 @@ public class SpecialDayController {
    * @param calendarID
    * Controller method to get closed days
    */
-  @GetMapping(value = { "/closeddays/{id}", "/closeddays/{id}/" })
+  @GetMapping(value = { "/specialday/closeddays/{id}", "/specialday/closeddays/{id}/" })
   public ResponseEntity getClosedDays(@PathVariable("id") int calendarID) {
     List<SpecialDayDto> closedDaysDto = new ArrayList<>();
     List<SpecialDay> closedDays;    
@@ -56,7 +56,7 @@ public class SpecialDayController {
    * @param specialDayID
    * Controller method to get all shifts on a specified special day
    */
-  @GetMapping(value = { "/shifts/{id}", "/shifts/{id}/" })
+  @GetMapping(value = { "/specialday/shifts/{id}", "/specialday/shifts/{id}/" })
   public ResponseEntity getSpecialShifts(@PathVariable("id") int specialDayID) {
     List<ShiftDto> specialShiftsDtoList = new ArrayList<>();
     List<Shift> specialShifts;    
@@ -79,7 +79,7 @@ public class SpecialDayController {
    * @param specialDayID
    * Controller method that gets the employees on a specified specialDay
    */
-  @GetMapping(value = { "/employees/{id}", "/employees/{id}/" })
+  @GetMapping(value = { "/specialday/employees/{id}", "/specialday/employees/{id}/" })
   public ResponseEntity getEmployeesOnSpecialShifts(@PathVariable("id") int specialDayID) {
     List<EmployeeDto> employeeDtoList = new ArrayList<>();
     List<Employee> employeeList;    
