@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.grocerystoresystem.dao.ItemRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.InventoryType;
 import ca.mcgill.ecse321.grocerystoresystem.model.Item;
-import ca.mcgill.ecse321.grocerystoresystem.model.PickupOrder;
 
 @Service
 public class ItemService {

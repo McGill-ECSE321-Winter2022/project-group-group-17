@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.ItemQuantityRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.PickupOrderRepository;
+import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
 import ca.mcgill.ecse321.grocerystoresystem.model.PickupOrder;
 
 @Service
@@ -66,6 +67,12 @@ public class PickupOrderService {
 	}
 	
 	@Transactional
+	public List<PickupOrder> getAllPickupOrdersOfPersonWithPersonID(int personID){
+		return toList(pickupOrderRepository.findPickupOrderByPersonPersonID(personID));
+	}
+
+	
+	@Transactional
 	public PickupOrder updatePickupDateTime(int id, LocalDateTime newPickupDateTime) {
 		
 		PickupOrder pickupOrder = pickupOrderRepository.findPickupOrderByOrderID(id);
@@ -96,7 +103,7 @@ public class PickupOrderService {
 	
 	
 	private void validateTotalCost(int totalCost) {
-		if (totalCost<0) throw new IllegalArgumentException("Please submit a valid total cost");
+		if (totalCost < 0) throw new IllegalArgumentException("Please submit a valid total cost");
 	}
 	
 	private <T> List<T> toList(Iterable<T> iterable){
