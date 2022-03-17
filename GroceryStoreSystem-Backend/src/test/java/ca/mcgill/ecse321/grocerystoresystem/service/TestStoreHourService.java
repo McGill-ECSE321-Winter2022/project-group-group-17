@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
 
-import ca.mcgill.ecse321.grocerystoresystem.service.StoreHourService;
 import ca.mcgill.ecse321.grocerystoresystem.dao.StoreHourRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
