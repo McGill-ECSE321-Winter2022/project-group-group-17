@@ -40,7 +40,11 @@ public class ItemQuantityController {
 		ItemQuantity itemQuantity = itemQuantityService.createItemQuantity(itemNum);
 		return convertToDto(itemQuantity);
 	}
-
+	@DeleteMapping(value= {"/itemquantities/delete","/itemquantities/delete/"})
+	public boolean deleteItemQuantities() {
+		itemQuantityService.deleteItemQuantities();
+		return true;
+	}
 	private ItemQuantityDto convertToDto(ItemQuantity e) {
 		if (e == null) {
 			throw new  IllegalArgumentException("There is no such ItemQuantity");

@@ -63,6 +63,12 @@ public class ItemQuantityService {
 
 	        return true;
 	}
+	@Transactional
+	public boolean deleteItemQuantities() {
+		itemQuantityRepository.deleteAll();
+		
+		return this.getAllItemQuantities().size()==0;
+	}
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
 		for (T t : iterable) {
