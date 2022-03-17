@@ -70,7 +70,7 @@ public class EmployeeDto {
     }
 
     public EmployeeStatus getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(EmployeeStatus status) {
