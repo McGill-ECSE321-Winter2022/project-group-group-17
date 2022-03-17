@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
+import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,6 +9,7 @@ import ca.mcgill.ecse321.grocerystoresystem.model.InStoreOrder;
 import ca.mcgill.ecse321.grocerystoresystem.dto.InStoreOrderDto;
 import ca.mcgill.ecse321.grocerystoresystem.service.InStoreOrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
@@ -63,8 +66,26 @@ public class InStoreOrderController {
 
 
         return new InStoreOrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(), 
-        		inStoreOrder.isPaid());
+        		inStoreOrder.isPaid(), convertToDto(inStoreOrder.getPortionNum()));
     }
+
+	private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities){
+		List<ItemQuantityDto> itemQuantityDtos = new ArrayList<>();
+
+		for (ItemQuantity itemQuantity : itemQuantities){
+			ItemQuantityDto itemQuantityDto = convertToDto(itemQuantity);
+			itemQuantityDtos.add(itemQuantityDto);
+		}
+
+		return itemQuantityDtos;
+	}
+
+	private ItemQuantityDto convertToDto (ItemQuantity itemQuantity){
+		if (itemQuantity == null){
+			throw new NullPointerException("Item Quantity is null");
+		}
+		return new ItemQuantityDto(itemQuantity.getItemNum());
+	}
 	
 	
 }

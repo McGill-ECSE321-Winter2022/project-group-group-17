@@ -116,13 +116,13 @@ public class CustomerController {
   
   @PutMapping(value = { "/customer/logout/{id}", "/customer/logout/{id}"})
   public ResponseEntity logout(@PathVariable("id") int personID, @RequestParam String email) {
-      boolean logout;
+      Customer customer;
       try {
-          logout = customerService.logout(email, personID);
+          customer = customerService.logout(email, personID);
       } catch (IllegalArgumentException exception) {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
       }
-      if (logout == true) {
+      if (customer.getLoginStatus() == false) {
         return ResponseEntity.status(HttpStatus.OK).body("Successfully logged out");
       }
       else {
