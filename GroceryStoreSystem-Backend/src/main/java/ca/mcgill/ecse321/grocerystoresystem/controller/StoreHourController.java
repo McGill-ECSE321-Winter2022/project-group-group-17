@@ -51,8 +51,16 @@ public class StoreHourController {
 
     }
 
-    @PostMapping (value = {"storehour/update/"})
+    @PostMapping (value = {"storehour/update/", "/storehour/update"})
+    public StoreHourDto updatStoreHourDto(@RequestParam int id, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime ){
+        try {
+            return convertToDto(this.storeHourService.updateStoreHour(id, startTime, endTime));
+        }
+        catch(NullPointerException exp) {
+            return null;
+        }
 
+    }
     private StoreHourDto convertToDto(StoreHour hour) throws NullPointerException{
         if(hour == null) {
             throw new NullPointerException("Store hour is null");
