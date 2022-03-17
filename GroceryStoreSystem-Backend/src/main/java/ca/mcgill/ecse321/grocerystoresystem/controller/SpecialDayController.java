@@ -141,7 +141,7 @@ public class SpecialDayController {
    * @param specialDayID
    * Controller method to delete a specific specialDay
    */
-  @DeleteMapping(value = { "/specialDay/{id}", "/specialDay/{id}/" })
+  @DeleteMapping(value = { "/specialDay/delete/{id}", "/specialDay/delete/{id}/" })
   public ResponseEntity deleteSpecialDay(@PathVariable("id") int specialDayID){
       boolean delete;
       try {
