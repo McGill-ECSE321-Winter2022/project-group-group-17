@@ -9,11 +9,6 @@ import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.DeliveryOrderRepository;
 
-<<<<<<< HEAD
-=======
-import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
-import ca.mcgill.ecse321.grocerystoresystem.model.Person;
->>>>>>> a52c8ea434a23d1783634048356c69c1fbfc83e7
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,9 +42,7 @@ public class TestDeliveryOrderService {
 	private static final LocalDateTime ORDER_TIME_STAMP = LocalDateTime.of(2022, 01,01,01,01,01,01);
 	private static final boolean IS_PAID = true;
 	private static final LocalDateTime DELIVERY_TIME = LocalDateTime.of(2022,01,02,01,01,01,01);
-<<<<<<< HEAD
-	
-=======
+
 
 	private static final int ORDER_ID2 = 1000;
 	private static final int TOTAL_COST2 = 1234;
@@ -63,7 +56,6 @@ public class TestDeliveryOrderService {
 	private static final boolean IS_PAID3 = true;
 	private static final LocalDateTime DELIVERY_TIME3 = LocalDateTime.of(2022,03,02,01,01,01,01);
 
->>>>>>> a52c8ea434a23d1783634048356c69c1fbfc83e7
 	private static final int ADDRESS_KEY = 1001;
     private static final String STREET_NUM = "1239";
     private static final String STREET_NAME = "Peel";
@@ -71,12 +63,10 @@ public class TestDeliveryOrderService {
     private static final String POSTAL_CODE = "HHH HHH";
     private static final String COUNTRY = "Canada";
     private static final boolean IS_LOCAL = true;
-<<<<<<< HEAD
-=======
+
 
 	private static final int PERSON_KEY = 1002;
 
->>>>>>> a52c8ea434a23d1783634048356c69c1fbfc83e7
 	
 	@BeforeEach
 	public void setMockOutput() {
@@ -88,9 +78,6 @@ public class TestDeliveryOrderService {
 	                return null;
 	            }
 	        });
-<<<<<<< HEAD
-		 
-=======
 
 		 lenient().when(deliveryOrderRepository.findDeliveryOrderByDeliveryAddressAddressID(anyInt()))
 				 .thenAnswer((InvocationOnMock invocation) -> {
@@ -114,7 +101,6 @@ public class TestDeliveryOrderService {
 
 				});
 
->>>>>>> a52c8ea434a23d1783634048356c69c1fbfc83e7
 		 lenient().when(addressRepository.findAddressByAddressID(anyInt())).thenAnswer((InvocationOnMock invocation) -> {
 	            if(invocation.getArgument(0).equals(ADDRESS_KEY)) {
 	                return createAddress();
@@ -193,8 +179,6 @@ public class TestDeliveryOrderService {
 		 assertNull(savedOrder);
 		 assertEquals("Please submit a valid totalCost", error);
 	 }
-<<<<<<< HEAD
-=======
 
 	 @Test
 	 public void successfullyGetDeliveryOrdersWithPerson(){
@@ -232,7 +216,6 @@ public class TestDeliveryOrderService {
 		assertEquals(IS_PAID, deliveryOrder.isPaid());
 		assertEquals(DELIVERY_TIME, deliveryOrder.getDeliveryTime());
 	}
->>>>>>> a52c8ea434a23d1783634048356c69c1fbfc83e7
 	
 	private DeliveryOrder createDeliveryOrder() {
 		DeliveryOrder deliveryOrder = new DeliveryOrder();
@@ -240,18 +223,7 @@ public class TestDeliveryOrderService {
 		deliveryOrder.setTotalCost(TOTAL_COST);
 		deliveryOrder.setOrderTimeStamp(ORDER_TIME_STAMP);
 		deliveryOrder.setPaid(IS_PAID);
-<<<<<<< HEAD
-		deliveryOrder.setOrderTimeStamp(ORDER_TIME_STAMP);
-		return deliveryOrder;
-	}
-	
-	private DeliveryOrder createDeliveryOrderWithAddress() {
-		DeliveryOrder deliveryOrder = createDeliveryOrder();
-		Address address = createAddress();
-		deliveryOrder.setAddress(address);
-=======
 		deliveryOrder.setDeliveryTime(DELIVERY_TIME);
->>>>>>> a52c8ea434a23d1783634048356c69c1fbfc83e7
 		return deliveryOrder;
 	}
 		
@@ -269,12 +241,7 @@ public class TestDeliveryOrderService {
 		return address;
 		
 	}
-	
-<<<<<<< HEAD
-	
-	
-	
-=======
+
 	private List<DeliveryOrder> createDeliveryOrders(){
 		ArrayList<DeliveryOrder> orders = new ArrayList<>();
 
@@ -314,6 +281,5 @@ public class TestDeliveryOrderService {
 		return orders;
 	}
 
->>>>>>> a52c8ea434a23d1783634048356c69c1fbfc83e7
 
 }
