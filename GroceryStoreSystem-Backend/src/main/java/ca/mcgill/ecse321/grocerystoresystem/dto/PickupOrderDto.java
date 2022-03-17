@@ -14,6 +14,8 @@ public class PickupOrderDto {
 	private LocalDateTime orderTimeStamp;
 	private boolean isPaid;
 	private int orderId;
+	
+	private List<ItemQuantityDto> itemQuantities;
 
 	
 	public PickupOrderDto() {
@@ -72,6 +74,14 @@ public class PickupOrderDto {
 		return this.pickupDate;
 	}
 	
+	
+	public List<ItemQuantityDto> getItemQuantities() {
+		return this.itemQuantities;
+	}
+
+	public void setItemQuantities(List<ItemQuantityDto> itemQuantities) {
+		this.itemQuantities = itemQuantities;
+	}
 	
 	
 }

@@ -45,7 +45,7 @@ public class ItemQuantityController {
 		if (e == null) {
 			throw new  IllegalArgumentException("There is no such ItemQuantity");
 		}
-		ItemQuantityDto itemQuantityDto = new ItemQuantityDto(e.getQuantityID(),e.getItemNum());
+		ItemQuantityDto itemQuantityDto = new ItemQuantityDto(e.getItemNum());
 		
 		return null;
 	}

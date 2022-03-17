@@ -87,7 +87,9 @@ public class TestCustomerService {
     private static final String COUNTRY = "Canada";
     private static final boolean IS_LOCAL = true;
 
-
+  /*
+   * Helper method to create a customer with certain attributes
+   */
     private Customer createCustomer() {
         Customer customer = new Customer();
         customer.setPersonID(CUSTOMER_KEY);
@@ -98,6 +100,9 @@ public class TestCustomerService {
         return customer;
     }
 
+    /*
+     * Helper method to create an address
+     */
     private Address createAddress() {
         Address address = new Address();
         address.setAddressID(ADDRESS_KEY);
@@ -109,7 +114,10 @@ public class TestCustomerService {
         address.setLocal(IS_LOCAL);
         return address;
     }
-
+    
+    /*
+     * Helper method to create customers with the same last name
+     */
     private List<Customer> createCustomersWithSameLastName() {
         ArrayList<Customer> customers = new ArrayList<>();
 
@@ -132,7 +140,10 @@ public class TestCustomerService {
 
         return customers;
     }
-
+    
+    /*
+     * Helper method to create another customer
+     */
     private List<Customer> createCustomers2() {
         ArrayList<Customer> customers = new ArrayList<>();
 
@@ -148,6 +159,9 @@ public class TestCustomerService {
         return customers;
     }
     
+    /*
+     * Helper method to create customers with identical first and last names
+     */
     private List<Customer> createCustomersWithSameFullName() {
       ArrayList<Customer> customers = new ArrayList<>();
 
@@ -170,7 +184,10 @@ public class TestCustomerService {
      
       return customers;
   }
-    
+   
+    /*
+     * Helper method to create a customer with an address
+     */
     private Customer createCustomerWithAddress() {
       Customer savedCustomer = createCustomer();
       Address a = createAddress();
@@ -178,6 +195,9 @@ public class TestCustomerService {
       return savedCustomer;
     }
 
+    /*
+     * Expected output for certain tests
+     */
     @BeforeEach
     public void setMockOutput() {
         lenient().when(customerRepository.findCustomerByPersonID(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
@@ -251,6 +271,9 @@ public class TestCustomerService {
         lenient().when(customerRepository.save(any(Customer.class))).thenAnswer(returnParamAsAnswer);
     }
 
+    /*
+     * Test to create a customer without an address
+     */
     @Test
     public void testCreateCustomer() {
         Customer savedCustomer = null;
@@ -274,6 +297,9 @@ public class TestCustomerService {
         assertEquals(savedCustomer.getAddress().getStreetNum(), STREET_NUM);
     }
 
+    /*
+     * Test to create a customer with an address
+     */
     @Test
     public void testCreateCustomer2() {
         Customer savedCustomer = null;
@@ -299,6 +325,9 @@ public class TestCustomerService {
         assertEquals(savedCustomer.getAddress().getAddressID(), ADDRESS_KEY);
     }
 
+    /*
+     * Test to make sure customer can't be created with a null firstName
+     */
     @Test
     public void testCreateCustomerFail1() {
         Customer savedCustomer = null;
@@ -313,6 +342,9 @@ public class TestCustomerService {
         assertEquals(error, "Please provide valid First Name");
     }
 
+    /*
+     * Test to make sure customer cannot be created with a null address
+     */
     @Test
     public void testCreateCustomerFail2() {
         Customer savedCustomer= null;
@@ -327,7 +359,90 @@ public class TestCustomerService {
         assertNull(savedCustomer);
         assertEquals(error, "Please provide valid Address");
     }
-
+    
+    /*
+     * Test to check if customer can successfully login
+     */
+    @Test
+    public void testLoginSuccessful() {
+      Customer c = createCustomer();
+      try {
+        c = customerService.login(EMAIL, PASSWORD, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        fail(exp.getMessage());
+      }
+      assertEquals(c.getLoginStatus(), true);
+      assertEquals(c.getEmail(), EMAIL);
+      assertEquals(c.getPassword(), PASSWORD);
+      assertEquals(c.getPersonID(), CUSTOMER_KEY);
+    }
+    
+    /*
+     * Test to check if customer can successfully log out
+     */
+    @Test
+    public void testLogoutSuccessful() {
+      Customer c = createCustomer();
+      c.setLoginStatus(true);
+      customerRepository.save(c);
+      try {
+        c = customerService.logout(EMAIL, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        fail(exp.getMessage());
+      }
+      assertFalse(c.getLoginStatus());
+    }
+    
+    /*
+     * Test to check that customer cannot log in with incorrect password
+     */
+    @Test
+    public void testLoginFail() {
+      Customer c = createCustomer();
+      String error = "";
+      try {
+        c = customerService.login(EMAIL, PASSWORD2, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertFalse(c.getLoginStatus());
+      assertEquals(error, "Incorrect password inputted!");
+    }
+    
+    /*
+     * Test to check that customer cannot log in with incorrect email
+     */
+    @Test
+    public void testLoginFail2() {
+      Customer c = createCustomer();
+      String error = "";
+      try {
+        c = customerService.login(EMAIL2, PASSWORD, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertFalse(c.getLoginStatus());
+      assertEquals(error, "Incorrect email inputted!");
+    }
+    /*
+     * Test to check that customer cannot log out with incorrect email
+     */
+    @Test
+    public void testLogoutFail() {
+      Customer c = createCustomer();
+      c.setLoginStatus(true);
+      String error = "";
+      try {
+        c = customerService.logout(EMAIL2, CUSTOMER_KEY);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertTrue(c.getLoginStatus());
+      assertEquals(error, "Incorrect email inputted!");
+    }
+    /*
+     * Test to get a customer with given ID
+     */
     @Test
     public void testGetCustomerByIDSuccessful() {
         Customer customer = null;
@@ -344,7 +459,9 @@ public class TestCustomerService {
         assertEquals(EMAIL, customer.getEmail());
         assertEquals(PASSWORD, customer.getPassword());
     }
-
+    /*
+     * Test to make sure no customer is returned with a wrong ID
+     */
     @Test
     public void testGetCustomerByIDUnsuccessful() {
         Customer customer = null;
@@ -358,7 +475,10 @@ public class TestCustomerService {
         assertNull(customer);
         assertEquals("Cannot find customer with specified ID", error);
     }
-
+    
+    /*
+     * Test to get customers with a specific first name
+     */
     @Test
     public void testGetCustomerByFirstNameSuccessful() {
         List<Customer> customers = null;
@@ -380,6 +500,9 @@ public class TestCustomerService {
         assertEquals(PASSWORD, customer.getPassword());
     }
 
+    /*
+     * Test not to return a customer if a name doesn't exist in the repository
+     */
     @Test
     public void testGetCustomerByFirstNameUnsuccessful() {
         List<Customer> customers = null;
@@ -395,6 +518,9 @@ public class TestCustomerService {
         assertEquals("Cannot find customers with specified first name", error);
     }
 
+    /*
+     * Test to get all customers with specified last name
+     */
     @Test
     public void testGetCustomerByLastNameSuccessful() {
         List<Customer> customers = null;
@@ -409,6 +535,9 @@ public class TestCustomerService {
         assertNotNull(customers);
     }
 
+    /*
+     * Test to not get customers with a last name that doesn't exist in the repository
+     */
     @Test
     public void testGetCustomerByLastNameUnsuccessful() {
         List<Customer> customers = null;
@@ -419,11 +548,13 @@ public class TestCustomerService {
         catch(IllegalArgumentException exp) {
             error = exp.getMessage();
         }
-
         assertNull(customers);
         assertEquals("Cannot find customers with specified last name", error);
     }
 
+    /*
+     * Test to get a customer using an email
+     */
     @Test
     public void testGetCustomerByEmailSuccessful() {
         Customer customer = null;
@@ -442,6 +573,9 @@ public class TestCustomerService {
         assertEquals(PASSWORD, customer.getPassword());
     }
 
+    /*
+     * Test to get a customer using a first and last name
+     */
     @Test
     public void testGetCustomerByFullNameSuccessful() {
         List<Customer> customers = null;
@@ -471,6 +605,9 @@ public class TestCustomerService {
         assertEquals(PASSWORD5, customer2.getPassword());  
     }
 
+    /*
+     * Test not to get a customer using an email which is an incorrect format
+     */
     @Test
     public void testGetCustomerByEmailUnsuccessful() {
         Customer customer = null;
@@ -486,6 +623,9 @@ public class TestCustomerService {
         assertEquals("Please enter a valid email", error);
     }
     
+    /*
+     * Test not to get a customer using an email which doesn't exist
+     */
     @Test
     public void testGetCustomerByEmailUnsuccessful2() {
         Customer customer = null;
@@ -501,6 +641,9 @@ public class TestCustomerService {
         assertEquals("Cannot find customer with specified email", error);
     }
 
+    /*
+     * Test not to get a customer using a full name which doesn't exist
+     */
     @Test
     public void testGetCustomerByFullNameUnsuccessful() {
         List<Customer> customers;
@@ -514,6 +657,9 @@ public class TestCustomerService {
         assertEquals("Cannot find customers with specified full name", error);
     }
 
+    /*
+     * Test to get all customers
+     */
     @Test
     public void testGetAllCustomers() {
         List<Customer> customers = this.customerService.getAllCustomers();
@@ -529,66 +675,99 @@ public class TestCustomerService {
         assertEquals(customer.getPassword(), PASSWORD3);
     }
 
+    /*
+     * Check if a person is of type Customer using personID
+     */
     @Test
     public void testIsCustomerByID() {
         boolean result = this.customerService.isCustomerByID(CUSTOMER_KEY);
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using first name
+     */
     @Test
     public void testIsCustomerByFirstName() {
         boolean result = this.customerService.isCustomerByFirstName(FIRST_NAME);
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using last name
+     */
     @Test
     public void testIsCustomerByLastName() {
         boolean result = this.customerService.isCustomerByLastName(LAST_NAME);
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using an email
+     */
     @Test
     public void testIsCustomerByEmail() {
         boolean result = this.customerService.isCustomerByEmail(EMAIL);
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using first and last names
+     */
     @Test
     public void testIsCustomerByFirstAndLastName() {
         boolean result = this.customerService.isCustomerByFirstAndLastName(FIRST_NAME, LAST_NAME);
         assertTrue(result);
     }
 
+    /*
+     * Test to check person is NOT a customer with invalid ID
+     */
     @Test
     public void testIsCustomerByIDFail() {
         boolean result = this.customerService.isCustomerByID(9787);
         assertFalse(result);
     }
 
+    /*
+     * Test to check that person is NOT a customer using invalid first name
+     */
     @Test
     public void testIsCustomerByFirstNameFail() {
         boolean result = this.customerService.isCustomerByFirstName("YK");
         assertFalse(result);
     }
 
+    /*
+     * Test to check that a person is NOT a customer using invalid last name
+     */
     @Test
     public void testIsCustomerByLastNameFail() {
         boolean result = this.customerService.isCustomerByLastName("YK");
         assertFalse(result);
     }
 
+    /*
+     * Test to check that a person is NOT a customer using invalid email
+     */
     @Test
     public void testIsCustomerByEmailFail() {
         boolean result = this.customerService.isCustomerByEmail("YK@gmail.com");
         assertFalse(result);
     }
 
+    /*
+     * Test to check that a person is NOT a customer using invalid full name
+     */
     @Test
     public void testIsCustomerByFirstNameAndLastNameFail() {
         boolean result = this.customerService.isCustomerByFirstAndLastName("Y", "K");
         assertFalse(result);
     }
 
+    /*
+     * Test to successfully update a customer's password
+     */
     @Test
     public void testUpdateCustomerPassword() {
         Customer customer = null;
@@ -604,6 +783,9 @@ public class TestCustomerService {
         assertEquals(customer.getPassword(), newPassword);
     }
 
+    /*
+     * Test to successfully update a customer's address
+     */
     @Test
     public void testUpdateCustomerAddress() {
         Customer savedCustomer = null;
@@ -632,6 +814,9 @@ public class TestCustomerService {
         assertEquals(savedCustomer.getAddress().getAddressID(), ADDRESS_KEY);
     }
     
+    /*
+     * Test to successfully update a customer's entire profile
+     */
     @Test
     public void testUpdateCustomerProfile() {
         Customer savedCustomer = createCustomerWithAddress();
@@ -658,6 +843,9 @@ public class TestCustomerService {
         assertEquals(savedCustomer.getAddress().isLocal(), IS_LOCAL);
     }
     
+    /*
+     * Test that makes sure a customer cannot be deleted due to invalid ID
+     */
     @Test
     public void deleteCustomerUnSuccessful() {
         Customer c = createCustomer();
