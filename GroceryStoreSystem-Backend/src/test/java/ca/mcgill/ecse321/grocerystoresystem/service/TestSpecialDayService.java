@@ -63,6 +63,9 @@ public class TestSpecialDayService {
   private static final LocalDateTime START_TIME3 = LocalDateTime.parse("2022-03-20T16:14:21.629");
   private static final LocalDateTime END_TIME3 = LocalDateTime.parse("2022-03-21T16:14:21.629");   
   
+  /*
+   * Helper method to create a special day with given parameters
+   */
   private SpecialDay createSpecialDay() {
     SpecialDay sDay = new SpecialDay();
     sDay.setSpecialDayID(SPECIALDAY_KEY);
@@ -72,6 +75,9 @@ public class TestSpecialDayService {
     return sDay;
   }
   
+  /*
+   * Helper method to create a calendar with specific ID
+   */
   private Calendar createCalendar() {
     Calendar calendar = new Calendar();
     calendar.setCalendarID(CALENDAR_KEY);
@@ -79,25 +85,9 @@ public class TestSpecialDayService {
     return calendar;
   }
   
-  private List<SpecialDay> createClosedDays(){
-    List<SpecialDay> sDays = new ArrayList<>();
-    SpecialDay sDay1 = new SpecialDay();
-    SpecialDay sDay2 = new SpecialDay();
-    
-    sDay1.setSpecialDayID(SPECIALDAY_KEY2);
-    sDay1.setStartTimestamp(START_TIME2);
-    sDay1.setEndTimestamp(END_TIME2);
-    
-    sDay2.setSpecialDayID(SPECIALDAY_KEY3);
-    sDay2.setStartTimestamp(START_TIME3);
-    sDay2.setEndTimestamp(END_TIME3);
-    
-    sDays.add(sDay1);
-    sDays.add(sDay2);
-    
-    return sDays;
-  }
-  
+  /*
+   * Expected output of certain tests
+   */
   @BeforeEach
   public void setMockOutput(){
     lenient().when(specialDayRepository.findSpecialDayBySpecialDayID(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
@@ -124,6 +114,9 @@ public class TestSpecialDayService {
     
   }
   
+  /*
+   * Test to successfully create a specialDay
+   */
   @Test
   public void testCreateSpecialDay() {
     SpecialDay sDay = new SpecialDay();
@@ -140,7 +133,10 @@ public class TestSpecialDayService {
     assertEquals(sDay.getStartTimestamp(), START_TIME);
     assertEquals(sDay.getEndTimestamp(), END_TIME);
   }
-  
+
+  /*
+   * Test that makes sure a specialDay isn't created due to start time being greater than end time
+   */
   @Test
   public void testCreateSpecialDayFail() {
     SpecialDay sDay = new SpecialDay();
@@ -155,6 +151,9 @@ public class TestSpecialDayService {
   assertEquals(error, "The start time cannot be after the end time!");
   }
   
+  /*
+   * Test that makes sure a specialDay isn't created due to null start time
+   */
   @Test
   public void testCreateSpecialDayFail2() {
     SpecialDay sDay = new SpecialDay();
@@ -169,6 +168,9 @@ public class TestSpecialDayService {
   assertEquals(error, "Please enter a valid start time!");
   }
   
+  /*
+   * Test to successfully update a specialDay
+   */
   @Test
   public void testUpdateSpecialDay() {
     SpecialDay sDay = createSpecialDay(); 
@@ -184,6 +186,9 @@ public class TestSpecialDayService {
     assertEquals(END_TIME2, sDay.getEndTimestamp());
   }
   
+  /*
+   * Test to make sure customer cannot be updated if specialDayID doesn't exist in system
+   */
   @Test
   public void testUpdateSpecialDayFail() {
     SpecialDay sDay = createSpecialDay();
@@ -200,6 +205,9 @@ public class TestSpecialDayService {
     assertEquals(error, "Cannot find specialDay with given ID");
   }
   
+  /*
+   * Tests that checks that a special day cannot be updated if the start time is greater than the end time
+   */
   @Test
   public void testUpdateSpecialDayFail2() {
     SpecialDay sDay = createSpecialDay();
