@@ -121,7 +121,7 @@ public class SpecialDayController {
    * @param specialDayID, shiftID, date, startTime, endTime, shiftStatus, personID
    * Update a specific Shift on a specific specialDay
    */
-  @PutMapping(value = { "/shift/update/{id}", "/shift/update/{id}/" })
+  @PutMapping(value = { "specialday/updateshift/{id}", "/specialday/updateshift/{id}/" })
   public ResponseEntity updateSpecificDayShift(@PathVariable("id") int specialDayID, int shiftID, LocalDate date, 
       LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, int personID) {
     Shift shift;
