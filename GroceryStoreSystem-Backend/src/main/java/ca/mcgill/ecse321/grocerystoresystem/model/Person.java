@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
