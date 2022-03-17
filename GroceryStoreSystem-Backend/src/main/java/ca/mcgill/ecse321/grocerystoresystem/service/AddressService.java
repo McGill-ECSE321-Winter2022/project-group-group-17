@@ -1,17 +1,13 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
-
-
+import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
+import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import  ca.mcgill.ecse321.grocerystoresystem.dao.*; //imports all the classes
-import  ca.mcgill.ecse321.grocerystoresystem.model.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service 
@@ -58,7 +54,8 @@ public class AddressService {
 			address.setPostalCode(postalCode);
 			address.setStreetName(streetName);
 			address.setStreetNum(streetNum);
-			}catch(IllegalArgumentException e) {
+			}
+		catch(IllegalArgumentException e) {
 			System.out.println(e);
 		}
 
@@ -183,6 +180,7 @@ public class AddressService {
 			if (Character.isLetterOrDigit(number.charAt(i))== false) {
 				throw new IllegalArgumentException("Your input should only contain digits or numbers.");
 			}
+			i++;
 		}
 	}
 
