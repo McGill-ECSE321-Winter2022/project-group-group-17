@@ -239,5 +239,4 @@ public class TestSpecialDayService {
       boolean result = this.specialDayService.isSpecialDayByID(150);
       assertFalse(result);
   }
-  
 }
