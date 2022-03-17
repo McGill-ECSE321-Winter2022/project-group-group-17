@@ -9,8 +9,6 @@ import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.DeliveryOrderRepository;
 
-import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
-import ca.mcgill.ecse321.grocerystoresystem.model.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,6 +43,7 @@ public class TestDeliveryOrderService {
 	private static final boolean IS_PAID = true;
 	private static final LocalDateTime DELIVERY_TIME = LocalDateTime.of(2022,01,02,01,01,01,01);
 
+
 	private static final int ORDER_ID2 = 1000;
 	private static final int TOTAL_COST2 = 1234;
 	private static final LocalDateTime ORDER_TIME_STAMP2 = LocalDateTime.of(2022, 02,01,01,01,01,01);
@@ -64,6 +63,7 @@ public class TestDeliveryOrderService {
     private static final String POSTAL_CODE = "HHH HHH";
     private static final String COUNTRY = "Canada";
     private static final boolean IS_LOCAL = true;
+
 
 	private static final int PERSON_KEY = 1002;
 
@@ -241,7 +241,7 @@ public class TestDeliveryOrderService {
 		return address;
 		
 	}
-	
+
 	private List<DeliveryOrder> createDeliveryOrders(){
 		ArrayList<DeliveryOrder> orders = new ArrayList<>();
 

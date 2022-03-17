@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/DeliveryOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/DeliveryOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/InStoreOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/InStoreOrderService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestDeliveryOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestDeliveryOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestInStoreOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestInStoreOrderService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +74,7 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'project-group-group-17.GroceryStoreSystem-Backend.test'">
+  <component name="RunManager" selected="Gradle.TestInStoreOrderService">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -110,6 +113,27 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestDeliveryOrderService.successfullyGetDeliveryOrdersWithAddress&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":GroceryStoreSystem-Backend:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestInStoreOrderService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestInStoreOrderService&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -176,6 +200,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TestInStoreOrderService" />
         <item itemvalue="Gradle.Tests in 'project-group-group-17.GroceryStoreSystem-Backend.test'" />
         <item itemvalue="Gradle.TestDeliveryOrderService.successfullyGetDeliveryOrdersWithAddress" />
         <item itemvalue="Gradle.Tests in 'ca.mcgill.ecse321.grocerystoresystem.service'" />
@@ -208,5 +233,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

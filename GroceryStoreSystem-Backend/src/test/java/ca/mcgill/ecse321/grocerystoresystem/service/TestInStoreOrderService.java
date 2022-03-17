@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
 import ca.mcgill.ecse321.grocerystoresystem.model.InStoreOrder;
 import ca.mcgill.ecse321.grocerystoresystem.dao.InStoreOrderRepository;
 
@@ -32,7 +33,14 @@ public class TestInStoreOrderService {
 	private static final int TOTAL_COST = 1000;
 	private static final LocalDateTime ORDER_TIME_STAMP = LocalDateTime.of(2022, 01,01,01,01,01,01);
 	private static final boolean IS_PAID = true;
-	
+
+	private static final int ORDER_ID2 = 1000;
+	private static final int TOTAL_COST2 = 1234;
+	private static final LocalDateTime ORDER_TIME_STAMP2 = LocalDateTime.of(2022, 02,01,01,01,01,01);
+	private static final boolean IS_PAID2 = true;
+
+	private static final int PERSON_KEY = 1002;
+
 	@BeforeEach
 	public void setMockOutput() {
 		lenient().when(inStoreOrderRepository.findInStoreOrderByOrderID(anyInt())).thenAnswer( (InvocationOnMock invocation) -> {
@@ -42,6 +50,17 @@ public class TestInStoreOrderService {
                 return null;
             }
         });
+
+		lenient().when(inStoreOrderRepository.findInStoreOrderByPersonPersonID(anyInt()))
+				.thenAnswer((InvocationOnMock invocation) -> {
+					if(invocation.getArgument(0).equals(PERSON_KEY)) {
+						List<InStoreOrder> orders = createInStoreOrders();
+						return orders;
+					} else {
+						return new ArrayList<>();
+					}
+
+				});
 	
 		lenient().when(inStoreOrderRepository.existsByOrderID(ORDER_ID)).thenAnswer((InvocationOnMock invocation) -> 
 		invocation.getArgument(0).equals(ORDER_ID));
@@ -85,7 +104,7 @@ public class TestInStoreOrderService {
 		 assertNull(savedOrder);
 		 assertEquals("Please submit a valid totalCost", error);
 	 }
-	
+
 	@Test
 	public void successfullyGetInStoreOrderByID() {
 		InStoreOrder inStoreOrder = null;
@@ -117,43 +136,6 @@ public class TestInStoreOrderService {
 		assertEquals("Order was not found", error);
 	}
 	
-	/**
-	@Test
-	public void unsuccessfullyGetInStoreOrders() {
-		
-		List<InStoreOrder> orders = inStoreOrderService.getAllInStoreOrders();
-		InStoreOrder inStoreOrder = null;
-		
-		assertEquals(1, orders.size());
-		inStoreOrder = orders.get(0);
-		
-		assertEquals(ORDER_ID, inStoreOrder.getOrderID());
-		assertEquals(TOTAL_COST, inStoreOrder.getTotalCost());
-		assertEquals(ORDER_TIME_STAMP, inStoreOrder.getOrderTimeStamp());
-		assertEquals(IS_PAID, inStoreOrder.isPaid());
-	}
-	**/
-	
-	/**
-	@Test
-	public void successfullyDeleteInStoreOrder() {
-		InStoreOrder order = null;
-		boolean deleted = inStoreOrderService.deleteInStoreOrderWithID(ORDER_ID);
-		String error = "";
-		
-		try {
-			order = inStoreOrderService.getInStoreOrderByID(ORDER_ID);
-		} catch(NullPointerException exception) {
-			error = exception.getMessage();
-		}
-		
-		assertNull(order);
-		assertTrue(deleted);
-		assertEquals("Order was not found", error);
-		
-	}
-	**/
-	
 	@Test
 	public void unsuccessfullyDeleteInStoreOrder() {
 		InStoreOrder order = new InStoreOrder();
@@ -174,7 +156,7 @@ public class TestInStoreOrderService {
 		
 		
 	}
-	
+
 	private InStoreOrder createInStoreOrder() {
 		InStoreOrder inStoreOrder = new InStoreOrder();
 		inStoreOrder.setOrderID(ORDER_ID);
@@ -183,7 +165,27 @@ public class TestInStoreOrderService {
 		inStoreOrder.setPaid(IS_PAID);
 		return inStoreOrder;
 	}
-	
-	
+
+	private List<InStoreOrder> createInStoreOrders(){
+		List<InStoreOrder> orders = new ArrayList<>();
+
+		InStoreOrder order = new InStoreOrder();
+		order.setOrderID(ORDER_ID);
+		order.setTotalCost(TOTAL_COST);
+		order.setOrderTimeStamp(ORDER_TIME_STAMP);
+		order.setPaid(IS_PAID);
+
+
+		InStoreOrder order2 = new InStoreOrder();
+		order2.setOrderID(ORDER_ID2);
+		order2.setTotalCost(TOTAL_COST2);
+		order2.setOrderTimeStamp(ORDER_TIME_STAMP2);
+		order2.setPaid(IS_PAID2);
+
+		orders.add(order);
+		orders.add(order2);
+
+		return orders;
+	}
 
 }
