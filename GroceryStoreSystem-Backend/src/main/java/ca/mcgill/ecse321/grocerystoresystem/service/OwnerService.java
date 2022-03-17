@@ -2,8 +2,10 @@ package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.OwnerRepository;
+import ca.mcgill.ecse321.grocerystoresystem.dao.PersonRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Owner;
+import ca.mcgill.ecse321.grocerystoresystem.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,14 @@ public class OwnerService {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Transactional
     public Owner createOwner() {
         Owner owner = new Owner();
 
-        ownerRepository.save(owner);
-        return owner;
+        return ownerRepository.save(owner);
     }
 
 
@@ -36,15 +40,16 @@ public class OwnerService {
         if(email == null || email.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Email");
         if(password == null || password.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Password");
 
+        if(personRepository.existsPersonByEmail(email)) throw new IllegalArgumentException("Email already exists in the database");
+
         Owner owner = new Owner();
         owner.setFirstName(first_name);
         owner.setLastName(last_name);
         owner.setEmail(email);
         owner.setPassword(password);
 
-        ownerRepository.save(owner);
+        return ownerRepository.save(owner);
 
-        return owner;
     }
 
     @Transactional
@@ -55,6 +60,8 @@ public class OwnerService {
         if(password == null || password.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Password");
         if(address == null) throw new IllegalArgumentException("Please provide valid arguments: Address");
 
+        if(personRepository.existsPersonByEmail(email)) throw new IllegalArgumentException("Email already exists in the database");
+
         Owner owner = new Owner();
         owner.setFirstName(first_name);
         owner.setLastName(last_name);
@@ -62,25 +69,24 @@ public class OwnerService {
         owner.setPassword(password);
         owner.setAddress(address);
 
-        ownerRepository.save(owner);
-
-        return owner;
+        return ownerRepository.save(owner);
     }
 
     @Transactional
     public boolean deleteOwner(int personID) {
         Owner owner = ownerRepository.findOwnerByPersonID(personID);
         if(owner == null) throw new NullPointerException("Owner not found");
+
         ownerRepository.delete(owner);
 
-        return true;
+        return !this.isOwnerByID(owner.getPersonID());
     }
 
     @Transactional
     public boolean deleteOwners() {
         ownerRepository.deleteAll();
 
-        return true;
+        return this.getAllOwners().size() == 0;
     }
 
     @Transactional
@@ -154,13 +160,13 @@ public class OwnerService {
     }
 
     @Transactional
-    public List<Owner> findOwnerByEmail(String email) {
+    public Owner findOwnerByEmail(String email) {
         if(email == null || email.length() == 0) throw new IllegalArgumentException("Please provide valid arguments: Invalid Email");
 
-        List<Owner> owners = this.ownerRepository.findOwnerByEmail("No owners found");
-        if(owners.size() == 0) throw new NullPointerException("No owners found");
+        Owner owner = this.ownerRepository.findOwnerByEmail(email);
+        if(owner == null) throw new NullPointerException("No owners found");
 
-        return owners;
+        return owner;
     }
 
     @Transactional
@@ -172,9 +178,7 @@ public class OwnerService {
         if(address == null) throw new NullPointerException("Address not found");
 
         owner.setAddress(address);
-        ownerRepository.save(owner);
-
-        return owner;
+        return ownerRepository.save(owner);
     }
 
     @Transactional
@@ -185,9 +189,41 @@ public class OwnerService {
         if(owner == null) throw new NullPointerException("Owner not found");
 
         owner.setPassword(password);
-        ownerRepository.save(owner);
+        return ownerRepository.save(owner);
+    }
 
-        return owner;
+    @Transactional
+    public boolean logIn(String email, String password) {
+        List<Person> persons = personRepository.findPersonByEmail(email);
+        if(persons.size() == 0) throw new NullPointerException("No account with that email or password");
+
+        if(persons.size() > 1) throw new IllegalArgumentException("More than 1 person associated with email");
+
+        Person person = persons.get(0);
+        if(person.getPassword().equals(password)) {
+            person.setLoginStatus(true);
+
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException("No account with that email or password");
+        }
+    }
+
+    @Transactional
+    public boolean logOut(int personID) {
+        Person person = personRepository.findPersonByPersonID(personID);
+
+        if(person == null) {
+            throw new NullPointerException("Person not found");
+        }
+
+        if(!person.getLoginStatus()) {
+            throw new IllegalArgumentException("Person not logged in");
+        }
+
+        person.setLoginStatus(false);
+        return true;
     }
 
     @Transactional

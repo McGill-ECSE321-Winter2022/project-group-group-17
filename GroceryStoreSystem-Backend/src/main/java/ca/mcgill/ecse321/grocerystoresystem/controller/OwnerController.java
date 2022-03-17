@@ -21,6 +21,28 @@ public class OwnerController {
     @Autowired
     private OwnerService ownerService;
 
+    @PostMapping(value = {"/owner/login"})
+    public boolean login(@RequestParam String email, @RequestParam String password) {
+        try {
+            return this.ownerService.logIn(email, password);
+        }
+        catch(NullPointerException | IllegalArgumentException exp) {
+            System.out.println(exp.getMessage());
+            return false;
+        }
+    }
+
+    @PostMapping(value = {"/owner/logout"})
+    public boolean logout(@RequestParam int id) {
+        try {
+            return this.ownerService.logOut(id);
+        }
+        catch(NullPointerException | IllegalArgumentException exp) {
+            System.out.println(exp.getMessage());
+            return false;
+        }
+    }
+
     @GetMapping(value = {"/owners/", "/owners"})
     public List<OwnerDto> getAllOwners() {
         return ownerService.getAllOwners().stream().map(this::convertToDto).collect(Collectors.toList());
@@ -67,9 +89,9 @@ public class OwnerController {
     }
 
     @GetMapping(value = {"/owner/get/email/", "/owner/get/email"})
-    public List<OwnerDto> getOwnerWithEmail(@RequestParam String email) {
+    public OwnerDto getOwnerWithEmail(@RequestParam String email) {
         try {
-            return ownerService.findOwnerByEmail(email).stream().map(this::convertToDto).collect(Collectors.toList());
+            return convertToDto(ownerService.findOwnerByEmail(email));
         }
         catch (NullPointerException exp) {
             return null;

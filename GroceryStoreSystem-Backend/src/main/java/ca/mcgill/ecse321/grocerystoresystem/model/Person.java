@@ -51,6 +51,8 @@ public abstract class Person {
 	public int getPersonID() {
 		return this.personID;
 	}
+
+	public void setPersonID(int personID) { this.personID = personID; }
 	
 	public String getFirstName() {
 		return firstName;

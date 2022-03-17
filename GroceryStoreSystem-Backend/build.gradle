@@ -19,16 +19,37 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'org.postgresql:postgresql'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 	testImplementation 'org.mockito:mockito-core:2.+'
+	testImplementation 'io.rest-assured:rest-assured-all:4.5.1'
+	testImplementation 'io.rest-assured:spring-mock-mvc:4.5.1' // for integration tests in junit
+
 	testImplementation 'org.mockito:mockito-junit-jupiter:2.18.3'
 	testImplementation 'org.junit.platform:junit-platform-launcher:1.4.1'
 	testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.2"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-params' // for parameterized tests
 
 	testRuntimeOnly  'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-
 }
 
-tasks.named('test') {
+task unitTest(type: Test) {
+
+	systemProperty "spring.profiles.active", (System.getenv("SPRING_PROFILES_ACTIVE") ?: "ci")
+
+	useJUnitPlatform { excludeTags "integration" }
+}
+
+task integrationTest(type: Test) {
+
+	systemProperty "spring.profiles.active", (System.getenv("SPRING_PROFILES_ACTIVE") ?: "ci")
+
+	useJUnitPlatform { includeTags "integration" }
+}
+
+test {
+
+	systemProperty "spring.profiles.active", (System.getenv("SPRING_PROFILES_ACTIVE") ?: "ci")
+
 	useJUnitPlatform()
 }

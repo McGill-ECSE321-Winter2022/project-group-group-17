@@ -25,7 +25,8 @@ public class Shift {
 	private ShiftStatus shiftStatus;
 	
 	public Shift() {};
-	
+
+
 	public Shift(LocalDate date, LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus) {
 		this.date = date;
 		this.startTime = startTime;
@@ -91,7 +92,15 @@ public class Shift {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	
-	
-	
+
+	public Calendar getCalendar_shifts() {
+		return calendar_shifts;
+	}
+
+	public void setCalendar_shifts(Calendar calendar_shifts) {
+		this.calendar_shifts = calendar_shifts;
+	}
+
+
+
 }

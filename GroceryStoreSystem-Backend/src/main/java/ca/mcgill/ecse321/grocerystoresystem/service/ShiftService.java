@@ -59,12 +59,19 @@ public class ShiftService {
     }
 
     @Transactional
-    public Shift deleteShift(int shiftID) {
+    public boolean deleteShift(int shiftID) {
         Shift shift = this.shiftRepository.findShiftByShiftID(shiftID);
         if(shift == null) throw new NullPointerException("Shift not found");
 
         shiftRepository.delete(shift);
-        return shift;
+        return !isShiftByID(shift.getShiftID());
+    }
+
+    @Transactional
+    public boolean deleteAllShifts() {
+        shiftRepository.deleteAll();
+
+        return this.getAllShifts().size() == 0;
     }
 
     @Transactional
@@ -177,9 +184,7 @@ public class ShiftService {
         if(shift == null) throw new NullPointerException("Shift not found");
 
         shift.setShiftStatus(status);
-        shiftRepository.save(shift);
-
-        return shift;
+        return shiftRepository.save(shift);
     }
 
     @Transactional
@@ -191,9 +196,7 @@ public class ShiftService {
         if(employee == null) throw new NullPointerException("Employee not found");
 
         shift.setEmployee(employee);
-        shiftRepository.save(shift);
-
-        return shift;
+        return shiftRepository.save(shift);
     }
 
     @Transactional
