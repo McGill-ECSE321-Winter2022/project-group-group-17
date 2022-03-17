@@ -27,8 +27,8 @@ public class ItemQuantityController {
 		}
 	}
 
-	@GetMapping(value = {"/itemquantity/get/itemnum/", "/itemquantity/get/itemnum"})
-	public List<ItemQuantityDto> getOwnerWithFirstName(@RequestParam int itemNum) {
+	@GetMapping(value = {"/itemquanties/get/itemnum/", "/itemquanties/get/itemnum"})
+	public List<ItemQuantityDto> getItemQuantitiesWithNum(@RequestParam int itemNum) {
 	     try {
 	          return itemQuantityService.getItemQuantityWithNum(itemNum).stream().map(this::convertToDto).collect(Collectors.toList());
 	     }catch (NullPointerException exp) {
