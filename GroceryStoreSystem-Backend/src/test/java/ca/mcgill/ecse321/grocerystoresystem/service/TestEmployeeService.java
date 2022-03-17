@@ -6,7 +6,6 @@ import ca.mcgill.ecse321.grocerystoresystem.dao.EmployeeRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Employee;
 import ca.mcgill.ecse321.grocerystoresystem.model.EmployeeStatus;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
