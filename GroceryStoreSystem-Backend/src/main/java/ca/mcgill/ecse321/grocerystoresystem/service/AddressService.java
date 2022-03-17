@@ -27,18 +27,60 @@ public class AddressService {
 	 * It also check the validity of each parameter input and throws exceptions when the user violates certain rules. 
 	 */
 	@Transactional
-	public Address createAddress(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+	public Address createAddress(Integer addressID,String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+		
+		try {
+			
+			checkEmptyInput(streetName);
+			checkEmptyInput(streetNum);
+			checkEmptyInput(city);
+			checkEmptyInput(postalCode);
+			checkEmptyInput(country);
+
+			
+		}catch(IllegalArgumentException e){
+			
+			return null;
+			
+		}
+		
+		try {
+			checkAlpha(streetName);
+			checkAlpha(city);
+			checkAlpha(country);
+			checkAlphaNum(streetNum);
+			checkAlphaNum(postalCode);
+		
+			}catch(IllegalArgumentException e) {
+				return null;
+			
+		}
 		Address address = new Address();
+		address.setAddressID(addressID);
+		address.setCity(city);
+		address.setCountry(country);
+		address.setLocal(isLocal);
+		address.setPostalCode(postalCode);
+		address.setStreetName(streetName);
+		address.setStreetNum(streetNum);
+
+		addressRepository.save(address);
+		return address;
+	}
+	@Transactional
+	public Address createAddress(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
+		
 		try {
 			checkEmptyInput(streetName);
 			checkEmptyInput(streetNum);
 			checkEmptyInput(city);
 			checkEmptyInput(postalCode);
 			checkEmptyInput(country);
-			checkEmptyInput(isLocal);
+			
 			
 		}catch(IllegalArgumentException e){
-			System.out.println(e);
+			return null;
+			
 		}
 		
 		try {
@@ -48,17 +90,20 @@ public class AddressService {
 			checkAlphaNum(streetNum);
 			checkAlphaNum(postalCode);
 			
-			address.setCity(city);
-			address.setCountry(country);
-			address.setLocal(isLocal);
-			address.setPostalCode(postalCode);
-			address.setStreetName(streetName);
-			address.setStreetNum(streetNum);
-			}
-		catch(IllegalArgumentException e) {
-			System.out.println(e);
-		}
+		
+			}catch(IllegalArgumentException e) {
+				return null;
+		
 
+		}
+		Address address = new Address();
+		
+		address.setCity(city);
+		address.setCountry(country);
+		address.setLocal(isLocal);
+		address.setPostalCode(postalCode);
+		address.setStreetName(streetName);
+		address.setStreetNum(streetNum);
 		addressRepository.save(address);
 		return address;
 	}
@@ -111,7 +156,7 @@ public class AddressService {
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);
 		}
-		if(streetNum == null || streetNum.length() == 0)throw new IllegalArgumentException("Please provide a valid street number.");
+		if(streetNum == null || streetNum.length() == 0)throw new IllegalArgumentException("Please provide a valid street number");
 		if(streetName == null || streetName.length() == 0) throw new IllegalArgumentException("Please provide a valid street name");	
 		
 		List<Address> addresses = this.addressRepository.findAddressByStreetNumAndStreetName(streetNum, streetName);
@@ -125,7 +170,7 @@ public class AddressService {
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);
 		}
-		if(postalCode == null || postalCode.length() == 0)throw new IllegalArgumentException("Please provide a valid street number.");
+		if(postalCode == null || postalCode.length() == 0)throw new IllegalArgumentException("Please provide a valid postal code.");
 		List<Address> addresses = this.addressRepository.findAddressByPostalCode(postalCode);
 		if (addresses.size()==0) throw new NullPointerException("There are no addresses with that postal code.");
 		
@@ -160,10 +205,11 @@ public class AddressService {
 		}
 		return resultList;
 	}
-	private void checkEmptyInput(Object input) {
-		if(input == null) {
-			throw new IllegalArgumentException("You must enter all the required information to proceed.");
+	private void checkEmptyInput(String input) {
+		if(input == null || input.equals("")) {
+			throw new IllegalArgumentException("You must enter all the required information to proceed");
 		}
+		
 	}
 	private void checkAlpha(String word) {
 		int i = 0;
