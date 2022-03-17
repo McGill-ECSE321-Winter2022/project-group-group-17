@@ -81,7 +81,6 @@ public class TestSpecialDayService {
   private Calendar createCalendar() {
     Calendar calendar = new Calendar();
     calendar.setCalendarID(CALENDAR_KEY);
-   
     return calendar;
   }
   
@@ -110,8 +109,7 @@ public class TestSpecialDayService {
         (InvocationOnMock invocation) -> invocation.getArgument(0).equals(SPECIALDAY_KEY));
     
     Answer<?> returnParamAsAnswer = (InvocationOnMock invocation) -> {return invocation.getArgument(0);};
-    lenient().when(specialDayRepository.save(any(SpecialDay.class))).thenAnswer(returnParamAsAnswer);
-    
+    lenient().when(specialDayRepository.save(any(SpecialDay.class))).thenAnswer(returnParamAsAnswer); 
   }
   
   /*
@@ -225,12 +223,21 @@ public class TestSpecialDayService {
   }
   
   /*
-   * Check if a person is of type Customer using various parameters
+   * Check if a person is of type SpecialDay using a specialDayID
    */
   @Test
   public void testIsSpecialDayByID() {
       boolean result = this.specialDayService.isSpecialDayByID(SPECIALDAY_KEY);
       assertTrue(result);
+  }
+  
+  /*
+   * Check if a person is NOT of type SpecialDay using invalid ID
+   */
+  @Test
+  public void testIsSpecialDayByIDFail() {
+      boolean result = this.specialDayService.isSpecialDayByID(150);
+      assertFalse(result);
   }
   
 }

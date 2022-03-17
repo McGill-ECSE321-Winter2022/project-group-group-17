@@ -676,7 +676,7 @@ public class TestCustomerService {
     }
 
     /*
-     * Check if a person is of type Customer using various parameters
+     * Check if a person is of type Customer using personID
      */
     @Test
     public void testIsCustomerByID() {
@@ -684,24 +684,36 @@ public class TestCustomerService {
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using first name
+     */
     @Test
     public void testIsCustomerByFirstName() {
         boolean result = this.customerService.isCustomerByFirstName(FIRST_NAME);
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using last name
+     */
     @Test
     public void testIsCustomerByLastName() {
         boolean result = this.customerService.isCustomerByLastName(LAST_NAME);
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using an email
+     */
     @Test
     public void testIsCustomerByEmail() {
         boolean result = this.customerService.isCustomerByEmail(EMAIL);
         assertTrue(result);
     }
 
+    /*
+     * Check if a person is of type Customer using first and last names
+     */
     @Test
     public void testIsCustomerByFirstAndLastName() {
         boolean result = this.customerService.isCustomerByFirstAndLastName(FIRST_NAME, LAST_NAME);
@@ -709,7 +721,7 @@ public class TestCustomerService {
     }
 
     /*
-     * Test to check person is NOT a customer with invalid inputs
+     * Test to check person is NOT a customer with invalid ID
      */
     @Test
     public void testIsCustomerByIDFail() {
