@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcgill.ecse321.grocerystoresystem.model.DeliveryOrder;
 import ca.mcgill.ecse321.grocerystoresystem.model.InStoreOrder;
 import ca.mcgill.ecse321.grocerystoresystem.dao.InStoreOrderRepository;
 
@@ -18,6 +17,8 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import org.springframework.test.context.TestPropertySource;
+
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.lenient;
 
@@ -120,7 +121,16 @@ public class TestInStoreOrderService {
 		assertEquals(ORDER_TIME_STAMP, inStoreOrder.getOrderTimeStamp());
 		assertEquals(IS_PAID, inStoreOrder.isPaid());
 	}
-	
+
+	@Test
+	public void successfullyGetInStoreOrdersWithPersonID(){
+		List<InStoreOrder> inStoreOrder = null;
+
+		inStoreOrder = inStoreOrderService.getAllDeliveryOrdersOfPersonWithPersonID(PERSON_KEY);
+
+		assertNotNull(inStoreOrder);
+		assertEquals(2, inStoreOrder.size());
+	}
 	@Test
 	public void unsuccessfullyGetInStoreOrderByID() {
 		InStoreOrder inStoreOrder = null;
@@ -153,8 +163,7 @@ public class TestInStoreOrderService {
 		assertFalse(deleted);
 		assertNotNull(order);
 		assertEquals("Order was not found", error);
-		
-		
+
 	}
 
 	private InStoreOrder createInStoreOrder() {

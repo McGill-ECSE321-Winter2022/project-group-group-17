@@ -36,8 +36,8 @@ public class ItemQuantityController {
 	     }
 	}
 	@PostMapping (value= {"/itemquantity/create/","itemquantity/create"})
-	public ItemQuantityDto createItemQuantity(@RequestParam int itemNum, @RequestParam int itemId) {
-		ItemQuantity itemQuantity = itemQuantityService.createItemQuantity(itemNum, itemId);
+	public ItemQuantityDto createItemQuantity(@RequestParam int itemNum) {
+		ItemQuantity itemQuantity = itemQuantityService.createItemQuantity(itemNum);
 		return convertToDto(itemQuantity);
 	}
 

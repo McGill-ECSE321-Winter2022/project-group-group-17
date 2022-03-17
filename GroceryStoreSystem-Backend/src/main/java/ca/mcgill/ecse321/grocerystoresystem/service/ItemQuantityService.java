@@ -17,17 +17,16 @@ public class ItemQuantityService {
 	ItemQuantityRepository itemQuantityRepository;
 	
 	@Transactional
-	public ItemQuantity createItemQuantity(int itemNum, int quantityID) {
+	public ItemQuantity createItemQuantity(int itemNum) {
+		if (itemNum < 0) throw new IllegalArgumentException("Input a valid itemNum!");
 		ItemQuantity itemQuantity = new ItemQuantity();
-		try{
-			checkEmptyInput(itemNum);
-			checkEmptyInput(quantityID);
-		}catch(IllegalArgumentException e){
-			System.out.println(e);	
-		}
+		itemQuantity.setItemNum(itemNum);
+
 		itemQuantityRepository.save(itemQuantity);
+
 		return itemQuantity;
 	}
+
 	@Transactional
 	public ItemQuantity getItemQuantityWithID(int itemID) {
 		
@@ -35,24 +34,26 @@ public class ItemQuantityService {
 	    if(itemQuantity == null) throw new NullPointerException("Item quantity not found");
 		return itemQuantity;
 	}
+
+	@Transactional
+	public List<ItemQuantity> getItemQuantityByOrderID(int orderID){
+		return toList(itemQuantityRepository.findItemQuantitiesByOrderOrderID(orderID));
+	}
+
+	@Transactional
+	public List<ItemQuantity> getItemQuantityByItemID(int itemID){
+		return toList(itemQuantityRepository.findItemQuantitiesBySpecificItemItemID(itemID));
+	}
+
 	@Transactional
 	public List<ItemQuantity> getItemQuantityWithNum(int itemNum) {
-		try {
-			checkEmptyInput(itemNum);
-		}catch(IllegalArgumentException e){
-			System.out.println(e);
-			
-		}
-		
-		List<ItemQuantity> itemQuantities = this.itemQuantityRepository.findItemQuantityByItemNum(itemNum);
-
-        if(itemQuantities.size() == 0) throw new NullPointerException("No item quantities found");
-        return itemQuantities;
+		return toList(itemQuantityRepository.findItemQuantityByItemNum(itemNum));
    	}
 	@Transactional
 	public List<ItemQuantity> getAllItemQuantities(){
 		return toList(itemQuantityRepository.findAll());
 	}
+
 	@Transactional
 	public boolean deleteItemQuantity(int itemQuantityID) {
 		
@@ -68,11 +69,6 @@ public class ItemQuantityService {
 			resultList.add(t);
 		}
 		return resultList;
-	}
-	private void checkEmptyInput(Integer input) {
-		if(input == null) {
-			throw new IllegalArgumentException("You must enter all the required information to proceed.");
-		}
 	}
 	
 }
