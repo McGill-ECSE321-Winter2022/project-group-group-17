@@ -21,6 +21,13 @@ public class EmployeeService {
     @Autowired 
     AddressRepository addressRepository;
 
+
+    @Transactional
+    public Employee createEmployee() {
+        Employee employee = new Employee();
+
+        return employeeRepository.save(employee);
+    }
     /**
    * @author Amy Qi Wang
    * @param String first_name, String last_name, String email,  String password, EmployeeStatus empStatus
@@ -37,9 +44,9 @@ public class EmployeeService {
         Employee employee = new Employee ();
         employee.setFirstName(first_name);
         employee.setLastName(last_name);
-        employee.setEmpStatus(empStatus);
         employee.setEmail(email);
         employee.setPassword(password);
+        employee.setEmpStatus(empStatus);
         employeeRepository.save(employee);
         return employee;
     }
@@ -49,6 +56,7 @@ public class EmployeeService {
    * @param String first_name, String last_name, String email,  String password, EmployeeStatus empStatus, Address address
    * Method to hire/create a new Employee profile using all attributes of an employee including address
    */
+
     @Transactional
     public Employee createEmployee(String first_name, String last_name, String email,  String password, EmployeeStatus empStatus, Address address ){
         
@@ -56,30 +64,19 @@ public class EmployeeService {
         if (email == null || !email.contains("@")) throw new IllegalArgumentException("Please enter a valid email");
         if (password == null || password.length() < 8) throw new IllegalArgumentException("Please enter a password that is at least 8 characters long");
         if (empStatus == null) throw new IllegalArgumentException("Must input employee status to create employee account");
+        if (address == null) throw new IllegalArgumentException("Must input a valid address");
         if (employeeRepository.findEmployeeByEmail(email) != null|| customerRepository.findCustomerByEmail(email) !=null) throw new IllegalArgumentException("Email in use, please choose another");
         Employee employee = new Employee ();
         employee.setFirstName(first_name);
         employee.setLastName(last_name);
-        employee.setEmpStatus(empStatus);
         employee.setEmail(email);
         employee.setPassword(password);
+        employee.setEmpStatus(empStatus);
         employee.setAddress(address);
         employeeRepository.save(employee);
         return employee;
     }
 
-/**
-   * @author Amy Qi Wang
-   * @param int personID
-   * Method to get an employee given the personID
-   */
-    @Transactional
-    public Employee getEmployee(int personID){
-        Employee employee= employeeRepository.findEmployeeByPersonID(personID);
-        if (employee == null) throw new IllegalArgumentException("Please enter a valid employee email");
-        return employee;
-
-    }
 /**
    * @author Amy Qi Wang
    * @param 
@@ -194,10 +191,10 @@ public class EmployeeService {
    */
 
     @Transactional
-    public Employee updateEmployeeAddressByEmail(String email, Address newAddress){
+    public Employee updateEmployeeAddressByEmail(String email, int addressId){
         Employee employee = employeeRepository.findEmployeeByEmail(email);
         if (employee == null) throw new NullPointerException ("Must be valid employee");
-        employee.setAddress(newAddress);
+        employee.setAddress(addressRepository.findAddressByAddressID(addressId));
         employeeRepository.save(employee);
         return employee;
     }
@@ -303,25 +300,25 @@ public class EmployeeService {
         return employeeRepository.existsByEmail(email);
     }
 
-    @Transactional 
-    public Employee fireEmployee(Employee e){
-        e.setEmpStatus(EmployeeStatus.fired);
-        employeeRepository.save(e);
-        return e;
-    }
+//    @Transactional
+//    public Employee fireEmployee(Employee e){
+//        e.setEmpStatus(EmployeeStatus.fired);
+//        employeeRepository.delete(e);
+//        return e;
+//    }
+//
+//    @Transactional
+//    public Employee resignEmployee(Employee e){
+//        e.setEmpStatus(EmployeeStatus.resigned);
+//        employeeRepository.delete(e);
+//        return e;
+//    }
 
-    @Transactional 
-    public Employee resignEmployee(Employee e){
-        e.setEmpStatus(EmployeeStatus.resigned);
-        employeeRepository.save(e);
-        return e;
-    }
-
-    @Transactional 
-    public Employee rehireEmployee (Person p){
-        return null;
-
-    }
+//    @Transactional
+//    public Employee rehireEmployee (Person p){
+//        return null;
+//
+//    }
 
     private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();

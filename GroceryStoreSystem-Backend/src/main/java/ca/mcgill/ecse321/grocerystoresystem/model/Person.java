@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -51,7 +50,7 @@ public abstract class Person {
 	public int getPersonID() {
 		return this.personID;
 	}
-x
+
 	public void setPersonID(int personID) { this.personID = personID; }
 	
 	public String getFirstName() {

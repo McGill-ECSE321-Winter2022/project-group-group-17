@@ -24,7 +24,7 @@ public class StoreHourController {
 
     }
 
-    @GetMapping(value = {"/storehours/get/id/", "/storehours/get/id"})
+    @GetMapping(value = {"/storehour/get/id/", "/storehour/get/id"})
     public StoreHourDto getStoreHourDto(@RequestParam int id){
         try{
             return convertToDto(storeHourService.getStoreHour(id));
@@ -34,7 +34,7 @@ public class StoreHourController {
         }
     }
 
-    @PostMapping(value = {"/storehours/get/id/", "/storehours/get/id"})
+    @PostMapping(value = {"/storehour/create/", "/storehour/create"})
     public StoreHourDto createStoreHourDto(@RequestParam LocalTime startTime, @RequestParam LocalTime endTime,
                                          @RequestParam Weekdays weekday, @RequestParam int storeHourID){
         return convertToDto(storeHourService.createStoreHour(startTime, endTime, weekday, storeHourID));
@@ -50,6 +50,8 @@ public class StoreHourController {
         }
 
     }
+
+    @PostMapping (value = {"storehour/update/"})
 
     private StoreHourDto convertToDto(StoreHour hour) throws NullPointerException{
         if(hour == null) {
