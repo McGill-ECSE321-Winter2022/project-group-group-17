@@ -28,7 +28,7 @@ public class StoreHourService {
         if (endTime == null||startTime ==null || startTime.isAfter(endTime)) throw new IllegalArgumentException("Must enter valid start and end time");
         if (weekday == null) throw new IllegalArgumentException("Must enter valid weekday");
 
-        StoreHour newStoreHour = new StoreHour(startTime, endTime, weekday);
+        StoreHour newStoreHour = new StoreHour(startTime, endTime, weekday, storeHourID);
         storeHourRepository.save(newStoreHour);
         return null;
 

@@ -1,5 +1,4 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
-import ca.mcgill.ecse321.grocerystoresystem.dao.StoreHourRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dto.StoreHourDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.StoreHour;
 import ca.mcgill.ecse321.grocerystoresystem.model.Weekdays;

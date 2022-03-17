@@ -10,9 +10,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import ca.mcgill.ecse321.grocerystoresystem.model.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,7 +105,7 @@ public class TestStoreHourService {
 
 //    @Test
 //    public void testCreateStoreHour2(){
-//        StoreHour hour = storeHourService.createStoreHour(START_TIME1, END_TIME1, HOUR_WEEKDAY1, HOUR_ID);
+//        StoreHour hour = this.storeHourService.createStoreHour(START_TIME1, END_TIME1, HOUR_WEEKDAY1, HOUR_ID);
 //        assertNotNull(hour);
 //
 //        assertEquals(START_TIME1, hour.getStartTime());
@@ -136,21 +133,21 @@ public class TestStoreHourService {
 
     }
 
-//    @Test
-//    public void testGetStoreHourUnsuccessful(){
-//        assertEquals(1, storeHourService.getAllStoreHours().size());
-//        StoreHour hour = null;
-//        String error =  "";
-//        try {
-//            hour = storeHourService.getStoreHour(10001);
-//        }
-//        catch(NullPointerException exp) {
-//            error  = exp.getMessage();
-//        }
-//
-//        assertNull(hour);
-//        assertEquals(error, "store hour does not exist");
-//    }
+    @Test
+    public void testGetStoreHourUnsuccessful(){
+        assertEquals(2, storeHourService.getAllStoreHours().size());
+        StoreHour hour = null;
+        String error =  "";
+        try {
+            hour = storeHourService.getStoreHour(10001);
+        }
+        catch(IllegalArgumentException exp) {
+            error  = exp.getMessage();
+        }
+
+        assertNull(hour);
+        assertEquals(error, "store hour does not exist");
+    }
 
     @Test
     public void testUpdateStoreHour(){
@@ -158,7 +155,7 @@ public class TestStoreHourService {
         StoreHour hour = this.storeHourService.createStoreHour(START_TIME1, END_TIME1, HOUR_WEEKDAY1, HOUR_ID);
 
         try {
-            hour = this.storeHourService.updateStoreHour(HOUR_ID, START_TIME2, END_TIME2 );
+            hour = this.storeHourService.updateStoreHourById(HOUR_ID, START_TIME2, END_TIME2 );
         }
         catch(Exception exp) {
             fail(exp.getMessage());
