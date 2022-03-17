@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
+import ca.mcgill.ecse321.grocerystoresystem.dao.StoreHourRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dto.StoreHourDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.StoreHour;
 import ca.mcgill.ecse321.grocerystoresystem.model.Weekdays;
@@ -34,6 +35,17 @@ public class StoreHourController {
         }
     }
 
+    @GetMapping(value = {"/storehour/get/day/", "/storehour/get/day"})
+    public StoreHourDto getStoreHourDtoByDay(@RequestParam Weekdays day){
+        try{
+            return convertToDto(storeHourService.getStoreHourByWeekday(day));
+        }
+        catch (NullPointerException n){
+            return null;
+        }
+    }
+
+
     @PostMapping(value = {"/storehour/create/", "/storehour/create"})
     public StoreHourDto createStoreHourDto(@RequestParam LocalTime startTime, @RequestParam LocalTime endTime,
                                          @RequestParam Weekdays weekday, @RequestParam int storeHourID){
@@ -43,7 +55,7 @@ public class StoreHourController {
     @DeleteMapping (value = {"/storehour/delete/", "/storehour/delete" })
     public boolean deleteStoreHourDto(@RequestParam int storeHourID){
         try {
-            return storeHourService.deleteStoreHour(storeHourID);
+            return this.storeHourService.deleteStoreHour(storeHourID);
         }
         catch (NullPointerException n){
             return false;
@@ -51,16 +63,41 @@ public class StoreHourController {
 
     }
 
-    @PostMapping (value = {"storehour/update/", "/storehour/update"})
-    public StoreHourDto updatStoreHourDto(@RequestParam int id, @RequestParam LocalTime startTime, @RequestParam LocalTime endTime ){
-        try {
-            return convertToDto(this.storeHourService.updateStoreHour(id, startTime, endTime));
-        }
-        catch(NullPointerException exp) {
-            return null;
-        }
-
+    @DeleteMapping (value = {"/storehour/delete/", "/storehour/delete"})
+    public boolean deleteAllHoursDto(){
+        
+        return storeHourService.deleteAllHours();
     }
+
+    @PostMapping (value = {"storehour/update/", "/storehour/update"})
+    public StoreHourDto updateStoreHourDtoByDay(@RequestParam Weekdays day,
+                                             @RequestParam LocalTime startTime, 
+                                             @RequestParam LocalTime endTime ){
+        try {
+            return convertToDto(storeHourService.updateStoreHourByDay(day, startTime, endTime));
+        }
+        catch (IllegalArgumentException x) {
+            System.out.println(x.getMessage());
+            return null;
+            
+        }
+    }
+
+    @PostMapping (value = {"storehour/update/", "/storehour/update"})
+    public StoreHourDto updateStoreHourDtoById(@RequestParam int storeHourID,
+                                             @RequestParam LocalTime startTime, 
+                                             @RequestParam LocalTime endTime ){
+        try {
+            return convertToDto(storeHourService.updateStoreHourById(storeHourID, startTime, endTime));
+        }
+        catch (IllegalArgumentException x) {
+            System.out.println(x.getMessage());
+            return null;
+            
+        }
+    }
+
+
     private StoreHourDto convertToDto(StoreHour hour) throws NullPointerException{
         if(hour == null) {
             throw new NullPointerException("Store hour is null");
