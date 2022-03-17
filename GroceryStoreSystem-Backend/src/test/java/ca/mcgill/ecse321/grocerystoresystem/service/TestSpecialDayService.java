@@ -215,4 +215,14 @@ public class TestSpecialDayService {
     assertEquals(END_TIME, sDay.getEndTimestamp());
     assertEquals(error, "The start time cannot be after the end time!");
   }
+  
+  /*
+   * Check if a person is of type Customer using various parameters
+   */
+  @Test
+  public void testIsSpecialDayByID() {
+      boolean result = this.specialDayService.isSpecialDayByID(SPECIALDAY_KEY);
+      assertTrue(result);
+  }
+  
 }
