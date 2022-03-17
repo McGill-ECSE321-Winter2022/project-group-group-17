@@ -223,7 +223,7 @@ public class TestSpecialDayService {
   }
   
   /*
-   * Check if a person is of type SpecialDay using a specialDayID
+   * Check if a day is of type SpecialDay using a specialDayID
    */
   @Test
   public void testIsSpecialDayByID() {
@@ -232,7 +232,7 @@ public class TestSpecialDayService {
   }
   
   /*
-   * Check if a person is NOT of type SpecialDay using invalid ID
+   * Check if a day is NOT of type SpecialDay using invalid ID
    */
   @Test
   public void testIsSpecialDayByIDFail() {

@@ -729,24 +729,36 @@ public class TestCustomerService {
         assertFalse(result);
     }
 
+    /*
+     * Test to check that person is NOT a customer using invalid first name
+     */
     @Test
     public void testIsCustomerByFirstNameFail() {
         boolean result = this.customerService.isCustomerByFirstName("YK");
         assertFalse(result);
     }
 
+    /*
+     * Test to check that a person is NOT a customer using invalid last name
+     */
     @Test
     public void testIsCustomerByLastNameFail() {
         boolean result = this.customerService.isCustomerByLastName("YK");
         assertFalse(result);
     }
 
+    /*
+     * Test to check that a person is NOT a customer using invalid email
+     */
     @Test
     public void testIsCustomerByEmailFail() {
         boolean result = this.customerService.isCustomerByEmail("YK@gmail.com");
         assertFalse(result);
     }
 
+    /*
+     * Test to check that a person is NOT a customer using invalid full name
+     */
     @Test
     public void testIsCustomerByFirstNameAndLastNameFail() {
         boolean result = this.customerService.isCustomerByFirstAndLastName("Y", "K");
