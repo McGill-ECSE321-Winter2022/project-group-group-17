@@ -9,6 +9,8 @@ import ca.mcgill.ecse321.grocerystoresystem.service.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,36 @@ public class EmployeeController {
     @Autowired 
     private EmployeeService employeeService;
 
+    @PutMapping(value = {"/employee/login/{id}", "/employee/login/{id}/"})
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
+        Employee e;
+        try {
+            e = employeeService.login(email, password);
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        if (e == null) {
+          return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error logging in!");
+        }
+        return new ResponseEntity<>(convertToDto(e), HttpStatus.OK);
+    }
+    
+    @PutMapping(value = { "/employee/logout/{id}", "/employee/logout/{id}"})
+    public ResponseEntity<?> logout(@PathVariable("id") int personID, @RequestParam String email) {
+        boolean logout;
+        try {
+            logout = employeeService.logout(email);
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        if (logout == true) {
+          return ResponseEntity.status(HttpStatus.OK).body("Successfully logged out");
+        }
+        else {
+          return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error logging out!");
+        }
+    }
+
     @GetMapping(value = {"/employees/", "/employees"})
     public List<EmployeeDto> getAllEmployees() {
         return employeeService.getAllEmployees().stream().map(this::convertToDto).collect(Collectors.toList());
@@ -28,13 +60,12 @@ public class EmployeeController {
     @GetMapping(value={"/employee/get/id/", "/employee/get/id"})
     public EmployeeDto getEmployeeWithId (@RequestParam int id){
         try {
-            EmployeeDto e = convertToDto(employeeService.getEmployee(id));
+            EmployeeDto e = convertToDto(employeeService.findEmployeeByID(id));
             return e;
         }
         catch (NullPointerException n) {
             return null;
         }
-       
 
     }
 
@@ -44,6 +75,37 @@ public class EmployeeController {
             return convertToDto(employeeService.findEmployeeByEmail(email));
         }
         catch(NullPointerException n){
+            return null;
+        }
+    }
+
+    @GetMapping(value = {"/employee/get/firstname/", "/employee/get/firstname"})
+    public List<EmployeeDto> getEmployeeWithFirstName(@RequestParam String firstname) {
+        try {
+            return employeeService.findEmployeeByFirstName(firstname).stream().map(this::convertToDto).collect(Collectors.toList());
+        }
+        catch (NullPointerException exp) {
+            return null;
+        }
+
+    }
+
+    @GetMapping(value = {"/employee/get/lastname/", "/employee/get/lastname"})
+    public List<EmployeeDto> getEmployeeWithLastName(@RequestParam String lastname) {
+        try {
+            return employeeService.findEmployeeByLastName(lastname).stream().map(this::convertToDto).collect(Collectors.toList());
+        }
+        catch (NullPointerException exp) {
+            return null;
+        }
+    }
+
+    @GetMapping(value = {"/employee/get/fullname/", "/employee/get/fullname"})
+    public List<EmployeeDto> getEmployeeWithName(@RequestParam String firstname, @RequestParam String lastname) {
+        try {
+            return employeeService.findEmployeeByName(firstname, lastname).stream().map(this::convertToDto).collect(Collectors.toList());
+        }
+        catch (NullPointerException exp) {
             return null;
         }
     }
@@ -66,24 +128,78 @@ public class EmployeeController {
         }
      }
 
-    @PostMapping (value = {"/employee/update/address/", "/employee/update/address"})
-    public EmployeeDto updateAddress (@RequestParam String email, @RequestParam Address newAddress){
+     @DeleteMapping(value={"/employees/delete/", "/employees/delete"})
+     public boolean deleteEmployees() {
+         employeeService.deleteEmployees();
+ 
+         return true;
+     }
+
+
+     @PostMapping(value={"/employee/update/address/", "/employee/update/address"})
+     public EmployeeDto updateAddressByID(@RequestParam int id, @RequestParam int addressID) {
+         try {
+             return convertToDto(employeeService.updateEmployeeAddressByID(id, addressID));
+         }
+         catch(NullPointerException exp) {
+             return null;
+         }
+     }
+ 
+     @PostMapping(value = {"/employee/update/password/", "/employee/update/password"})
+     public EmployeeDto updatePasswordByID(@RequestParam int id, @RequestParam String password) {
+         try {
+             return convertToDto(employeeService.updateEmployeePasswordById(id, password));
+         }
+         catch(NullPointerException exp) {
+             return null;
+         }
+     }
+
+    @PostMapping (value = {"/employee/update/email/", "/employee/update/email"})
+    public EmployeeDto updateAddressByEmail (@RequestParam String email, @RequestParam int addressId){
         try {
-            return convertToDto(employeeService.updateAddress(email, newAddress));
+            return convertToDto(employeeService.updateEmployeeAddressByEmail(email, addressId));
         }
         catch (NullPointerException n){
             return null;
         }
     }
 
-    @PostMapping (value = {"/employee/update/password/", "/employee/update/password"})
-    public EmployeeDto updatePassword (@RequestParam String email, @RequestParam String oldPassword, @RequestParam String newPassword){
-        try {
-            return convertToDto(employeeService.updatePassword(email, oldPassword, newPassword));
-        }
-        catch (NullPointerException n){
-            return null;
-        }
+    // @PostMapping (value = {"/employee/update/password/", "/employee/update/password"})
+    // public EmployeeDto updatePassByEmail (@RequestParam String email, @RequestParam String oldPassword, @RequestParam String newPassword){
+    //     try {
+    //         return convertToDto(employeeService.updatePasswordByEmail(email, oldPassword, newPassword));
+    //     }
+    //     catch (NullPointerException n){
+    //         return null;
+    //     }
+    // }
+
+
+    @GetMapping(value = {"/employee/check/id/", "/employee/check/id"})
+    public boolean isEmployeeWithID(@RequestParam int id) {
+        return employeeService.existsbyID(id);
+    }
+
+    @GetMapping(value = {"/employee/check/firstname/", "/employee/check/firstname"})
+    public boolean isEmployeeWithFirstName(@RequestParam String firstname) {
+        return employeeService.isEmployeeByFirstName(firstname);
+    }
+
+    @GetMapping(value = {"/employee/check/lastname/", "/employee/check/lastname"})
+    public boolean isEmployeeWithLastName(@RequestParam String lastname) {
+        return employeeService.isEmployeeByLastName(lastname);
+    }
+
+    @GetMapping(value = {"/employee/check/email/", "/employee/check/email"})
+    public boolean isEmployeeWithEmail(@RequestParam String email) {
+        return employeeService.isEmployeeByEmail(email);
+    }
+
+    @GetMapping(value = {"/employee/check/fullname/", "/employee/check/fullname"})
+    public boolean isEmployeeWithFirstNameAndLastName(@RequestParam String firstname, @RequestParam String lastname) {
+        return employeeService.isEmployeeByFirstAndLastName(firstname, lastname);
     }
 
     private EmployeeDto convertToDto(Employee employee) throws NullPointerException{

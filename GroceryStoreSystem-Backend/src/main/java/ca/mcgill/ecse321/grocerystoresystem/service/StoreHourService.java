@@ -17,6 +17,13 @@ public class StoreHourService {
     StoreHourRepository storeHourRepository;
 
     @Transactional
+    public StoreHour createStoreHour(){
+        StoreHour storeHour = new StoreHour();
+
+        return storeHourRepository.save(storeHour);
+    }
+
+    @Transactional
     public StoreHour createStoreHour (LocalTime startTime, LocalTime endTime, Weekdays weekday, int storeHourID){
         if (endTime == null||startTime ==null || startTime.isAfter(endTime)) throw new IllegalArgumentException("Must enter valid start and end time");
         if (weekday == null) throw new IllegalArgumentException("Must enter valid weekday");
@@ -33,8 +40,6 @@ public class StoreHourService {
         storeHourRepository.delete(hour);
         return true;
     }
-   // @Transactional 
-  //  public void deleteStoreHourByWeekday
 
     @Transactional 
     public StoreHour updateStoreHour (int storeHourID, LocalTime startTime, LocalTime endTime){
