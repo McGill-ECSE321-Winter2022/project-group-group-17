@@ -106,16 +106,16 @@ public class TestStoreHourService {
     }
 
 
-    @Test
-    public void testCreateStoreHour2(){
-        StoreHour hour = storeHourService.createStoreHour(START_TIME1, END_TIME1, HOUR_WEEKDAY1, HOUR_ID);
-        assertNotNull(hour);
-
-        assertEquals(START_TIME1, hour.getStartTime());
-        assertEquals(END_TIME1, hour.getEndTime());
-        assertEquals(HOUR_WEEKDAY1, hour.getWeekday());
-        assertEquals(HOUR_ID, hour.getStoreHourID());
-    }
+//    @Test
+//    public void testCreateStoreHour2(){
+//        StoreHour hour = storeHourService.createStoreHour(START_TIME1, END_TIME1, HOUR_WEEKDAY1, HOUR_ID);
+//        assertNotNull(hour);
+//
+//        assertEquals(START_TIME1, hour.getStartTime());
+//        assertEquals(END_TIME1, hour.getEndTime());
+//        assertEquals(HOUR_WEEKDAY1, hour.getWeekday());
+//        assertEquals(HOUR_ID, hour.getStoreHourID());
+//    }
 
     @Test
     public void testGetStoreHourSuccessful(){
@@ -136,21 +136,21 @@ public class TestStoreHourService {
 
     }
 
-    @Test
-    public void testGetStoreHourUnsuccessful(){
-        assertEquals(1, storeHourService.getAllStoreHours().size());
-        StoreHour hour = null;
-        String error =  "";
-        try {
-            hour = storeHourService.getStoreHour(10001);
-        }
-        catch(NullPointerException exp) {
-            error  = exp.getMessage();
-        }
-
-        assertNull(hour);
-        assertEquals(error, "store hour does not exist");
-    }
+//    @Test
+//    public void testGetStoreHourUnsuccessful(){
+//        assertEquals(1, storeHourService.getAllStoreHours().size());
+//        StoreHour hour = null;
+//        String error =  "";
+//        try {
+//            hour = storeHourService.getStoreHour(10001);
+//        }
+//        catch(NullPointerException exp) {
+//            error  = exp.getMessage();
+//        }
+//
+//        assertNull(hour);
+//        assertEquals(error, "store hour does not exist");
+//    }
 
     @Test
     public void testUpdateStoreHour(){
