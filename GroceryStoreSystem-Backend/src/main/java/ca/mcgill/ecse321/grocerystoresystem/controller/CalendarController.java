@@ -41,13 +41,8 @@ public class CalendarController {
     }
 
     @DeleteMapping(value = {"/calendar/delete/", "/calendar/delete"})
-    public CalendarDto deleteMapping(@RequestParam int id) {
-        try {
-            return convertToDto(calendarService.deleteCalendar(id));
-        }
-        catch(NullPointerException exp) {
-            return null;
-        }
+    public boolean deleteCalendar(@RequestParam int id) {
+        return calendarService.deleteCalendar(id);
     }
 
     public CalendarDto convertToDto(Calendar c) {

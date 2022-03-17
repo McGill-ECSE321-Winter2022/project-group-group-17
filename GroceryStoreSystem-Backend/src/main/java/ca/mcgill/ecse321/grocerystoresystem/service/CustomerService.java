@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.CustomerRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
+import ca.mcgill.ecse321.grocerystoresystem.dao.PersonRepository;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.*;
 
@@ -19,11 +20,13 @@ public class CustomerService {
   private CustomerRepository customerRepository;
   @Autowired
   private AddressRepository addressRepository;
+  @Autowired
+  private PersonRepository personRepository;
   
   /**
    * @author Yash Khapre
    * @param int personID, String firstName, String lastName, String email, String password, String city, String country, String postalCode, String streetName, String streetNum, Boolean isLocal
-   * Method to create a new customer profile using all attributes of a customer
+   * Method to create a new customer profile using all attributes of a customer and their address
    */
   @Transactional
   public Customer createCustomer(int personID, String firstName, String lastName, String email, String password, String city, String country, String postalCode, 
@@ -41,10 +44,76 @@ public class CustomerService {
     if(customerRepository.existsByPersonID(personID)) {
       throw new IllegalArgumentException("Customer already exists!");
     }
+    if(customerRepository.existsByEmail(email)) {
+      throw new IllegalArgumentException("Person with this email already exists!");
+    }
     Address newAddress = new Address(streetName, streetNum, city, postalCode, country, isLocal);
     Customer newOnlineCustomer = new Customer(firstName, lastName, email, password, newAddress, false);
     customerRepository.save(newOnlineCustomer);
     return newOnlineCustomer;    
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param String firstName, String lastName, String email, String password, Address address
+   * Method to create a customer given an address object as an input
+   */
+  @Transactional
+  public Customer createCustomer(int personID, String firstName, String lastName, String email, String password, Address address) {
+      if(firstName == null || firstName.length() == 0) {
+        throw new IllegalArgumentException("Please provide valid First Name");
+      }
+      if(lastName == null || lastName.length() == 0) {
+        throw new IllegalArgumentException("Please provide valid Last Name");
+      }
+      if(email == null || email.length() == 0) {
+        throw new IllegalArgumentException("Please provide valid Email");
+      }
+      if(password.length() < 8 || password == null) {
+        throw new IllegalArgumentException("Please provide valid Password");
+      }
+      if(address == null) {
+        throw new IllegalArgumentException("Please provide valid Address");
+      }
+      if(customerRepository.existsByEmail(email) || customerRepository.existsByPersonID(personID)) {
+        throw new IllegalArgumentException("Customer already exists!"); 
+      }
+      Customer customer = new Customer();
+      customer.setFirstName(firstName);
+      customer.setLastName(lastName);
+      customer.setEmail(email);
+      customer.setPassword(password);
+      customer.setAddress(address);
+      customerRepository.save(customer);
+      return customer;
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param String firstName, String lastName, String email, String password, Address address
+   * Method to create a customer given everything but an address
+   */
+  @Transactional
+  public Customer createCustomer(int personID, String firstName, String lastName, String email, String password) {
+      if(firstName == null || firstName.length() == 0) {
+        throw new IllegalArgumentException("Please provide valid First Name");
+      }
+      if(lastName == null || lastName.length() == 0) {
+        throw new IllegalArgumentException("Please provide valid Last Name");
+      }
+      if(email == null || email.length() == 0 || !email.contains("a")) {
+        throw new IllegalArgumentException("Please provide valid Email");
+      }
+      if(password.length() < 8 || password == null) {
+        throw new IllegalArgumentException("Please provide valid Password");
+      }
+      Customer customer = new Customer();
+      customer.setFirstName(firstName);
+      customer.setLastName(lastName);
+      customer.setEmail(email);
+      customer.setPassword(password);
+      customerRepository.save(customer);
+      return customer;
   }
   
   /**
@@ -166,15 +235,16 @@ public class CustomerService {
    */
   @Transactional
   public List<Customer> getCustomerByFullName(String firstName, String lastName) {    
+    List<Customer> customers = null;
     if (firstName == null) {
       throw new IllegalArgumentException("Please enter a valid first name");
     }    
     if (lastName == null) {
       throw new IllegalArgumentException("Please enter a valid last name");
     }   
-    List<Customer> customers = customerRepository.findCustomersByFirstNameAndLastName(firstName, lastName);    
-    if(customers.isEmpty()) {
-      throw new IllegalArgumentException("Cannot find customers with specified first name");
+    customers = customerRepository.findCustomersByFirstNameAndLastName(firstName, lastName);    
+    if(customers == null || customers.isEmpty()) {
+      throw new IllegalArgumentException("Cannot find customers with specified full name");
     }    
     return customers;
   }
@@ -231,7 +301,7 @@ public class CustomerService {
       if(lastName == null || lastName.length() == 0) {
         throw new IllegalArgumentException("Please provide a valid last Name!");
       }
-      return customerRepository.existsByFirstName(lastName);
+      return customerRepository.existsByLastName(lastName);
   }
 
   /**
@@ -331,34 +401,32 @@ public class CustomerService {
       String streetName, String streetNum, Boolean isLocal, int personID) {
     if(firstName == null || lastName == null || firstName.isEmpty() || lastName.isEmpty() || email == null || email.isEmpty() || email.contains("@") == false) {
       throw new IllegalArgumentException("Please enter a valid name and email");
-    }
-    
+    }   
     if(password.length() < 8 || password == null) {
       throw new IllegalArgumentException("Please enter a password with at least 8 characters");
-    }
-    
+    } 
     if (city.isEmpty() || country.isEmpty() || postalCode.isEmpty() || streetName.isEmpty() || streetNum.isEmpty() || city==null || 
         country == null || postalCode == null || streetName == null || streetNum == null || isLocal == null) {  
       throw new IllegalArgumentException("Please enter a valid address");
     }
-    
+
     Customer c = customerRepository.findCustomerByPersonID(personID);
-    
+    Address a = new Address();
     if(c != null && (c instanceof Customer)) {
-      
-      c.getAddress().setCity(city);
-      c.getAddress().setCountry(country);
-      c.getAddress().setPostalCode(postalCode);
-      c.getAddress().setLocal(isLocal);
-      c.getAddress().setStreetName(streetName);
-      c.getAddress().setStreetNum(streetNum);
+      a.setCity(city);
+      a.setCountry(country);
+      a.setPostalCode(postalCode);
+      a.setLocal(isLocal);
+      a.setStreetName(streetName);
+      a.setStreetNum(streetNum);
       
       c.setEmail(email);
       c.setFirstName(firstName);
       c.setLastName(lastName);
       c.setPassword(password);
+      c.setAddress(a);
       
-      addressRepository.save(c.getAddress());
+      addressRepository.save(a);
       customerRepository.save(c);
       return c;
     }
@@ -384,6 +452,26 @@ public class CustomerService {
         throw new NullPointerException("Customer not found");
       }
       customer.setPassword(password);
+      customerRepository.save(customer);
+      return customer;
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param int personID, int addressID
+   * Method to update a customer's address
+   */
+  @Transactional
+  public Customer updateCustomerAddressById(int personID, int addressID) {
+      Customer customer = customerRepository.findCustomerByPersonID(personID);
+      Address address = addressRepository.findAddressByAddressID(addressID);
+      if(customer == null) {
+        throw new NullPointerException("Customer not found");
+      }
+      if(address == null) {
+        throw new NullPointerException("Address not found");
+      }
+      customer.setAddress(address);
       customerRepository.save(customer);
       return customer;
   }

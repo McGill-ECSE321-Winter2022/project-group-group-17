@@ -14,17 +14,17 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer>{
 	Customer findCustomerByPersonID(Integer personID);
 	
 	/**
-     * Find Owner based on their first name
+     * Find Customer based on their first name
      */
     List<Customer> findCustomersByFirstName(String firstName);
 
     /**
-     * Find Owner based on their last name
+     * Find Customer based on their last name
      */
     List<Customer> findCustomersByLastName(String lastName);
     
     /**
-     * Find Owner based on their first and last name
+     * Find Customer based on their first and last name
      */
     List<Customer> findCustomersByFirstNameAndLastName(String firstName, String lastName);
 
@@ -57,7 +57,10 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer>{
      * Returns true if there is an owner in the database with the specified email
      */
     boolean existsByEmail(String email);
+    
+    void delete(Customer c);
 	
+    
 	
 	
 }

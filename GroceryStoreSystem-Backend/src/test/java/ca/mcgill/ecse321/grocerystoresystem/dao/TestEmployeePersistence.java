@@ -49,6 +49,15 @@ public class TestEmployeePersistence {
 		this.employeeRepository.save(employee);
 		
 		assertTrue(this.employeeRepository.existsByPersonID(employee.getPersonID()));
+
+
+		Employee retrievedEmployee = this.employeeRepository.findEmployeeByPersonID(employee.getPersonID());
+		assertEquals(retrievedEmployee.getFirstName(), first_name);
+		assertEquals(retrievedEmployee.getLastName(), last_name);
+		assertEquals(retrievedEmployee.getEmail(), email);
+		assertEquals(retrievedEmployee.getPassword(), password);
+		assertEquals(retrievedEmployee.getEmpStatus(), status);
+
 	}
 
 	@Test
