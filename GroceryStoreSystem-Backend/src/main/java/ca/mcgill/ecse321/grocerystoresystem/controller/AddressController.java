@@ -30,7 +30,7 @@ public class AddressController {
 	public List<AddressDto> getAllAddresses() {
 		return addressService.getAllAddresses().stream().map(p -> convertToDto(p)).collect(Collectors.toList());
 	}
-	@GetMapping(value = {"/adress/get/streetname", "/address/get/streetname/"})
+	@GetMapping(value = {"/address/get/streetname", "/address/get/streetname/"})
 	public List<AddressDto> getAddressWithStreetName(@RequestParam String streetName){
 		try {
 			return addressService.getAddressWithStreetName(streetName).stream().map(this::convertToDto).collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class AddressController {
 			return null;
 		}
 	}
-	@GetMapping(value = {"/adress/get/postalcode", "/address/get/postalcode/"})
+	@GetMapping(value = {"/address/get/postalcode", "/address/get/postalcode/"})
 	public List<AddressDto> getAddressWithPostalCode(@RequestParam String postalCode){
 		try {
 			return addressService.getAddressWithPostalCode(postalCode).stream().map(this::convertToDto).collect(Collectors.toList());
@@ -54,7 +54,15 @@ public class AddressController {
 			return null;
 		}
 	}
-	@GetMapping(value = {"/adress/get/islocal", "/address/get/islocal/"})
+	@GetMapping(value = {"/address/get/country", "/address/get/country/"})
+	public List<AddressDto> getAddressCountry(@RequestParam String country){
+		try {
+			return addressService.getAddressWithPostalCode((country)).stream().map(this::convertToDto).collect(Collectors.toList());
+		}catch(NullPointerException e) {
+			return null;
+		}
+	}
+	@GetMapping(value = {"/address/get/islocal", "/address/get/islocal/"})
 	public List<AddressDto> getAddressWithIsLocal(@RequestParam boolean isLocal){
 		try {
 			return addressService.getAddressWithIsLocal(isLocal).stream().map(this::convertToDto).collect(Collectors.toList());
@@ -62,7 +70,7 @@ public class AddressController {
 			return null;
 		}
 	}
-	@GetMapping(value = {"/adress/get/city", "/address/get/city/"})
+	@GetMapping(value = {"/address/get/city", "/address/get/city/"})
 	public List<AddressDto> getAddressWithCity(@RequestParam String city){
 		try {
 			return addressService.getAddressWithCity(city).stream().map(this::convertToDto).collect(Collectors.toList());
@@ -70,7 +78,7 @@ public class AddressController {
 			return null;
 		}
 	}
-	@GetMapping(value = {"/adress/get/streetnamenum", "/address/get/streetnamenum/"})
+	@GetMapping(value = {"/address/get/streetnamenum", "/address/get/streetnamenum/"})
 	public List<AddressDto> getAddressWithStreetNumAndName(@RequestParam String streetNum, @RequestParam String streetName){
 		try {
 			return addressService.getAddressWithStreetNumAndName(streetNum, streetName).stream().map(this::convertToDto).collect(Collectors.toList());

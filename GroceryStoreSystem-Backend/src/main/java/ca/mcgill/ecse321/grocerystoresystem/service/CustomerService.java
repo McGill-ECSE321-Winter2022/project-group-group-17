@@ -144,7 +144,7 @@ public class CustomerService {
    * Customer logout method
    */
   @Transactional
-  public boolean logout(String email, int personID) {
+  public Customer logout(String email, int personID) {
     if (email == null || email.contains("@") == false) {
       throw new IllegalArgumentException("Please enter a valid email");
     }
@@ -152,12 +152,9 @@ public class CustomerService {
     if (customer.getEmail().equals(email) == false) {
       throw new IllegalArgumentException("Incorrect email inputted!");
     }
-    if (customer.getLoginStatus() == false) {
-      throw new IllegalArgumentException("Account is currently not logged in!");
-    }
     customer.setLoginStatus(false);
     customerRepository.save(customer);
-    return true;
+    return customer;
   }
   
   /**

@@ -1,8 +1,8 @@
 package ca.mcgill.ecse321.grocerystoresystem.dto;
 
 import java.time.LocalDateTime;
-
-import ca.mcgill.ecse321.grocerystoresystem.model.Address;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeliveryOrderDto {
 
@@ -12,18 +12,21 @@ public class DeliveryOrderDto {
 	private boolean isPaid;
 	private LocalDateTime deliveryTime;
 	private AddressDto deliveryAddress;
+	private List<ItemQuantityDto> itemQuantities;
 	
 	public DeliveryOrderDto() {
 	}
 
 	public DeliveryOrderDto(int id, int totalCost, LocalDateTime orderTimeStamp, boolean isPaid,
-			LocalDateTime deliveryTime, AddressDto deliveryAddress ) {
+			LocalDateTime deliveryTime, AddressDto deliveryAddress,
+							List<ItemQuantityDto> itemQuantities) {
 		this.id = id;
 		this.totalCost = totalCost;
 		this.orderTimeStamp = orderTimeStamp;
 		this.isPaid = isPaid;
 		this.deliveryTime = deliveryTime;
 		this.deliveryAddress = deliveryAddress;
+		this.itemQuantities = itemQuantities;
 		
 	}
 
@@ -77,5 +80,11 @@ public class DeliveryOrderDto {
 	
 	public AddressDto getDeliveryAddress() {
 		return deliveryAddress;
+	}
+
+	public List<ItemQuantityDto> getItemQuantities() { return this.itemQuantities; }
+
+	public void setItemQuantities(ArrayList<ItemQuantityDto> itemQuantities) {
+		this.itemQuantities = itemQuantities;
 	}
 }

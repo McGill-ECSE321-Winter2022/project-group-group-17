@@ -28,20 +28,20 @@ public class AddressService {
 	 */
 	@Transactional
 	public Address createAddress(Integer addressID,String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
-
+		
 		try {
-
+			
 			checkEmptyInput(streetName);
 			checkEmptyInput(streetNum);
 			checkEmptyInput(city);
 			checkEmptyInput(postalCode);
 			checkEmptyInput(country);
 
-
+			
 		}catch(IllegalArgumentException e){
-
+			
 			return null;
-
+			
 		}
 
 		try {
@@ -50,10 +50,10 @@ public class AddressService {
 			checkAlpha(country);
 			checkAlphaNum(streetNum);
 			checkAlphaNum(postalCode);
-
-		}catch(IllegalArgumentException e) {
-			return null;
-
+		
+			}catch(IllegalArgumentException e) {
+				return null;
+			
 		}
 		Address address = new Address();
 		address.setAddressID(addressID);
@@ -64,40 +64,46 @@ public class AddressService {
 		address.setStreetName(streetName);
 		address.setStreetNum(streetNum);
 
+		address.setCity(city);
+		address.setCountry(country);
+		address.setLocal(isLocal);
+		address.setPostalCode(postalCode);
+		address.setStreetName(streetName);
+		address.setStreetNum(streetNum);
 		addressRepository.save(address);
 		return address;
 	}
 	@Transactional
 	public Address createAddress(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
-
+		
 		try {
 			checkEmptyInput(streetName);
 			checkEmptyInput(streetNum);
 			checkEmptyInput(city);
 			checkEmptyInput(postalCode);
 			checkEmptyInput(country);
-
-
+			
+			
 		}catch(IllegalArgumentException e){
 			return null;
-
+			
 		}
-
+		
 		try {
 			checkAlpha(streetName);
 			checkAlpha(city);
 			checkAlpha(country);
 			checkAlphaNum(streetNum);
 			checkAlphaNum(postalCode);
-
-
-		}catch(IllegalArgumentException e) {
-			return null;
-
+			
+		
+			}catch(IllegalArgumentException e) {
+				return null;
+		
 
 		}
 		Address address = new Address();
-
+		
 		address.setCity(city);
 		address.setCountry(country);
 		address.setLocal(isLocal);
@@ -157,8 +163,8 @@ public class AddressService {
 			System.out.println(e);
 		}
 		if(streetNum == null || streetNum.length() == 0)throw new IllegalArgumentException("Please provide a valid street number");
-		if(streetName == null || streetName.length() == 0) throw new IllegalArgumentException("Please provide a valid street name");
-
+		if(streetName == null || streetName.length() == 0) throw new IllegalArgumentException("Please provide a valid street name");	
+		
 		List<Address> addresses = this.addressRepository.findAddressByStreetNumAndStreetName(streetNum, streetName);
 		if (addresses.size()==0) throw new NullPointerException("There are no addresses with that street name and number");
 		return addresses;
@@ -209,7 +215,7 @@ public class AddressService {
 		if(input == null || input.equals("")) {
 			throw new IllegalArgumentException("You must enter all the required information to proceed");
 		}
-
+		
 	}
 	private void checkAlpha(String word) {
 		int i = 0;

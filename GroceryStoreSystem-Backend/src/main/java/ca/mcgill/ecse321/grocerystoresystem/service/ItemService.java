@@ -66,6 +66,42 @@ public class ItemService {
 		return toList(itemRepository.findAll());
 	}
 	
+	@Transactional
+	public int getInventoryAmountById(int id) {
+		Item item = itemRepository.findItemByItemID(id);
+		
+		return item.getInventoryAmount();
+	}
+	
+	
+	@Transactional
+	public Item setInventoryAmountById(int id, int amount) {
+		Item item = itemRepository.findItemByItemID(id);
+		
+		item.setInventoryAmount(amount);
+		
+		itemRepository.save(item);
+		
+		return item;
+	}
+	
+	@Transactional
+	public boolean deleteItemById(int id) {
+		Item item = itemRepository.findItemByItemID(id);
+		if (item == null) {
+			throw new NullPointerException("Item not found");
+		}
+		
+		itemRepository.deleteById(id);
+		return true;
+	}
+	
+	@Transactional
+	public boolean deleteAllItems() {
+		itemRepository.deleteAll();
+		return true;
+	}
+	
 	
 	private void validateItemPrice(int itemPrice) {
 		if (itemPrice < 0) throw new IllegalArgumentException("Please submit a valid item price.");

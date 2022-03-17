@@ -19,6 +19,7 @@ public class StoreHourDto {
 
     }
 
+    
     public int getStoreHourID(){
         return storeHourID;
     }

@@ -35,7 +35,8 @@ public class DeliveryOrderService {
 	}
 	
 	@Transactional
-	public DeliveryOrder createDeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime, Address deliveryAddress) {
+	public DeliveryOrder createDeliveryOrder(int totalCost, LocalDateTime orderTimeStamp,
+											 boolean isPaid, LocalDateTime deliveryTime, Address deliveryAddress) {
 		validateTotalCost(totalCost);
 		DeliveryOrder deliveryOrder = new DeliveryOrder();
 		deliveryOrder.setOrderTimeStamp(orderTimeStamp);
@@ -61,9 +62,21 @@ public class DeliveryOrderService {
 	
 	@Transactional 
 	public DeliveryOrder getDeliveryOrderByID(int id) {
-		return deliveryOrderRepository.findDeliveryOrderByOrderID(id);
+		DeliveryOrder deliveryOrder = deliveryOrderRepository.findDeliveryOrderByOrderID(id);
+		if (deliveryOrder == null) throw new NullPointerException("Order not found");
+		return deliveryOrder;
 	}
-	
+
+	@Transactional
+	public List<DeliveryOrder> getAllDeliveryOrdersOfPersonWithPersonID(int personID){
+		return toList(deliveryOrderRepository.findDeliveryOrderByPersonPersonID(personID));
+	}
+
+	@Transactional
+	public List<DeliveryOrder> getDeliveryOrdersForAddressWithAddressID(int addressID){
+		return toList(deliveryOrderRepository.findDeliveryOrderByDeliveryAddressAddressID(addressID));
+	}
+
 	@Transactional
 	public List<DeliveryOrder> getAllDeliveryOrders(){
 		return toList(deliveryOrderRepository.findAll());
@@ -95,5 +108,6 @@ public class DeliveryOrderService {
 		}
 		return resultList;
 	}
+
 
 }

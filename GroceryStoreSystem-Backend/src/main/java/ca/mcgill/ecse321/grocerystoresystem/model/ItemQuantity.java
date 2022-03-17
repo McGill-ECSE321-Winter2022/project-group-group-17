@@ -8,7 +8,7 @@ public class ItemQuantity {
 	@Id
 	@GeneratedValue
 	private int quantityID;
-	
+
 	// ItemQuantity Associations
 	@ManyToOne
 	private Order order;
@@ -16,15 +16,15 @@ public class ItemQuantity {
 
 	@ManyToOne
 	private Item specificItem;
-	
+
 	private int itemNum;
-	
+
 	public ItemQuantity() {};
-	
+
 	public ItemQuantity(int itemNum) {
 		this.itemNum = itemNum;
 	}
-	
+
 	public ItemQuantity(int itemNum, int quantityID ) {
 		this.itemNum = itemNum;
 		this.quantityID = quantityID;
@@ -60,4 +60,6 @@ public class ItemQuantity {
 	public void setSpecificItem(Item specificItem) {
 		this.specificItem = specificItem;
 	}
+
 }
+

@@ -27,8 +27,8 @@ public class ItemQuantityController {
 		}
 	}
 
-	@GetMapping(value = {"/itemquantity/get/itemnum/", "/itemquantity/get/itemnum"})
-	public List<ItemQuantityDto> getOwnerWithFirstName(@RequestParam int itemNum) {
+	@GetMapping(value = {"/itemquanties/get/itemnum/", "/itemquanties/get/itemnum"})
+	public List<ItemQuantityDto> getItemQuantitiesWithNum(@RequestParam int itemNum) {
 	     try {
 	          return itemQuantityService.getItemQuantityWithNum(itemNum).stream().map(this::convertToDto).collect(Collectors.toList());
 	     }catch (NullPointerException exp) {
@@ -36,8 +36,8 @@ public class ItemQuantityController {
 	     }
 	}
 	@PostMapping (value= {"/itemquantity/create/","itemquantity/create"})
-	public ItemQuantityDto createItemQuantity(@RequestParam int itemNum, @RequestParam int itemId) {
-		ItemQuantity itemQuantity = itemQuantityService.createItemQuantity(itemNum, itemId);
+	public ItemQuantityDto createItemQuantity(@RequestParam int itemNum) {
+		ItemQuantity itemQuantity = itemQuantityService.createItemQuantity(itemNum);
 		return convertToDto(itemQuantity);
 	}
 
@@ -45,7 +45,7 @@ public class ItemQuantityController {
 		if (e == null) {
 			throw new  IllegalArgumentException("There is no such ItemQuantity");
 		}
-		ItemQuantityDto itemQuantityDto = new ItemQuantityDto(e.getQuantityID(),e.getItemNum());
+		ItemQuantityDto itemQuantityDto = new ItemQuantityDto(e.getItemNum());
 		
 		return null;
 	}
