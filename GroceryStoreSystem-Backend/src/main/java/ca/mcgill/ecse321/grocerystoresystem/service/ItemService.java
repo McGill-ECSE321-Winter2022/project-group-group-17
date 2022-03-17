@@ -66,12 +66,19 @@ public class ItemService {
 		return toList(itemRepository.findAll());
 	}
 	
-	
 	@Transactional
-	public Item decreaseInventoryAmount(int id, int amount) {
+	public int getInventoryAmountById(int id) {
 		Item item = itemRepository.findItemByItemID(id);
 		
-		item.setInventoryAmount(item.getInventoryAmount() - amount);
+		return item.getInventoryAmount();
+	}
+	
+	
+	@Transactional
+	public Item setInventoryAmountById(int id, int amount) {
+		Item item = itemRepository.findItemByItemID(id);
+		
+		item.setInventoryAmount(amount);
 		
 		itemRepository.save(item);
 		
@@ -79,16 +86,20 @@ public class ItemService {
 	}
 	
 	@Transactional
-	public Item increaseInventoryAmount(int id, int amount) {
-		
+	public boolean deleteItemById(int id) {
 		Item item = itemRepository.findItemByItemID(id);
+		if (item == null) {
+			throw new NullPointerException("Item not found");
+		}
 		
-		item.setInventoryAmount(item.getInventoryAmount() + amount);
-		
-		itemRepository.save(item);
-		
-		return item;
-		
+		itemRepository.deleteById(id);
+		return true;
+	}
+	
+	@Transactional
+	public boolean deleteAllItems() {
+		itemRepository.deleteAll();
+		return true;
 	}
 	
 	
