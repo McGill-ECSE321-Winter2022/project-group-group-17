@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/InStoreOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/InStoreOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestDeliveryOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestDeliveryOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/ItemQuantityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/ItemQuantityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/ItemQuantityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/ItemQuantityService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestInStoreOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestInStoreOrderService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +39,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,7 +79,7 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Gradle.TestInStoreOrderService">
+  <component name="RunManager" selected="Gradle.Tests in 'project-group-group-17.GroceryStoreSystem-Backend.test'">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -85,27 +90,6 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
-    </configuration>
-    <configuration name="TestDeliveryOrderService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestDeliveryOrderService&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":GroceryStoreSystem-Backend:test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
     </configuration>
     <configuration name="TestDeliveryOrderService.successfullyGetDeliveryOrdersWithAddress" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -134,6 +118,27 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestInStoreOrderService&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":GroceryStoreSystem-Backend:test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestItemQuantityService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestItemQuantityService&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -200,11 +205,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.TestInStoreOrderService" />
         <item itemvalue="Gradle.Tests in 'project-group-group-17.GroceryStoreSystem-Backend.test'" />
+        <item itemvalue="Gradle.TestItemQuantityService" />
+        <item itemvalue="Gradle.TestInStoreOrderService" />
         <item itemvalue="Gradle.TestDeliveryOrderService.successfullyGetDeliveryOrdersWithAddress" />
         <item itemvalue="Gradle.Tests in 'ca.mcgill.ecse321.grocerystoresystem.service'" />
-        <item itemvalue="Gradle.TestDeliveryOrderService" />
       </list>
     </recent_temporary>
   </component>
