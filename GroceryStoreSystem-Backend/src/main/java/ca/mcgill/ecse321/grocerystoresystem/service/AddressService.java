@@ -32,18 +32,20 @@ public class AddressService {
 	 */
 	@Transactional
 	public Address createAddress(Integer addressID,String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
-		Address address = new Address();
+		
 		try {
-			checkEmptyInput(addressID);
+			
 			checkEmptyInput(streetName);
 			checkEmptyInput(streetNum);
 			checkEmptyInput(city);
 			checkEmptyInput(postalCode);
 			checkEmptyInput(country);
-			checkEmptyInput(isLocal);
+
 			
 		}catch(IllegalArgumentException e){
-			System.out.println(e);
+			
+			return null;
+			
 		}
 		
 		try {
@@ -52,33 +54,37 @@ public class AddressService {
 			checkAlpha(country);
 			checkAlphaNum(streetNum);
 			checkAlphaNum(postalCode);
-			address.setAddressID(addressID);
-			address.setCity(city);
-			address.setCountry(country);
-			address.setLocal(isLocal);
-			address.setPostalCode(postalCode);
-			address.setStreetName(streetName);
-			address.setStreetNum(streetNum);
+		
 			}catch(IllegalArgumentException e) {
-			System.out.println(e);
+				return null;
+			
 		}
+		Address address = new Address();
+		address.setAddressID(addressID);
+		address.setCity(city);
+		address.setCountry(country);
+		address.setLocal(isLocal);
+		address.setPostalCode(postalCode);
+		address.setStreetName(streetName);
+		address.setStreetNum(streetNum);
 
 		addressRepository.save(address);
 		return address;
 	}
 	@Transactional
 	public Address createAddress(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
-		Address address = new Address();
+		
 		try {
 			checkEmptyInput(streetName);
 			checkEmptyInput(streetNum);
 			checkEmptyInput(city);
 			checkEmptyInput(postalCode);
 			checkEmptyInput(country);
-			checkEmptyInput(isLocal);
+			
 			
 		}catch(IllegalArgumentException e){
-			System.out.println(e);
+			return null;
+			
 		}
 		
 		try {
@@ -88,16 +94,19 @@ public class AddressService {
 			checkAlphaNum(streetNum);
 			checkAlphaNum(postalCode);
 			
-			address.setCity(city);
-			address.setCountry(country);
-			address.setLocal(isLocal);
-			address.setPostalCode(postalCode);
-			address.setStreetName(streetName);
-			address.setStreetNum(streetNum);
+		
 			}catch(IllegalArgumentException e) {
-			System.out.println(e);
+				return null;
+		
 		}
-
+		Address address = new Address();
+		
+		address.setCity(city);
+		address.setCountry(country);
+		address.setLocal(isLocal);
+		address.setPostalCode(postalCode);
+		address.setStreetName(streetName);
+		address.setStreetNum(streetNum);
 		addressRepository.save(address);
 		return address;
 	}
@@ -199,10 +208,11 @@ public class AddressService {
 		}
 		return resultList;
 	}
-	private void checkEmptyInput(Object input) {
-		if(input == null) {
-			throw new IllegalArgumentException("You must enter all the required information to proceed.");
+	private void checkEmptyInput(String input) {
+		if(input == null || input.equals("")) {
+			throw new IllegalArgumentException("You must enter all the required information to proceed");
 		}
+		
 	}
 	private void checkAlpha(String word) {
 		int i = 0;
@@ -219,6 +229,7 @@ public class AddressService {
 			if (Character.isLetterOrDigit(number.charAt(i))== false) {
 				throw new IllegalArgumentException("Your input should only contain digits or numbers.");
 			}
+			i++;
 		}
 	}
 
