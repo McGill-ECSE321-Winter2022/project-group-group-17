@@ -9,8 +9,8 @@ import ca.mcgill.ecse321.grocerystoresystem.service.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.http.HttpStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,33 +22,25 @@ public class EmployeeController {
     @Autowired 
     private EmployeeService employeeService;
 
-    @PutMapping(value = {"/employee/login/{id}", "/employee/login/{id}/"})
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
-        Employee e;
+    @PostMapping(value = {"/employee/login"})
+    public boolean login(@RequestParam String email, @RequestParam String password) {
         try {
-            e = employeeService.login(email, password);
-        } catch (IllegalArgumentException exception) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return this.employeeService.login(email, password);
         }
-        if (e == null) {
-          return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error logging in!");
+        catch(NullPointerException | IllegalArgumentException exp) {
+            System.out.println(exp.getMessage());
+            return false;
         }
-        return new ResponseEntity<>(convertToDto(e), HttpStatus.OK);
     }
-    
-    @PutMapping(value = { "/employee/logout/{id}", "/employee/logout/{id}"})
-    public ResponseEntity<?> logout(@PathVariable("id") int personID, @RequestParam String email) {
-        boolean logout;
+
+    @PostMapping(value = {"/employee/logout"})
+    public boolean logout(@RequestParam String email) {
         try {
-            logout = employeeService.logout(email);
-        } catch (IllegalArgumentException exception) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return this.employeeService.logout(email);
         }
-        if (logout == true) {
-          return ResponseEntity.status(HttpStatus.OK).body("Successfully logged out");
-        }
-        else {
-          return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error logging out!");
+        catch(NullPointerException | IllegalArgumentException exp) {
+            System.out.println(exp.getMessage());
+            return false;
         }
     }
 
@@ -166,16 +158,63 @@ public class EmployeeController {
         }
     }
 
-    // @PostMapping (value = {"/employee/update/password/", "/employee/update/password"})
-    // public EmployeeDto updatePassByEmail (@RequestParam String email, @RequestParam String oldPassword, @RequestParam String newPassword){
-    //     try {
-    //         return convertToDto(employeeService.updatePasswordByEmail(email, oldPassword, newPassword));
-    //     }
-    //     catch (NullPointerException n){
-    //         return null;
-    //     }
-    // }
+    @PostMapping (value = {"/employee/update/password/", "/employee/update/password"})
+    public EmployeeDto updatePassByEmail (@RequestParam String email, @RequestParam String oldPassword, @RequestParam String newPassword){
+        try {
+            return convertToDto(employeeService.updatePasswordByEmail(email, oldPassword, newPassword));
+        }
+        catch (NullPointerException n){
+            return null;
+        }
+    }
 
+    @PostMapping (value = {"/employee/update/employeestatus/", "/employee/update/employeestatus"})
+    public boolean resignEmployeeDto(@RequestParam int id){
+
+        try{
+            return this.employeeService.findEmployeeByID(id).setEmpStatus(EmployeeStatus.resigned);
+        }
+        catch (NullPointerException | IllegalArgumentException x) {
+            System.out.println(x.getMessage());
+            return false;
+        }
+    }
+
+    @PostMapping (value = {"/employee/update/employeestatus/", "/employee/update/employeestatus"})
+    public boolean fireEmployeeDto(@RequestParam int id){
+
+        try{
+            return this.employeeService.findEmployeeByID(id).setEmpStatus(EmployeeStatus.fired);
+        }
+        catch (NullPointerException | IllegalArgumentException x) {
+            System.out.println(x.getMessage());
+            return false;
+        }
+    }
+
+    @PostMapping (value = {"/employee/update/employeestatus/", "/employee/update/employeestatus"})
+    public boolean rehireEmployeeDto(@RequestParam int id){
+
+        try{
+            return this.employeeService.findEmployeeByID(id).setEmpStatus(EmployeeStatus.hired);
+        }
+        catch (NullPointerException | IllegalArgumentException x) {
+            System.out.println(x.getMessage());
+            return false;
+        }
+    }
+
+    @GetMapping (value={"/employee/get/employeestatus/", "/employee/update/employeestatus"})
+    public boolean isHired(@RequestParam int id){
+        EmployeeDto e = convertToDto(employeeService.findEmployeeByID(id));
+        try {
+            return e.getStatus()==EmployeeStatus.hired;
+        }
+        catch (NullPointerException|IllegalArgumentException x){
+            System.out.println(x.getMessage());
+            return false;
+        }
+    }
 
     @GetMapping(value = {"/employee/check/id/", "/employee/check/id"})
     public boolean isEmployeeWithID(@RequestParam int id) {
@@ -201,6 +240,7 @@ public class EmployeeController {
     public boolean isEmployeeWithFirstNameAndLastName(@RequestParam String firstname, @RequestParam String lastname) {
         return employeeService.isEmployeeByFirstAndLastName(firstname, lastname);
     }
+
 
     private EmployeeDto convertToDto(Employee employee) throws NullPointerException{
         if(employee == null) {

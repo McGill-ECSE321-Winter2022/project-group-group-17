@@ -32,7 +32,8 @@ public class Employee extends Person {
 	public EmployeeStatus getEmpStatus() {
 		return empStatus;
 	}
-	public void setEmpStatus(EmployeeStatus empStatus) {
+	public boolean setEmpStatus(EmployeeStatus empStatus) {
 		this.empStatus = empStatus;
+		return (this.empStatus == empStatus);
 	}
 }

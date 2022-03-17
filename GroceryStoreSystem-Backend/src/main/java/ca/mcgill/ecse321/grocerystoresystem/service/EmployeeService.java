@@ -121,14 +121,14 @@ public class EmployeeService {
    */
 
     @Transactional
-    public Employee login (String email, String password){
+    public boolean login (String email, String password){
         if (email==null) throw new IllegalArgumentException("Please enter a valid email");
         Employee employee = employeeRepository.findEmployeeByEmail(email);
         if (employee==null) throw new NullPointerException("Employee not found");
         if (!employee.getPassword().equals(password)) throw new IllegalArgumentException("Wrong password");
         employee.setLoginStatus(true);
         employeeRepository.save(employee);
-        return employee;
+        return employee.getLoginStatus();
 
     }
 
@@ -145,7 +145,7 @@ public class EmployeeService {
         if (employee==null) throw new NullPointerException("Employee not found");
         employee.setLoginStatus(false);
         employeeRepository.save(employee);
-        return true;
+        return (employee.getLoginStatus()==false);
     }
 
      /**
@@ -300,25 +300,36 @@ public class EmployeeService {
         return employeeRepository.existsByEmail(email);
     }
 
-//    @Transactional
-//    public Employee fireEmployee(Employee e){
-//        e.setEmpStatus(EmployeeStatus.fired);
-//        employeeRepository.delete(e);
-//        return e;
-//    }
-//
-//    @Transactional
-//    public Employee resignEmployee(Employee e){
-//        e.setEmpStatus(EmployeeStatus.resigned);
-//        employeeRepository.delete(e);
-//        return e;
-//    }
+   @Transactional
+   public boolean fireEmployeeById(int id){
+       Employee e=employeeRepository.findEmployeeByPersonID(id);
+       e.setEmpStatus(EmployeeStatus.fired);
+       employeeRepository.save(e);
+       return e.getEmpStatus()==EmployeeStatus.fired ;
+   }
 
-//    @Transactional
-//    public Employee rehireEmployee (Person p){
-//        return null;
-//
-//    }
+   @Transactional
+   public boolean resignEmployee(int id){
+    Employee e=employeeRepository.findEmployeeByPersonID(id);
+       e.setEmpStatus(EmployeeStatus.resigned);
+       employeeRepository.save(e);
+       return e.getEmpStatus()==EmployeeStatus.resigned;
+   }
+
+   @Transactional
+   public boolean rehireEmployee (int id){
+        Employee e=employeeRepository.findEmployeeByPersonID(id);
+        if (e.getEmpStatus()==EmployeeStatus.resigned || e.getEmpStatus()==EmployeeStatus.fired ){
+            e.setEmpStatus(EmployeeStatus.hired);
+            employeeRepository.save(e);
+        }
+        return e.getEmpStatus()==EmployeeStatus.hired ;
+   }
+
+   @Transactional 
+   public boolean isHired(int id){
+       return employeeRepository.findEmployeeByPersonID(id).getEmpStatus()==EmployeeStatus.hired;
+   }
 
     private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
