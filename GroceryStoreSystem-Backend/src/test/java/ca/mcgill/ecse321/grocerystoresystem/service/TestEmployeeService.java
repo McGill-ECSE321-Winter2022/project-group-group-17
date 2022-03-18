@@ -34,6 +34,7 @@ public class TestEmployeeService{
     private AddressRepository addressRepository;
 
 
+
     private static final int EMPLOYEE_KEY = 1010;
     private static final int NO_EMPLOYEE_KEY = 123;
 
@@ -230,51 +231,51 @@ public class TestEmployeeService{
         assertEquals(savedEmployee.getPersonID(), 0);
         assertNull(savedEmployee.getEmpStatus());
     }
-
-    @Test
-    public void testCreateEmployee2() {
-        Employee savedEmployee = null;
-
-        try {
-            savedEmployee = this.employeeService.createEmployee(FIRST_NAME4, LAST_NAME4, EMAIL4, PASSWORD4, HIRED_STATUS);
-        }
-        catch(IllegalArgumentException exp) {
-            fail(exp.getMessage());
-        }
-        assertNotNull(savedEmployee);
-        assertEquals(savedEmployee.getFirstName(), FIRST_NAME4);
-        assertEquals(savedEmployee.getLastName(), LAST_NAME4);
-        assertEquals(savedEmployee.getEmail(), EMAIL4);
-        assertEquals(savedEmployee.getPassword(), PASSWORD4);
-        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
-    }
-
-    @Test
-    public void testCreateEmployee3() {
-        Employee savedEmployee = null;
-
-        try {
-            savedEmployee = this.employeeService.createEmployee(FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, HIRED_STATUS, createAddress());
-        }
-        catch(IllegalArgumentException exp) {
-            fail(exp.getMessage());
-        }
-        assertNotNull(savedEmployee);
-        assertEquals(savedEmployee.getFirstName(), FIRST_NAME);
-        assertEquals(savedEmployee.getLastName(), LAST_NAME);
-        assertEquals(savedEmployee.getEmail(), EMAIL);
-        assertEquals(savedEmployee.getPassword(), PASSWORD);
-        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
-
-        assertNotNull(savedEmployee.getAddress());
-        assertEquals(savedEmployee.getAddress().getStreetName(), STREET_NAME);
-        assertEquals(savedEmployee.getAddress().getStreetNum(), STREET_NUM);
-        assertEquals(savedEmployee.getAddress().getCity(), CITY);
-        assertEquals(savedEmployee.getAddress().getCountry(), COUNTRY);
-        assertEquals(savedEmployee.getAddress().getPostalCode(), POSTAL_CODE);
-        assertEquals(savedEmployee.getAddress().isLocal(), IS_LOCAL);
-        assertEquals(savedEmployee.getAddress().getAddressID(), ADDRESS_KEY);
-    }
+//
+//    @Test
+//    public void testCreateEmployee2() {
+//        Employee savedEmployee = null;
+//
+//        try {
+//            savedEmployee = this.employeeService.createEmployee(FIRST_NAME4, LAST_NAME4, EMAIL4, PASSWORD4, HIRED_STATUS);
+//        }
+//        catch(IllegalArgumentException exp) {
+//            fail(exp.getMessage());
+//        }
+//        assertNotNull(savedEmployee);
+//        assertEquals(savedEmployee.getFirstName(), FIRST_NAME4);
+//        assertEquals(savedEmployee.getLastName(), LAST_NAME4);
+//        assertEquals(savedEmployee.getEmail(), EMAIL4);
+//        assertEquals(savedEmployee.getPassword(), PASSWORD4);
+//        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
+//    }
+//
+//    @Test
+//    public void testCreateEmployee3() {
+//        Employee savedEmployee = null;
+//
+//        try {
+//            savedEmployee = this.employeeService.createEmployee(FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, HIRED_STATUS, createAddress());
+//        }
+//        catch(IllegalArgumentException exp) {
+//            fail(exp.getMessage());
+//        }
+//        assertNotNull(savedEmployee);
+//        assertEquals(savedEmployee.getFirstName(), FIRST_NAME);
+//        assertEquals(savedEmployee.getLastName(), LAST_NAME);
+//        assertEquals(savedEmployee.getEmail(), EMAIL);
+//        assertEquals(savedEmployee.getPassword(), PASSWORD);
+//        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
+//
+//        assertNotNull(savedEmployee.getAddress());
+//        assertEquals(savedEmployee.getAddress().getStreetName(), STREET_NAME);
+//        assertEquals(savedEmployee.getAddress().getStreetNum(), STREET_NUM);
+//        assertEquals(savedEmployee.getAddress().getCity(), CITY);
+//        assertEquals(savedEmployee.getAddress().getCountry(), COUNTRY);
+//        assertEquals(savedEmployee.getAddress().getPostalCode(), POSTAL_CODE);
+//        assertEquals(savedEmployee.getAddress().isLocal(), IS_LOCAL);
+//        assertEquals(savedEmployee.getAddress().getAddressID(), ADDRESS_KEY);
+//    }
 
     @Test
     public void testCreateEmployeeFail1() {
