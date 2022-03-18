@@ -148,27 +148,7 @@ public class EmployeeController {
          }
      }
 
-    @PostMapping (value = {"/employee/update/email/", "/employee/update/email"})
-    public EmployeeDto updateAddressByEmail (@RequestParam String email, @RequestParam int addressId){
-        try {
-            return convertToDto(employeeService.updateEmployeeAddressByEmail(email, addressId));
-        }
-        catch (NullPointerException n){
-            return null;
-        }
-    }
-
-    @PostMapping (value = {"/employee/update/password/", "/employee/update/password"})
-    public EmployeeDto updatePassByEmail (@RequestParam String email, @RequestParam String oldPassword, @RequestParam String newPassword){
-        try {
-            return convertToDto(employeeService.updatePasswordByEmail(email, oldPassword, newPassword));
-        }
-        catch (NullPointerException n){
-            return null;
-        }
-    }
-
-    @PostMapping (value = {"/employee/update/employeestatus/", "/employee/update/employeestatus"})
+    @PostMapping (value = {"/employee/resign/employeestatus/", "/employee/resign/employeestatus"})
     public boolean resignEmployeeDto(@RequestParam int id){
 
         try{
@@ -180,7 +160,7 @@ public class EmployeeController {
         }
     }
 
-    @PostMapping (value = {"/employee/update/employeestatus/", "/employee/update/employeestatus"})
+    @PostMapping (value = {"/employee/fire/employeestatus/", "/employee/fire/employeestatus"})
     public boolean fireEmployeeDto(@RequestParam int id){
 
         try{
@@ -192,7 +172,7 @@ public class EmployeeController {
         }
     }
 
-    @PostMapping (value = {"/employee/update/employeestatus/", "/employee/update/employeestatus"})
+    @PostMapping (value = {"/employee/rehire/employeestatus/", "/employee/rehire/employeestatus"})
     public boolean rehireEmployeeDto(@RequestParam int id){
 
         try{

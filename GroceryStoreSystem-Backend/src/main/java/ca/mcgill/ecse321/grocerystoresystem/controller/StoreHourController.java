@@ -62,24 +62,10 @@ public class StoreHourController {
 
     }
 
-    @DeleteMapping (value = {"/storehour/delete/", "/storehour/delete"})
+    @DeleteMapping (value = {"/storehour/deleteall/", "/storehour/deleteall"})
     public boolean deleteAllHoursDto(){
         
         return storeHourService.deleteAllHours();
-    }
-
-    @PostMapping (value = {"storehour/update/", "/storehour/update"})
-    public StoreHourDto updateStoreHourDtoByDay(@RequestParam Weekdays day,
-                                             @RequestParam LocalTime startTime, 
-                                             @RequestParam LocalTime endTime ){
-        try {
-            return convertToDto(storeHourService.updateStoreHourByDay(day, startTime, endTime));
-        }
-        catch (IllegalArgumentException x) {
-            System.out.println(x.getMessage());
-            return null;
-            
-        }
     }
 
     @PostMapping (value = {"storehour/update/", "/storehour/update"})

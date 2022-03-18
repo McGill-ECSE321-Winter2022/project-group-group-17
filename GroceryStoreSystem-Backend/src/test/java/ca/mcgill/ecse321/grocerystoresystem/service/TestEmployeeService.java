@@ -33,8 +33,6 @@ public class TestEmployeeService{
     @Mock
     private AddressRepository addressRepository;
 
-    @InjectMocks
-    private AddressService addressService;
 
     private static final int EMPLOYEE_KEY = 1010;
     private static final int NO_EMPLOYEE_KEY = 123;
@@ -233,51 +231,50 @@ public class TestEmployeeService{
         assertNull(savedEmployee.getEmpStatus());
     }
 
+    @Test
+    public void testCreateEmployee2() {
+        Employee savedEmployee = null;
 
-//    @Test
-//    public void testCreateEmployee2() {
-//        Employee savedEmployee = null;
-//
-//        try {
-//            savedEmployee = this.employeeService.createEmployee(FIRST_NAME4, LAST_NAME4, EMAIL4, PASSWORD4, HIRED_STATUS);
-//        }
-//        catch(IllegalArgumentException exp) {
-//            fail(exp.getMessage());
-//        }
-//        assertNotNull(savedEmployee);
-//        assertEquals(savedEmployee.getFirstName(), FIRST_NAME4);
-//        assertEquals(savedEmployee.getLastName(), LAST_NAME4);
-//        assertEquals(savedEmployee.getEmail(), EMAIL4);
-//        assertEquals(savedEmployee.getPassword(), PASSWORD4);
-//        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
-//    }
+        try {
+            savedEmployee = this.employeeService.createEmployee(FIRST_NAME4, LAST_NAME4, EMAIL4, PASSWORD4, HIRED_STATUS);
+        }
+        catch(IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertNotNull(savedEmployee);
+        assertEquals(savedEmployee.getFirstName(), FIRST_NAME4);
+        assertEquals(savedEmployee.getLastName(), LAST_NAME4);
+        assertEquals(savedEmployee.getEmail(), EMAIL4);
+        assertEquals(savedEmployee.getPassword(), PASSWORD4);
+        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
+    }
 
-//    @Test
-//    public void testCreateEmployee3() {
-//        Employee savedEmployee = null;
-//
-//        try {
-//            savedEmployee = this.employeeService.createEmployee(FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, HIRED_STATUS, createAddress());
-//        }
-//        catch(IllegalArgumentException exp) {
-//            fail(exp.getMessage());
-//        }
-//        assertNotNull(savedEmployee);
-//        assertEquals(savedEmployee.getFirstName(), FIRST_NAME);
-//        assertEquals(savedEmployee.getLastName(), LAST_NAME);
-//        assertEquals(savedEmployee.getEmail(), EMAIL);
-//        assertEquals(savedEmployee.getPassword(), PASSWORD);
-//        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
-//
-//        assertNotNull(savedEmployee.getAddress());
-//        assertEquals(savedEmployee.getAddress().getStreetName(), STREET_NAME);
-//        assertEquals(savedEmployee.getAddress().getStreetNum(), STREET_NUM);
-//        assertEquals(savedEmployee.getAddress().getCity(), CITY);
-//        assertEquals(savedEmployee.getAddress().getCountry(), COUNTRY);
-//        assertEquals(savedEmployee.getAddress().getPostalCode(), POSTAL_CODE);
-//        assertEquals(savedEmployee.getAddress().isLocal(), IS_LOCAL);
-//        assertEquals(savedEmployee.getAddress().getAddressID(), ADDRESS_KEY);
-//    }
+    @Test
+    public void testCreateEmployee3() {
+        Employee savedEmployee = null;
+
+        try {
+            savedEmployee = this.employeeService.createEmployee(FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, HIRED_STATUS, createAddress());
+        }
+        catch(IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertNotNull(savedEmployee);
+        assertEquals(savedEmployee.getFirstName(), FIRST_NAME);
+        assertEquals(savedEmployee.getLastName(), LAST_NAME);
+        assertEquals(savedEmployee.getEmail(), EMAIL);
+        assertEquals(savedEmployee.getPassword(), PASSWORD);
+        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
+
+        assertNotNull(savedEmployee.getAddress());
+        assertEquals(savedEmployee.getAddress().getStreetName(), STREET_NAME);
+        assertEquals(savedEmployee.getAddress().getStreetNum(), STREET_NUM);
+        assertEquals(savedEmployee.getAddress().getCity(), CITY);
+        assertEquals(savedEmployee.getAddress().getCountry(), COUNTRY);
+        assertEquals(savedEmployee.getAddress().getPostalCode(), POSTAL_CODE);
+        assertEquals(savedEmployee.getAddress().isLocal(), IS_LOCAL);
+        assertEquals(savedEmployee.getAddress().getAddressID(), ADDRESS_KEY);
+    }
 
     @Test
     public void testCreateEmployeeFail1() {
@@ -673,9 +670,32 @@ public class TestEmployeeService{
 
     }
     //Delete employee
+    @Test 
+    public void testDeleteEmployee(){
+        boolean b = true;
+        try {
+            b = employeeService.deleteEmployee(EMPLOYEE_KEY);
+        }
+        catch(Exception exp) {
+            fail(exp.getMessage());
+        }
+        assertTrue(b);
+    }
+
     //login (email and pass)
+    @Test 
+    public void testLogin(){
+
+    }
+
+    @Test 
+    public void testLogout(){
+        
+    }
+
+
     //logout (email)
-    //fire, resign, rehire (still need to be added in controller)
+    //fire, resign, rehire 
 
 
 
