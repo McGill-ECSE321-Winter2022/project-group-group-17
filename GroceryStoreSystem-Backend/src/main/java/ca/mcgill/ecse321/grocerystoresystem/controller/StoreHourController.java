@@ -4,6 +4,7 @@ import ca.mcgill.ecse321.grocerystoresystem.model.StoreHour;
 import ca.mcgill.ecse321.grocerystoresystem.model.Weekdays;
 import ca.mcgill.ecse321.grocerystoresystem.service.StoreHourService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,8 +47,9 @@ public class StoreHourController {
 
 
     @PostMapping(value = {"/storehour/create/", "/storehour/create"})
-    public StoreHourDto createStoreHourDto(@RequestParam LocalTime startTime, @RequestParam LocalTime endTime,
-                                         @RequestParam Weekdays weekday, @RequestParam int storeHourID){
+    public StoreHourDto createStoreHourDto(@RequestParam("startTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime startTime,
+                                           @RequestParam("endTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime endTime,
+                                           @RequestParam Weekdays weekday, @RequestParam int storeHourID){
         return convertToDto(storeHourService.createStoreHour(startTime, endTime, weekday, storeHourID));
     }
 
@@ -70,8 +72,8 @@ public class StoreHourController {
 
     @PostMapping (value = {"storehour/update/", "/storehour/update"})
     public StoreHourDto updateStoreHourDtoById(@RequestParam int storeHourID,
-                                             @RequestParam LocalTime startTime, 
-                                             @RequestParam LocalTime endTime ){
+                                               @RequestParam("startTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime startTime,
+                                               @RequestParam("endTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime endTime ){
         try {
             return convertToDto(storeHourService.updateStoreHourById(storeHourID, startTime, endTime));
         }
