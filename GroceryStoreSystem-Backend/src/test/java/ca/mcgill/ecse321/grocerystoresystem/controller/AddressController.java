@@ -85,7 +85,7 @@ public class AddressController {
     	.param("postalcode","HHHHHH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetname", "Peel")
     	.param("streetnum", "1235")
@@ -93,7 +93,7 @@ public class AddressController {
     	.param("postalcode","HHH4HH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetname", "Peel")
     	.get("/address/get/streetname/")
@@ -117,7 +117,7 @@ public class AddressController {
     	.param("postalcode","HHHHHH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetname", "Peel")
     	.param("streetnum", "1234")
@@ -125,7 +125,7 @@ public class AddressController {
     	.param("postalcode","HHH4HH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetnum", "1234")
     	.get("/address/get/streetnum/")
@@ -149,7 +149,7 @@ public class AddressController {
     	.param("postalcode","HHHHHH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetname", "Peel")
     	.param("streetnum", "1235")
@@ -157,7 +157,7 @@ public class AddressController {
     	.param("postalcode","HHH4HH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("city", "Montreal")
     	.get("/address/get/city/")
@@ -181,7 +181,7 @@ public class AddressController {
     	.param("postalcode","HHHHHH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetname", "Peel")
     	.param("streetnum", "1235")
@@ -189,7 +189,7 @@ public class AddressController {
     	.param("postalcode","HHHHHH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("postalcode", "HHHHHH")
     	.get("/address/get/postalcode/")
@@ -213,7 +213,7 @@ public class AddressController {
     	.param("postalcode","HHH3HH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetname", "Peel")
     	.param("streetnum", "1235")
@@ -221,7 +221,7 @@ public class AddressController {
     	.param("postalcode","HHHHHH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("country", "Canada")
     	.get("/address/get/country/")
@@ -245,7 +245,7 @@ public class AddressController {
     	.param("postalcode","HHH3HH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("streetname", "Peel")
     	.param("streetnum", "1235")
@@ -253,7 +253,7 @@ public class AddressController {
     	.param("postalcode","HHHHHH")
     	.param("country","Canada")
     	.param("isLocal",true)
-    	.post("/address/create")
+    	.post("/address/create");
     	given()
     	.param("islocal", true)
     	.get("/address/get/islocal/")

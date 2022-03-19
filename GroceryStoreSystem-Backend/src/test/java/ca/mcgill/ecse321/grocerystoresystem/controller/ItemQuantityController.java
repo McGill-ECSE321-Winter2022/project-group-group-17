@@ -69,10 +69,10 @@ public class ItemQuantityController {
 
     	 given()
     	 .param("itemnum", 1)
-		 .post("/itemquantity/create")
+		 .post("/itemquantity/create");
 		 given()
 		 .param("itemnum", 1)
-		 .post("/itemquantity/create")
+		 .post("/itemquantity/create");
 		 given()
 		 .param("itemnum", 1)
 		 .get("/itemquantities/get/itemnum")
