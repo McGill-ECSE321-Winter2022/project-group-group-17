@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Service 
+@Service
 public class AddressService {
-	@Autowired 
+	@Autowired
 	AddressRepository addressRepository;
 	/**
 	 * @author Tinetendo Wamambo
@@ -43,7 +43,7 @@ public class AddressService {
 			return null;
 			
 		}
-		
+
 		try {
 			checkAlpha(streetName);
 			checkAlpha(city);
@@ -64,6 +64,12 @@ public class AddressService {
 		address.setStreetName(streetName);
 		address.setStreetNum(streetNum);
 
+		address.setCity(city);
+		address.setCountry(country);
+		address.setLocal(isLocal);
+		address.setPostalCode(postalCode);
+		address.setStreetName(streetName);
+		address.setStreetNum(streetNum);
 		addressRepository.save(address);
 		return address;
 	}
@@ -113,7 +119,7 @@ public class AddressService {
 		Address address = addressRepository.findAddressByAddressID(addressID);
 		if(address == null) throw new NullPointerException("Address not found");
 		addressRepository.delete(address);
-		
+
 		return true;
 	}
 	@Transactional
@@ -129,11 +135,11 @@ public class AddressService {
 		}catch(IllegalArgumentException e) {
 			System.out.println(e);
 		}
-		if(streetName == null || streetName.length() == 0) throw new IllegalArgumentException("Please provide a valid street name");	
+		if(streetName == null || streetName.length() == 0) throw new IllegalArgumentException("Please provide a valid street name");
 		List<Address> addresses = this.addressRepository.findAddressByStreetName(streetName);
-		
-		if(addresses.size() ==0) throw new NullPointerException("There are no addresses with that street name");	
-		return addresses; 		
+
+		if(addresses.size() ==0) throw new NullPointerException("There are no addresses with that street name");
+		return addresses;
 	}
 	@Transactional
 	public List<Address> getAddressWithStreetNum(String streetNum) {
@@ -145,8 +151,8 @@ public class AddressService {
 		if(streetNum == null || streetNum.length() == 0)throw new IllegalArgumentException("Please provide a valid street number.");
 		List<Address> addresses = this.addressRepository.findAddressByStreetNum(streetNum);
 		if (addresses.size()==0) throw new NullPointerException("There are no addresses with that street number");
-		
-		return addresses; 
+
+		return addresses;
 	}
 	@Transactional
 	public List<Address> getAddressWithStreetNumAndName(String streetNum, String streetName) {
@@ -161,7 +167,7 @@ public class AddressService {
 		
 		List<Address> addresses = this.addressRepository.findAddressByStreetNumAndStreetName(streetNum, streetName);
 		if (addresses.size()==0) throw new NullPointerException("There are no addresses with that street name and number");
-		return addresses; 
+		return addresses;
 	}
 	@Transactional
 	public List<Address> getAddressWithPostalCode(String postalCode) {
@@ -173,7 +179,7 @@ public class AddressService {
 		if(postalCode == null || postalCode.length() == 0)throw new IllegalArgumentException("Please provide a valid postal code.");
 		List<Address> addresses = this.addressRepository.findAddressByPostalCode(postalCode);
 		if (addresses.size()==0) throw new NullPointerException("There are no addresses with that postal code.");
-		
+
 		return addresses;
 	}
 	@Transactional
@@ -186,17 +192,17 @@ public class AddressService {
 		if(city == null || city.length() == 0)throw new IllegalArgumentException("Please provide a valid city name.");
 		List<Address> addresses = this.addressRepository.findAddressByCity(city);
 		if (addresses.size()==0) throw new NullPointerException("There are no addresses with that city name.");
-		
+
 		return addresses;
 	}
 	@Transactional
 	public List<Address> getAddressWithIsLocal(boolean isLocal) {
-		return toList (addressRepository.findAddressByIsLocal(isLocal)); 
+		return toList (addressRepository.findAddressByIsLocal(isLocal));
 	}
-	
+
 	@Transactional
 	public List<Address> getAllAddresses(){
-		return toList(addressRepository.findAll()); 
+		return toList(addressRepository.findAll());
 	}
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();

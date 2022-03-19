@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.grocerystoresystem.service.AddressService;
-import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dto.AddressDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 @CrossOrigin(origins = "*")
