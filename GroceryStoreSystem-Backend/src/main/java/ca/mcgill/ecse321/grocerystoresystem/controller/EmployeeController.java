@@ -148,7 +148,7 @@ public class EmployeeController {
          }
      }
 
-    @PostMapping (value = {"/employee/resign/employeestatus/", "/employee/resign/employeestatus"})
+    @PostMapping (value = {"/employee/resign/", "/employee/resign"})
     public boolean resignEmployeeDto(@RequestParam int id){
 
         try{
@@ -160,7 +160,7 @@ public class EmployeeController {
         }
     }
 
-    @PostMapping (value = {"/employee/fire/employeestatus/", "/employee/fire/employeestatus"})
+    @PostMapping (value = {"/employee/fire/", "/employee/fire"})
     public boolean fireEmployeeDto(@RequestParam int id){
 
         try{
@@ -172,7 +172,7 @@ public class EmployeeController {
         }
     }
 
-    @PostMapping (value = {"/employee/rehire/employeestatus/", "/employee/rehire/employeestatus"})
+    @PostMapping (value = {"/employee/rehire/", "/employee/rehire"})
     public boolean rehireEmployeeDto(@RequestParam int id){
 
         try{
