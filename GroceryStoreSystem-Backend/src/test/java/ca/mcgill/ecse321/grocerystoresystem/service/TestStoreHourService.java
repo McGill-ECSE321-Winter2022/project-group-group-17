@@ -103,17 +103,6 @@ public class TestStoreHourService {
     }
 
 
-//    @Test
-//    public void testCreateStoreHour2(){
-//        StoreHour hour = this.storeHourService.createStoreHour(START_TIME1, END_TIME1, HOUR_WEEKDAY1, HOUR_ID);
-//        assertNotNull(hour);
-//
-//        assertEquals(START_TIME1, hour.getStartTime());
-//        assertEquals(END_TIME1, hour.getEndTime());
-//        assertEquals(HOUR_WEEKDAY1, hour.getWeekday());
-//        assertEquals(HOUR_ID, hour.getStoreHourID());
-//    }
-
     @Test
     public void testGetStoreHourSuccessful(){
         StoreHour hour = null;
@@ -165,9 +154,10 @@ public class TestStoreHourService {
         assertEquals(hour.getStartTime(), START_TIME2);
         assertEquals(hour.getEndTime(), END_TIME2);
     }
-    @Test
-    public void testUpdateStoreHourUnsuccessful(){
 
+    @Test
+    public void testIsStoreHour(){
+        assertTrue(storeHourService.isStoreHourById(HOUR_ID));
     }
 
     @Test
@@ -182,6 +172,18 @@ public class TestStoreHourService {
         }
         assertNotNull(hours);
         assertEquals(hours.size(), 2);
+    }
+
+    @Test
+    public void testDelete(){
+        boolean b = true;
+        try {
+            b = storeHourService.deleteStoreHour(HOUR_ID);
+        }
+        catch(Exception exp) {
+            fail(exp.getMessage());
+        }
+        assertTrue(b);
     }
 
 

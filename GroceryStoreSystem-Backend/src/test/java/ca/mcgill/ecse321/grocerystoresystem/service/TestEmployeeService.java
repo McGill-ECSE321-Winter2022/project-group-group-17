@@ -61,23 +61,21 @@ public class TestEmployeeService{
     private static final String EMAIL3 = "annachen@outlook.com";
     private static final String PASSWORD3 = "bubbles123";
 
-    private static final int EMP_KEY_4 = 1004;
     private static final String FIRST_NAME4 = "Ryan";
     private static final String LAST_NAME4 = "Li";
     private static final String EMAIL4 = "ryli@hotmail.com";
     private static final String PASSWORD4 = "pink12345";
-
-    private static final int EMP_KEY_5 = 1005;
-    private static final String FIRST_NAME6 = "Bob";
-    private static final String LAST_NAME6 = "Smith";
-    private static final String EMAIL6 = "bobsmith@aol.com";
-    private static final String PASSWORD6 = "hellothere";
 
     private static final int CUST_KEY = 1006;
     private static final String FIRST_NAME5 = "Bo";
     private static final String LAST_NAME5 = "Lee";
     private static final String EMAIL5 = "bolee@aol.com";
     private static final String PASSWORD5 = "password";
+
+    private static final String FIRST_NAME6 = "Bob";
+    private static final String LAST_NAME6 = "Smith";
+    private static final String EMAIL6 = "bobsmith@aol.com";
+    private static final String PASSWORD6 = "hellothere";
 
     private static final int ADDRESS_KEY = 1001;
     private static final String STREET_NUM = "1450";
@@ -88,8 +86,6 @@ public class TestEmployeeService{
     private static final boolean IS_LOCAL = true;
     private static final boolean IS_LOGGED = true;
     private static final EmployeeStatus HIRED_STATUS = EmployeeStatus.hired;
-    //private static final EmployeeStatus FIRED_STATUS = EmployeeStatus.fired;
-    //private static final EmployeeStatus RESIGNED_STATUS = EmployeeStatus.resigned; 
 
     private Customer createCustomer(){
         Customer c = new Customer();
@@ -719,20 +715,30 @@ public class TestEmployeeService{
         assertTrue(b);
     }
 
-    //login (email and pass)
-    @Test 
-    public void testLogin(){
-
+    @Test
+    public void testLoginSuccessful() {
+       boolean b = true;
+        try {
+            b = employeeService.login(EMAIL, PASSWORD);
+        }catch(IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertTrue(b);
     }
 
     @Test 
     public void testLogout(){
-        
+        boolean b = false;
+        try {
+            b = employeeService.logout(EMAIL);
+        }catch(IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertTrue(b);
     }
 
+    //fire, hire, resign
 
-    //logout (email)
-    //fire, resign, rehire 
 
 
 

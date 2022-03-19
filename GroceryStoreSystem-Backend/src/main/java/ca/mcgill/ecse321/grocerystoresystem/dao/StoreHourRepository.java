@@ -17,8 +17,4 @@ public interface StoreHourRepository extends CrudRepository<StoreHour, Integer >
 	 */
 	boolean existsByStoreHourID(Integer storeHourID);
 
-		/**
-	 * Find StoreHour based on weekday
-	 */
-	StoreHour findStoreHourByWeekday (Weekdays day);
 }

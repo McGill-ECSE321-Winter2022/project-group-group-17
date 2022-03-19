@@ -47,6 +47,8 @@ public class StoreHourService {
         return this.getAllStoreHours().size() == 0;
     }
 
+
+
     @Transactional 
     public StoreHour updateStoreHourById (int storeHourID, LocalTime startTime, LocalTime endTime){
         if (!storeHourRepository.existsByStoreHourID(storeHourID)) throw new IllegalArgumentException("store hour does not exist");
@@ -57,26 +59,27 @@ public class StoreHourService {
         return hour;
     }
 
-    @Transactional 
-    public StoreHour updateStoreHourByDay (Weekdays day, LocalTime startTime, LocalTime endTime){
-        if (storeHourRepository.findStoreHourByWeekday(day)==null) throw new IllegalArgumentException("store hour does not exist");
-        StoreHour hour = storeHourRepository.findStoreHourByWeekday(day);
-        hour.setStartTime(startTime);
-        hour.setEndTime(endTime);
-        storeHourRepository.save(hour);
-        return hour;
+    @Transactional
+    public boolean isStoreHourById (int storeHourID){
+
+        return storeHourRepository.existsByStoreHourID(storeHourID);
     }
+
+//    @Transactional
+//    public StoreHour updateStoreHourByDay (Weekdays day, LocalTime startTime, LocalTime endTime){
+//        if (storeHourRepository.findStoreHourByWeekday(day)==null) throw new IllegalArgumentException("store hour does not exist");
+//        StoreHour hour = storeHourRepository.findStoreHourByWeekday(day);
+//        hour.setStartTime(startTime);
+//        hour.setEndTime(endTime);
+//        storeHourRepository.save(hour);
+//        return hour;
+//    }
 
     @Transactional 
     public StoreHour getStoreHour (int id){
         if (!storeHourRepository.existsByStoreHourID(id)) throw new IllegalArgumentException("store hour does not exist");
         return storeHourRepository.findStoreHourByStoreHourID(id);
 
-    }
-
-    @Transactional 
-    public StoreHour getStoreHourByWeekday(Weekdays day){
-        return storeHourRepository.findStoreHourByWeekday(day);
     }
 
     @Transactional 

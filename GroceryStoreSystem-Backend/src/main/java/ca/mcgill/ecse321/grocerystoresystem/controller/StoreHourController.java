@@ -26,24 +26,24 @@ public class StoreHourController {
     }
 
     @GetMapping(value = {"/storehour/get/id/", "/storehour/get/id"})
-    public StoreHourDto getStoreHourDto(@RequestParam int id){
+    public StoreHourDto getStoreHourDto(@RequestParam int storeHourID){
         try{
-            return convertToDto(storeHourService.getStoreHour(id));
+            return convertToDto(storeHourService.getStoreHour(storeHourID));
         }
         catch (NullPointerException n){
             return null;
         }
     }
 
-    @GetMapping(value = {"/storehour/get/day/", "/storehour/get/day"})
-    public StoreHourDto getStoreHourDtoByDay(@RequestParam Weekdays day){
-        try{
-            return convertToDto(storeHourService.getStoreHourByWeekday(day));
-        }
-        catch (NullPointerException n){
-            return null;
-        }
-    }
+//    @GetMapping(value = {"/storehour/get/day/", "/storehour/get/day"})
+//    public StoreHourDto getStoreHourDtoByDay(@RequestParam Weekdays day){
+//        try{
+//            return convertToDto(storeHourService.getStoreHourByWeekday(day));
+//        }
+//        catch (NullPointerException n){
+//            return null;
+//        }
+//    }
 
 
     @PostMapping(value = {"/storehour/create/", "/storehour/create"})
@@ -82,6 +82,11 @@ public class StoreHourController {
             return null;
             
         }
+    }
+
+    @GetMapping(value = {"/storehour/check/id", "/storehour/check/id/"})
+    public boolean isStoreHourById(@RequestParam int storeHourID) {
+        return storeHourService.isStoreHourById(storeHourID);
     }
 
 
