@@ -2,10 +2,12 @@
 package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
+import ca.mcgill.ecse321.grocerystoresystem.dao.CustomerRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.EmployeeRepository;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Employee;
 import ca.mcgill.ecse321.grocerystoresystem.model.EmployeeStatus;
+import ca.mcgill.ecse321.grocerystoresystem.model.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +34,9 @@ public class TestEmployeeService{
 
     @Mock
     private AddressRepository addressRepository;
+
+    @Mock
+    private CustomerRepository customerRepository;
 
 
 
@@ -62,6 +67,18 @@ public class TestEmployeeService{
     private static final String EMAIL4 = "ryli@hotmail.com";
     private static final String PASSWORD4 = "pink12345";
 
+    private static final int EMP_KEY_5 = 1005;
+    private static final String FIRST_NAME6 = "Bob";
+    private static final String LAST_NAME6 = "Smith";
+    private static final String EMAIL6 = "bobsmith@aol.com";
+    private static final String PASSWORD6 = "hellothere";
+
+    private static final int CUST_KEY = 1006;
+    private static final String FIRST_NAME5 = "Bo";
+    private static final String LAST_NAME5 = "Lee";
+    private static final String EMAIL5 = "bolee@aol.com";
+    private static final String PASSWORD5 = "password";
+
     private static final int ADDRESS_KEY = 1001;
     private static final String STREET_NUM = "1450";
     private static final String STREET_NAME = "Guy";
@@ -74,6 +91,16 @@ public class TestEmployeeService{
     //private static final EmployeeStatus FIRED_STATUS = EmployeeStatus.fired;
     //private static final EmployeeStatus RESIGNED_STATUS = EmployeeStatus.resigned; 
 
+    private Customer createCustomer(){
+        Customer c = new Customer();
+        c.setFirstName(FIRST_NAME5);
+        c.setLastName(LAST_NAME5);
+        c.setEmail(EMAIL5);
+        c.setPersonID(CUST_KEY);
+        c.setPassword(PASSWORD5);
+        return c;
+
+    }
     private Employee createEmployee() {
         Employee employee = new Employee();
         employee.setPersonID(EMPLOYEE_KEY);
@@ -200,6 +227,14 @@ public class TestEmployeeService{
             }
         });
 
+        lenient().when(customerRepository.findCustomerByEmail(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
+            if(invocation.getArgument(0).equals(EMAIL5)) {
+                return createEmployee();
+            } else {
+                return null;
+            }
+        });
+
         lenient().when(employeeRepository.existsByPersonID(anyInt())).thenAnswer(
             (InvocationOnMock invocation) -> invocation.getArgument(0).equals(EMPLOYEE_KEY));
     lenient().when(employeeRepository.existsByFirstName(anyString())).thenAnswer(
@@ -231,51 +266,52 @@ public class TestEmployeeService{
         assertEquals(savedEmployee.getPersonID(), 0);
         assertNull(savedEmployee.getEmpStatus());
     }
-//
-//    @Test
-//    public void testCreateEmployee2() {
-//        Employee savedEmployee = null;
-//
-//        try {
-//            savedEmployee = this.employeeService.createEmployee(FIRST_NAME4, LAST_NAME4, EMAIL4, PASSWORD4, HIRED_STATUS);
-//        }
-//        catch(IllegalArgumentException exp) {
-//            fail(exp.getMessage());
-//        }
-//        assertNotNull(savedEmployee);
-//        assertEquals(savedEmployee.getFirstName(), FIRST_NAME4);
-//        assertEquals(savedEmployee.getLastName(), LAST_NAME4);
-//        assertEquals(savedEmployee.getEmail(), EMAIL4);
-//        assertEquals(savedEmployee.getPassword(), PASSWORD4);
-//        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
-//    }
-//
-//    @Test
-//    public void testCreateEmployee3() {
-//        Employee savedEmployee = null;
-//
-//        try {
-//            savedEmployee = this.employeeService.createEmployee(FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, HIRED_STATUS, createAddress());
-//        }
-//        catch(IllegalArgumentException exp) {
-//            fail(exp.getMessage());
-//        }
-//        assertNotNull(savedEmployee);
-//        assertEquals(savedEmployee.getFirstName(), FIRST_NAME);
-//        assertEquals(savedEmployee.getLastName(), LAST_NAME);
-//        assertEquals(savedEmployee.getEmail(), EMAIL);
-//        assertEquals(savedEmployee.getPassword(), PASSWORD);
-//        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
-//
-//        assertNotNull(savedEmployee.getAddress());
-//        assertEquals(savedEmployee.getAddress().getStreetName(), STREET_NAME);
-//        assertEquals(savedEmployee.getAddress().getStreetNum(), STREET_NUM);
-//        assertEquals(savedEmployee.getAddress().getCity(), CITY);
-//        assertEquals(savedEmployee.getAddress().getCountry(), COUNTRY);
-//        assertEquals(savedEmployee.getAddress().getPostalCode(), POSTAL_CODE);
-//        assertEquals(savedEmployee.getAddress().isLocal(), IS_LOCAL);
-//        assertEquals(savedEmployee.getAddress().getAddressID(), ADDRESS_KEY);
-//    }
+
+    @Test
+    public void testCreateEmployee2() {
+        Employee savedEmployee = null;
+
+        try {
+            savedEmployee = this.employeeService.createEmployee(FIRST_NAME4, LAST_NAME4, EMAIL4, PASSWORD4, HIRED_STATUS);
+        }
+        catch(NullPointerException | IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertNotNull(savedEmployee);
+        assertEquals(savedEmployee.getFirstName(), FIRST_NAME4);
+        assertEquals(savedEmployee.getLastName(), LAST_NAME4);
+        assertEquals(savedEmployee.getEmail(), EMAIL4);
+        assertEquals(savedEmployee.getPassword(), PASSWORD4);
+        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
+    }
+
+    @Test
+    public void testCreateEmployee3() {
+        Employee savedEmployee = null;
+        Address a = createAddress();
+
+        try {
+            savedEmployee = this.employeeService.createEmployee(FIRST_NAME6, LAST_NAME6, EMAIL6, PASSWORD6, HIRED_STATUS, a);
+        }
+        catch(IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertNotNull(savedEmployee);
+        assertEquals(savedEmployee.getFirstName(), FIRST_NAME6);
+        assertEquals(savedEmployee.getLastName(), LAST_NAME6);
+        assertEquals(savedEmployee.getEmail(), EMAIL6);
+        assertEquals(savedEmployee.getPassword(), PASSWORD6);
+        assertEquals(savedEmployee.getEmpStatus(), HIRED_STATUS);
+
+        assertNotNull(savedEmployee.getAddress());
+        assertEquals(savedEmployee.getAddress().getStreetName(), STREET_NAME);
+        assertEquals(savedEmployee.getAddress().getStreetNum(), STREET_NUM);
+        assertEquals(savedEmployee.getAddress().getCity(), CITY);
+        assertEquals(savedEmployee.getAddress().getCountry(), COUNTRY);
+        assertEquals(savedEmployee.getAddress().getPostalCode(), POSTAL_CODE);
+        assertEquals(savedEmployee.getAddress().isLocal(), IS_LOCAL);
+        assertEquals(savedEmployee.getAddress().getAddressID(), ADDRESS_KEY);
+    }
 
     @Test
     public void testCreateEmployeeFail1() {
