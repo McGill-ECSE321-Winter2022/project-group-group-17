@@ -80,7 +80,7 @@ public class TestCustomerController {
   
   @Test
   public void testCreateAndQueryCustomerFirstName() {
-      when().delete("/custmers/delete").then().statusCode(200);
+      when().delete("/customers/delete").then().statusCode(200);
 
       given()
               .param("personID", 1001)        
@@ -349,7 +349,7 @@ public class TestCustomerController {
   @Test
   public void testCreateAndQueryCustomerNonLocal() {
     
-    when().get("/customers/local").then().statusCode(200).body("size()", equalTo(1));
+    when().get("/customers/nonlocal").then().statusCode(200).body("size()", equalTo(1));
     
     given()
             .param("personID", 1001)
