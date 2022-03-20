@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/AddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestAddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestAddressService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +85,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.37471265" />
   </component>
-  <component name="RunManager" selected="Gradle.Tests in 'project-group-group-17.GroceryStoreSystem-Backend.test'">
+  <component name="RunManager" selected="Gradle.TestAddressService">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -95,12 +97,54 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDeliveryOrderService.successfullyGetDeliveryOrdersWithAddress" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AddressController.testCreateAndQueryAddressID" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestDeliveryOrderService.successfullyGetDeliveryOrdersWithAddress&quot;" />
+        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.controller.AddressController.testCreateAndQueryAddressID&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":GroceryStoreSystem-Backend:integrationTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="AddressController.testGetNoAddresses" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.controller.AddressController.testGetNoAddresses&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":GroceryStoreSystem-Backend:unitTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ItemQuantityController" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.controller.ItemQuantityController&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -116,60 +160,18 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="TestInStoreOrderService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestAddressService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestInStoreOrderService&quot;" />
+        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestAddressService&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":GroceryStoreSystem-Backend:test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="TestItemQuantityService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.TestItemQuantityService&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":GroceryStoreSystem-Backend:test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests in 'ca.mcgill.ecse321.grocerystoresystem.service'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;ca.mcgill.ecse321.grocerystoresystem.service.*&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":GroceryStoreSystem-Backend:test" />
+            <option value=":GroceryStoreSystem-Backend:unitTest" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -209,11 +211,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TestAddressService" />
+        <item itemvalue="Gradle.AddressController.testCreateAndQueryAddressID" />
+        <item itemvalue="Gradle.AddressController.testGetNoAddresses" />
+        <item itemvalue="Gradle.ItemQuantityController" />
         <item itemvalue="Gradle.Tests in 'project-group-group-17.GroceryStoreSystem-Backend.test'" />
-        <item itemvalue="Gradle.TestItemQuantityService" />
-        <item itemvalue="Gradle.TestInStoreOrderService" />
-        <item itemvalue="Gradle.TestDeliveryOrderService.successfullyGetDeliveryOrdersWithAddress" />
-        <item itemvalue="Gradle.Tests in 'ca.mcgill.ecse321.grocerystoresystem.service'" />
       </list>
     </recent_temporary>
   </component>
@@ -243,5 +245,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/project_group_group_17$AddressController_testCreateAndQueryAddressID.ic" NAME="AddressController.testCreateAndQueryAddressID Coverage Results" MODIFIED="1647738670224" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/project_group_group_17$Tests_in__project_group_group_17_GroceryStoreSystem_Backend_test_.ic" NAME="Tests in 'project-group-group-17.GroceryStoreSystem-Backend.test' Coverage Results" MODIFIED="1647738160133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/project_group_group_17$TestAddressService.ic" NAME="TestAddressService Coverage Results" MODIFIED="1647738811591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

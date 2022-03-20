@@ -55,6 +55,7 @@ public class AddressController {
     	.param("country","Canada")
     	.param("isLocal",true)
     	.post("/address/create")
+
     	.then().statusCode(200)
     	.body("streetname", equalTo("Peel"))
     	.body("streetnum", equalTo("1234"))
