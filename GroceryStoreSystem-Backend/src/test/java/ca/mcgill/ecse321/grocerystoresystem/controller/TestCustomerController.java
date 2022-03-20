@@ -46,6 +46,7 @@ public class TestCustomerController {
   public void testGetNoCustomers() {
     
       when().get("/customers").then()
+              .statusCode(200)
               .body("$", empty());
   }
   
@@ -58,20 +59,20 @@ public class TestCustomerController {
               .param("email", "yash.khapre@gmail.com")
               .param("password", "ya$hpas$word!")
               .post("/customer/create")
-              .then()
+              .then().statusCode(200)
               .body("firstName", equalTo("Yash"))
               .body("lastName", equalTo("Khapre"))
               .body("email", equalTo("yash.khapre@gmail.com"))
               .extract().response().body().path("id");
 
       when().get("/customer/id?id="+id)
-              .then()
+              .then().statusCode(200)
               .body("id", equalTo(id));
 
       String str =  given()
               .param("id", id)
               .get("/customer/check/id/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, "true");
@@ -79,7 +80,7 @@ public class TestCustomerController {
   
   @Test
   public void testCreateAndQueryCustomerFirstName() {
-      when().delete("/customers/delete").then();
+      when().delete("/customers/delete").then().statusCode(200);
 
       given()
               .param("personID", 1001)        
@@ -100,13 +101,13 @@ public class TestCustomerController {
       given()
               .param("firstname", "Yash")
               .get("/customer/firstname/")
-              .then()
+              .then().statusCode(200)
               .body("size()", equalTo(2));
 
       String str =  given()
               .param("firstname", "Yash")
               .get("/customer/check/firstname/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, "true");
@@ -114,7 +115,7 @@ public class TestCustomerController {
   
   @Test
   public void testCreateAndQueryCustomerLastName() {
-      when().delete("/custmers/delete").then();
+      when().delete("/custmers/delete").then().statusCode(200);
 
       given()
               .param("personID", 1001)        
@@ -135,13 +136,13 @@ public class TestCustomerController {
       given()
               .param("lastname", "Khapre")
               .get("/customer/lastname/")
-              .then()
+              .then().statusCode(200)
               .body("size()", equalTo(2));
 
       String str =  given()
               .param("lastname", "Khapre")
               .get("/customer/check/lastname/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, "true");
@@ -149,7 +150,7 @@ public class TestCustomerController {
   
   @Test
   public void testCreateAndQueryCustomerFullName() {
-      when().delete("/customers/delete").then();
+      when().delete("/customers/delete").then().statusCode(200);
 
       given()
               .param("personID", 1001)        
@@ -171,14 +172,14 @@ public class TestCustomerController {
               .param("firstname", "Yash")
               .param("lastname", "Khapre")
               .get("/customer/get/fullname/")
-              .then()
+              .then().statusCode(200)
               .body("size()", equalTo(2));
 
       String str =  given()
               .param("firstname", "Yash")
               .param("lastname", "Khapre")
               .get("/customer/check/fullname/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, "true");
@@ -193,12 +194,13 @@ public class TestCustomerController {
               .param("email", "yashkhapre2@gmail.com")
               .param("password", "12345678")
               .post("/customer/create").then()
+              .statusCode(200)
               .extract().response().body().path("id");
 
       given()
               .param("email", "yashkhapre2@gmail.com")
               .get("/customer/email/")
-              .then()
+              .then().statusCode(200)
               .body("firstName", equalTo("Yash"))
               .body("lastName", equalTo("Khapre"))
               .body("id", equalTo(id));
@@ -206,7 +208,7 @@ public class TestCustomerController {
       String str =  given()
               .param("email", "yashkhapre2@gmail.com")
               .get("/customer/check/email/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, "true");
@@ -221,22 +223,23 @@ public class TestCustomerController {
               .param("email", "yash.khapre@gmail.com")
               .param("password", "12345678")
               .post("/customer/create").then()
+              .statusCode(200)
               .extract().response().body().path("id");
 
       when().get("/customer/id?id="+id)
-              .then()
+              .then().statusCode(200)
               .body("{id}", equalTo(id));
 
       String str =  given()
               .param("id", id)
               .get("/customer/check/id/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, "true");
 
       String str2 = when().delete("/customer/delete?{id}="+id)
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, str2);
@@ -245,7 +248,7 @@ public class TestCustomerController {
   @Test
   public void testCreateAndDeleteMultipleCustomers() {
 
-      when().delete("/customers/delete").then();
+      when().delete("/customers/delete").then().statusCode(200);
 
       given()
               .param("personID", 1001)
@@ -253,7 +256,8 @@ public class TestCustomerController {
               .param("lastname", "Khapre")
               .param("email", "yash.khapre@gmail.com")
               .param("password", "12345678")
-              .post("/customer/create");
+              .post("/customer/create").then()
+              .statusCode(200);
 
       given()
               .param("personID", 1002)
@@ -261,7 +265,8 @@ public class TestCustomerController {
               .param("lastname", "Khapre")
               .param("email", "yash.khapre2@gmail.com")
               .param("password", "12345678")
-              .post("/customer/create");
+              .post("/customer/create").then()
+              .statusCode(200);
 
       given()
               .param("personID", 1003)
@@ -269,19 +274,21 @@ public class TestCustomerController {
               .param("lastname", "Khapre")
               .param("email", "yash.khapre4@gmail.com")
               .param("password", "12345678")
-              .post("/customer/create");
+              .post("/customer/create").then()
+              .statusCode(200);
 
       when().get("/customers")
-              .then().body("size()", equalTo(3));
+              .then().statusCode(200)
+              .body("size()", equalTo(3));
 
       String str = when().delete("/customers/delete/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().asPrettyString();
 
       assertEquals(str, "true");
 
       when().get("/customers")
-              .then()
+              .then().statusCode(200)
               .body("size()", equalTo(0));
   }
   
@@ -293,6 +300,7 @@ public class TestCustomerController {
               .param("email", "yash.khapre@gmail.com")
               .param("password", "ya$hpa$sword")
               .post("/customer/create").then()
+              .statusCode(200)
               .extract().response().body().path("id");
 
       final int addressID = given()
@@ -303,21 +311,21 @@ public class TestCustomerController {
               .param("country", "Canada")
               .param("isLocal", false)
               .post("/address/create/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().path("id");
 
       given()
               .param("id", id)
               .param("addressID", addressID)
               .post("/customer/update/address/")
-              .then()
+              .then().statusCode(200)
               .extract().response().body().prettyPrint();
   }
   
   @Test
   public void testCreateAndQueryCustomerLocal() {
     
-    when().get("/customers/local").then().body("size()", equalTo(1));
+    when().get("/customers/local").then().statusCode(200).body("size()", equalTo(1));
     
     given()
             .param("personID", 1001)
@@ -325,7 +333,8 @@ public class TestCustomerController {
             .param("lastname", "Khapre")
             .param("email", "yash.khapre@gmail.com")
             .param("password", "12345678")
-            .post("/customer/create");
+            .post("/customer/create").then()
+            .statusCode(200);
     given()
            .param("streetName", "Hutchison")
            .param("streetNum", "3445")
@@ -333,13 +342,14 @@ public class TestCustomerController {
            .param("postalCode", "H2X 2G1")
            .param("country", "Canada")
            .param("isLocal", true)
-           .post("/address/create/");
+           .post("/address/create/")
+           .then().statusCode(200);
   }
   
   @Test
   public void testCreateAndQueryCustomerNonLocal() {
     
-    when().get("/customers/nonlocal").then().body("size()", equalTo(1));
+    when().get("/customers/nonlocal").then().statusCode(200).body("size()", equalTo(1));
     
     given()
             .param("personID", 1001)
@@ -347,7 +357,8 @@ public class TestCustomerController {
             .param("lastname", "Khapre")
             .param("email", "yash.khapre@gmail.com")
             .param("password", "12345678")
-            .post("/customer/create");
+            .post("/customer/create").then()
+            .statusCode(200);
     given()
            .param("streetName", "Hutchison")
            .param("streetNum", "3445")
@@ -355,7 +366,8 @@ public class TestCustomerController {
            .param("postalCode", "H2X 2G1")
            .param("country", "Canada")
            .param("isLocal", false)
-           .post("/address/create/");
+           .post("/address/create/")
+           .then().statusCode(200);
   }
   
 }

@@ -77,7 +77,7 @@ public class CustomerController {
     return new ResponseEntity<>(customerDtoList, HttpStatus.OK);
 }
   
-  @GetMapping(value = { "/customer/{id}", "/customer/{id}/" })
+  @GetMapping(value = { "/customer/id", "/customer/id/" })
   public ResponseEntity getCustomerByID(@PathVariable("id") int personID) {
       Customer customer;
       try {
@@ -116,7 +116,7 @@ public class CustomerController {
       return new ResponseEntity<>(convertToDto(customer), HttpStatus.OK);
   }
   
-  @PutMapping(value = {"/customer/login/{id}", "/customer/login/id/"})
+  @PutMapping(value = {"/customer/login/id", "/customer/login/id/"})
   public ResponseEntity login(@PathVariable("id") int personID, @RequestParam String password, @RequestParam String email) {
       Customer c;
       try {
@@ -130,7 +130,7 @@ public class CustomerController {
       return new ResponseEntity<>(convertToDto(c), HttpStatus.OK);
   }
   
-  @PutMapping(value = { "/customer/logout/{id}", "/customer/logout/id"})
+  @PutMapping(value = { "/customer/logout/id", "/customer/logout/id"})
   public ResponseEntity logout(@PathVariable("id") int personID, @RequestParam String email) {
       Customer customer;
       try {
@@ -146,7 +146,7 @@ public class CustomerController {
       }
   }
 
-  @DeleteMapping(value = { "/customer/delete/{id}", "/customer/delete/id/" })
+  @DeleteMapping(value = { "/customer/delete/id", "/customer/delete/id/" })
   public ResponseEntity deleteCustomer(@PathVariable("id") int personID){
       boolean delete;
       try {
@@ -248,7 +248,7 @@ public class CustomerController {
       }
   }
   
-  @PutMapping(value = { "/customer/update/{id}", "/customer/update/id/" })
+  @PutMapping(value = { "/customer/update/id", "/customer/update/id/" })
   public ResponseEntity updateInfo(@PathVariable("id") int personID, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password,
                                 @RequestParam String streetName,  @RequestParam String StreetNum, @RequestParam String city, @RequestParam String postalCode,
                                 @RequestParam boolean isLocal){
