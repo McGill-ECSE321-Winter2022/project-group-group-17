@@ -238,6 +238,16 @@ public class CustomerController {
       }
   }
   
+  @PostMapping(value={"/customer/update/address/", "/customer/update/address"})
+  public CustomerDto updateOwnerAddress(@RequestParam int id, @RequestParam int addressID) {
+      try {
+          return convertToDto(customerService.updateCustomerAddressById(id, addressID));
+      }
+      catch(NullPointerException exp) {
+          return null;
+      }
+  }
+  
   @PutMapping(value = { "/customer/update/{id}", "/customer/update/{id}/" })
   public ResponseEntity updateInfo(@PathVariable("id") int personID, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password,
                                 @RequestParam String streetName,  @RequestParam String StreetNum, @RequestParam String city, @RequestParam String postalCode,
@@ -252,16 +262,6 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot update this Customer profile");
       }
       return new ResponseEntity<>(convertToDto(c), HttpStatus.OK);
-  }
-  
-  @PostMapping(value={"/customer/update/address/", "/customer/update/address"})
-  public CustomerDto updateOwnerAddress(@RequestParam int id, @RequestParam int addressID) {
-      try {
-          return convertToDto(customerService.updateCustomerAddressById(id, addressID));
-      }
-      catch(NullPointerException exp) {
-          return null;
-      }
   }
   
   private CustomerDto convertToDto(Customer c) {

@@ -30,41 +30,10 @@ public class SpecialDayController {
   
   /**
    * @author Yash Khapre
-   * @param specialDayID, startTime, endTime
-   * Controller method to create a specialDay
-   */
-  @PostMapping(value = { "/specialday/create", "/specialday/create/"})
-  public ResponseEntity createSpecialDay(@RequestParam int specialDayID, @RequestParam LocalDateTime startTime, @RequestParam LocalDateTime endTime) {
-      SpecialDay sDay;
-      try {
-          sDay = specialDayService.createSpecialDay(specialDayID, startTime, endTime);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-      return new ResponseEntity<>(convertToDto(sDay), HttpStatus.OK);
-  }
-  
-  /**
-   * @author Yash Khapre
-   * @param specialDayID
-   * Controller method to get a specialDay given an ID
-   */
-  @GetMapping(value = {"specialday/{id}", "/specialday/{id}"})
-  public SpecialDayDto getSpecialDayWithId(@RequestParam int specialDayID) {
-    try {
-      return convertToDto(specialDayService.getSpecialDay(specialDayID));
-  }
-  catch (NullPointerException exp) {
-      return null;
-    }
-  }
-  
-  /**
-   * @author Yash Khapre
    * @param calendarID
    * Controller method to get closed days
    */
-  @GetMapping(value = { "/closeddays/{id}", "/closeddays/{id}/" })
+  @GetMapping(value = { "/specialday/closeddays/{id}", "/specialday/closeddays/{id}/" })
   public ResponseEntity getClosedDays(@PathVariable("id") int calendarID) {
     List<SpecialDayDto> closedDaysDto = new ArrayList<>();
     List<SpecialDay> closedDays;    
@@ -87,7 +56,7 @@ public class SpecialDayController {
    * @param specialDayID
    * Controller method to get all shifts on a specified special day
    */
-  @GetMapping(value = { "/shifts/{id}", "/shifts/{id}/" })
+  @GetMapping(value = { "/specialday/shifts/{id}", "/specialday/shifts/{id}/" })
   public ResponseEntity getSpecialShifts(@PathVariable("id") int specialDayID) {
     List<ShiftDto> specialShiftsDtoList = new ArrayList<>();
     List<Shift> specialShifts;    
@@ -110,7 +79,7 @@ public class SpecialDayController {
    * @param specialDayID
    * Controller method that gets the employees on a specified specialDay
    */
-  @GetMapping(value = { "/employees/{id}", "/employees/{id}/" })
+  @GetMapping(value = { "/specialday/employees/{id}", "/specialday/employees/{id}/" })
   public ResponseEntity getEmployeesOnSpecialShifts(@PathVariable("id") int specialDayID) {
     List<EmployeeDto> employeeDtoList = new ArrayList<>();
     List<Employee> employeeList;    
@@ -152,7 +121,7 @@ public class SpecialDayController {
    * @param specialDayID, shiftID, date, startTime, endTime, shiftStatus, personID
    * Update a specific Shift on a specific specialDay
    */
-  @PutMapping(value = { "/shift/update/{id}", "/shift/update/{id}/" })
+  @PutMapping(value = { "specialday/updateshift/{id}", "/specialday/updateshift/{id}/" })
   public ResponseEntity updateSpecificDayShift(@PathVariable("id") int specialDayID, int shiftID, LocalDate date, 
       LocalTime startTime, LocalTime endTime, ShiftStatus shiftStatus, int personID) {
     Shift shift;
@@ -172,7 +141,7 @@ public class SpecialDayController {
    * @param specialDayID
    * Controller method to delete a specific specialDay
    */
-  @DeleteMapping(value = { "/specialDay/{id}", "/specialDay/{id}/" })
+  @DeleteMapping(value = { "/specialDay/delete/{id}", "/specialDay/delete/{id}/" })
   public ResponseEntity deleteSpecialDay(@PathVariable("id") int specialDayID){
       boolean delete;
       try {
@@ -184,16 +153,6 @@ public class SpecialDayController {
         return ResponseEntity.status(HttpStatus.OK).body("SpecialDay with specialDayID " + specialDayID + " has been successfully deleted");
       }
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error deleting special day!");
-  }
-  
-  /**
-   * @author Yash Khapre
-   * @param id
-   * Controller methods that checks if an object is a specialDay given an ID 
-   */
-  @GetMapping(value = {"/specialday/check/id/", "/specialday/check/id"})
-  public boolean isCustomerWithID(@RequestParam int id) {
-      return specialDayService.isSpecialDayByID(id);
   }
   
   /**
