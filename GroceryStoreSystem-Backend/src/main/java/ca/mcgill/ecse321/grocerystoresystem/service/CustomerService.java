@@ -267,6 +267,17 @@ public class CustomerService {
   
   /**
    * @author Yash Khapre
+   * @param none
+   * Delete all customers in the system
+   */
+  @Transactional
+  public boolean deleteCustomers() {
+      customerRepository.deleteAll();
+      return this.getAllCustomers().size() == 0;
+  }
+  
+  /**
+   * @author Yash Khapre
    * @param int personID
    * Method that checks if a person is a Customer using personID
    */

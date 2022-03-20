@@ -30,6 +30,37 @@ public class SpecialDayController {
   
   /**
    * @author Yash Khapre
+   * @param specialDayID, startTime, endTime
+   * Controller method to create a specialDay
+   */
+  @PostMapping(value = { "/specialday/create", "/specialday/create/"})
+  public ResponseEntity createSpecialDay(@RequestParam int specialDayID, @RequestParam LocalDateTime startTime, @RequestParam LocalDateTime endTime) {
+      SpecialDay sDay;
+      try {
+          sDay = specialDayService.createSpecialDay(specialDayID, startTime, endTime);
+      } catch (IllegalArgumentException exception) {
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+      }
+      return new ResponseEntity<>(convertToDto(sDay), HttpStatus.OK);
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param specialDayID
+   * Controller method to get a specialDay given an ID
+   */
+  @GetMapping(value = {"specialday/{id}", "/specialday/{id}"})
+  public SpecialDayDto getSpecialDayWithId(@RequestParam int specialDayID) {
+    try {
+      return convertToDto(specialDayService.getSpecialDay(specialDayID));
+  }
+  catch (NullPointerException exp) {
+      return null;
+    }
+  }
+  
+  /**
+   * @author Yash Khapre
    * @param calendarID
    * Controller method to get closed days
    */
@@ -153,6 +184,16 @@ public class SpecialDayController {
         return ResponseEntity.status(HttpStatus.OK).body("SpecialDay with specialDayID " + specialDayID + " has been successfully deleted");
       }
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error deleting special day!");
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param id
+   * Controller methods that checks if an object is a specialDay given an ID 
+   */
+  @GetMapping(value = {"/specialday/check/id/", "/specialday/check/id"})
+  public boolean isCustomerWithID(@RequestParam int id) {
+      return specialDayService.isSpecialDayByID(id);
   }
   
   /**

@@ -5,15 +5,13 @@ import ca.mcgill.ecse321.grocerystoresystem.dto.CustomerDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Customer;
 import ca.mcgill.ecse321.grocerystoresystem.service.CustomerService;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,6 +19,26 @@ public class CustomerController {
   
   @Autowired
   private CustomerService customerService;
+  
+  @GetMapping(value = {"/customer/firstname/", "/customer/firstname"})
+  public List<CustomerDto> getOwnerWithFirstName(@RequestParam String firstname) {
+      try {
+          return customerService.getCustomerByFirstName(firstname).stream().map(this::convertToDto).collect(Collectors.toList());
+      }
+      catch (NullPointerException exp) {
+          return null;
+      }
+  }
+
+  @GetMapping(value = {"/customer/lastname/", "/customer/lastname"})
+  public List<CustomerDto> getOwnerWithLastName(@RequestParam String lastname) {
+      try {
+          return customerService.getCustomerByLastName(lastname).stream().map(this::convertToDto).collect(Collectors.toList());
+      }
+      catch (NullPointerException exp) {
+          return null;
+      }
+  }
   
   @GetMapping(value = { "/customers/fullname", "/customers/fullname/" })
   public ResponseEntity getCustomersByFirstAndLastName(@RequestParam String firstName, @RequestParam String lastName) {
@@ -88,12 +106,10 @@ public class CustomerController {
   }
   
   @PostMapping(value = { "/customer/create", "/customer/create/"})
-  public ResponseEntity createCustomer(@RequestParam int personID, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password,
-                                    @RequestParam String city, @RequestParam String country, @RequestParam String postalCode,
-                                    @RequestParam String streetName, @RequestParam String streetNum, boolean isLocal) {
+  public ResponseEntity createCustomer(@RequestParam int personID, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password) {
       Customer customer;
       try {
-          customer = customerService.createCustomer(personID, firstname, lastname, email, password, city, country, postalCode, streetName, streetNum, isLocal);
+          customer = customerService.createCustomer(personID, firstname, lastname, email, password);
       } catch (IllegalArgumentException exception) {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
       }
@@ -130,7 +146,7 @@ public class CustomerController {
       }
   }
 
-  @DeleteMapping(value = { "/customer/{id}", "/customer/{id}/" })
+  @DeleteMapping(value = { "/customer/delete/{id}", "/customer/delete/{id}/" })
   public ResponseEntity deleteCustomer(@PathVariable("id") int personID){
       boolean delete;
       try {
@@ -142,6 +158,12 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body("Customer with personID " + personID + " has been successfully deleted");
       }
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error deleting customer!");
+  }
+  
+  @DeleteMapping(value={"/customers/delete/", "/customers/delete"})
+  public boolean deleteCustomers() {
+      customerService.deleteCustomers();
+      return true;
   }
   
   @GetMapping(value = {"/customers/local", "/customers/local/"})
@@ -230,6 +252,16 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot update this Customer profile");
       }
       return new ResponseEntity<>(convertToDto(c), HttpStatus.OK);
+  }
+  
+  @PostMapping(value={"/customer/update/address/", "/customer/update/address"})
+  public CustomerDto updateOwnerAddress(@RequestParam int id, @RequestParam int addressID) {
+      try {
+          return convertToDto(customerService.updateCustomerAddressById(id, addressID));
+      }
+      catch(NullPointerException exp) {
+          return null;
+      }
   }
   
   private CustomerDto convertToDto(Customer c) {
