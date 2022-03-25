@@ -89,10 +89,32 @@ public class DeliveryOrderController {
             throw new NullPointerException("Order is null");
         }
         
-        return new DeliveryOrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(), 
-        		deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(), 
-        		deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()),
-				convertToDto(deliveryOrder.getPortionNum()));
+        if (deliveryOrder.getPortionNum() != null && deliveryOrder.getAddress() != null) {
+        	return new DeliveryOrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+					deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+					deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()),
+					convertToDto(deliveryOrder.getPortionNum()));
+		}
+
+        else if(deliveryOrder.getPortionNum() != null && deliveryOrder.getAddress() == null){
+			return new DeliveryOrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+					deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+					deliveryOrder.getDeliveryTime(), convertToDto(new Address()),
+					convertToDto(deliveryOrder.getPortionNum()));
+		}
+        else if(deliveryOrder.getPortionNum() == null && deliveryOrder.getAddress() != null){
+			return new DeliveryOrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+					deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+					deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()),
+					new ArrayList<>());
+		}
+        else{
+			return new DeliveryOrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+					deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+					deliveryOrder.getDeliveryTime(), convertToDto(new Address()),
+					new ArrayList<>());
+
+		}
     }
 	
 	private AddressDto convertToDto(Address a) throws NullPointerException {

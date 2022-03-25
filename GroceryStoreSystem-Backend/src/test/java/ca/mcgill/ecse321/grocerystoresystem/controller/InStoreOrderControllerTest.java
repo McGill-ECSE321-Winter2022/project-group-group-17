@@ -60,22 +60,17 @@ public class InStoreOrderControllerTest {
                 .then().statusCode(200)
                 .body("totalCost", equalTo(1000))
                 .body("orderTimeStamp", equalTo("2022-01-02T12:12:12"))
-                .body("isPaid", equalTo(true))
+                .body("paid", equalTo(true))
                 .extract().response().body().path("id");
+
 
         when().get("/instoreorder/get/id?id="+id)
                 .then().statusCode(200)
                 .body("id", equalTo(id))
                 .body("totalCost", equalTo(1000))
                 .body("orderTimeStamp", equalTo("2022-01-02T12:12:12"))
-                .body("isPaid", equalTo(true));
+                .body("paid", equalTo(true));
 
-
-        String str = when().get("/instoreorder/check/id?id="+id).then()
-                .statusCode(200)
-                .extract().response().body().asPrettyString();
-
-        assertEquals(str, "true");
     }
 
 }

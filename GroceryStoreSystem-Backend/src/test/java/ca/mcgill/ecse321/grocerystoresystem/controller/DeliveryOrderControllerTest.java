@@ -59,24 +59,20 @@ public class DeliveryOrderControllerTest {
                 .param("deliveryTime", "2022.02.02/13.12.12")
                 .post("/deliveryorder/create/")
                 .then().statusCode(200)
-                .body("orderTimeStamp", equalTo("2022-01-02:12:12:12"))
-                .body("deliveryTime", equalTo("2022-02-02:13:12:12"))
+                .body("totalCost", equalTo(1000))
+                .body("orderTimeStamp", equalTo("2022-01-02T12:12:12"))
+                .body("deliveryTime", equalTo("2022-02-02T13:12:12"))
+                .body("paid", equalTo(true))
                 .extract().response().body().path("id");
 
         when().get("/deliveryorder/get/id?id="+id)
                 .then().statusCode(200)
                 .body("id", equalTo(id))
-                .body("totalCost", equalTo("1000"))
-                .body("orderTimeStamp", equalTo("2022-01-02:12:12:12/"))
-                .body("isPaid", equalTo("true"))
-                .body("deliveryTime", equalTo("2022-02-02:13:12:12"));
+                .body("totalCost", equalTo(1000))
+                .body("orderTimeStamp", equalTo("2022-01-02T12:12:12"))
+                .body("paid", equalTo(true))
+                .body("deliveryTime", equalTo("2022-02-02T13:12:12"));
 
-
-        String str = when().get("/deliveryorder/check/id?id="+id).then()
-                .statusCode(200)
-                .extract().response().body().asPrettyString();
-
-        assertEquals(str, "true");
     }
 
     @Test
@@ -88,8 +84,10 @@ public class DeliveryOrderControllerTest {
                 .param("deliveryTime", "2022.02.02/13.12.12")
                 .post("/deliveryorder/create/")
                 .then().statusCode(200)
-                .body("orderTimeStamp", equalTo("2022-01-02:12:12:12"))
-                .body("deliveryTime", equalTo("2022-02-02:13:12:12"))
+                .body("totalCost", equalTo(1000))
+                .body("orderTimeStamp", equalTo("2022-01-02T12:12:12"))
+                .body("paid", equalTo(true))
+                .body("deliveryTime", equalTo("2022-02-02T13:12:12"))
                 .extract().response().body().path("id");
 
         final int addressID = given()
@@ -111,6 +109,5 @@ public class DeliveryOrderControllerTest {
                 .extract().response().body().prettyPrint();
 
     }
-
 
 }
