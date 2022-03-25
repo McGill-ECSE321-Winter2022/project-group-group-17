@@ -1,8 +1,10 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
 import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
+import ca.mcgill.ecse321.grocerystoresystem.dto.OwnerDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
@@ -46,21 +48,22 @@ public class DeliveryOrderController {
 	}
 	
 	@PostMapping(value = {"/deliveryorder/create/", "/deliveryorder/create"})
-	public DeliveryOrderDto DeliveryOrder(@RequestParam int totalCost, 
-			@RequestParam LocalDateTime orderTimeStamp, @RequestParam boolean isPaid,
-			@RequestParam LocalDateTime deliveryTime) {
+	public DeliveryOrderDto DeliveryOrder(@RequestParam int totalCost,
+										  @RequestParam("orderTimeStamp") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime orderTimeStamp,
+										  @RequestParam boolean isPaid,
+										  @RequestParam("deliveryTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime deliveryTime) {
 		DeliveryOrder deliveryOrder = deliveryOrderService.createDeliveryOrder(totalCost, orderTimeStamp,
 				isPaid, deliveryTime);
 		
 		return convertToDto(deliveryOrder);
 	}
-	
-	@PostMapping(value = {"/deliveryorder/update/", "/deliveryorder/update"})
-	public DeliveryOrderDto DeliveryOrder(@RequestParam int id, @RequestParam Address address) {
+
+	@PostMapping(value={"/deliveryorderr/update/address/", "/deliveryorder/update/address"})
+	public DeliveryOrderDto updateDeliveryOrderAddress(@RequestParam int id, @RequestParam int addressID) {
 		try {
-			return convertToDto(deliveryOrderService.updateDeliveryAddressWithId(id, address));
+			return convertToDto(deliveryOrderService.updateDeliveryAddressWithId(id, addressID));
 		}
-		catch (NullPointerException exception) {
+		catch(NullPointerException exp) {
 			return null;
 		}
 	}

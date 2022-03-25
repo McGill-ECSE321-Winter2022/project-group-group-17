@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.grocerystoresystem.controller;
 import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.InStoreOrder;
@@ -22,11 +23,13 @@ public class InStoreOrderController {
 	private InStoreOrderService inStoreOrderService;
 	
 	@PostMapping(value = {"/instoreorder/create/", "/instoreorder/create"})
-	public InStoreOrderDto createInStoreOrder(@RequestParam int totalCost, 
-			@RequestParam LocalDateTime orderTimeStamp, @RequestParam boolean isPaid) {
+	public InStoreOrderDto createInStoreOrder(@RequestParam int totalCost,
+											  @RequestParam("orderTimeStamp") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime orderTimeStamp,
+											  @RequestParam boolean isPaid) {
 		InStoreOrder inStoreOrder = inStoreOrderService.createInStoreOrder(totalCost, orderTimeStamp, isPaid);
 		
-		return convertToDto(inStoreOrder);
+		InStoreOrderDto dto = convertToDto(inStoreOrder);
+		return dto;
 	}
 	
 	@GetMapping(value = {"/instoreorders/", "/instoreorders"})
@@ -64,9 +67,14 @@ public class InStoreOrderController {
             throw new NullPointerException("Order is null");
         }
 
-
-        return new InStoreOrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(), 
+		if (inStoreOrder.getPortionNum() != null) return new InStoreOrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(),
         		inStoreOrder.isPaid(), convertToDto(inStoreOrder.getPortionNum()));
+
+		else{
+
+			return new InStoreOrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(),
+					inStoreOrder.isPaid(), new ArrayList<>());
+		}
     }
 
 	private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities){
