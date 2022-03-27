@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +20,10 @@ public class DeliveryOrderService {
 	
 	@Autowired
 	DeliveryOrderRepository deliveryOrderRepository;
-	
+
+	@Autowired
+	AddressRepository addressRepository;
+
 	@Transactional
 	public DeliveryOrder createDeliveryOrder(int totalCost, LocalDateTime orderTimeStamp, boolean isPaid, LocalDateTime deliveryTime) {
 		validateTotalCost(totalCost);
@@ -51,10 +55,14 @@ public class DeliveryOrderService {
 	}
 	
 	@Transactional
-	public DeliveryOrder updateDeliveryAddressWithId(int id, Address deliveryAddress) {
+	public DeliveryOrder updateDeliveryAddressWithId(int id, int addressID) {
 		DeliveryOrder deliveryOrder = getDeliveryOrderByID(id);
-		deliveryOrder.setAddress(deliveryAddress);
-		
+		if(deliveryOrder == null) throw new NullPointerException("Delivery Order not found");
+
+		Address address = addressRepository.findAddressByAddressID(addressID);
+		if(address == null) throw new NullPointerException("Address not found");
+
+		deliveryOrder.setAddress(address);
 		deliveryOrderRepository.save(deliveryOrder);
 		
 		return deliveryOrder;
