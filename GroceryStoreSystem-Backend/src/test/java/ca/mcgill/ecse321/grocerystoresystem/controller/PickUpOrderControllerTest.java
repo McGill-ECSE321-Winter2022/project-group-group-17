@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class InStoreOrderControllerTest {
+public class PickUpOrderControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -35,7 +35,6 @@ public class InStoreOrderControllerTest {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
 
         this.orderRepository.deleteAll();
-
     }
 
     @AfterEach
@@ -44,33 +43,36 @@ public class InStoreOrderControllerTest {
     }
 
     @Test
-    public void testGetNoInStoreOrders() {
-        when().get("/instoreorders").then()
+    public void testGetNoPickUpOrders() {
+        when().get("/pickuporders").then()
                 .statusCode(200)
                 .body("$", empty());
     }
 
     @Test
-    public void testCreateAndQueryInStoreOrderID() {
+    public void testCreateAndQueryPickUpOrderID() {
         final int id = given()
                 .param("totalCost", 1000)
                 .param("orderTimeStamp", "2022.01.02/12.12.12")
                 .param("isPaid", "true")
-                .post("/instoreorder/create/")
+                .param("pickupDateTime", "2022.01.02/16.12.12")
+                .post("/pickuporder/create/")
                 .then().statusCode(200)
                 .body("totalCost", equalTo(1000))
                 .body("orderTimeStamp", equalTo("2022-01-02T12:12:12"))
                 .body("paid", equalTo(true))
+                .body("pickupTime", equalTo("2022-01-02T16:12:12"))
                 .extract().response().body().path("id");
 
-
-        when().get("/instoreorder/get/id?id="+id)
+        when().get("/pickuporder/get/id?id="+id)
                 .then().statusCode(200)
                 .body("id", equalTo(id))
                 .body("totalCost", equalTo(1000))
                 .body("orderTimeStamp", equalTo("2022-01-02T12:12:12"))
-                .body("paid", equalTo(true));
+                .body("paid", equalTo(true))
+                .body("pickupTime", equalTo("2022-01-02T16:12:12"));
 
     }
+
 
 }

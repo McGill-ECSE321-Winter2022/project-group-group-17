@@ -1,12 +1,17 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dto.InStoreOrderDto;
+import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
+import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.grocerystoresystem.dto.PickupOrderDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.PickupOrder;
 import ca.mcgill.ecse321.grocerystoresystem.service.PickupOrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDateTime;
@@ -34,9 +39,10 @@ public class PickupOrderController {
 	
 	
 	@PostMapping(value = {"/pickuporder/create/", "/pickuporder/create"})
-	public PickupOrderDto PickupOrder(@RequestParam int totalCost, 
-			@RequestParam LocalDateTime orderTimeStamp, @RequestParam boolean isPaid,
-			@RequestParam LocalDateTime pickupDateTime) {
+	public PickupOrderDto PickupOrder(@RequestParam int totalCost,
+									  @RequestParam("orderTimeStamp") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime orderTimeStamp,
+									  @RequestParam boolean isPaid,
+									  @RequestParam("pickupDateTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime pickupDateTime) {
 		PickupOrder pickupOrder = pickupOrderService.createPickupOrder(totalCost, orderTimeStamp,
 				isPaid, pickupDateTime);
 		
@@ -73,10 +79,34 @@ public class PickupOrderController {
         if(pickupOrder == null) {
             throw new NullPointerException("Order is null");
         }
-        
-        return new PickupOrderDto(pickupOrder.getTotalCost(), 
-        		pickupOrder.getOrderTimeStamp(), pickupOrder.isPaid(), 
-        		pickupOrder.getPickupDate(), pickupOrder.getOrderID());
+
+		if (pickupOrder.getPortionNum() != null) return new PickupOrderDto(pickupOrder.getOrderID(), pickupOrder.getTotalCost(), pickupOrder.getOrderTimeStamp(),
+				pickupOrder.isPaid(), pickupOrder.getPickupDate(), convertToDto(pickupOrder.getPortionNum()));
+
+		else{
+
+			return new PickupOrderDto(pickupOrder.getOrderID(), pickupOrder.getTotalCost(), pickupOrder.getOrderTimeStamp(),
+					pickupOrder.isPaid(), pickupOrder.getPickupDate(),new ArrayList<>());
+		}
+
     }
+
+	private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities){
+		List<ItemQuantityDto> itemQuantityDtos = new ArrayList<>();
+
+		for (ItemQuantity itemQuantity : itemQuantities){
+			ItemQuantityDto itemQuantityDto = convertToDto(itemQuantity);
+			itemQuantityDtos.add(itemQuantityDto);
+		}
+
+		return itemQuantityDtos;
+	}
+
+	private ItemQuantityDto convertToDto (ItemQuantity itemQuantity){
+		if (itemQuantity == null){
+			throw new NullPointerException("Item Quantity is null");
+		}
+		return new ItemQuantityDto(itemQuantity.getItemNum());
+	}
 
 }
