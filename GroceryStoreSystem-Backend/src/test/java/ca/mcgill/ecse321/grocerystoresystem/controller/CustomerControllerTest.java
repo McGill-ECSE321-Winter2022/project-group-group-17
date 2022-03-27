@@ -65,7 +65,7 @@ public class CustomerControllerTest {
               .body("email", equalTo("yash.khapre@gmail.com"))
               .extract().response().body().path("id");
 
-      when().get("/customer/id?id="+id)
+      when().get("/customer/get/id?id="+id)
               .then().statusCode(200)
               .body("id", equalTo(id));
 
@@ -100,7 +100,7 @@ public class CustomerControllerTest {
 
       given()
               .param("firstname", "Yash")
-              .get("/customer/firstname/")
+              .get("/customer/get/firstname/")
               .then().statusCode(200)
               .body("size()", equalTo(2));
 
@@ -115,7 +115,7 @@ public class CustomerControllerTest {
   
   @Test
   public void testCreateAndQueryCustomerLastName() {
-      when().delete("/custmers/delete").then().statusCode(200);
+      when().delete("/customers/delete").then().statusCode(200);
 
       given()
               .param("personID", 1001)        
@@ -135,7 +135,7 @@ public class CustomerControllerTest {
 
       given()
               .param("lastname", "Khapre")
-              .get("/customer/lastname/")
+              .get("/customer/get/lastname/")
               .then().statusCode(200)
               .body("size()", equalTo(2));
 
@@ -199,7 +199,7 @@ public class CustomerControllerTest {
 
       given()
               .param("email", "yashkhapre2@gmail.com")
-              .get("/customer/email/")
+              .get("/customer/get/email/")
               .then().statusCode(200)
               .body("firstName", equalTo("Yash"))
               .body("lastName", equalTo("Khapre"))
@@ -226,7 +226,7 @@ public class CustomerControllerTest {
               .statusCode(200)
               .extract().response().body().path("id");
 
-      when().get("/customer/id?id="+id)
+      when().get("/customer/get/id?id="+id)
               .then().statusCode(200)
               .body("{id}", equalTo(id));
 
