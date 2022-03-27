@@ -49,8 +49,8 @@ public class StoreHourController {
     @PostMapping(value = {"/storehour/create/", "/storehour/create"})
     public StoreHourDto createStoreHourDto(@RequestParam("startTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime startTime,
                                            @RequestParam("endTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime endTime,
-                                           @RequestParam Weekdays weekday, @RequestParam int storeHourID){
-        return convertToDto(storeHourService.createStoreHour(startTime, endTime, weekday, storeHourID));
+                                           @RequestParam Weekdays weekday){
+        return convertToDto(storeHourService.createStoreHour(startTime, endTime, weekday));
     }
 
     @DeleteMapping (value = {"/storehour/delete/", "/storehour/delete" })
