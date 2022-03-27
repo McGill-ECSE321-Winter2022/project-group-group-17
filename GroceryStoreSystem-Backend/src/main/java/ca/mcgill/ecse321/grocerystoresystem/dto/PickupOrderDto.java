@@ -21,13 +21,14 @@ public class PickupOrderDto {
 	public PickupOrderDto() {
 	}
 	
-	public PickupOrderDto(int totalCost, LocalDateTime orderTimestamp, boolean isPaid, LocalDateTime pickupDate, int orderId) {
+	public PickupOrderDto( int orderId, int totalCost, LocalDateTime orderTimestamp,
+						   boolean isPaid, LocalDateTime pickupDate,
+						   List<ItemQuantityDto> itemQuantities) {
+		this.orderId = orderId;
 		this.totalCost = totalCost;
 		this.orderTimeStamp = orderTimestamp;
 		this.isPaid = isPaid;
 		this.pickupDate = pickupDate;
-		this.orderId = orderId;
-		
 	}
 	
 	public int getId() {
