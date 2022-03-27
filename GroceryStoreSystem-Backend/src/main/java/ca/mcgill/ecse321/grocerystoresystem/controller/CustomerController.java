@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -22,7 +23,27 @@ public class CustomerController {
   @Autowired
   private CustomerService customerService;
   
-  @GetMapping(value = { "/customers/fullname", "/customers/fullname/" })
+  @GetMapping(value = {"/customer/get/firstname/", "/customer/get/firstname"})
+  public List<CustomerDto> getCustomerWithFirstName(@RequestParam String firstname) {
+      try {
+          return customerService.getCustomerByFirstName(firstname).stream().map(this::convertToDto).collect(Collectors.toList());
+      }
+      catch (NullPointerException exp) {
+          return null;
+      }
+  }
+
+  @GetMapping(value = {"/customer/get/lastname/", "/customer/get/lastname"})
+  public List<CustomerDto> getCustomerWithLastName(@RequestParam String lastname) {
+      try {
+          return customerService.getCustomerByLastName(lastname).stream().map(this::convertToDto).collect(Collectors.toList());
+      }
+      catch (NullPointerException exp) {
+          return null;
+      }
+  }
+  
+  @GetMapping(value = { "/customers/get/fullname", "/customers/get/fullname/" })
   public ResponseEntity getCustomersByFirstAndLastName(@RequestParam String firstName, @RequestParam String lastName) {
       List<CustomerDto> cDtoList = new ArrayList<>();
       List<Customer> customerList;
@@ -59,21 +80,21 @@ public class CustomerController {
     return new ResponseEntity<>(customerDtoList, HttpStatus.OK);
 }
   
-  @GetMapping(value = { "/customer/{id}", "/customer/{id}/" })
-  public ResponseEntity getCustomerByID(@PathVariable("id") int personID) {
+  @GetMapping(value = { "/customer/get/id", "/customer/get/id/" })
+  public ResponseEntity getCustomerByID(@PathVariable("id") int id) {
       Customer customer;
       try {
-          customer = customerService.getCustomer(personID);
+          customer = customerService.getCustomer(id);
       } catch (IllegalArgumentException exception) {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
       }
       if (customer == null) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot find Customer with given personID" + personID);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot find Customer with given personID" + id);
       }
       return new ResponseEntity<>(convertToDto(customer), HttpStatus.OK);
   }
   
-  @GetMapping(value = { "/customer/email", "customer/email/" })
+  @GetMapping(value = { "/customer/get/email", "customer/get/email/" })
   public ResponseEntity getCustomerByEmail(@RequestParam String email) {
       Customer c;
       try {
@@ -100,11 +121,11 @@ public class CustomerController {
       return new ResponseEntity<>(convertToDto(customer), HttpStatus.OK);
   }
   
-  @PutMapping(value = {"/customer/login/{id}", "/customer/login/{id}/"})
-  public ResponseEntity login(@PathVariable("id") int personID, @RequestParam String password, @RequestParam String email) {
+  @PutMapping(value = {"/customer/login/id", "/customer/login/id/"})
+  public ResponseEntity login(@PathVariable("id") int id, @RequestParam String password, @RequestParam String email) {
       Customer c;
       try {
-          c = customerService.login(email, password, personID);
+          c = customerService.login(email, password, id);
       } catch (IllegalArgumentException exception) {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
       }
@@ -114,11 +135,11 @@ public class CustomerController {
       return new ResponseEntity<>(convertToDto(c), HttpStatus.OK);
   }
   
-  @PutMapping(value = { "/customer/logout/{id}", "/customer/logout/{id}"})
-  public ResponseEntity logout(@PathVariable("id") int personID, @RequestParam String email) {
+  @PutMapping(value = { "/customer/logout/id", "/customer/logout/id"})
+  public ResponseEntity logout(@PathVariable("id") int id, @RequestParam String email) {
       Customer customer;
       try {
-          customer = customerService.logout(email, personID);
+          customer = customerService.logout(email, id);
       } catch (IllegalArgumentException exception) {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
       }
@@ -130,16 +151,16 @@ public class CustomerController {
       }
   }
 
-  @DeleteMapping(value = { "/customer/{id}", "/customer/{id}/" })
-  public ResponseEntity deleteCustomer(@PathVariable("id") int personID){
+  @DeleteMapping(value = { "/customer/id", "/customer/id/" })
+  public ResponseEntity deleteCustomer(@PathVariable("id") int id){
       boolean delete;
       try {
-          delete = customerService.deleteCustomerByID(personID);
+          delete = customerService.deleteCustomerByID(id);
       } catch (IllegalArgumentException exception) {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
       }
-      if (delete == true && customerService.getCustomer(personID) == null) {
-        return ResponseEntity.status(HttpStatus.OK).body("Customer with personID " + personID + " has been successfully deleted");
+      if (delete == true && customerService.getCustomer(id) == null) {
+        return ResponseEntity.status(HttpStatus.OK).body("Customer with personID " + id + " has been successfully deleted");
       }
       return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error deleting customer!");
   }
@@ -216,13 +237,23 @@ public class CustomerController {
       }
   }
   
-  @PutMapping(value = { "/customer/update/{id}", "/customer/update/{id}/" })
-  public ResponseEntity updateInfo(@PathVariable("id") int personID, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password,
+  @PostMapping(value={"/customer/update/address/", "/customer/update/address"})
+  public CustomerDto updateCustomerAddress(@RequestParam int id, @RequestParam int addressID) {
+      try {
+          return convertToDto(customerService.updateCustomerAddressById(id, addressID));
+      }
+      catch(NullPointerException exp) {
+          return null;
+      }
+  }
+  
+  @PutMapping(value = { "/customer/update/id", "/customer/update/id/" })
+  public ResponseEntity updateInfo(@PathVariable("id") int id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password,
                                 @RequestParam String streetName,  @RequestParam String StreetNum, @RequestParam String city, @RequestParam String postalCode,
                                 @RequestParam boolean isLocal){
       Customer c;
       try {
-          c = customerService.updateProfile(firstName, lastName, email, password, city, city, postalCode, streetName, StreetNum, isLocal, personID);
+          c = customerService.updateProfile(firstName, lastName, email, password, city, city, postalCode, streetName, StreetNum, isLocal, id);
       } catch (IllegalArgumentException exception) {
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
       }
