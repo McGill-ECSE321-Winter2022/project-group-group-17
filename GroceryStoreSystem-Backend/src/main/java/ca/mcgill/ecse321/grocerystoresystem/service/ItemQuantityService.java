@@ -28,9 +28,9 @@ public class ItemQuantityService {
 	}
 
 	@Transactional
-	public ItemQuantity getItemQuantityWithID(int itemID) {
+	public ItemQuantity getItemQuantityWithQuantityID(int quantityID) {
 		
-		ItemQuantity itemQuantity = itemQuantityRepository.findItemQuantityByQuantityID(itemID);
+		ItemQuantity itemQuantity = itemQuantityRepository.findItemQuantityByQuantityID(quantityID);
 	    if(itemQuantity == null) throw new NullPointerException("Item quantity not found");
 		return itemQuantity;
 	}

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.grocerystoresystem.service.ItemQuantityService;
-import ca.mcgill.ecse321.grocerystoresystem.dao.ItemQuantityRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 
@@ -22,9 +21,9 @@ public class ItemQuantityController {
 		return itemQuantityService.getAllItemQuantities().stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	@GetMapping(value = { "/itemquantity/get/id", "/itemquantity/get/id/" })
-	public ItemQuantityDto getItemQuantityWithId(@RequestParam int id) {
+	public ItemQuantityDto getItemQuantityWithQuantityID(@RequestParam int quantityID) {
 		try {
-			return convertToDto(itemQuantityService.getItemQuantityWithID(id));
+			return convertToDto(itemQuantityService.getItemQuantityWithQuantityID(quantityID));
 		}catch(NullPointerException e){
 			return null;
 		}
@@ -40,8 +39,7 @@ public class ItemQuantityController {
 	}
 	@PostMapping (value= {"/itemquantity/create/","itemquantity/create"})
 	public ItemQuantityDto createItemQuantity(@RequestParam int itemNum) {
-		ItemQuantity itemQuantity = itemQuantityService.createItemQuantity(itemNum);
-		return convertToDto(itemQuantity);
+		return convertToDto(itemQuantityService.createItemQuantity(itemNum));
 	}
 
 	private ItemQuantityDto convertToDto(ItemQuantity e) {

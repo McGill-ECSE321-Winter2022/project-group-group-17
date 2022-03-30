@@ -35,10 +35,12 @@ public class ItemQuantityControllerTest {
 
         this.itemQuantityRepository.deleteAll();
     }
+
     @AfterEach
     public void cleanup() {
         RestAssuredMockMvc.reset();
     }
+
 
     @Test
     public void testGetNoItemQuantities() {
@@ -50,17 +52,18 @@ public class ItemQuantityControllerTest {
     @Test
     public void testCreateAndQueryItemQuantitiesID() {
         final int id = given()
-                .param("itemnum", "1")
+                .param("itemNum", "1")
                 .post("/itemquantity/create")
                 .then().statusCode(200)
-                .body("itemnum", equalTo(1))
-                .extract().response().body().path("id");
+                .body("itemNum", equalTo(1))
+                .extract().response().body().path("quantityID");
+        System.out.println("MAYBE");
 
-        when().get("/itemquantity/get/id?id="+id)
+        when().get("/itemquantity/get/id?quantityID=" +id)
                 .then().statusCode(200)
-                .body("id", equalTo(id))
-                .body("itemnum", equalTo(1));
-
+                .body("quantityID", equalTo(id))
+                .body("itemNum", equalTo(1));
+        System.out.println("SO");
 
     }
 
