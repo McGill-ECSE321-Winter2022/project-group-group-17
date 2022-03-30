@@ -10,13 +10,16 @@ import ca.mcgill.ecse321.grocerystoresystem.service.ItemQuantityService;
 import ca.mcgill.ecse321.grocerystoresystem.dao.ItemQuantityRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
+
+@CrossOrigin(origins = "*")
+@RestController
 public class ItemQuantityController {
 	@Autowired
 	private ItemQuantityService itemQuantityService;
 	
 	@GetMapping(value = { "/itemquantities", "/itemquantities/" })
 	public List<ItemQuantityDto> getAllItemQuantities() {
-		return itemQuantityService.getAllItemQuantities().stream().map(p -> convertToDto(p)).collect(Collectors.toList());
+		return itemQuantityService.getAllItemQuantities().stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	@GetMapping(value = { "/itemquantity/get/id", "/itemquantity/get/id/" })
 	public ItemQuantityDto getItemQuantityWithId(@RequestParam int id) {
@@ -45,9 +48,7 @@ public class ItemQuantityController {
 		if (e == null) {
 			throw new  IllegalArgumentException("There is no such ItemQuantity");
 		}
-		ItemQuantityDto itemQuantityDto = new ItemQuantityDto(e.getItemNum());
-		
-		return null;
+		return new ItemQuantityDto(e.getItemNum());
 	}
 	
 }
