@@ -75,37 +75,6 @@ public class AddressControllerTest {
 
     }
 
-    @Test
-    public void testCreateAndQueryAddressStreetName() {
-        when().delete("/addresses/delete").then().statusCode(200);
 
-        given()
-                .param("streetName", "Peel")
-                .param("streetNum", "1234")
-                .param("city", "Montreal")
-                .param("postalCode","HHHHHH")
-                .param("country","Canada")
-                .param("isLocal",true)
-                .post("/address/create");
-        given()
-                .param("streetName", "Peel")
-                .param("streetNum", "1235")
-                .param("city", "Montreal")
-                .param("postalCode","HHH4HH")
-                .param("country","Canada")
-                .param("isLocal",true)
-                .post("/address/create");
-        given()
-                .param("streetname", "Peel")
-                .get("/address/get/streetname/")
-                .then().statusCode(200)
-                .body("size()", equalTo(2));
-        String str = given()
-                .param("streetname", "Peel")
-                .get("/address/check/streetname")
-                .then().statusCode(200)
-                .extract().response().body().asPrettyString();
-        assertEquals(str,"true");
-    }
 
 }
