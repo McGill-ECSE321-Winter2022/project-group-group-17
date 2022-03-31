@@ -42,11 +42,11 @@ public class ItemQuantityController {
 		return convertToDto(itemQuantityService.createItemQuantity(itemNum));
 	}
 
-	private ItemQuantityDto convertToDto(ItemQuantity e) {
-		if (e == null) {
+	private ItemQuantityDto convertToDto(ItemQuantity itemQuantity) {
+		if (itemQuantity == null) {
 			throw new  IllegalArgumentException("There is no such ItemQuantity");
 		}
-		return new ItemQuantityDto(e.getItemNum());
+		return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());
 	}
 	
 }

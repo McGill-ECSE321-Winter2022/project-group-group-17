@@ -4,9 +4,10 @@ public class ItemQuantityDto {
 	private int quantityID;
 	private int itemNum;
 
-	public ItemQuantityDto(int itemNum){
+	public ItemQuantityDto(int itemNum, int quantityID){
 		super();
 		this.itemNum = itemNum;
+		this.quantityID = quantityID;
 	}
 
 	public int getQuantityID() {

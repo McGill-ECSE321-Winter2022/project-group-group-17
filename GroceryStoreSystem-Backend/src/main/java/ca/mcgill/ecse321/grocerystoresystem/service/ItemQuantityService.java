@@ -22,9 +22,9 @@ public class ItemQuantityService {
 		ItemQuantity itemQuantity = new ItemQuantity();
 		itemQuantity.setItemNum(itemNum);
 
-		itemQuantityRepository.save(itemQuantity);
+		return itemQuantityRepository.save(itemQuantity);
 
-		return itemQuantity;
+
 	}
 
 	@Transactional
