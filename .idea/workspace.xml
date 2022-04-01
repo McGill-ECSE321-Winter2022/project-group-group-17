@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/tryingVueJS/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/tryingVueJS/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/tryingVueJS/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
