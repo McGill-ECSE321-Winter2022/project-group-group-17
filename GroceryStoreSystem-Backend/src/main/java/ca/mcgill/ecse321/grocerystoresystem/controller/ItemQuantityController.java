@@ -7,21 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import ca.mcgill.ecse321.grocerystoresystem.service.ItemQuantityService;
-import ca.mcgill.ecse321.grocerystoresystem.dao.ItemQuantityRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
+
+@CrossOrigin(origins = "*")
+@RestController
 public class ItemQuantityController {
 	@Autowired
 	private ItemQuantityService itemQuantityService;
 	
 	@GetMapping(value = { "/itemquantities", "/itemquantities/" })
 	public List<ItemQuantityDto> getAllItemQuantities() {
-		return itemQuantityService.getAllItemQuantities().stream().map(p -> convertToDto(p)).collect(Collectors.toList());
+		return itemQuantityService.getAllItemQuantities().stream().map(this::convertToDto).collect(Collectors.toList());
 	}
 	@GetMapping(value = { "/itemquantity/get/id", "/itemquantity/get/id/" })
-	public ItemQuantityDto getItemQuantityWithId(@RequestParam int id) {
+	public ItemQuantityDto getItemQuantityWithQuantityID(@RequestParam int quantityID) {
 		try {
-			return convertToDto(itemQuantityService.getItemQuantityWithID(id));
+			return convertToDto(itemQuantityService.getItemQuantityWithQuantityID(quantityID));
 		}catch(NullPointerException e){
 			return null;
 		}
@@ -37,17 +39,14 @@ public class ItemQuantityController {
 	}
 	@PostMapping (value= {"/itemquantity/create/","itemquantity/create"})
 	public ItemQuantityDto createItemQuantity(@RequestParam int itemNum) {
-		ItemQuantity itemQuantity = itemQuantityService.createItemQuantity(itemNum);
-		return convertToDto(itemQuantity);
+		return convertToDto(itemQuantityService.createItemQuantity(itemNum));
 	}
 
-	private ItemQuantityDto convertToDto(ItemQuantity e) {
-		if (e == null) {
+	private ItemQuantityDto convertToDto(ItemQuantity itemQuantity) {
+		if (itemQuantity == null) {
 			throw new  IllegalArgumentException("There is no such ItemQuantity");
 		}
-		ItemQuantityDto itemQuantityDto = new ItemQuantityDto(e.getItemNum());
-		
-		return null;
+		return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());
 	}
 	
 }

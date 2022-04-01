@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import  ca.mcgill.ecse321.grocerystoresystem.dao.*; //imports all the classes
 import  ca.mcgill.ecse321.grocerystoresystem.model.*;
 
-
+@Service
 public class ItemQuantityService {
 
 	@Autowired
@@ -22,15 +22,15 @@ public class ItemQuantityService {
 		ItemQuantity itemQuantity = new ItemQuantity();
 		itemQuantity.setItemNum(itemNum);
 
-		itemQuantityRepository.save(itemQuantity);
+		return itemQuantityRepository.save(itemQuantity);
 
-		return itemQuantity;
+
 	}
 
 	@Transactional
-	public ItemQuantity getItemQuantityWithID(int itemID) {
+	public ItemQuantity getItemQuantityWithQuantityID(int quantityID) {
 		
-		ItemQuantity itemQuantity = itemQuantityRepository.findItemQuantityByQuantityID(itemID);
+		ItemQuantity itemQuantity = itemQuantityRepository.findItemQuantityByQuantityID(quantityID);
 	    if(itemQuantity == null) throw new NullPointerException("Item quantity not found");
 		return itemQuantity;
 	}
