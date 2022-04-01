@@ -35,7 +35,7 @@ jobs:
         - name: push frontend
           uses: akhileshns/heroku-deploy@v3.12.12 
           with:
-            heroku_api_key: fd1510e5-6c24-4fad-806b-edddd8cdf010
+            heroku_api_key: 678de1b4-6da9-438e-800c-70f13d302580
             heroku_app_name: "grocerystoresys-frontend-22ws" 
             heroku_email: "onyekachi.ezekwem@mail.mcgill.ca"
             dontuseforce: false
