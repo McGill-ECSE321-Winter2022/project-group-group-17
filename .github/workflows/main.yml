@@ -27,3 +27,15 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       working-directory: GroceryStoreSystem-Backend
+  frontend:
+      needs: build
+      runs-on: Windows-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: push frontend
+          uses: akhileshns/heroku-deploy@v3.12.12 
+          with:
+            heroku_api_key: fd1510e5-6c24-4fad-806b-edddd8cdf010
+            heroku_app_name: "grocerystoresys-frontend-22ws" 
+            heroku_email: "onyekachi.ezekwem@mail.mcgill.ca"
+            dontuseforce: false
