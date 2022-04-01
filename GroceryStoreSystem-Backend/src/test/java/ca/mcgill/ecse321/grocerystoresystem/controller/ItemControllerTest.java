@@ -65,7 +65,7 @@ public class ItemControllerTest {
                 .body("portionUnit", equalTo("20g"))
                 .body("inventoryType", equalTo(InventoryType.perishable.name()))
                 .extract().response().body().path("itemID");
-        System.out.println("YES");
+        
         when().get("/item/get/id?id=" +id)
                 .then().statusCode(200)
                 .body("name", equalTo("cheeseburger"))
