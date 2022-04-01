@@ -10,7 +10,9 @@ public class AddressDto {
     private String postalCode;
     private String country;
 
-    public AddressDto(int id, boolean isLocal, String streetName, String streetNum, String city, String postalCode, String country) {
+    public AddressDto(int id, boolean isLocal, String streetName, String streetNum,
+                      String city, String postalCode, String country) {
+        this.id = id;
         this.isLocal = isLocal;
         this.streetName = streetName;
         this.streetNum = streetNum;
