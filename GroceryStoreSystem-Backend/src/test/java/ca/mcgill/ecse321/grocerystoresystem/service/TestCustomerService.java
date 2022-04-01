@@ -277,10 +277,10 @@ public class TestCustomerService {
     @Test
     public void testCreateCustomer() {
         Customer savedCustomer = null;
+        Address a = createAddress();
 
         try {
-            savedCustomer = this.customerService.createCustomer(CUSTOMER_KEY_6, FIRST_NAME6, LAST_NAME6, EMAIL6, PASSWORD6, CITY, COUNTRY, POSTAL_CODE, 
-                STREET_NAME, STREET_NUM, IS_LOCAL);
+            savedCustomer = this.customerService.createCustomer(CUSTOMER_KEY_6, FIRST_NAME6, LAST_NAME6, EMAIL6, PASSWORD6, a);
         }
         catch(IllegalArgumentException exp) {
             fail(exp.getMessage());
@@ -367,7 +367,7 @@ public class TestCustomerService {
     public void testLoginSuccessful() {
       Customer c = createCustomer();
       try {
-        c = customerService.login(EMAIL, PASSWORD, CUSTOMER_KEY);
+        c = customerService.login(EMAIL, PASSWORD);
       }catch(IllegalArgumentException exp) {
         fail(exp.getMessage());
       }
@@ -401,7 +401,7 @@ public class TestCustomerService {
       Customer c = createCustomer();
       String error = "";
       try {
-        c = customerService.login(EMAIL, PASSWORD2, CUSTOMER_KEY);
+        c = customerService.login(EMAIL, PASSWORD2);
       }catch(IllegalArgumentException exp) {
         error = exp.getMessage();
       }
@@ -417,7 +417,7 @@ public class TestCustomerService {
       Customer c = createCustomer();
       String error = "";
       try {
-        c = customerService.login(EMAIL2, PASSWORD, CUSTOMER_KEY);
+        c = customerService.login(EMAIL2, PASSWORD);
       }catch(IllegalArgumentException exp) {
         error = exp.getMessage();
       }
@@ -820,10 +820,10 @@ public class TestCustomerService {
     @Test
     public void testUpdateCustomerProfile() {
         Customer savedCustomer = createCustomerWithAddress();
-        
+        Address a = createAddress();
         try {
-            savedCustomer = this.customerService.updateProfile(FIRST_NAME2, LAST_NAME2, EMAIL2, PASSWORD2, CITY, COUNTRY, POSTAL_CODE, STREET_NAME, STREET_NUM, true, CUSTOMER_KEY);
-        }
+            savedCustomer = this.customerService.updateProfile(FIRST_NAME2, LAST_NAME2, EMAIL2, PASSWORD2, a, CUSTOMER_KEY);
+            }
         catch(Exception exp) {
             fail(exp.getMessage());
         }
@@ -848,7 +848,6 @@ public class TestCustomerService {
      */
     @Test
     public void deleteCustomerUnSuccessful() {
-        Customer c = createCustomer();
         boolean b = false;
         String error = null;
         try {

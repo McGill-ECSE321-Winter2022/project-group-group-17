@@ -2,15 +2,11 @@ package ca.mcgill.ecse321.grocerystoresystem.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ca.mcgill.ecse321.grocerystoresystem.dao.CustomerRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
-import ca.mcgill.ecse321.grocerystoresystem.dao.PersonRepository;
-
 import ca.mcgill.ecse321.grocerystoresystem.model.*;
 
 @Service
@@ -20,38 +16,7 @@ public class CustomerService {
   private CustomerRepository customerRepository;
   @Autowired
   private AddressRepository addressRepository;
-  @Autowired
-  private PersonRepository personRepository;
   
-  /**
-   * @author Yash Khapre
-   * @param int personID, String firstName, String lastName, String email, String password, String city, String country, String postalCode, String streetName, String streetNum, Boolean isLocal
-   * Method to create a new customer profile using all attributes of a customer and their address
-   */
-  @Transactional
-  public Customer createCustomer(int personID, String firstName, String lastName, String email, String password, String city, String country, String postalCode, 
-      String streetName, String streetNum, Boolean isLocal) {
-    if(firstName == null || lastName == null || firstName.isEmpty() || lastName.isEmpty() || email == null || email.isEmpty() || email.contains("@") == false) {
-      throw new IllegalArgumentException("Please enter a valid name and email");
-    }
-    if(password.length() < 8 || password == null) {
-      throw new IllegalArgumentException("Please enter a password with at least 8 characters");
-    }
-    if (city.isEmpty() || country.isEmpty() || postalCode.isEmpty() || streetName.isEmpty() || streetNum.isEmpty() || city==null || 
-        country == null || postalCode == null || streetName == null || streetNum == null || isLocal == null) {  
-      throw new IllegalArgumentException("Please enter a valid address");
-    }
-    if(customerRepository.existsByPersonID(personID)) {
-      throw new IllegalArgumentException("Customer already exists!");
-    }
-    if(customerRepository.existsByEmail(email)) {
-      throw new IllegalArgumentException("Person with this email already exists!");
-    }
-    Address newAddress = new Address(streetName, streetNum, city, postalCode, country, isLocal);
-    Customer newOnlineCustomer = new Customer(firstName, lastName, email, password, newAddress, false);
-    customerRepository.save(newOnlineCustomer);
-    return newOnlineCustomer;    
-  }
   
   /**
    * @author Yash Khapre
@@ -122,12 +87,12 @@ public class CustomerService {
    * Customer login method
    */
   @Transactional
-  public Customer login(String email, String password, int personID) {
+  public Customer login(String email, String password) {
     if (email == null || email.contains("@") == false) {
       throw new IllegalArgumentException("Please enter a valid email");
     } 
-    Customer customer = customerRepository.findCustomerByPersonID(personID);
-    if (customer.getEmail().equals(email) == false) {
+    Customer customer = customerRepository.findCustomerByEmail(email);
+    if (customer == null) {
       throw new IllegalArgumentException("Incorrect email inputted!");
     }
     if (customer.getPassword().equals(password) == false) {
@@ -267,6 +232,18 @@ public class CustomerService {
   
   /**
    * @author Yash Khapre
+   * @param none
+   * Delete all customers method
+   */
+  @Transactional
+  public boolean deleteCustomers() {
+      customerRepository.deleteAll();
+
+      return this.getAllCustomers().size() == 0;
+  }
+  
+  /**
+   * @author Yash Khapre
    * @param int personID
    * Method that checks if a person is a Customer using personID
    */
@@ -390,32 +367,32 @@ public class CustomerService {
   
   /**
    * @author Yash Khapre
-   * @param String firstName, String lastName, String email, String password, String city, String country, String postalCode, String streetName, String streetNum, Boolean isLocal, int personID
+   * @param String firstName, String lastName, String email, Address a
    * Method that updates a specific customer's profile
    */
   @Transactional
-  public Customer updateProfile(String firstName, String lastName, String email, String password, String city, String country, String postalCode, 
-      String streetName, String streetNum, Boolean isLocal, int personID) {
+  public Customer updateProfile(String firstName, String lastName, String email, String password, Address address, int personID) {
     if(firstName == null || lastName == null || firstName.isEmpty() || lastName.isEmpty() || email == null || email.isEmpty() || email.contains("@") == false) {
       throw new IllegalArgumentException("Please enter a valid name and email");
     }   
     if(password.length() < 8 || password == null) {
       throw new IllegalArgumentException("Please enter a password with at least 8 characters");
     } 
-    if (city.isEmpty() || country.isEmpty() || postalCode.isEmpty() || streetName.isEmpty() || streetNum.isEmpty() || city==null || 
-        country == null || postalCode == null || streetName == null || streetNum == null || isLocal == null) {  
+    if (address.getCity().isEmpty() || address.getCountry().isEmpty() || address.getPostalCode().isEmpty() || address.getStreetName().isEmpty() || 
+        address.getStreetNum().isEmpty() || address.getCity()==null || address.getCountry() == null || address.getPostalCode() == null ||
+        address.getStreetName() == null || address.getStreetNum() == null) {  
       throw new IllegalArgumentException("Please enter a valid address");
     }
 
     Customer c = customerRepository.findCustomerByPersonID(personID);
     Address a = new Address();
     if(c != null && (c instanceof Customer)) {
-      a.setCity(city);
-      a.setCountry(country);
-      a.setPostalCode(postalCode);
-      a.setLocal(isLocal);
-      a.setStreetName(streetName);
-      a.setStreetNum(streetNum);
+      a.setCity(address.getCity());
+      a.setCountry(address.getCountry());
+      a.setPostalCode(address.getPostalCode());
+      a.setLocal(address.isLocal());
+      a.setStreetName(address.getStreetName());
+      a.setStreetNum(address.getStreetNum());
       
       c.setEmail(email);
       c.setFirstName(firstName);

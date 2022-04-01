@@ -5,9 +5,6 @@ import ca.mcgill.ecse321.grocerystoresystem.dto.CustomerDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.Address;
 import ca.mcgill.ecse321.grocerystoresystem.model.Customer;
 import ca.mcgill.ecse321.grocerystoresystem.service.CustomerService;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,142 +60,102 @@ public class CustomerController {
   }
   
   @GetMapping(value = { "/customers", "/customers/" })
-  public ResponseEntity getAllCustomers() {
-    List<CustomerDto> customerDtoList = new ArrayList<>();
-    List<Customer> customerList;
-    try {
-        customerList = customerService.getAllCustomers();
-    } catch (IllegalArgumentException exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }
-    for (Customer c : customerList) {
-        customerDtoList.add(convertToDto(c));
-    }
-    if (customerDtoList.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot find any Customers in System");
-    }
-    return new ResponseEntity<>(customerDtoList, HttpStatus.OK);
+  public List<CustomerDto> getAllCustomers() {
+    return customerService.getAllCustomers().stream().map(this::convertToDto).collect(Collectors.toList());
 }
   
   @GetMapping(value = { "/customer/get/id", "/customer/get/id/" })
-  public ResponseEntity getCustomerByID(@PathVariable("id") int id) {
-      Customer customer;
-      try {
-          customer = customerService.getCustomer(id);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-      if (customer == null) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot find Customer with given personID" + id);
-      }
-      return new ResponseEntity<>(convertToDto(customer), HttpStatus.OK);
+  public CustomerDto getCustomerByID(@RequestParam int id) {
+    try {
+      return convertToDto(customerService.getCustomer(id));
   }
+  catch (NullPointerException exp) {
+      return null;
+  }
+}
   
   @GetMapping(value = { "/customer/get/email", "customer/get/email/" })
-  public ResponseEntity getCustomerByEmail(@RequestParam String email) {
-      Customer c;
-      try {
-          c = customerService.getCustomerByEmail(email);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-      if (c == null) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot find Customer with this email");
-      }
-      return new ResponseEntity<>(convertToDto(c), HttpStatus.OK);
+  public CustomerDto getCustomerByEmail(@RequestParam String email) {
+    try {
+      return convertToDto(customerService.getCustomerByEmail(email));
   }
+  catch (NullPointerException exp) {
+      return null;
+  }
+}
   
   @PostMapping(value = { "/customer/create", "/customer/create/"})
-  public ResponseEntity createCustomer(@RequestParam int personID, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String password,
-                                    @RequestParam String city, @RequestParam String country, @RequestParam String postalCode,
-                                    @RequestParam String streetName, @RequestParam String streetNum, boolean isLocal) {
-      Customer customer;
-      try {
-          customer = customerService.createCustomer(personID, firstname, lastname, email, password, city, country, postalCode, streetName, streetNum, isLocal);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-      return new ResponseEntity<>(convertToDto(customer), HttpStatus.OK);
+  public CustomerDto createCustomer(@RequestParam int personID, @RequestParam String firstname, @RequestParam String lastname, 
+      @RequestParam String email, @RequestParam String password, @RequestParam Address address) {
+    Customer c = this.customerService.createCustomer(personID, firstname, lastname, email, password, address);
+    return convertToDto(c);
   }
   
-  @PutMapping(value = {"/customer/login/id", "/customer/login/id/"})
-  public ResponseEntity login(@PathVariable("id") int id, @RequestParam String password, @RequestParam String email) {
-      Customer c;
-      try {
-          c = customerService.login(email, password, id);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-      if (c == null) {
-        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error logging in!");
-      }
-      return new ResponseEntity<>(convertToDto(c), HttpStatus.OK);
+  @PostMapping(value = {"/customer/login", "/customer/login/"})
+  public boolean login(@RequestParam String password, @RequestParam String email) {
+    try {
+      return (this.customerService.login(email, password) != null);
   }
+  catch(NullPointerException | IllegalArgumentException exp) {
+      System.out.println(exp.getMessage());
+      return false;
+  }
+}
   
-  @PutMapping(value = { "/customer/logout/id", "/customer/logout/id"})
-  public ResponseEntity logout(@PathVariable("id") int id, @RequestParam String email) {
-      Customer customer;
+  @PostMapping(value = { "/customer/logout", "/customer/logout/id"})
+  public boolean logout(@RequestParam int id, @RequestParam String email) {
+    try {
+      return (this.customerService.logout(email,id) != null);
+  }
+  catch(NullPointerException | IllegalArgumentException exp) {
+      System.out.println(exp.getMessage());
+      return false;
+  }
+}
+  
+  @DeleteMapping(value={"/customer/delete/", "/customer/delete"})
+  public boolean deleteCustomerByID(@RequestParam int id) {
       try {
-          customer = customerService.logout(email, id);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+          return customerService.deleteCustomerByID(id);
       }
-      if (customer.getLoginStatus() == false) {
-        return ResponseEntity.status(HttpStatus.OK).body("Successfully logged out");
-      }
-      else {
-        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error logging out!");
+      catch (NullPointerException exp) {
+          return false;
       }
   }
 
-  @DeleteMapping(value = { "/customer/id", "/customer/id/" })
-  public ResponseEntity deleteCustomer(@PathVariable("id") int id){
-      boolean delete;
-      try {
-          delete = customerService.deleteCustomerByID(id);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-      if (delete == true && customerService.getCustomer(id) == null) {
-        return ResponseEntity.status(HttpStatus.OK).body("Customer with personID " + id + " has been successfully deleted");
-      }
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Error deleting customer!");
+  @DeleteMapping(value = { "/customers/delete", "/customers/delete/" })
+  public boolean deleteCustomers(){
+      return customerService.deleteCustomers();
   }
   
   @GetMapping(value = {"/customers/local", "/customers/local/"})
-  public ResponseEntity getLocalCustomers() {
+  public List<CustomerDto> getLocalCustomers() {
       List<CustomerDto> customerDtoList = new ArrayList<>();
       List<Customer> customerList;
       try {
           customerList = customerService.getLocalCustomers();
       } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+          return null;
       }
       for (Customer c : customerList) {
           customerDtoList.add(convertToDto(c));
       }
-      if (customerDtoList.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot find any local customers");
-      }
-      return new ResponseEntity<>(customerDtoList, HttpStatus.OK);
+      return customerDtoList;
   }
   
   @GetMapping(value = {"/customers/nonlocal", "/customers/nonlocal/"})
-  public ResponseEntity getNonLocalCustomers() {
+  public List<CustomerDto> getNonLocalCustomers() {
       List<CustomerDto> customerDtoList = new ArrayList<>();
       List<Customer> customerList;
       try {
-          customerList = customerService.getNonLocalCustomers();
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-      for (Customer c : customerList) {
-          customerDtoList.add(convertToDto(c));
-      }
-      if (customerDtoList.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot find any local customers");
-      }
-      return new ResponseEntity<>(customerDtoList, HttpStatus.OK);
+        customerList = customerService.getNonLocalCustomers();
+    } catch (IllegalArgumentException exception) {
+        return null;
+    }
+    for (Customer c : customerList) {
+        customerDtoList.add(convertToDto(c));
+    }
+    return customerDtoList;
   }
   
   @GetMapping(value = {"/customer/check/id/", "/customer/check/id"})
@@ -248,19 +205,14 @@ public class CustomerController {
   }
   
   @PutMapping(value = { "/customer/update/id", "/customer/update/id/" })
-  public ResponseEntity updateInfo(@PathVariable("id") int id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password,
-                                @RequestParam String streetName,  @RequestParam String StreetNum, @RequestParam String city, @RequestParam String postalCode,
-                                @RequestParam boolean isLocal){
+  public CustomerDto updateInfo(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password,
+                                @RequestParam Address address){
       Customer c;
       try {
-          c = customerService.updateProfile(firstName, lastName, email, password, city, city, postalCode, streetName, StreetNum, isLocal, id);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+          return convertToDto(customerService.updateProfile(firstName, lastName, email, password, address, id));
+      } catch (NullPointerException | IllegalArgumentException exception) {
+          return null;
       }
-      if (c == null) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cannot update this Customer profile");
-      }
-      return new ResponseEntity<>(convertToDto(c), HttpStatus.OK);
   }
   
   private CustomerDto convertToDto(Customer c) {
