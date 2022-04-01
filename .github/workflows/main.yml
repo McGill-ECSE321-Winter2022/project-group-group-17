@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  backend:
 
     runs-on: Windows-latest
 
@@ -28,7 +28,7 @@ jobs:
       run: ./gradlew build
       working-directory: GroceryStoreSystem-Backend
   frontend:
-      needs: build
+      needs: backend
       runs-on: Windows-latest
       steps:
         - uses: actions/checkout@v2
