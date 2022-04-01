@@ -57,13 +57,12 @@ public class ItemQuantityControllerTest {
                 .then().statusCode(200)
                 .body("itemNum", equalTo(1))
                 .extract().response().body().path("quantityID");
-        System.out.println("MAYBE");
 
         when().get("/itemquantity/get/id?quantityID=" +id)
                 .then().statusCode(200)
                 .body("quantityID", equalTo(id))
                 .body("itemNum", equalTo(1));
-        System.out.println("SO");
+
 
     }
 
