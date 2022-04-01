@@ -74,7 +74,5 @@ public class AddressControllerTest {
                 .body("local", equalTo(true));
 
     }
-
-
-
+    
 }
