@@ -59,7 +59,7 @@ public class CustomerService {
    * Method to create a customer given everything but an address
    */
   @Transactional
-  public Customer createCustomer(int personID, String firstName, String lastName, String email, String password) {
+  public Customer createCustomer(String firstName, String lastName, String email, String password) {
       if(firstName == null || firstName.length() == 0) {
         throw new IllegalArgumentException("Please provide valid First Name");
       }
@@ -118,8 +118,8 @@ public class CustomerService {
       throw new IllegalArgumentException("Incorrect email inputted!");
     }
     customer.setLoginStatus(false);
-    customerRepository.save(customer);
-    return customer;
+    
+    return customerRepository.save(customer);
   }
   
   /**
@@ -129,9 +129,7 @@ public class CustomerService {
    */
   @Transactional
   public Customer getCustomer(int personID) {
-    if (personID <= 0) {
-      throw new IllegalArgumentException("Please enter a valid personID");
-    }
+    
     Customer customer = customerRepository.findCustomerByPersonID(personID);
     if(customer == null) {
       throw new IllegalArgumentException("Cannot find customer with specified ID");
@@ -217,17 +215,13 @@ public class CustomerService {
    * Delete a customer given a personID method
    */
   @Transactional
-  public boolean deleteCustomerByID(int personID) {
-    if (personID <= 0) {
-      throw new IllegalArgumentException("Please enter a valid personID");
-    }    
-    Customer c = customerRepository.findCustomerByPersonID(personID);    
-    if(c == null) {
-      throw new NullPointerException("Cannot find Customer with this personID");
-    }    
-    customerRepository.delete(c);
-    addressRepository.delete(c.getAddress());
-    return true;
+  public boolean deleteCustomerByID(int personID) {  
+    Customer customer = customerRepository.findCustomerByPersonID(personID);    
+    if(customer == null) throw new NullPointerException("Customer not found");
+
+    customerRepository.delete(customer);
+
+    return !this.isCustomerByID(customer.getPersonID());
   }
   
   /**

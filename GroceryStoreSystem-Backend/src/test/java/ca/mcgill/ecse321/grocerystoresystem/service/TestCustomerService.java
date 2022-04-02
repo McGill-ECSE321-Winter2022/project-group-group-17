@@ -333,7 +333,7 @@ public class TestCustomerService {
         Customer savedCustomer = null;
         String error = null;
         try {
-            savedCustomer = this.customerService.createCustomer(CUSTOMER_KEY, null, LAST_NAME, EMAIL, PASSWORD);
+            savedCustomer = this.customerService.createCustomer(null, LAST_NAME, EMAIL, PASSWORD);
         }
         catch(IllegalArgumentException exp) {
             error = exp.getMessage();

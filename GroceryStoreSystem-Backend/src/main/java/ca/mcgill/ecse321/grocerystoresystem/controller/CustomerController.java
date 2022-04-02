@@ -20,44 +20,35 @@ public class CustomerController {
   @Autowired
   private CustomerService customerService;
   
-  @GetMapping(value = {"/customer/get/firstname/", "/customer/get/firstname"})
-  public List<CustomerDto> getCustomerWithFirstName(@RequestParam String firstname) {
+  @GetMapping(value = {"/customer/get/firstName/", "/customer/get/firstName"})
+  public List<CustomerDto> getCustomerWithFirstName(@RequestParam String firstName) {
       try {
-          return customerService.getCustomerByFirstName(firstname).stream().map(this::convertToDto).collect(Collectors.toList());
+          return customerService.getCustomerByFirstName(firstName).stream().map(this::convertToDto).collect(Collectors.toList());
       }
       catch (NullPointerException exp) {
           return null;
       }
   }
 
-  @GetMapping(value = {"/customer/get/lastname/", "/customer/get/lastname"})
-  public List<CustomerDto> getCustomerWithLastName(@RequestParam String lastname) {
+  @GetMapping(value = {"/customer/get/lastName/", "/customer/get/lastName"})
+  public List<CustomerDto> getCustomerWithLastName(@RequestParam String lastName) {
       try {
-          return customerService.getCustomerByLastName(lastname).stream().map(this::convertToDto).collect(Collectors.toList());
+          return customerService.getCustomerByLastName(lastName).stream().map(this::convertToDto).collect(Collectors.toList());
       }
       catch (NullPointerException exp) {
           return null;
       }
   }
   
-  @GetMapping(value = { "/customers/get/fullname", "/customers/get/fullname/" })
-  public ResponseEntity getCustomersByFirstAndLastName(@RequestParam String firstName, @RequestParam String lastName) {
-      List<CustomerDto> cDtoList = new ArrayList<>();
-      List<Customer> customerList;
-      try {
-          customerList = customerService.getCustomerByFullName(firstName, lastName);
-      } catch (IllegalArgumentException exception) {
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-      }
-
-      for (Customer c : customerList) {
-          cDtoList.add(convertToDto(c));
-      }
-      if (cDtoList.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No customers with specified first and last names exists");
-      }
-      return new ResponseEntity<>(cDtoList, HttpStatus.OK);
+  @GetMapping(value = { "/customer/get/fullName", "/customer/get/fullName/" })
+  public List<CustomerDto> getCustomersByFirstAndLastName(@RequestParam String firstName, @RequestParam String lastName) {
+    try {
+      return customerService.getCustomerByFullName(firstName, lastName).stream().map(this::convertToDto).collect(Collectors.toList());
   }
+  catch (NullPointerException exp) {
+      return null;
+  }
+}
   
   @GetMapping(value = { "/customers", "/customers/" })
   public List<CustomerDto> getAllCustomers() {
@@ -85,9 +76,9 @@ public class CustomerController {
 }
   
   @PostMapping(value = { "/customer/create", "/customer/create/"})
-  public CustomerDto createCustomer(@RequestParam int personID, @RequestParam String firstname, @RequestParam String lastname, 
-      @RequestParam String email, @RequestParam String password, @RequestParam Address address) {
-    Customer c = this.customerService.createCustomer(personID, firstname, lastname, email, password, address);
+  public CustomerDto createCustomer( @RequestParam String firstName, @RequestParam String lastName, 
+      @RequestParam String email, @RequestParam String password) {
+    Customer c = this.customerService.createCustomer(firstName, lastName, email, password);
     return convertToDto(c);
   }
   
@@ -163,14 +154,14 @@ public class CustomerController {
       return customerService.isCustomerByID(id);
   }
 
-  @GetMapping(value = {"/customer/check/firstname/", "/customer/check/firstname"})
-  public boolean isCustomerWithFirstName(@RequestParam String firstname) {
-    return customerService.isCustomerByFirstName(firstname);
+  @GetMapping(value = {"/customer/check/firstName/", "/customer/check/firstName"})
+  public boolean isCustomerWithFirstName(@RequestParam String firstName) {
+    return customerService.isCustomerByFirstName(firstName);
   }
 
-  @GetMapping(value = {"/customer/check/lastname/", "/customer/check/lastname"})
-  public boolean isCustomerWithLastName(@RequestParam String lastname) {
-      return customerService.isCustomerByLastName(lastname);
+  @GetMapping(value = {"/customer/check/lastName/", "/customer/check/lastName"})
+  public boolean isCustomerWithLastName(@RequestParam String lastName) {
+      return customerService.isCustomerByLastName(lastName);
   }
 
   @GetMapping(value = {"/customer/check/email/", "/customer/check/email"})
@@ -178,9 +169,9 @@ public class CustomerController {
       return customerService.isCustomerByEmail(email);
   }
 
-  @GetMapping(value = {"/customer/check/fullname/", "/customer/check/fullname"})
-  public boolean isCustomerWithFirstNameAndLastName(@RequestParam String firstname, @RequestParam String lastname) {
-      return customerService.isCustomerByFirstAndLastName(firstname, lastname);
+  @GetMapping(value = {"/customer/check/fullName/", "/customer/check/fullName"})
+  public boolean isCustomerWithFirstNameAndLastName(@RequestParam String firstName, @RequestParam String lastName) {
+      return customerService.isCustomerByFirstAndLastName(firstName, lastName);
   }
   
   @PostMapping(value = {"/customer/update/password", "/customer/update/password/"})
@@ -219,8 +210,13 @@ public class CustomerController {
     if (c == null) {
       throw new NullPointerException("Cannot find this Customer");
     }
-    
+    if (c.getAddress() != null) {
     return new CustomerDto(c.getPersonID(), c.getFirstName(),c.getLastName(), c.getEmail(), convertToDto(c.getAddress()), c.getLoginStatus());
+    }
+    else {
+      return new CustomerDto(c.getPersonID(), c.getFirstName(),c.getLastName(), c.getEmail(), convertToDto(new Address()), c.getLoginStatus());
+    }
+    
     }
   
   private AddressDto convertToDto(Address address) {
