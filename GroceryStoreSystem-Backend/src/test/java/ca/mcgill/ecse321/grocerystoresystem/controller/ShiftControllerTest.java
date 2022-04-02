@@ -131,51 +131,6 @@ public class ShiftControllerTest {
         assertEquals(str, "true");
     }
 
-//    @Test
-//    public void testCreateAndGetByEmployee() {
-//        final int id = given()
-//                .param("date", "2022.01.02")
-//                .param("starttime", "08.30.00")
-//                .param("endtime", "17.00.00")
-//                .param("status", "assigned")
-//                .post("/shift/create")
-//                .then().statusCode(200)
-//                .extract().response().body().path("id");
-//
-//
-//        final int employeeID = given()
-//                .param("firstname", "Mario")
-//                .param("lastname", "Bouzakhm")
-//                .param("email", "mariobouzakhm03@gmail.com")
-//                .param("password", "12345678")
-//                .param("empStatus", "hired")
-//                .post("/employee/create")
-//                .then().statusCode(200)
-//                .extract().response().body().path("id");
-//
-//
-//        given()
-//                .param("shiftID", id)
-//                .param("employeeID", employeeID)
-//                .post("/shift/update/employee")
-//                .then().statusCode(200);
-//
-//        given()
-//                .param("id", employeeID)
-//                .get("/shift/get/employee")
-//                .then().statusCode(200)
-//                .body("[0].id", equalTo(id))
-//                .body("[0].date", equalTo("2022-01-02"));
-//
-//        String str = given()
-//                .param("id", employeeID)
-//                .get("/shift/check/employee")
-//                .then().statusCode(200)
-//                .extract().response().body().asPrettyString();
-//
-//        assertEquals(str, "true");
-//    }
-
     @Test
     public void testCreateAndGetByDateAndTimes() {
         given()
@@ -211,56 +166,6 @@ public class ShiftControllerTest {
 
         assertEquals(str, "true");
     }
-//
-//    @Test
-//    public void testCreateAndGetByEmployeeAndDateAndTimes() {
-//        final int id = given()
-//                .param("date", "2022.01.02")
-//                .param("starttime", "10.00.00")
-//                .param("endtime", "17.00.00")
-//                .param("status", "assigned")
-//                .post("/shift/create")
-//                .then().statusCode(200)
-//                .extract().response().body().path("id");
-//
-//
-//        final int employeeID = given()
-//                .param("firstname", "Mario")
-//                .param("lastname", "Bouzakhm")
-//                .param("email", "mariobouzakhm03@gmail.com")
-//                .param("password", "12345678")
-//                .param("empStatus", "hired")
-//                .post("/employee/create")
-//                .then().statusCode(200)
-//                .extract().response().body().path("id");
-//
-//        given()
-//                .param("shiftID", id)
-//                .param("employeeID", employeeID)
-//                .post("/shift/update/employee")
-//                .then().statusCode(200);
-//
-//        given()
-//                .param("id", employeeID)
-//                .param("date", "2022.01.02")
-//                .param("starttime", "10.00.00")
-//                .param("endtime", "17.00.00")
-//                .get("/shift/get/empdatetime")
-//                .then().statusCode(200)
-//                .body("[0].id", equalTo(id))
-//                .body("[0].employeeDto.id", equalTo(employeeID));
-//
-//        String str = given()
-//                .param("id", employeeID)
-//                .param("date", "2022.01.02")
-//                .param("starttime", "10.00.00")
-//                .param("endtime", "17.00.00")
-//                .get("/shift/check/empdatetime")
-//                .then().statusCode(200)
-//                .extract().response().body().asPrettyString();
-//
-//        assertEquals(str, "true");
-//    }
 
     @Test
     public void testCreateAndDeleteShift() {
