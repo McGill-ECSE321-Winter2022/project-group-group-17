@@ -856,6 +856,6 @@ public class TestCustomerService {
             error = exp.getMessage();
         }
         assertFalse(b);
-        assertEquals("Cannot find Customer with this personID", error);
+        assertEquals("Customer not found", error);
     }
 }
