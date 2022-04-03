@@ -35,12 +35,8 @@ public class SpecialDayService {
    * Method to create a specialDay
    */
   @Transactional
-  public SpecialDay createSpecialDay(int specialDayID, LocalDateTime startTime, LocalDateTime endTime) {
+  public SpecialDay createSpecialDay(LocalDateTime startTime, LocalDateTime endTime) {
     SpecialDay sDay = new SpecialDay();
-    
-    if(specialDayID < 0) {
-      throw new IllegalArgumentException("Please enter a valid specialDayID");
-    }
     if(startTime == null) {
       throw new IllegalArgumentException("Please enter a valid start time!");
     }
@@ -50,9 +46,9 @@ public class SpecialDayService {
     if(startTime.isAfter(endTime)) {
       throw new IllegalArgumentException("The start time cannot be after the end time!");
     } 
-    sDay.setSpecialDayID(specialDayID);
     sDay.setStartTimestamp(startTime);
     sDay.setEndTimestamp(endTime);
+    specialDayRepository.save(sDay);
     return sDay;
   }
   
@@ -74,6 +70,16 @@ public class SpecialDayService {
   @Transactional
   public boolean isSpecialDayByID(int specialDayID) {
       return specialDayRepository.existsBySpecialDayID(specialDayID);
+  }
+  
+  /**
+   * @author Yash Khapre
+   * @param none
+   * Method that gets all specialDays
+   */
+  @Transactional
+  public List<SpecialDay> getAllSpecialDays(){
+      return toList(specialDayRepository.findAll());
   }
   
   /**
@@ -228,4 +234,12 @@ public class SpecialDayService {
     specialDayRepository.delete(sDay);
     return true;
   }  
+  
+  private <T> List<T> toList(Iterable<T> iterable){
+    List<T> resultList = new ArrayList<T>();
+    for (T t : iterable) {
+        resultList.add(t);
+    }
+    return resultList;
+}
 }
