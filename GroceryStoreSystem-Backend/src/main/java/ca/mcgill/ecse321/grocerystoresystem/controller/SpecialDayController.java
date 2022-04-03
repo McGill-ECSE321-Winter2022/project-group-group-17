@@ -124,7 +124,7 @@ public class SpecialDayController {
    * @param specialDayID, shiftID, date, startTime, endTime, shiftStatus, personID
    * Update a specific Shift on a specific specialDay
    */
-  @PostMapping(value = { "specialday/updateshift/id", "/specialday/updateshift/id/" })
+  @PostMapping(value = { "/specialday/updateshift/id", "/specialday/updateshift/id/" })
   public ShiftDto updateSpecificDayShift(@RequestParam int id, @RequestParam int shiftID, @RequestParam LocalDate date, 
       @RequestParam LocalTime startTime, @RequestParam LocalTime endTime, @RequestParam ShiftStatus shiftStatus, @RequestParam int personID) {
     try {

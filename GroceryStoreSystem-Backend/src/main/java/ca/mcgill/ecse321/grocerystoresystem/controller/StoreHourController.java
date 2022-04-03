@@ -70,7 +70,7 @@ public class StoreHourController {
         return storeHourService.deleteAllHours();
     }
 
-    @PostMapping (value = {"storehour/update/", "/storehour/update"})
+    @PostMapping (value = {"/storehour/update/", "/storehour/update"})
     public StoreHourDto updateStoreHourDtoById(@RequestParam int storeHourID,
                                                @RequestParam("startTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime startTime,
                                                @RequestParam("endTime") @DateTimeFormat(pattern = "HH:mm:ss") LocalTime endTime ){
