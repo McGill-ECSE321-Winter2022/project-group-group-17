@@ -2,23 +2,27 @@ package ca.mcgill.ecse321.grocerystoresystem.dto;
 
 import ca.mcgill.ecse321.grocerystoresystem.model.EmployeeStatus;
 
+import java.util.List;
+
 public class EmployeeDto {
     private int id;
     private String firstName;
     private String lastName;
     private String email;
-
+    private List<OrderDto> orders;
     private EmployeeStatus status;
 
     private AddressDto addressDto;
 
-    public EmployeeDto(int id, String firstName, String lastName, String email, EmployeeStatus status, AddressDto addressDto) {
+    public EmployeeDto(int id, String firstName, String lastName, String email, EmployeeStatus status, AddressDto addressDto,
+                       List<OrderDto> orders) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.status = status;
         this.addressDto = addressDto;
+        this.orders = orders;
     }
 
     public EmployeeDto(int id, String firstName, String lastName, String email, EmployeeStatus status) {
