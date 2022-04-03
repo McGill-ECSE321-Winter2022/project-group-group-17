@@ -79,4 +79,8 @@ public class CustomerDto {
   public void setLoginStatus(boolean loginStatus) {
     this.loginStatus = loginStatus;
   }
+
+    public List<OrderDto> getOrders() {
+        return orders;
+    }
 }
