@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
 import ca.mcgill.ecse321.grocerystoresystem.dto.AddressDto;
-import ca.mcgill.ecse321.grocerystoresystem.dto.CustomerDto;
 import ca.mcgill.ecse321.grocerystoresystem.dto.EmployeeDto;
 import ca.mcgill.ecse321.grocerystoresystem.dto.ShiftDto;
 import ca.mcgill.ecse321.grocerystoresystem.dto.SpecialDayDto;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
