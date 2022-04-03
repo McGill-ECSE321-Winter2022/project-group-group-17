@@ -120,14 +120,13 @@ public class TestSpecialDayService {
     SpecialDay sDay = new SpecialDay();
     
     try {
-      sDay = this.specialDayService.createSpecialDay(SPECIALDAY_KEY, START_TIME, END_TIME);
+      sDay = this.specialDayService.createSpecialDay(START_TIME, END_TIME);
   }
   catch(IllegalArgumentException exp) {
       fail(exp.getMessage());
   }
     
     assertNotNull(sDay);
-    assertEquals(sDay.getSpecialdayID(), SPECIALDAY_KEY);
     assertEquals(sDay.getStartTimestamp(), START_TIME);
     assertEquals(sDay.getEndTimestamp(), END_TIME);
   }
@@ -141,7 +140,7 @@ public class TestSpecialDayService {
     String error = null;
     
     try {
-      sDay = this.specialDayService.createSpecialDay(SPECIALDAY_KEY, END_TIME, START_TIME);
+      sDay = this.specialDayService.createSpecialDay(END_TIME, START_TIME);
   }
   catch(IllegalArgumentException exp) {
       error = exp.getMessage();
@@ -158,7 +157,7 @@ public class TestSpecialDayService {
     String error = null;
     
     try {
-      sDay = this.specialDayService.createSpecialDay(SPECIALDAY_KEY, null, START_TIME);
+      sDay = this.specialDayService.createSpecialDay(null, START_TIME);
   }
   catch(IllegalArgumentException exp) {
       error = exp.getMessage();

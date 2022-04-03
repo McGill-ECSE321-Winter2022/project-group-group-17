@@ -195,10 +195,9 @@ public class CustomerController {
       }
   }
   
-  @PutMapping(value = { "/customer/update/id", "/customer/update/id/" })
+  @PostMapping(value = { "/customer/update/id", "/customer/update/id/" })
   public CustomerDto updateInfo(@RequestParam int id, @RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String password,
                                 @RequestParam Address address){
-      Customer c;
       try {
           return convertToDto(customerService.updateProfile(firstName, lastName, email, password, address, id));
       } catch (NullPointerException | IllegalArgumentException exception) {
