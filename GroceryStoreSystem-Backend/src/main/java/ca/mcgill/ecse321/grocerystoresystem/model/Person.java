@@ -104,4 +104,8 @@ public abstract class Person {
 	public boolean getLoginStatus() {
 		return this.loginStatus;
 	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
 }

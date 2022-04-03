@@ -1,12 +1,16 @@
 package ca.mcgill.ecse321.grocerystoresystem.dto;
 
+import ca.mcgill.ecse321.grocerystoresystem.model.Order;
+
+import java.util.List;
+
 public class CustomerDto {
     private int id;
     private String firstName;
     private String lastName;
     private String email;
     private boolean loginStatus;
-   
+    private List<OrderDto> orders;
     private AddressDto addressDto;
     
     public CustomerDto(int id, String firstName, String lastName, String email, boolean loginStatus) {
@@ -17,13 +21,15 @@ public class CustomerDto {
       this.setLoginStatus(loginStatus);
   }
   
-  public CustomerDto(int id, String firstName, String lastName, String email, AddressDto addressDto, boolean loginStatus) {
+  public CustomerDto(int id, String firstName, String lastName, String email, AddressDto addressDto, boolean loginStatus
+  , List<OrderDto> orders) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
       this.addressDto = addressDto;
       this.loginStatus = loginStatus;
       this.id = id;
+      this.orders = orders;
   }
   
   public int getId() {
