@@ -23,6 +23,7 @@ public class CustomerDto {
       this.email = email;
       this.addressDto = addressDto;
       this.loginStatus = loginStatus;
+      this.id = id;
   }
   
   public int getId() {
