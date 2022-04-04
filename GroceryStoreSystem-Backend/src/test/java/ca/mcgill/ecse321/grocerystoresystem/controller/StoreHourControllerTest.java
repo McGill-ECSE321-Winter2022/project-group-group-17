@@ -66,4 +66,83 @@ public class StoreHourControllerTest {
 
         assertEquals(str, "true");
     }
+    
+    @Test
+    public void testUpdateStoreHour() {
+      final int id = given()
+          .param("startTime", "09:00:00")
+          .param("endTime", "21:00:00")
+          .param("weekday", "MONDAY")
+          .post("/storehour/create")
+          .then().statusCode(200)
+          .body("startTime", equalTo("09:00:00"))
+          .body("endTime", equalTo("21:00:00"))
+          .body("weekday", equalTo("MONDAY"))
+          .extract().response().body().path("storeHourID");
+
+      when().get("/storehour/get/id?storeHourID=" + id).then()
+          .statusCode(200)
+          .body("storeHourID", equalTo(id))
+          .body("startTime", equalTo("09:00:00"))
+          .body("endTime", equalTo("21:00:00"))
+          .body("weekday", equalTo("MONDAY"));
+
+      String str = when().get("/storehour/check/id?storeHourID=" + id).then()
+          .statusCode(200)
+          .extract().response().body().asPrettyString();
+
+      assertEquals(str, "true");
+      
+      given()
+          .param("storeHourID", id)
+          .param("startTime", "10:00:00")
+          .param("endTime", "22:00:00")
+          .post("/storehour/update")
+          .then().statusCode(200)
+          .extract().response().body().prettyPrint();
+      
+      when().get("/storehour/get/id?storeHourID=" + id).then()
+          .statusCode(200)
+          .body("storeHourID", equalTo(id))
+          .body("startTime", equalTo("10:00:00"))
+          .body("endTime", equalTo("22:00:00"))
+          .body("weekday", equalTo("MONDAY"));
+
+      String str2 = when().get("/storehour/check/id?storeHourID=" + id).then()
+          .statusCode(200)
+          .extract().response().body().asPrettyString();
+
+      assertEquals(str2, "true");
+    }
+    
+    @Test
+    public void testCreateGetAndDeleteStoreHour() {
+      final int id = given()
+          .param("startTime", "09:00:00")
+          .param("endTime", "21:00:00")
+          .param("weekday", "MONDAY")
+          .post("/storehour/create")
+          .then().statusCode(200)
+          .body("startTime", equalTo("09:00:00"))
+          .extract().response().body().path("storeHourID");
+
+      when().get("/storehour/get/id?storeHourID=" + id).then()
+          .statusCode(200)
+          .body("storeHourID", equalTo(id))
+          .body("startTime", equalTo("09:00:00"))
+          .body("endTime", equalTo("21:00:00"))
+          .body("weekday", equalTo("MONDAY"));
+
+      String str = when().get("/storehour/check/id?storeHourID=" + id).then()
+          .statusCode(200)
+          .extract().response().body().asPrettyString();
+
+      assertEquals(str, "true");
+      
+      String str2 = when().delete("/storehour/delete?storeHourID="+id)
+          .then().statusCode(200)
+          .extract().response().body().asPrettyString();
+
+      assertEquals(str, str2);
+    }
 }
