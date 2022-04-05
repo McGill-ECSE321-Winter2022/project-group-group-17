@@ -1,55 +1,86 @@
+
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+  <div id="app">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6BE138">
+      <div class="container-fluid">
+        <a class="navbar-brand font-weight-bold" href="#" style="font-size: 16px">SUPER GROCERY STORE</a>
       </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00C2CB">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" @click="home">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" @click="storehours">Store Hours</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="browse">Browse</a>
+            </li>
 
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <router-view/>
-    </v-main>
-  </v-app>
+            <li class="nav-item">
+              <a class="nav-link" @click="login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="register_customer">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="body-content">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
+import JQuery from "jquery";
+const $ = JQuery();
+
 
 export default {
-  name: 'App',
+  name: 'app',
 
-  data: () => ({
-    //
-  }),
-};
+  methods: {
+    home: function() {
+      this.$router.push('/')
+    },
+
+    storehours: function() {
+      this.$router.push('/storehours')
+    },
+
+    browse: function() {
+      this.$router.push('/')
+    },
+
+    login: function() {
+      this.$router.push('/login')
+    },
+
+    register_customer: function() {
+      this.$router.push('/register')
+    }
+  }
+}
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+</style>

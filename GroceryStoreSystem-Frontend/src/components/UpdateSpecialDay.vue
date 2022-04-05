@@ -15,10 +15,10 @@
         <input type="text" v-model='id' id="specialDayID" placeholder="SpecialDay ID" class="form-control" required>
         <br>
         <br>
-        <input type="datetime-local" v-model='starttime' id="starttime" placeholder="Start Time" class="form-control" required>
+        <input type="text" v-model='starttime' id="starttime" placeholder="Start Time" class="form-control" required>
         <br>
         <br>
-        <input type="datetime-local" v-model="endtime" id="endtime" placeholder="End Time" class="form-control" required>
+        <input type="text" v-model="endtime" id="endtime" placeholder="End Time" class="form-control" required>
         <br>
         <br>
       </div>
@@ -26,13 +26,12 @@
       <div class="buttonPersonalFrame inputPersLabel">
         <button class="btn-cancel" @click="cancel">Back
         </button>
-        <button class="btn-success" @click="updateSpecialDay(starttime, endtime, id)">Create Shift
-        </button>
+        <button class="btn-success" @click="updateSpecialDay(starttime, endtime, id)">Create Special Day</button>
       </div>
 
 
       <span v-if="error" style="color: red">Error: {{error}}</span>
-      <span v-if="success" style="color: green">Added New Author: {{success}}</span>
+      <span v-if="success" style="color: green">Updated Special Day: {{success}}</span>
     </div>
   </div>
 </template>
@@ -96,7 +95,7 @@ export default {
     },
 
     cancel: function() {
-      this.$router.push('/')
+      this.$router.push('/storehours')
     }
   }
 }

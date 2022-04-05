@@ -42,7 +42,11 @@
 
 <script>
 import axios from 'axios'
+import JQuery from "jquery";
+
 const config = require('../../config')
+
+let $ = JQuery()
 
 let frontendUrl;
 let backendUrl;
@@ -99,12 +103,14 @@ export default {
           console.log(msg.response.status)
           this.error = msg.response.data;
         })
+
+        this.$router.push('/shifts')
       }
     },
 
     //Push to URL
     cancel: function() {
-      this.$router.push('/')
+      this.$router.push('/storehours')
     }
   }
 }
