@@ -80,4 +80,8 @@ public class EmployeeDto {
     public void setStatus(EmployeeStatus status) {
         this.status = status;
     }
+
+    public List<OrderDto> getOrders() {
+        return orders;
+    }
 }
