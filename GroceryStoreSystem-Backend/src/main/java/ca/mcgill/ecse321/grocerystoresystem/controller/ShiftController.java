@@ -197,7 +197,6 @@ public class ShiftController {
             return new EmployeeDto(employee.getPersonID(), employee.getFirstName(), employee.getLastName(),
                     employee.getEmail(), employee.getEmpStatus(), convertToDto(new Address()), convertToOrderDto(employee.getOrders()));
         }
-
         return new EmployeeDto(employee.getPersonID(), employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getEmpStatus());
     }
 
@@ -249,12 +248,14 @@ public class ShiftController {
                     deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
                     deliveryOrder.getDeliveryTime(), convertToDto(new Address()),
                     convertToDto(deliveryOrder.getPortionNum()));
-        } else if (deliveryOrder.getPortionNum() == null && deliveryOrder.getAddress() != null) {
+        }
+        else if(deliveryOrder.getPortionNum() == null && deliveryOrder.getAddress() != null){
             return new OrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
                     deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
                     deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()),
                     new ArrayList<>());
-        } else {
+        }
+        else{
             return new OrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
                     deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
                     deliveryOrder.getDeliveryTime(), convertToDto(new Address()),
@@ -264,26 +265,25 @@ public class ShiftController {
     }
 
     private OrderDto convertToDto(PickupOrder pickupOrder) {
-        if (pickupOrder == null) {
+        if(pickupOrder == null) {
             throw new NullPointerException("Order is null");
         }
 
-        if (pickupOrder.getPortionNum() != null)
-            return new OrderDto(pickupOrder.getOrderID(), pickupOrder.getTotalCost(), pickupOrder.getOrderTimeStamp(),
-                    pickupOrder.isPaid(), pickupOrder.getPickupDate(), convertToDto(pickupOrder.getPortionNum()));
+        if (pickupOrder.getPortionNum() != null) return new OrderDto(pickupOrder.getOrderID(), pickupOrder.getTotalCost(), pickupOrder.getOrderTimeStamp(),
+                pickupOrder.isPaid(), pickupOrder.getPickupDate(), convertToDto(pickupOrder.getPortionNum()));
 
-        else {
+        else{
 
             return new OrderDto(pickupOrder.getOrderID(), pickupOrder.getTotalCost(), pickupOrder.getOrderTimeStamp(),
-                    pickupOrder.isPaid(), pickupOrder.getPickupDate(), new ArrayList<>());
+                    pickupOrder.isPaid(), pickupOrder.getPickupDate(),new ArrayList<>());
         }
 
     }
 
-    private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities) {
+    private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities){
         List<ItemQuantityDto> itemQuantityDtos = new ArrayList<>();
 
-        for (ItemQuantity itemQuantity : itemQuantities) {
+        for (ItemQuantity itemQuantity : itemQuantities){
             ItemQuantityDto itemQuantityDto = convertToDto(itemQuantity);
             itemQuantityDtos.add(itemQuantityDto);
         }
@@ -292,23 +292,21 @@ public class ShiftController {
     }
 
     private OrderDto convertToDto(InStoreOrder inStoreOrder) {
-        if (inStoreOrder == null) {
+        if(inStoreOrder == null) {
             throw new NullPointerException("Order is null");
         }
 
-        if (inStoreOrder.getPortionNum() != null)
-            return new OrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(),
-                    inStoreOrder.isPaid(), convertToDto(inStoreOrder.getPortionNum()));
+        if (inStoreOrder.getPortionNum() != null) return new OrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(),
+                inStoreOrder.isPaid(), convertToDto(inStoreOrder.getPortionNum()));
 
         else {
-
             return new OrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(),
                     inStoreOrder.isPaid(), new ArrayList<>());
         }
     }
-
-    private ItemQuantityDto convertToDto(ItemQuantity itemQuantity) {
-        if (itemQuantity == null) {
+      
+    private ItemQuantityDto convertToDto (ItemQuantity itemQuantity){
+        if (itemQuantity == null){
             throw new NullPointerException("Item Quantity is null");
         }
         return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());

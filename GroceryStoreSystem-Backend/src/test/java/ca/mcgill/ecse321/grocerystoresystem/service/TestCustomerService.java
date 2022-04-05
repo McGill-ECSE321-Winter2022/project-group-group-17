@@ -365,18 +365,18 @@ public class TestCustomerService {
      */
     @Test
     public void testLoginSuccessful() {
-        Customer c = createCustomer();
-        try {
-            c = customerService.login(EMAIL, PASSWORD);
-        }catch(IllegalArgumentException exp) {
-            fail(exp.getMessage());
-        }
-        assertEquals(c.getLoginStatus(), true);
-        assertEquals(c.getEmail(), EMAIL);
-        assertEquals(c.getPassword(), PASSWORD);
-        assertEquals(c.getPersonID(), CUSTOMER_KEY);
+      Customer c = createCustomer();
+      try {
+        c = customerService.login(EMAIL, PASSWORD);
+      }catch(IllegalArgumentException exp) {
+        fail(exp.getMessage());
+      }
+      assertEquals(c.getLoginStatus(), true);
+      assertEquals(c.getEmail(), EMAIL);
+      assertEquals(c.getPassword(), PASSWORD);
+      assertEquals(c.getPersonID(), CUSTOMER_KEY);
     }
-
+    
     /*
      * Test to check if customer can successfully log out
      */
@@ -398,31 +398,31 @@ public class TestCustomerService {
      */
     @Test
     public void testLoginFail() {
-        Customer c = createCustomer();
-        String error = "";
-        try {
-            c = customerService.login(EMAIL, PASSWORD2);
-        }catch(IllegalArgumentException exp) {
-            error = exp.getMessage();
-        }
-        assertFalse(c.getLoginStatus());
-        assertEquals(error, "Incorrect password inputted!");
+      Customer c = createCustomer();
+      String error = "";
+      try {
+        c = customerService.login(EMAIL, PASSWORD2);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertFalse(c.getLoginStatus());
+      assertEquals(error, "Incorrect password inputted!");
     }
-
+   
     /*
      * Test to check that customer cannot log in with incorrect email
      */
     @Test
     public void testLoginFail2() {
-        Customer c = createCustomer();
-        String error = "";
-        try {
-            c = customerService.login(EMAIL2, PASSWORD);
-        }catch(IllegalArgumentException exp) {
-            error = exp.getMessage();
-        }
-        assertFalse(c.getLoginStatus());
-        assertEquals(error, "Incorrect email inputted!");
+      Customer c = createCustomer();
+      String error = "";
+      try {
+        c = customerService.login(EMAIL2, PASSWORD);
+      }catch(IllegalArgumentException exp) {
+        error = exp.getMessage();
+      }
+      assertFalse(c.getLoginStatus());
+      assertEquals(error, "Incorrect email inputted!");
     }
     /*
      * Test to check that customer cannot log out with incorrect email

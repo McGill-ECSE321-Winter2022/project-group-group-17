@@ -46,7 +46,6 @@ public class TestSpecialDayService {
 
   @InjectMocks
   private CalendarService calendarService;
-
   private static final int SPECIALDAY_KEY = 3001;
   private static final int SPECIALDAY_KEY2 = 3002;
   private static final int CALENDAR_KEY = 4001;
@@ -114,8 +113,8 @@ public class TestSpecialDayService {
 
     try {
       sDay = this.specialDayService.createSpecialDay(START_TIME, END_TIME);
-    }
-    catch(IllegalArgumentException exp) {
+  }
+  catch(IllegalArgumentException exp) {
       fail(exp.getMessage());
     }
 
@@ -134,8 +133,8 @@ public class TestSpecialDayService {
 
     try {
       sDay = this.specialDayService.createSpecialDay(END_TIME, START_TIME);
-    }
-    catch(IllegalArgumentException exp) {
+  }
+  catch(IllegalArgumentException exp) {
       error = exp.getMessage();
     }
     assertEquals(error, "The start time cannot be after the end time!");
@@ -151,8 +150,9 @@ public class TestSpecialDayService {
 
     try {
       sDay = this.specialDayService.createSpecialDay(null, START_TIME);
-    }
-    catch(IllegalArgumentException exp) {
+
+  }
+  catch(IllegalArgumentException exp) {
       error = exp.getMessage();
     }
     assertEquals(error, "Please enter a valid start time!");
