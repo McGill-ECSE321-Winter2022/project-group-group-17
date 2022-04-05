@@ -26,6 +26,7 @@
 </template>
 
 <script>
+
 import axios from 'axios'
 var config = require('../../config')
 
