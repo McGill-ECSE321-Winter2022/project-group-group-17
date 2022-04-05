@@ -45,7 +45,7 @@ public class SpecialDayService {
     }
     if(startTime.isAfter(endTime)) {
       throw new IllegalArgumentException("The start time cannot be after the end time!");
-    } 
+    }
     sDay.setStartTimestamp(startTime);
     sDay.setEndTimestamp(endTime);
     specialDayRepository.save(sDay);
@@ -82,16 +82,6 @@ public class SpecialDayService {
     return toList(specialDayRepository.findAll());
   }
 
-  /**
-   * @author Yash Khapre
-   * @param none
-   * Method that gets all specialDays
-   */
-  @Transactional
-  public List<SpecialDay> getAllSpecialDays(){
-      return toList(specialDayRepository.findAll());
-  }
-  
   /**
    * @author Yash Khapre
    * @param int CalendarID
@@ -243,13 +233,13 @@ public class SpecialDayService {
     }
     specialDayRepository.delete(sDay);
     return true;
-  }  
-  
+  }
+
   private <T> List<T> toList(Iterable<T> iterable){
     List<T> resultList = new ArrayList<T>();
     for (T t : iterable) {
-        resultList.add(t);
+      resultList.add(t);
     }
     return resultList;
-}
+  }
 }
