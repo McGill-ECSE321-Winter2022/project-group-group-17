@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
+import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +10,7 @@ import ca.mcgill.ecse321.grocerystoresystem.model.InventoryType;
 import ca.mcgill.ecse321.grocerystoresystem.model.Item;
 import ca.mcgill.ecse321.grocerystoresystem.service.ItemService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,8 +37,10 @@ public class ItemController {
 	}
 	
 	@PostMapping(value = {"/item/create/", "/item/create"})
-	public ItemDto Item(@RequestParam String name, @RequestParam int itemPrice, @RequestParam int inventoryAmount, @RequestParam boolean isDeliverable, @RequestParam String portionUnit, @RequestParam InventoryType inventoryType) {
-		Item item = itemService.createItem(name, itemPrice, inventoryAmount, isDeliverable, portionUnit, inventoryType);
+	public ItemDto Item(@RequestParam String name, @RequestParam int itemPrice,
+						@RequestParam int inventoryAmount, @RequestParam boolean isDeliverable,
+						@RequestParam String portionUnit, @RequestParam String inventoryType) {
+		Item item = itemService.createItem(name, itemPrice, inventoryAmount, isDeliverable, portionUnit, InventoryType.valueOf(inventoryType));
 		
 		return convertToDto(item);
 	}
@@ -69,10 +74,37 @@ public class ItemController {
         if(item == null) {
             throw new NullPointerException("Item is null");
         }
-        
-        return new ItemDto(item.getName(), item.getItemPrice(), 
-        		item.getInventoryAmount(), item.isDeliverable(), 
-        		item.getPortionUnit(), item.getInventoryType(), item.getItemID());
+
+		if (item.getPortionNum() != null) {
+			return new ItemDto(item.getName(), item.getItemPrice(),
+					item.getInventoryAmount(), item.isDeliverable(),
+					item.getPortionUnit(), item.getInventoryType(), item.getItemID(), convertToDto(item.getPortionNum()));
+		}
+
+		else{
+			return new ItemDto(item.getName(), item.getItemPrice(),
+					item.getInventoryAmount(), item.isDeliverable(),
+					item.getPortionUnit(), item.getInventoryType(), item.getItemID(), new ArrayList<>());
+
+		}
     }
+
+	private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities){
+		List<ItemQuantityDto> itemQuantityDtos = new ArrayList<>();
+
+		for (ItemQuantity itemQuantity : itemQuantities){
+			ItemQuantityDto itemQuantityDto = convertToDto(itemQuantity);
+			itemQuantityDtos.add(itemQuantityDto);
+		}
+
+		return itemQuantityDtos;
+	}
+
+	private ItemQuantityDto convertToDto (ItemQuantity itemQuantity){
+		if (itemQuantity == null){
+			throw new NullPointerException("Item Quantity is null");
+		}
+		return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());
+	}
 	
 }

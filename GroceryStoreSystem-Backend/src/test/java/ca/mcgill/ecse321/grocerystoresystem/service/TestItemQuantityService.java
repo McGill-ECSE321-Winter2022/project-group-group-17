@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-import org.springframework.test.context.TestPropertySource;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.lenient;
@@ -127,7 +126,7 @@ public class TestItemQuantityService {
         ItemQuantity savedItemQuantity = null;
 
         try{
-            savedItemQuantity = itemQuantityService.getItemQuantityWithID(ITEM_QUANTITY_ID);
+            savedItemQuantity = itemQuantityService.getItemQuantityWithQuantityID(ITEM_QUANTITY_ID);
         } catch(NullPointerException exp){
             fail(exp.getMessage());
         }
@@ -142,7 +141,7 @@ public class TestItemQuantityService {
         String error = "";
 
         try{
-            savedItemQuantity = itemQuantityService.getItemQuantityWithID(01);
+            savedItemQuantity = itemQuantityService.getItemQuantityWithQuantityID(01);
         } catch(NullPointerException exp){
             error = exp.getMessage();
         }

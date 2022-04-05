@@ -1,8 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
-import ca.mcgill.ecse321.grocerystoresystem.dto.AddressDto;
-import ca.mcgill.ecse321.grocerystoresystem.dto.EmployeeDto;
-import ca.mcgill.ecse321.grocerystoresystem.dto.ShiftDto;
+import ca.mcgill.ecse321.grocerystoresystem.dto.*;
 import ca.mcgill.ecse321.grocerystoresystem.model.*;
 import ca.mcgill.ecse321.grocerystoresystem.service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -192,16 +191,27 @@ public class ShiftController {
         return new ShiftDto(s.getShiftID(), s.getDate(), s.getStartTime(), s.getEndTime(), s.getShiftStatus());
     }
 
-    private EmployeeDto convertToDto(Employee o) throws NullPointerException{
-        if(o == null) {
+    private EmployeeDto convertToDto(Employee employee) throws NullPointerException{
+        if(employee == null) {
             throw new NullPointerException("Owner is null");
         }
 
-        if(o.getAddress() != null) {
-            return new EmployeeDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail(), o.getEmpStatus(), convertToDto(o.getAddress()));
+        if(employee.getAddress() != null && employee.getOrders() != null) {
+            return new EmployeeDto(employee.getPersonID(), employee.getFirstName(), employee.getLastName(),
+                    employee.getEmail(), employee.getEmpStatus(), convertToDto(employee.getAddress()), convertToOrderDto(employee.getOrders()));
         }
 
-        return new EmployeeDto(o.getPersonID(), o.getFirstName(), o.getLastName(), o.getEmail(),  o.getEmpStatus());
+        else if (employee.getAddress() != null && employee.getOrders() == null){
+            return new EmployeeDto(employee.getPersonID(), employee.getFirstName(), employee.getLastName(),
+                    employee.getEmail(), employee.getEmpStatus(), convertToDto(employee.getAddress()), new ArrayList<>());
+
+        }
+        else if (employee.getAddress() == null && employee.getOrders() != null){
+            return new EmployeeDto(employee.getPersonID(), employee.getFirstName(), employee.getLastName(),
+                    employee.getEmail(), employee.getEmpStatus(), convertToDto(new Address()), convertToOrderDto(employee.getOrders()));
+        }
+
+        return new EmployeeDto(employee.getPersonID(), employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getEmpStatus());
     }
 
     private AddressDto convertToDto(Address a) throws NullPointerException{
@@ -210,5 +220,114 @@ public class ShiftController {
         }
 
         return new AddressDto(a.getAddressID(), a.isLocal(), a.getStreetName(), a.getStreetNum(), a.getCity(), a.getPostalCode(), a.getCountry());
+    }
+
+    private List<OrderDto> convertToOrderDto(List<Order> orders){
+        List<OrderDto> orderDtos = new ArrayList<>();
+
+        for (Order order : orders){
+            OrderDto orderDto = convertToDto(order);
+            orderDtos.add(orderDto);
+        }
+
+        return orderDtos;
+    }
+
+    private OrderDto convertToDto (Order order){
+        if (order == null){
+            throw new NullPointerException("Order is null");
+        }
+
+        if (order instanceof DeliveryOrder){
+            return convertToDto((DeliveryOrder) order);
+        }
+        else if (order instanceof PickupOrder){
+            return convertToDto((PickupOrder) order);
+        }
+        else{
+            return convertToDto((InStoreOrder) order);
+        }
+    }
+
+    private OrderDto convertToDto(DeliveryOrder deliveryOrder) {
+        if(deliveryOrder == null) {
+            throw new NullPointerException("Order is null");
+        }
+
+        if (deliveryOrder.getPortionNum() != null && deliveryOrder.getAddress() != null) {
+            return new OrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+                    deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+                    deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()),
+                    convertToDto(deliveryOrder.getPortionNum()));
+        }
+
+        else if(deliveryOrder.getPortionNum() != null && deliveryOrder.getAddress() == null){
+            return new OrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+                    deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+                    deliveryOrder.getDeliveryTime(), convertToDto(new Address()),
+                    convertToDto(deliveryOrder.getPortionNum()));
+        }
+        else if(deliveryOrder.getPortionNum() == null && deliveryOrder.getAddress() != null){
+            return new OrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+                    deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+                    deliveryOrder.getDeliveryTime(), convertToDto(deliveryOrder.getAddress()),
+                    new ArrayList<>());
+        }
+        else{
+            return new OrderDto(deliveryOrder.getOrderID(), deliveryOrder.getTotalCost(),
+                    deliveryOrder.getOrderTimeStamp(), deliveryOrder.isPaid(),
+                    deliveryOrder.getDeliveryTime(), convertToDto(new Address()),
+                    new ArrayList<>());
+
+        }
+    }
+
+    private OrderDto convertToDto(PickupOrder pickupOrder) {
+        if(pickupOrder == null) {
+            throw new NullPointerException("Order is null");
+        }
+
+        if (pickupOrder.getPortionNum() != null) return new OrderDto(pickupOrder.getOrderID(), pickupOrder.getTotalCost(), pickupOrder.getOrderTimeStamp(),
+                pickupOrder.isPaid(), pickupOrder.getPickupDate(), convertToDto(pickupOrder.getPortionNum()));
+
+        else{
+
+            return new OrderDto(pickupOrder.getOrderID(), pickupOrder.getTotalCost(), pickupOrder.getOrderTimeStamp(),
+                    pickupOrder.isPaid(), pickupOrder.getPickupDate(),new ArrayList<>());
+        }
+
+    }
+
+    private List<ItemQuantityDto> convertToDto(List<ItemQuantity> itemQuantities){
+        List<ItemQuantityDto> itemQuantityDtos = new ArrayList<>();
+
+        for (ItemQuantity itemQuantity : itemQuantities){
+            ItemQuantityDto itemQuantityDto = convertToDto(itemQuantity);
+            itemQuantityDtos.add(itemQuantityDto);
+        }
+
+        return itemQuantityDtos;
+    }
+
+    private OrderDto convertToDto(InStoreOrder inStoreOrder) {
+        if(inStoreOrder == null) {
+            throw new NullPointerException("Order is null");
+        }
+
+        if (inStoreOrder.getPortionNum() != null) return new OrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(),
+                inStoreOrder.isPaid(), convertToDto(inStoreOrder.getPortionNum()));
+
+        else{
+
+            return new OrderDto(inStoreOrder.getOrderID(), inStoreOrder.getTotalCost(), inStoreOrder.getOrderTimeStamp(),
+                    inStoreOrder.isPaid(), new ArrayList<>());
+        }
+    }
+
+    private ItemQuantityDto convertToDto (ItemQuantity itemQuantity){
+        if (itemQuantity == null){
+            throw new NullPointerException("Item Quantity is null");
+        }
+        return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());
     }
 }

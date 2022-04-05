@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
 import ca.mcgill.ecse321.grocerystoresystem.dto.ItemQuantityDto;
-import ca.mcgill.ecse321.grocerystoresystem.dto.OwnerDto;
 import ca.mcgill.ecse321.grocerystoresystem.model.ItemQuantity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -140,6 +139,6 @@ public class DeliveryOrderController {
 		if (itemQuantity == null){
 			throw new NullPointerException("Item Quantity is null");
 		}
-		return new ItemQuantityDto(itemQuantity.getItemNum());
+		return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());
 	}
 }

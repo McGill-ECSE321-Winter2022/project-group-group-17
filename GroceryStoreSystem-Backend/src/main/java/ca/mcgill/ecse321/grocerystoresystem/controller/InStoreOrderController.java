@@ -92,7 +92,7 @@ public class InStoreOrderController {
 		if (itemQuantity == null){
 			throw new NullPointerException("Item Quantity is null");
 		}
-		return new ItemQuantityDto(itemQuantity.getItemNum());
+		return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());
 	}
 	
 	

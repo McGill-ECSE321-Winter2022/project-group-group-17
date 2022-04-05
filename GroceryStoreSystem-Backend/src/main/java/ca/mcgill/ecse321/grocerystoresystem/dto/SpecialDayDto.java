@@ -12,11 +12,6 @@ public class SpecialDayDto {
     this.endTimestamp = endTimestamp;
     this.id = id;
   }
-
-  public SpecialDayDto(LocalDateTime startTimestamp, LocalDateTime endTimestamp) {
-      this.startTimestamp = startTimestamp;
-      this.endTimestamp = endTimestamp;
-  }
   
   public int getId() {
     return id;

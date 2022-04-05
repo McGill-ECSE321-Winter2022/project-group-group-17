@@ -14,94 +14,24 @@ import java.util.List;
 public class AddressService {
 	@Autowired
 	AddressRepository addressRepository;
-	/**
-	 * @author Tinetendo Wamambo
-	 * @param streetName
-	 * @param streetNum
-	 * @param city
-	 * @param postalCode
-	 * @param country
-	 * @param isLocal
-	 * @return address
-	 * This method is used to create a new address in the system and add it to the existing address repository.
-	 * It also check the validity of each parameter input and throws exceptions when the user violates certain rules. 
-	 */
+
 	@Transactional
-	public Address createAddress(Integer addressID,String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
-		
-		try {
-			
-			checkEmptyInput(streetName);
-			checkEmptyInput(streetNum);
-			checkEmptyInput(city);
-			checkEmptyInput(postalCode);
-			checkEmptyInput(country);
+	public Address createAddress(String streetName, String streetNum, String city, String postalCode,
+								 String country, boolean isLocal) {
+		checkEmptyInput(streetName);
+		checkEmptyInput(streetNum);
+		checkEmptyInput(city);
+		checkEmptyInput(postalCode);
+		checkEmptyInput(country);
 
-			
-		}catch(IllegalArgumentException e){
-			
-			return null;
-			
-		}
 
-		try {
-			checkAlpha(streetName);
-			checkAlpha(city);
-			checkAlpha(country);
-			checkAlphaNum(streetNum);
-			checkAlphaNum(postalCode);
-		
-			}catch(IllegalArgumentException e) {
-				return null;
-			
-		}
-		Address address = new Address();
-		address.setAddressID(addressID);
-		address.setCity(city);
-		address.setCountry(country);
-		address.setLocal(isLocal);
-		address.setPostalCode(postalCode);
-		address.setStreetName(streetName);
-		address.setStreetNum(streetNum);
+		checkAlpha(streetName);
+		checkAlpha(city);
+		checkAlpha(country);
+		checkAlphaNum(streetNum);
+		checkAlphaNum(postalCode);
 
-		address.setCity(city);
-		address.setCountry(country);
-		address.setLocal(isLocal);
-		address.setPostalCode(postalCode);
-		address.setStreetName(streetName);
-		address.setStreetNum(streetNum);
-		addressRepository.save(address);
-		return address;
-	}
-	@Transactional
-	public Address createAddress(String streetName, String streetNum, String city, String postalCode, String country, boolean isLocal) {
-		
-		try {
-			checkEmptyInput(streetName);
-			checkEmptyInput(streetNum);
-			checkEmptyInput(city);
-			checkEmptyInput(postalCode);
-			checkEmptyInput(country);
-			
-			
-		}catch(IllegalArgumentException e){
-			return null;
-			
-		}
-		
-		try {
-			checkAlpha(streetName);
-			checkAlpha(city);
-			checkAlpha(country);
-			checkAlphaNum(streetNum);
-			checkAlphaNum(postalCode);
-			
-		
-			}catch(IllegalArgumentException e) {
-				return null;
-		
 
-		}
 		Address address = new Address();
 		
 		address.setCity(city);
@@ -110,8 +40,8 @@ public class AddressService {
 		address.setPostalCode(postalCode);
 		address.setStreetName(streetName);
 		address.setStreetNum(streetNum);
-		addressRepository.save(address);
-		return address;
+
+		return addressRepository.save(address);
 	}
 
 	@Transactional
@@ -220,7 +150,7 @@ public class AddressService {
 	private void checkAlpha(String word) {
 		int i = 0;
 		while (i<word.length()) {
-			if (Character.isAlphabetic(word.charAt(i))==false) {
+			if (!Character.isAlphabetic(word.charAt(i))) {
 				throw new IllegalArgumentException("Your input should not contain any special characters.");
 			}
 			i++;
@@ -229,7 +159,7 @@ public class AddressService {
 	private void checkAlphaNum(String number) {
 		int i = 0;
 		while(i<number.length()) {
-			if (Character.isLetterOrDigit(number.charAt(i))== false) {
+			if (!Character.isLetterOrDigit(number.charAt(i))) {
 				throw new IllegalArgumentException("Your input should only contain digits or numbers.");
 			}
 			i++;

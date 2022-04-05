@@ -104,5 +104,12 @@ public class Item {
 	public void setItemID(int itemID) {
 	    this.itemID = itemID;
 	}
-	
+
+	public void setPortionNum(List<ItemQuantity> portionNum) {
+		this.portionNum = portionNum;
+	}
+
+	public List<ItemQuantity> getPortionNum() {
+		return portionNum;
+	}
 }

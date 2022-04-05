@@ -39,22 +39,22 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer>{
     boolean existsByPersonID(Integer personID);
 	
 	/**
-     * Returns true if there is an owner in the database with the specified first name
+     * Returns true if there is a customer in the database with the specified first name
      */
     boolean existsByFirstName(String firstName);
 
     /**
-     * Returns true if there is an owner in the database with the specified last name
+     * Returns true if there is a customer in the database with the specified last name
      */
     boolean existsByLastName(String lastName);
 
     /**
-     * Returns true if there is an owner in the database with the specified first name and last name
+     * Returns true if there is a customer in the database with the specified first name and last name
      */
     boolean existsByFirstNameAndLastName(String firstName, String lastName);
 
     /**
-     * Returns true if there is an owner in the database with the specified email
+     * Returns true if there is a customer in the database with the specified email
      */
     boolean existsByEmail(String email);
     

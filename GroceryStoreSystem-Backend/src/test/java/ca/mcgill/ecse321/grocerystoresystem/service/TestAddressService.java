@@ -198,7 +198,7 @@ public class TestAddressService {
 	
 	@Test
 	public void testCreateAddress() {
-		Address savedAddress = this.addressService.createAddress(ADDRESS_KEY,STREET_NAME, STREET_NUM, CITY, POSTAL_CODE, COUNTRY, IS_LOCAL);
+		Address savedAddress = this.addressService.createAddress(STREET_NAME, STREET_NUM, CITY, POSTAL_CODE, COUNTRY, IS_LOCAL);
 		assertNotNull(savedAddress);
 		assertEquals(STREET_NAME,savedAddress.getStreetName());
 		assertEquals(STREET_NUM,savedAddress.getStreetNum());
@@ -206,7 +206,7 @@ public class TestAddressService {
 		assertEquals(POSTAL_CODE,savedAddress.getPostalCode());
 		assertEquals(COUNTRY,savedAddress.getCountry());
 		assertEquals( IS_LOCAL,savedAddress.isLocal());
-		assertEquals( ADDRESS_KEY,savedAddress.getAddressID());	
+
 	}
 	@Test 
 	public void testCreateAddressStreetNameFail() {
@@ -256,7 +256,7 @@ public class TestAddressService {
 		Address savedAddress = null;
 
 		try {
-			savedAddress = this.addressService.createAddress(ADDRESS_KEY,STREET_NAME,STREET_NUM, CITY, POSTAL_CODE, "", IS_LOCAL);
+			savedAddress = this.addressService.createAddress(STREET_NAME,STREET_NUM, CITY, POSTAL_CODE, "", IS_LOCAL);
 		}catch(IllegalArgumentException e) {
 		System.out.println(e);
 		}

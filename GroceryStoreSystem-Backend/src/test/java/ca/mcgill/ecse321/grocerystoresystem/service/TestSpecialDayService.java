@@ -15,8 +15,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -49,19 +47,14 @@ public class TestSpecialDayService {
   @InjectMocks
   private CalendarService calendarService;
   
-  private static final int EMPLOYEE_KEY = 1001;
-  private static final int SHIFT_KEY = 2001;
   private static final int SPECIALDAY_KEY = 3001;
   private static final int SPECIALDAY_KEY2 = 3002;
-  private static final int SPECIALDAY_KEY3 = 3003;
   private static final int CALENDAR_KEY = 4001;
   
   private static final LocalDateTime START_TIME = LocalDateTime.parse("2022-03-13T15:14:21.629");
   private static final LocalDateTime END_TIME = LocalDateTime.parse("2022-03-14T15:14:21.629");
   private static final LocalDateTime START_TIME2 = LocalDateTime.parse("2022-03-18T16:14:21.629");
   private static final LocalDateTime END_TIME2 = LocalDateTime.parse("2022-03-19T16:14:21.629");  
-  private static final LocalDateTime START_TIME3 = LocalDateTime.parse("2022-03-20T16:14:21.629");
-  private static final LocalDateTime END_TIME3 = LocalDateTime.parse("2022-03-21T16:14:21.629");   
   
   /*
    * Helper method to create a special day with given parameters
@@ -120,14 +113,13 @@ public class TestSpecialDayService {
     SpecialDay sDay = new SpecialDay();
     
     try {
-      sDay = this.specialDayService.createSpecialDay(SPECIALDAY_KEY, START_TIME, END_TIME);
+      sDay = this.specialDayService.createSpecialDay(START_TIME, END_TIME);
   }
   catch(IllegalArgumentException exp) {
       fail(exp.getMessage());
   }
     
     assertNotNull(sDay);
-    assertEquals(sDay.getSpecialdayID(), SPECIALDAY_KEY);
     assertEquals(sDay.getStartTimestamp(), START_TIME);
     assertEquals(sDay.getEndTimestamp(), END_TIME);
   }
@@ -141,7 +133,7 @@ public class TestSpecialDayService {
     String error = null;
     
     try {
-      sDay = this.specialDayService.createSpecialDay(SPECIALDAY_KEY, END_TIME, START_TIME);
+      sDay = this.specialDayService.createSpecialDay(END_TIME, START_TIME);
   }
   catch(IllegalArgumentException exp) {
       error = exp.getMessage();
@@ -158,7 +150,7 @@ public class TestSpecialDayService {
     String error = null;
     
     try {
-      sDay = this.specialDayService.createSpecialDay(SPECIALDAY_KEY, null, START_TIME);
+      sDay = this.specialDayService.createSpecialDay(null, START_TIME);
   }
   catch(IllegalArgumentException exp) {
       error = exp.getMessage();

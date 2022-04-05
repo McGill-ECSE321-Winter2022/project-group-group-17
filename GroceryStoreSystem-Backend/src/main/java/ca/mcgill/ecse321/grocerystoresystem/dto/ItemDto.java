@@ -12,7 +12,7 @@ public class ItemDto {
 
 	private int itemID;
 	
-	private List<ItemQuantity> portionNum;
+	private List<ItemQuantityDto> portionNum;
 	
 	private int itemPrice;
 	private String name;
@@ -24,7 +24,8 @@ public class ItemDto {
 	public ItemDto() {
 	}
 	
-	public ItemDto(String name, int itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType, int itemID) {
+	public ItemDto(String name, int itemPrice, int inventoryAmount, boolean isDeliverable,
+				   String portionUnit, InventoryType inventoryType, int itemID, List<ItemQuantityDto> portionNum) {
 		this.itemID = itemID;
 		this.name = name;
 		this.itemPrice = itemPrice;
@@ -32,15 +33,7 @@ public class ItemDto {
 		this.isDeliverable = isDeliverable;
 		this.portionUnit = portionUnit;
 		this.inventoryType = inventoryType;
-	}
-	
-	public ItemDto(String name, int itemPrice, int inventoryAmount, boolean isDeliverable, String portionUnit, InventoryType inventoryType) {
-		this.name = name;
-		this.itemPrice = itemPrice;
-		this.inventoryAmount = inventoryAmount;
-		this.isDeliverable = isDeliverable;
-		this.portionUnit = portionUnit;
-		this.inventoryType = inventoryType;
+		this.portionNum = portionNum;
 	}
 	
 	public int getItemPrice() {
