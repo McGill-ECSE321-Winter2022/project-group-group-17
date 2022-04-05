@@ -1,86 +1,69 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home <span class="sr-only">(current)</span></a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link disabled"
-              href="#"
-              tabindex="-1"
-              aria-disabled="true"
-              >Disabled</a
-            >
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6BE138">
+      <div class="container-fluid">
+        <a class="navbar-brand font-weight-bold" href="#" style="font-size: 16px">SUPER GROCERY STORE</a>
       </div>
     </nav>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #00C2CB">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#" @click="home">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-    <router-view></router-view>
+            <li class="nav-item">
+              <a class="nav-link" @click="browse">Browse</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="storehours">Store Hours</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="shifts">Shifts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="register_customer">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="body-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
-<!--<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
-  </div>
-</template>-->
-
 <script>
+import JQuery from "jquery";
+const $ = JQuery();
 export default {
-  name: 'app'
+  name: 'app',
+  methods: {
+    home: function() {
+      this.$router.push('/')
+    },
+    shifts: function() {
+      this.$router.push('/shifts')
+    },
+    storehours: function() {
+      this.$router.push('/storehours')
+    },
+    browse: function() {
+      this.$router.push('/browse')
+    },
+    login: function() {
+      this.$router.push('/login')
+    },
+    register_customer: function() {
+      this.$router.push('/register')
+    }
+  }
 }
 </script>
 
@@ -91,50 +74,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
-</style>
-<!--
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
-* {
-  box-sizing: border-box;
+body {
   margin: 0;
   padding: 0;
 }
-body {
-  font-family: "Poppins", sans-serif;
-}
-.container {
-  max-width: 500px;
-  margin: 30px auto;
-  overflow: auto;
-  min-height: 300px;
-  border: 1px solid steelblue;
-  padding: 30px;
-  border-radius: 5px;
-}
-.btn {
-  display: inline-block;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  font-family: inherit;
-}
-.btn:focus {
-  outline: none;
-}
-.btn:active {
-  transform: scale(0.98);
-}
-.btn-block {
-  display: block;
-  width: 100%; */
-
 </style>
--->
