@@ -15,7 +15,7 @@
         <input type="text" v-model='shiftID' id="shiftID" placeholder="Shift ID" class="form-control" required>
         <br>
         <br>
-        <input type="text" v-model="shiftstatus" id="status" placeholder="Employee ID" class="form-control" required>
+        <input type="text" v-model="shiftstatus" id="status" placeholder="Status" class="form-control" required>
         <br>
         <br>
       </div>
@@ -23,13 +23,13 @@
       <div class="buttonPersonalFrame inputPersLabel">
         <button class="btn-cancel" @click="cancel">Back
         </button>
-        <button class="btn-success" @click="updateShiftStatus(shiftID, shiftstatus)">Create Shift
+        <button class="btn-success" @click="updateShiftStatus(shiftID, shiftstatus)">Update Shift
         </button>
       </div>
 
 
       <span v-if="error" style="color: red">Error: {{error}}</span>
-      <span v-if="success" style="color: green">Added New Author: {{success}}</span>
+      <span v-if="success" style="color: green">Updated Shift Status: {{success}}</span>
     </div>
   </div>
 </template>
@@ -69,7 +69,7 @@ export default {
   },
 
   methods: {
-    updateShiftStatus: function(status, shift_id) {
+    updateShiftStatus: function(shift_id, status) {
       if(document.getElementById("shiftID").value === '') {
         this.error = 'Please provide a valid Shift ID'
       }
@@ -90,7 +90,7 @@ export default {
     },
 
     cancel: function() {
-      this.$router.push('/')
+      this.$router.push('/shifts')
     }
   }
 }

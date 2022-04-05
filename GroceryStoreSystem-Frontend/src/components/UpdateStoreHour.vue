@@ -26,7 +26,7 @@
       <div class="buttonPersonalFrame inputPersLabel">
         <button class="btn btn-cancel" @click="cancel">Back
         </button>
-        <button class="btn btn-success" @click="updateStoreHour(storeHourID, starttime, endtime)">Update Special Day</button>
+        <button class="btn btn-success" @click="updateStoreHour(storeHourID, starttime, endtime)">Update Store Hour</button>
       </div>
 
 

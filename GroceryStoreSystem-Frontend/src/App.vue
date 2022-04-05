@@ -14,13 +14,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+              <a class="nav-link" @click="browse">Browse</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" @click="storehours">Store Hours</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" @click="browse">Browse</a>
+              <a class="nav-link" @click="shifts">Shifts</a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" @click="login">Login</a>
             </li>
@@ -50,12 +53,16 @@ export default {
       this.$router.push('/')
     },
 
+    shifts: function() {
+      this.$router.push('/shifts')
+    },
+
     storehours: function() {
       this.$router.push('/storehours')
     },
 
     browse: function() {
-      this.$router.push('/')
+      this.$router.push('/browse')
     },
 
     login: function() {

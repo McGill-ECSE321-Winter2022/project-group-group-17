@@ -11,6 +11,9 @@ import UpdateShiftStatus from "../components/UpdateShiftStatus";
 import UpdateSpecialDay from "../components/UpdateSpecialDay";
 import UpdateStoreHour from "../components/UpdateStoreHour";
 import Hello from "../components/Hello";
+import Browse from "../components/Browse";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 Vue.use(Router)
 
@@ -66,7 +69,23 @@ const ourRouter  = new Router( {
       path: '/updatestorehour',
       name: 'update_store_hour',
       component: UpdateStoreHour
+    },
+    {
+      path: '/browse',
+      name: 'browse',
+      component: Browse
+    },
+    {
+      path:'/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     }
+
   ]
 })
 

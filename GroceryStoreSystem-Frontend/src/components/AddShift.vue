@@ -12,13 +12,13 @@
         <label><b>Shift Information: </b></label>
         <br>
         <br>
-        <input type="date" v-model='date' id="date" placeholder="Shift Date" class="form-control" required>
+        <input type="text" v-model='date' id="date" placeholder="Shift Date" class="form-control" required>
         <br>
         <br>
-        <input type="time" v-model="starttime" id="starttime" placeholder="Start Time" class="form-control" required>
+        <input type="text" v-model="starttime" id="starttime" placeholder="Start Time" class="form-control" required>
         <br>
         <br>
-        <input type="time" v-model="endtime" id="endtime" placeholder="End Time" class="form-control" required>
+        <input type="text" v-model="endtime" id="endtime" placeholder="End Time" class="form-control" required>
         <br>
         <br>
         <input type="text" v-model="shiftstatus" id="shiftstatus" placeholder="Shift Status" class="form-control" required>
@@ -104,13 +104,13 @@ export default {
           this.error = msg.response.data;
         })
 
-        this.$router.push('/shifts')
+        // this.$router.push('/shifts')
       }
     },
 
     //Push to URL
     cancel: function() {
-      this.$router.push('/storehours')
+      this.$router.push('/shifts')
     }
   }
 }
