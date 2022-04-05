@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.grocerystoresystem.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -11,13 +10,13 @@ public class Employee extends Person {
 
 	// Employee Associations
 	@OneToMany(targetEntity = Shift.class, fetch = FetchType.EAGER)
-    private List<Shift> shifts;
+	private List<Shift> shifts;
 
 	private EmployeeStatus empStatus;
 
-    public Employee() {
-    	super(null, null, null, null, false);
-    };
+	public Employee() {
+		super(null, null, null, null, false);
+	};
 
 	public Employee(String first_name, String last_name, String email,  String password, EmployeeStatus empStatus, boolean loginStatus) {
 		super(first_name, last_name, email, password, loginStatus);

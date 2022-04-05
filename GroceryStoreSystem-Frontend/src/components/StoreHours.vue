@@ -11,9 +11,9 @@
             <thead>
               <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Weekday</th>
                 <th scope="col">Start Time</th>
                 <th scope="col">End Time</th>
+                <th scope="col">Weekday</th>
               </tr>
             </thead>
             <tbody>

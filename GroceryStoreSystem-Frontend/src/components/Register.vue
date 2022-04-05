@@ -25,14 +25,16 @@
                   </div>
                   <div class="form-group">
                     <label>Password</label>
-                    <input class="form-control form-control-lg" type="password" name="password" id="password" v-model="passwrod">
+                    <input class="form-control form-control-lg" type="password" name="password" id="password" v-model="password">
                   </div>
                   <div class="text-center mt-3">
-                    <button type="button" class="btn btn-lg btn-primary">Sign up</button>
+                    <button type="button" class="btn btn-lg btn-primary" @click="register_user(firstname, lastname, email, password)">Sign up</button>
                   </div>
               </div>
             </div>
           </div>
+
+          <h3 v-if="error">{{error}}</h3>
 
         </div>
       </div>
@@ -69,23 +71,26 @@ export default {
   data() {
     return {
       response: [],
+      success: '',
       error: ''
     }
   },
 
   methods: {
-    login: function(username, password) {
-      if(document.getElementById('username').value === '') {
-        this.error = 'Please provide a valid username'
-      }
-      else if(document.getElementById('password').value === '') {
+    register_user: function(firstname, lastname, email, password) {
+      if (document.getElementById('firstname').value === '') {
+        this.error = 'Please provide a valid first name'
+      } else if (document.getElementById('lastname').value === '') {
+        this.error = 'Please provide a valid last name'
+      } else if (document.getElementById('email').value === '') {
+        this.error = 'Please provide a valid email'
+      } else if (document.getElementById('password').value === '') {
         this.error = 'Please provide a valid password'
-      }
-      else {
-        this.error = ''
-
-        AXIOS.get(backendUrl + '/customer/login?email='+username+'&password='+password).then(response => {
+      } else {
+        AXIOS.post(backendUrl + '/customer/create?firstName=' + firstname + '&lastName=' + lastname + '&email=' + email + '&password='
+          + password).then(response => {
           this.response = response.data
+          this.success = response.data.id
         })
           .catch(msg => {
             console.log(msg.response.data)
@@ -93,9 +98,7 @@ export default {
             this.error = msg.response.data;
           })
 
-        this.error = this.response
-
-
+        this.$router.push('/login')
       }
     }
   }

@@ -54,25 +54,25 @@ public class TestCustomerService {
     private static final String LAST_NAME3 = "FootballClub";
     private static final String EMAIL3 = "chelseafc@gmail.com";
     private static final String PASSWORD3 = "w3Ar3Brokepl$help";
-    
+
     private static final int CUSTOMER_KEY_4 = 1004;
     private static final String FIRST_NAME4 = "Y";
     private static final String LAST_NAME4 = "Khapre";
     private static final String EMAIL4 = "ykcfc09@gmail.com";
     private static final String PASSWORD4 = "randompassword";
-    
+
     private static final int CUSTOMER_KEY_5 = 1005;
     private static final String FIRST_NAME5 = "Cristiano";
     private static final String LAST_NAME5 = "Ronaldo";
     private static final String EMAIL5 = "Lefauxcr7@gmail.com";
     private static final String PASSWORD5 = "123458998";
-    
+
     private static final int CUSTOMER_KEY_6 = 1006;
     private static final String FIRST_NAME6 = "Random";
     private static final String LAST_NAME6 = "Person";
     private static final String EMAIL6 = "random@gmail.com";
     private static final String PASSWORD6 = "12345786";
-    
+
     private static final int CUSTOMER_KEY_7 = 1007;
     private static final String FIRST_NAME7 = "Yash";
     private static final String LAST_NAME7 = "Khapre";
@@ -87,9 +87,9 @@ public class TestCustomerService {
     private static final String COUNTRY = "Canada";
     private static final boolean IS_LOCAL = true;
 
-  /*
-   * Helper method to create a customer with certain attributes
-   */
+    /*
+     * Helper method to create a customer with certain attributes
+     */
     private Customer createCustomer() {
         Customer customer = new Customer();
         customer.setPersonID(CUSTOMER_KEY);
@@ -114,7 +114,7 @@ public class TestCustomerService {
         address.setLocal(IS_LOCAL);
         return address;
     }
-    
+
     /*
      * Helper method to create customers with the same last name
      */
@@ -140,7 +140,7 @@ public class TestCustomerService {
 
         return customers;
     }
-    
+
     /*
      * Helper method to create another customer
      */
@@ -158,41 +158,41 @@ public class TestCustomerService {
 
         return customers;
     }
-    
+
     /*
      * Helper method to create customers with identical first and last names
      */
     private List<Customer> createCustomersWithSameFullName() {
-      ArrayList<Customer> customers = new ArrayList<>();
+        ArrayList<Customer> customers = new ArrayList<>();
 
-      Customer customer = new Customer();
-      customer.setPersonID(CUSTOMER_KEY_2);
-      customer.setFirstName(FIRST_NAME2);
-      customer.setLastName(LAST_NAME2);
-      customer.setEmail(EMAIL2);
-      customer.setPassword(PASSWORD2);
+        Customer customer = new Customer();
+        customer.setPersonID(CUSTOMER_KEY_2);
+        customer.setFirstName(FIRST_NAME2);
+        customer.setLastName(LAST_NAME2);
+        customer.setEmail(EMAIL2);
+        customer.setPassword(PASSWORD2);
 
-      Customer customer2 = new Customer();
-      customer2.setPersonID(CUSTOMER_KEY_5);
-      customer2.setFirstName(FIRST_NAME5);
-      customer2.setLastName(LAST_NAME5);
-      customer2.setEmail(EMAIL5);
-      customer2.setPassword(PASSWORD5);
-      
-      customers.add(customer);
-      customers.add(customer2);
-     
-      return customers;
-  }
-   
+        Customer customer2 = new Customer();
+        customer2.setPersonID(CUSTOMER_KEY_5);
+        customer2.setFirstName(FIRST_NAME5);
+        customer2.setLastName(LAST_NAME5);
+        customer2.setEmail(EMAIL5);
+        customer2.setPassword(PASSWORD5);
+
+        customers.add(customer);
+        customers.add(customer2);
+
+        return customers;
+    }
+
     /*
      * Helper method to create a customer with an address
      */
     private Customer createCustomerWithAddress() {
-      Customer savedCustomer = createCustomer();
-      Address a = createAddress();
-      savedCustomer.setAddress(a);
-      return savedCustomer;
+        Customer savedCustomer = createCustomer();
+        Address a = createAddress();
+        savedCustomer.setAddress(a);
+        return savedCustomer;
     }
 
     /*
@@ -207,11 +207,11 @@ public class TestCustomerService {
                 return null;
             }
         });
-        
+
         lenient().when(customerRepository.findCustomersByFirstName(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
             if(invocation.getArgument(0).equals(FIRST_NAME)) {
-              List<Customer> customers = new ArrayList<>();
-              customers.add(createCustomer());
+                List<Customer> customers = new ArrayList<>();
+                customers.add(createCustomer());
                 return customers;
             } else {
                 return new ArrayList<>();
@@ -251,7 +251,7 @@ public class TestCustomerService {
                 return null;
             }
         });
-        
+
 
         lenient().when(customerRepository.existsByPersonID(anyInt())).thenAnswer(
                 (InvocationOnMock invocation) -> invocation.getArgument(0).equals(CUSTOMER_KEY));
@@ -277,10 +277,10 @@ public class TestCustomerService {
     @Test
     public void testCreateCustomer() {
         Customer savedCustomer = null;
+        Address a = createAddress();
 
         try {
-            savedCustomer = this.customerService.createCustomer(CUSTOMER_KEY_6, FIRST_NAME6, LAST_NAME6, EMAIL6, PASSWORD6, CITY, COUNTRY, POSTAL_CODE, 
-                STREET_NAME, STREET_NUM, IS_LOCAL);
+            savedCustomer = this.customerService.createCustomer(CUSTOMER_KEY_6, FIRST_NAME6, LAST_NAME6, EMAIL6, PASSWORD6, a);
         }
         catch(IllegalArgumentException exp) {
             fail(exp.getMessage());
@@ -333,7 +333,7 @@ public class TestCustomerService {
         Customer savedCustomer = null;
         String error = null;
         try {
-            savedCustomer = this.customerService.createCustomer(CUSTOMER_KEY, null, LAST_NAME, EMAIL, PASSWORD);
+            savedCustomer = this.customerService.createCustomer(null, LAST_NAME, EMAIL, PASSWORD);
         }
         catch(IllegalArgumentException exp) {
             error = exp.getMessage();
@@ -359,86 +359,86 @@ public class TestCustomerService {
         assertNull(savedCustomer);
         assertEquals(error, "Please provide valid Address");
     }
-    
+
     /*
      * Test to check if customer can successfully login
      */
     @Test
     public void testLoginSuccessful() {
-      Customer c = createCustomer();
-      try {
-        c = customerService.login(EMAIL, PASSWORD, CUSTOMER_KEY);
-      }catch(IllegalArgumentException exp) {
-        fail(exp.getMessage());
-      }
-      assertEquals(c.getLoginStatus(), true);
-      assertEquals(c.getEmail(), EMAIL);
-      assertEquals(c.getPassword(), PASSWORD);
-      assertEquals(c.getPersonID(), CUSTOMER_KEY);
+        Customer c = createCustomer();
+        try {
+            c = customerService.login(EMAIL, PASSWORD);
+        }catch(IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertEquals(c.getLoginStatus(), true);
+        assertEquals(c.getEmail(), EMAIL);
+        assertEquals(c.getPassword(), PASSWORD);
+        assertEquals(c.getPersonID(), CUSTOMER_KEY);
     }
-    
+
     /*
      * Test to check if customer can successfully log out
      */
     @Test
     public void testLogoutSuccessful() {
-      Customer c = createCustomer();
-      c.setLoginStatus(true);
-      customerRepository.save(c);
-      try {
-        c = customerService.logout(EMAIL, CUSTOMER_KEY);
-      }catch(IllegalArgumentException exp) {
-        fail(exp.getMessage());
-      }
-      assertFalse(c.getLoginStatus());
+        Customer c = createCustomer();
+        c.setLoginStatus(true);
+        customerRepository.save(c);
+        try {
+            c = customerService.logout(EMAIL, CUSTOMER_KEY);
+        }catch(IllegalArgumentException exp) {
+            fail(exp.getMessage());
+        }
+        assertFalse(c.getLoginStatus());
     }
-    
+
     /*
      * Test to check that customer cannot log in with incorrect password
      */
     @Test
     public void testLoginFail() {
-      Customer c = createCustomer();
-      String error = "";
-      try {
-        c = customerService.login(EMAIL, PASSWORD2, CUSTOMER_KEY);
-      }catch(IllegalArgumentException exp) {
-        error = exp.getMessage();
-      }
-      assertFalse(c.getLoginStatus());
-      assertEquals(error, "Incorrect password inputted!");
+        Customer c = createCustomer();
+        String error = "";
+        try {
+            c = customerService.login(EMAIL, PASSWORD2);
+        }catch(IllegalArgumentException exp) {
+            error = exp.getMessage();
+        }
+        assertFalse(c.getLoginStatus());
+        assertEquals(error, "Incorrect password inputted!");
     }
-    
+
     /*
      * Test to check that customer cannot log in with incorrect email
      */
     @Test
     public void testLoginFail2() {
-      Customer c = createCustomer();
-      String error = "";
-      try {
-        c = customerService.login(EMAIL2, PASSWORD, CUSTOMER_KEY);
-      }catch(IllegalArgumentException exp) {
-        error = exp.getMessage();
-      }
-      assertFalse(c.getLoginStatus());
-      assertEquals(error, "Incorrect email inputted!");
+        Customer c = createCustomer();
+        String error = "";
+        try {
+            c = customerService.login(EMAIL2, PASSWORD);
+        }catch(IllegalArgumentException exp) {
+            error = exp.getMessage();
+        }
+        assertFalse(c.getLoginStatus());
+        assertEquals(error, "Incorrect email inputted!");
     }
     /*
      * Test to check that customer cannot log out with incorrect email
      */
     @Test
     public void testLogoutFail() {
-      Customer c = createCustomer();
-      c.setLoginStatus(true);
-      String error = "";
-      try {
-        c = customerService.logout(EMAIL2, CUSTOMER_KEY);
-      }catch(IllegalArgumentException exp) {
-        error = exp.getMessage();
-      }
-      assertTrue(c.getLoginStatus());
-      assertEquals(error, "Incorrect email inputted!");
+        Customer c = createCustomer();
+        c.setLoginStatus(true);
+        String error = "";
+        try {
+            c = customerService.logout(EMAIL2, CUSTOMER_KEY);
+        }catch(IllegalArgumentException exp) {
+            error = exp.getMessage();
+        }
+        assertTrue(c.getLoginStatus());
+        assertEquals(error, "Incorrect email inputted!");
     }
     /*
      * Test to get a customer with given ID
@@ -475,7 +475,7 @@ public class TestCustomerService {
         assertNull(customer);
         assertEquals("Cannot find customer with specified ID", error);
     }
-    
+
     /*
      * Test to get customers with a specific first name
      */
@@ -596,13 +596,13 @@ public class TestCustomerService {
         assertEquals(LAST_NAME2, customer.getLastName());
         assertEquals(EMAIL2, customer.getEmail());
         assertEquals(PASSWORD2, customer.getPassword());
-        
+
         assertNotNull(customer2);
         assertEquals(CUSTOMER_KEY_5, customer2.getPersonID());
         assertEquals(FIRST_NAME5, customer2.getFirstName());
         assertEquals(LAST_NAME5, customer2.getLastName());
         assertEquals(EMAIL5, customer2.getEmail());
-        assertEquals(PASSWORD5, customer2.getPassword());  
+        assertEquals(PASSWORD5, customer2.getPassword());
     }
 
     /*
@@ -622,7 +622,7 @@ public class TestCustomerService {
         assertNull(customer);
         assertEquals("Please enter a valid email", error);
     }
-    
+
     /*
      * Test not to get a customer using an email which doesn't exist
      */
@@ -813,16 +813,16 @@ public class TestCustomerService {
         assertEquals(savedCustomer.getAddress().isLocal(), IS_LOCAL);
         assertEquals(savedCustomer.getAddress().getAddressID(), ADDRESS_KEY);
     }
-    
+
     /*
      * Test to successfully update a customer's entire profile
      */
     @Test
     public void testUpdateCustomerProfile() {
         Customer savedCustomer = createCustomerWithAddress();
-        
+        Address a = createAddress();
         try {
-            savedCustomer = this.customerService.updateProfile(FIRST_NAME2, LAST_NAME2, EMAIL2, PASSWORD2, CITY, COUNTRY, POSTAL_CODE, STREET_NAME, STREET_NUM, true, CUSTOMER_KEY);
+            savedCustomer = this.customerService.updateProfile(FIRST_NAME2, LAST_NAME2, EMAIL2, PASSWORD2, a, CUSTOMER_KEY);
         }
         catch(Exception exp) {
             fail(exp.getMessage());
@@ -842,21 +842,20 @@ public class TestCustomerService {
         assertEquals(savedCustomer.getAddress().getPostalCode(), POSTAL_CODE);
         assertEquals(savedCustomer.getAddress().isLocal(), IS_LOCAL);
     }
-    
+
     /*
      * Test that makes sure a customer cannot be deleted due to invalid ID
      */
     @Test
     public void deleteCustomerUnSuccessful() {
-        Customer c = createCustomer();
         boolean b = false;
         String error = null;
         try {
-             b = customerService.deleteCustomerByID(10);
+            b = customerService.deleteCustomerByID(10);
         } catch (NullPointerException exp) {
             error = exp.getMessage();
         }
         assertFalse(b);
-        assertEquals("Cannot find Customer with this personID", error);
+        assertEquals("Customer not found", error);
     }
 }

@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dao.ShiftRepository;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,9 +25,14 @@ public class ShiftControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private ShiftRepository shiftRepository;
+
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
+
+        shiftRepository.deleteAll();
     }
 
     @AfterEach

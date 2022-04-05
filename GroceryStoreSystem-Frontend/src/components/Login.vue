@@ -13,18 +13,20 @@
                 <div class="m-sm-4">
                   <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control form-control-lg" type="text" name="email" id="email" v-model="email">
+                    <input class="form-control form-control-lg" type="text" name="email" id="username" v-model="email">
                   </div>
                   <div class="form-group">
                     <label>Password</label>
                     <input class="form-control form-control-lg" type="text" name="password" id="password" v-model="password">
                   </div>
                   <div class="text-center mt-3">
-                    <button type="button" class="btn btn-lg btn-primary">Log in</button>
+                    <button type="button" class="btn btn-lg btn-primary" @click="login(email, password)">Log in</button>
                   </div>
                 </div>
               </div>
             </div>
+
+            <h3 v-if="error">{{error}}</h3>
 
           </div>
         </div>
@@ -60,7 +62,7 @@ export default {
 
   data() {
     return {
-      response: [],
+      response: '',
       error: ''
     }
   },
@@ -75,25 +77,101 @@ export default {
       }
       else {
         this.error = ''
-
-        AXIOS.get(backendUrl + '/customer/login?email='+username+'&password='+password).then(response => {
+        AXIOS.post(backendUrl + '/customer/login?email='+username+'&password='+password).then(response => {
           this.response = response.data
         })
-          .catch(msg => {
-            console.log(msg.response.data)
-            console.log(msg.response.status)
-            this.error = msg.response.data;
+        .catch(msg => {
+          console.log(msg.response.data)
+          console.log(msg.response.status)
+          this.error = msg.response.data;
+        })
+
+        if(this.response === true) {
+          let id = ''
+          AXIOS.get(backendUrl + '/customer/get/email?email='+username).then(response => {
+            this.id = response.data.id
           })
+            .catch(msg => {
+              console.log(msg.response.data)
+              console.log(msg.response.status)
+              this.error = msg.response.data;
+            })
 
-        this.error = this.response
+          document.cookie = 'email='+username+'; path=/'
+          document.cookie = 'id='+id+'; path=/'
+          document.cookie = 'type=customer; path=/'
 
 
+          this.$router.push('/browse')
+
+          return
+        }
+
+
+        //Potential Employee Login
+        AXIOS.post(backendUrl + '/employee/login?email='+username+'&password='+password).then(response => {
+          this.response = response.data
+        })
+        .catch(msg => {
+          console.log(msg.response.data)
+          console.log(msg.response.status)
+          this.error = msg.response.data;
+        })
+
+        if(this.response === true) {
+          let id = ''
+          AXIOS.get(backendUrl + '/employee/get/email?email='+username).then(response => {
+            this.id = response.data.id
+          })
+            .catch(msg => {
+              console.log(msg.response.data)
+              console.log(msg.response.status)
+              this.error = msg.response.data;
+            })
+
+          document.cookie = 'email='+username+'; path=/'
+          document.cookie = 'id='+id+'; path=/'
+          document.cookie = 'type=employee; path=/'
+
+          this.$router.push('/browse')
+
+          return
+        }
+
+        //Potential Owner Login
+        AXIOS.post(backendUrl + '/owner/login?email='+username+'&password='+password).then(response => {
+          this.response = response.data
+        })
+        .catch(msg => {
+          console.log(msg.response.data)
+          console.log(msg.response.status)
+          this.error = msg.response.data;
+        })
+        if(this.response === true) {
+          let id = ''
+          AXIOS.get(backendUrl + '/owner/get/email?email='+username).then(response => {
+            this.id = response.data.id
+          })
+            .catch(msg => {
+              console.log(msg.response.data)
+              console.log(msg.response.status)
+              this.error = msg.response.data;
+            })
+
+          document.cookie = 'email='+username+'; path=/'
+          document.cookie = 'id='+id+'; path=/'
+          document.cookie = 'type=employee; path=/'
+
+          this.$router.push('/browse')
+
+          return
+        }
+
+        this.error = 'Invalid Credentials'
       }
     }
   }
 }
-
-
 
 </script>
 

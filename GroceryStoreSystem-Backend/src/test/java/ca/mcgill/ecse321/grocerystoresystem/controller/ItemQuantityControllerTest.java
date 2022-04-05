@@ -64,7 +64,5 @@ public class ItemQuantityControllerTest {
                 .body("quantityID", equalTo(id))
                 .body("itemNum", equalTo(1));
         System.out.println("SO");
-
     }
-
 }
