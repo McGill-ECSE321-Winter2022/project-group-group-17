@@ -25,6 +25,9 @@
               <a class="nav-link" @click="shifts">Shifts</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" @click="orders">Orders</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" @click="login">Login</a>
             </li>
             <li class="nav-item">
@@ -63,6 +66,10 @@ export default {
 
     browse: function() {
       this.$router.push('/browse')
+    },
+
+    orders: function() {
+      this.$router.push('/myorders')
     },
 
     login: function() {
