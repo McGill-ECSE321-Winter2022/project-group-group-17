@@ -19,7 +19,7 @@
                         mb-5
                       "
                     >
-                      <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                      <h1 class="fw-bold mb-0 text-black">Checkout</h1>
                       <h6 class="mb-0 text-muted">3 items</h6>
                     </div>
                     <hr class="my-4" />
@@ -56,7 +56,7 @@
                           id="form1"
                           min="0"
                           name="quantity"
-                          value="1"
+                          value="8"
                           type="number"
                           class="form-control form-control-sm"
                         />
@@ -112,7 +112,7 @@
                           id="form1"
                           min="0"
                           name="quantity"
-                          value="1"
+                          value="6"
                           type="number"
                           class="form-control form-control-sm"
                         />
@@ -168,7 +168,7 @@
                           id="form1"
                           min="0"
                           name="quantity"
-                          value="1"
+                          value="10"
                           type="number"
                           class="form-control form-control-sm"
                         />

@@ -9,6 +9,44 @@
         
       </div>
     </div>
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Product</th>
+      <th scope="col">Category</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">001</th>
+      <td>Apples</td>
+      <td>Fruits</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th scope="row">002</th>
+      <td>Carrots</td>
+      <td>Vegetables</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th scope="row">003</th>
+      <td>Fruit Loops Cereal</td>
+      <td>Non-Perishables</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th scope="row">004</th>
+      <td>Bananas</td>
+      <td>Fruits</td>
+      <td>100</td>
+    </tr>
+    
+  </tbody>
+</table>
   </section>
   
 </template>

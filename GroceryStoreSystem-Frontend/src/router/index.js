@@ -4,12 +4,12 @@ import Hello from '@/components/Hello'
 import EmployeeLogin from '@/components/EmployeeLogin'
 import OwnerLogin from '@/components/OwnerLogin'
 import CustomerLogin from '@/components/CustomerLogin'
-import Register from '@/components/Register'
 import EditCustomerProfile from '@/components/EditCustomerProfile'
 import EditEmployeeProfile from '@/components/EditEmployeeProfile'
 import CreateEmployee from '@/components/CreateEmployee'
 import Inventory from '@/components/Inventory'
 import Checkout from '@/components/Checkout'
+import Cart from '@/components/Cart'
 
 Vue.use(Router)
 
@@ -39,11 +39,6 @@ export default new Router({
       component: CustomerLogin,
     }, 
     {
-      path: '/register',
-      name: 'Register',
-      component: Register,
-    },
-    {
       path: '/customer/update',
       name: 'EditCustomerProfile',
       component: EditCustomerProfile,
@@ -67,7 +62,14 @@ export default new Router({
       path: '/checkout',
       name: 'Checkout',
       component: Checkout,
+    },
+
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart,
     }
+
 
   ]
 })
