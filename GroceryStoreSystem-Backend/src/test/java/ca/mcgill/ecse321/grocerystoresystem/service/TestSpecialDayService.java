@@ -46,14 +46,6 @@ public class TestSpecialDayService {
 
   @InjectMocks
   private CalendarService calendarService;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 40180975 (Fix IntTest failures)
-=======
->>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
   private static final int SPECIALDAY_KEY = 3001;
   private static final int SPECIALDAY_KEY2 = 3002;
   private static final int CALENDAR_KEY = 4001;
@@ -61,18 +53,7 @@ public class TestSpecialDayService {
   private static final LocalDateTime START_TIME = LocalDateTime.parse("2022-03-13T15:14:21.629");
   private static final LocalDateTime END_TIME = LocalDateTime.parse("2022-03-14T15:14:21.629");
   private static final LocalDateTime START_TIME2 = LocalDateTime.parse("2022-03-18T16:14:21.629");
-<<<<<<< HEAD
-<<<<<<< HEAD
-  private static final LocalDateTime END_TIME2 = LocalDateTime.parse("2022-03-19T16:14:21.629");  
-  
-=======
   private static final LocalDateTime END_TIME2 = LocalDateTime.parse("2022-03-19T16:14:21.629");
-
->>>>>>> 40180975 (Fix IntTest failures)
-=======
-  private static final LocalDateTime END_TIME2 = LocalDateTime.parse("2022-03-19T16:14:21.629");
-
->>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
   /*
    * Helper method to create a special day with given parameters
    */
@@ -131,13 +112,8 @@ public class TestSpecialDayService {
 
     try {
       sDay = this.specialDayService.createSpecialDay(START_TIME, END_TIME);
-<<<<<<< HEAD
-  }
-  catch(IllegalArgumentException exp) {
-=======
     }
     catch(IllegalArgumentException exp) {
->>>>>>> 40180975 (Fix IntTest failures)
       fail(exp.getMessage());
     }
 
@@ -156,13 +132,8 @@ public class TestSpecialDayService {
 
     try {
       sDay = this.specialDayService.createSpecialDay(END_TIME, START_TIME);
-<<<<<<< HEAD
-  }
-  catch(IllegalArgumentException exp) {
-=======
     }
     catch(IllegalArgumentException exp) {
->>>>>>> 40180975 (Fix IntTest failures)
       error = exp.getMessage();
     }
     assertEquals(error, "The start time cannot be after the end time!");
@@ -178,17 +149,8 @@ public class TestSpecialDayService {
 
     try {
       sDay = this.specialDayService.createSpecialDay(null, START_TIME);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
   }
-  catch(IllegalArgumentException exp) {
-=======
-    }
     catch(IllegalArgumentException exp) {
->>>>>>> 40180975 (Fix IntTest failures)
       error = exp.getMessage();
     }
     assertEquals(error, "Please enter a valid start time!");
