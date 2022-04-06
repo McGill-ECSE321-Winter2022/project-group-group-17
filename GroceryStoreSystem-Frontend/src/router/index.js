@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-<<<<<<< HEAD
-import Hello from '@/components/Hello'
-import Order from '@/components/Order'
-import ViewPersonalOrders from '@/components/ViewPersonalOrders'
-=======
+import Hello from '../components/Hello'
+import Order from '../components/Order'
+import ViewPersonalOrders from '../components/ViewPersonalOrders'
 import AddShift from '../components/AddShift';
 import AddSpecialDay from '../components/AddSpecialDay';
 import AddStoreHour from "../components/AddStoreHour";
@@ -15,11 +13,9 @@ import UpdateShift from "../components/UpdateShift";
 import UpdateShiftStatus from "../components/UpdateShiftStatus";
 import UpdateSpecialDay from "../components/UpdateSpecialDay";
 import UpdateStoreHour from "../components/UpdateStoreHour";
-<<<<<<< HEAD
->>>>>>> c1a05680 (Added Vue Components)
-=======
-import Hello from "../components/Hello";
->>>>>>> 84f6d028 (Front End #1)
+import Browse from "../components/Browse";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 Vue.use(Router)
 
@@ -27,9 +23,7 @@ Vue.use(Router)
 const ourRouter  = new Router( {
   routes: [
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      path: '/hello',
+      path: '/',
       name: 'Hello',
       component: Hello
     },
@@ -42,14 +36,8 @@ const ourRouter  = new Router( {
       path: '/myorders/2',
       name: 'order',
       component: Order
-=======
-=======
-      path: '/',
-      name: 'home',
-      component: Hello
     },
     {
->>>>>>> 84f6d028 (Front End #1)
       path: '/addshift',
       name: 'add_shift',
       component: AddShift
@@ -93,7 +81,21 @@ const ourRouter  = new Router( {
       path: '/updatestorehour',
       name: 'update_store_hour',
       component: UpdateStoreHour
->>>>>>> c1a05680 (Added Vue Components)
+    },
+    {
+      path: '/browse',
+      name: 'browse',
+      component: Browse
+    },
+    {
+      path:'/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     }
   ]
 })

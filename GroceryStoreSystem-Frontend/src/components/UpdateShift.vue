@@ -23,13 +23,13 @@
       <div class="buttonPersonalFrame inputPersLabel">
         <button class="btn-cancel" @click="cancel">Back
         </button>
-        <button class="btn-success" @click="updateShiftEmployee(employeeID, shiftID)">Create Shift
+        <button class="btn-success" @click="updateShiftEmployee(employeeID, shiftID)">Update Shift
         </button>
       </div>
 
 
       <span v-if="error" style="color: red">Error: {{error}}</span>
-      <span v-if="success" style="color: green">Added New Author: {{success}}</span>
+      <span v-if="success" style="color: green">Updated Shift Employee: {{success}}</span>
     </div>
   </div>
 </template>
@@ -90,7 +90,7 @@ export default {
     },
 
     cancel: function() {
-      this.$router.push('/')
+      this.$router.push('/shifts')
     }
 
   }
