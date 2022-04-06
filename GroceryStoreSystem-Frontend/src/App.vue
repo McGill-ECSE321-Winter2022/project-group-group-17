@@ -28,6 +28,15 @@
               <a class="nav-link" @click="orders">Orders</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" @click="profile">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="inventory">Inventory</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" @click="checkout">Checkout</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" @click="login">Login</a>
             </li>
             <li class="nav-item">
@@ -71,6 +80,20 @@ export default {
     orders: function() {
       this.$router.push('/myorders')
     },
+
+    profile: function() {
+      this.$router.push('/profile')
+    },
+
+    inventory: function() {
+      this.$router.push('/inventory')
+    },
+
+    checkout: function() {
+      this.$router.push('/checkout')
+    },
+
+
     login: function() {
       this.$router.push('/login')
     },

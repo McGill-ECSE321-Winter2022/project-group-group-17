@@ -5,7 +5,7 @@
         <div class="d-table-cell align-middle">
 
           <div class="text-center mt-4">
-            <h1 class="h2">Customer Registeration</h1>
+            <h1 class="h2">Customer Registration</h1>
           </div>
 
           <div class="card">
