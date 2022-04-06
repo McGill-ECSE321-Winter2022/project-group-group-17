@@ -16,7 +16,7 @@ public class GroceryStoreSystemBackendApplication {
 	@RequestMapping("/")
 	public String greeting(){
 		return "Hello world!";
-	}
+	} 
 
 	
 
