@@ -1,12 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-<<<<<<< HEAD
 import Hello from '../components/Hello'
 import Order from '../components/Order'
 import ViewPersonalOrders from '../components/ViewPersonalOrders'
-=======
->>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
 import AddShift from '../components/AddShift';
 import AddSpecialDay from '../components/AddSpecialDay';
 import AddStoreHour from "../components/AddStoreHour";
@@ -16,10 +13,6 @@ import UpdateShift from "../components/UpdateShift";
 import UpdateShiftStatus from "../components/UpdateShiftStatus";
 import UpdateSpecialDay from "../components/UpdateSpecialDay";
 import UpdateStoreHour from "../components/UpdateStoreHour";
-<<<<<<< HEAD
-=======
-import Hello from "../components/Hello";
->>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
 import Browse from "../components/Browse";
 import Login from "../components/Login";
 import Register from "../components/Register";
@@ -35,7 +28,6 @@ const ourRouter  = new Router( {
       component: Hello
     },
     {
-<<<<<<< HEAD
       path: '/myorders',
       name: 'PersonalOrders',
       component: ViewPersonalOrders
@@ -46,8 +38,6 @@ const ourRouter  = new Router( {
       component: Order
     },
     {
-=======
->>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
       path: '/addshift',
       name: 'add_shift',
       component: AddShift

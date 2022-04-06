@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/App.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
