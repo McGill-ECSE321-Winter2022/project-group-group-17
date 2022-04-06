@@ -15,24 +15,23 @@
         <input type="text" v-model='storeHourID' id="storeHourID" placeholder="Store Hour ID" class="form-control" required>
         <br>
         <br>
-        <input type="time" v-model='starttime' id="starttime" placeholder="Start Time" class="form-control" required>
+        <input type="text" v-model='starttime' id="starttime" placeholder="Start Time" class="form-control" required>
         <br>
         <br>
-        <input type="time" v-model="endtime" id="endtime" placeholder="End Time" class="form-control" required>
+        <input type="text" v-model="endtime" id="endtime" placeholder="End Time" class="form-control" required>
         <br>
         <br>
       </div>
 
       <div class="buttonPersonalFrame inputPersLabel">
-        <button class="btn-cancel" @click="cancel">Back
+        <button class="btn btn-cancel" @click="cancel">Back
         </button>
-        <button class="btn-success" @click="updateStoreHour(storeHourID, starttime, endtime)">Create Shift
-        </button>
+        <button class="btn btn-success" @click="updateStoreHour(storeHourID, starttime, endtime)">Update Special Day</button>
       </div>
 
 
-      <span v-if="error" style="color: red">Error: {{error}}</span>
-      <span v-if="success" style="color: green">Added New Author: {{success}}</span>
+      <span v-if="error" style="color: red; margin-top:20px; ">Error: {{error}}</span>
+      <span v-if="success" style="color: green">Updated Store Hour: {{success}}</span>
     </div>
   </div>
 </template>
@@ -87,18 +86,19 @@ export default {
         AXIOS.post(backendUrl + '/storehour/update?storeHourID=' + storeHourID + "&startTime=" + starttime
           + '&endTime=' + endtime).then(response => {
           this.response = response.data
-          this.success = response.data.id
-          console.log(response)
+          this.success = response.data.storeHourID
+          console.log(response);
         }).catch(msg => {
           console.log(msg.response.data)
           console.log(msg.response.status)
           this.error = msg.response.data;
         })
+
       }
     },
 
     cancel: function() {
-      this.$router.push('/')
+      this.$router.push('/storehours')
     }
 
   }
@@ -117,21 +117,5 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   padding-top: 2vh;
-}
-.btn-success {
-  border-radius: 60px;
-  border: None;
-  width: 150px;
-  height: 55px;
-  color: #FDEDEC;
-  background-color: #03a634;
-}
-.btn-cancel {
-  border-radius: 60px;
-  border: None;
-  width: 150px;
-  height: 55px;
-  color: #FDEDEC;
-  background-color: #ab0303;
 }
 </style>

@@ -15,7 +15,11 @@ import UpdateShift from "../components/UpdateShift";
 import UpdateShiftStatus from "../components/UpdateShiftStatus";
 import UpdateSpecialDay from "../components/UpdateSpecialDay";
 import UpdateStoreHour from "../components/UpdateStoreHour";
+<<<<<<< HEAD
 >>>>>>> c1a05680 (Added Vue Components)
+=======
+import Hello from "../components/Hello";
+>>>>>>> 84f6d028 (Front End #1)
 
 Vue.use(Router)
 
@@ -23,6 +27,7 @@ Vue.use(Router)
 const ourRouter  = new Router( {
   routes: [
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
       path: '/hello',
       name: 'Hello',
@@ -38,6 +43,13 @@ const ourRouter  = new Router( {
       name: 'order',
       component: Order
 =======
+=======
+      path: '/',
+      name: 'home',
+      component: Hello
+    },
+    {
+>>>>>>> 84f6d028 (Front End #1)
       path: '/addshift',
       name: 'add_shift',
       component: AddShift
