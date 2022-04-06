@@ -433,7 +433,11 @@ public class TestCustomerService {
         assertEquals(error, "Incorrect password inputted!");
 >>>>>>> 40180975 (Fix IntTest failures)
     }
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
     /*
      * Test to check that customer cannot log in with incorrect email
      */
@@ -861,10 +865,14 @@ public class TestCustomerService {
         try {
             savedCustomer = this.customerService.updateProfile(FIRST_NAME2, LAST_NAME2, EMAIL2, PASSWORD2, a, CUSTOMER_KEY);
 <<<<<<< HEAD
+<<<<<<< HEAD
             }
 =======
         }
 >>>>>>> 40180975 (Fix IntTest failures)
+=======
+        }
+>>>>>>> 115b14e5ef6ceceb166a2f1e765b8e0e08c58146
         catch(Exception exp) {
             fail(exp.getMessage());
         }
