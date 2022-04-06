@@ -16,6 +16,9 @@ import UpdateStoreHour from "../components/UpdateStoreHour";
 import Browse from "../components/Browse";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import EditCustomerProfile from "../components/EditCustomerProfile";
+import Inventory from "../components/Inventory";
+import Checkout from "../components/Checkout";
 
 Vue.use(Router)
 
@@ -96,6 +99,21 @@ const ourRouter  = new Router( {
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: EditCustomerProfile
+    },
+    {
+      path: '/inventory',
+      name: 'inventory',
+      component: Inventory
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: Checkout
     }
 
   ]
