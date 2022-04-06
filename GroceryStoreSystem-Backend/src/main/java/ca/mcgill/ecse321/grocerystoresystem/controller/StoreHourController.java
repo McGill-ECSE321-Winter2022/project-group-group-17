@@ -15,7 +15,7 @@ import java.time.*;
 @RestController
 public class StoreHourController {
 
-    @Autowired 
+    @Autowired
     private StoreHourService storeHourService;
 
 
@@ -66,7 +66,7 @@ public class StoreHourController {
 
     @DeleteMapping (value = {"/storehour/deleteall/", "/storehour/deleteall"})
     public boolean deleteAllHoursDto(){
-        
+
         return storeHourService.deleteAllHours();
     }
 
@@ -80,7 +80,7 @@ public class StoreHourController {
         catch (IllegalArgumentException x) {
             System.out.println(x.getMessage());
             return null;
-            
+
         }
     }
 
@@ -98,7 +98,7 @@ public class StoreHourController {
     }
 
 
-    
+
 
 
 

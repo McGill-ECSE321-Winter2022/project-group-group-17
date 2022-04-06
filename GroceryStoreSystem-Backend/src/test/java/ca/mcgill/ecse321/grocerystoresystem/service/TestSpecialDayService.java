@@ -22,7 +22,7 @@ import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 public class TestSpecialDayService {
-  
+
   @Mock
   private EmployeeRepository employeeRepository;
 
@@ -34,7 +34,7 @@ public class TestSpecialDayService {
 
   @InjectMocks
   private ShiftService shiftService;
-  
+
   @Mock
   private SpecialDayRepository specialDayRepository;
 
@@ -46,16 +46,25 @@ public class TestSpecialDayService {
 
   @InjectMocks
   private CalendarService calendarService;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 40180975 (Fix IntTest failures)
   private static final int SPECIALDAY_KEY = 3001;
   private static final int SPECIALDAY_KEY2 = 3002;
   private static final int CALENDAR_KEY = 4001;
-  
+
   private static final LocalDateTime START_TIME = LocalDateTime.parse("2022-03-13T15:14:21.629");
   private static final LocalDateTime END_TIME = LocalDateTime.parse("2022-03-14T15:14:21.629");
   private static final LocalDateTime START_TIME2 = LocalDateTime.parse("2022-03-18T16:14:21.629");
+<<<<<<< HEAD
   private static final LocalDateTime END_TIME2 = LocalDateTime.parse("2022-03-19T16:14:21.629");  
   
+=======
+  private static final LocalDateTime END_TIME2 = LocalDateTime.parse("2022-03-19T16:14:21.629");
+
+>>>>>>> 40180975 (Fix IntTest failures)
   /*
    * Helper method to create a special day with given parameters
    */
@@ -64,10 +73,10 @@ public class TestSpecialDayService {
     sDay.setSpecialDayID(SPECIALDAY_KEY);
     sDay.setStartTimestamp(START_TIME);
     sDay.setEndTimestamp(END_TIME);
-    
+
     return sDay;
   }
-  
+
   /*
    * Helper method to create a calendar with specific ID
    */
@@ -76,7 +85,7 @@ public class TestSpecialDayService {
     calendar.setCalendarID(CALENDAR_KEY);
     return calendar;
   }
-  
+
   /*
    * Expected output of certain tests
    */
@@ -89,7 +98,7 @@ public class TestSpecialDayService {
         return null;
       }
     });
-    
+
     lenient().when(calendarRepository.findCalendarByCalendarID(anyInt())).then( (InvocationOnMock invocation) -> {
       if(invocation.getArgument(0).equals(CALENDAR_KEY)) {
         return createCalendar();
@@ -97,28 +106,33 @@ public class TestSpecialDayService {
         return null;
       }
     });
-    
+
     lenient().when(specialDayRepository.existsBySpecialDayID(anyInt())).thenAnswer(
-        (InvocationOnMock invocation) -> invocation.getArgument(0).equals(SPECIALDAY_KEY));
-    
+            (InvocationOnMock invocation) -> invocation.getArgument(0).equals(SPECIALDAY_KEY));
+
     Answer<?> returnParamAsAnswer = (InvocationOnMock invocation) -> {return invocation.getArgument(0);};
-    lenient().when(specialDayRepository.save(any(SpecialDay.class))).thenAnswer(returnParamAsAnswer); 
+    lenient().when(specialDayRepository.save(any(SpecialDay.class))).thenAnswer(returnParamAsAnswer);
   }
-  
+
   /*
    * Test to successfully create a specialDay
    */
   @Test
   public void testCreateSpecialDay() {
     SpecialDay sDay = new SpecialDay();
-    
+
     try {
       sDay = this.specialDayService.createSpecialDay(START_TIME, END_TIME);
+<<<<<<< HEAD
   }
   catch(IllegalArgumentException exp) {
+=======
+    }
+    catch(IllegalArgumentException exp) {
+>>>>>>> 40180975 (Fix IntTest failures)
       fail(exp.getMessage());
-  }
-    
+    }
+
     assertNotNull(sDay);
     assertEquals(sDay.getStartTimestamp(), START_TIME);
     assertEquals(sDay.getEndTimestamp(), END_TIME);
@@ -131,16 +145,21 @@ public class TestSpecialDayService {
   public void testCreateSpecialDayFail() {
     SpecialDay sDay = new SpecialDay();
     String error = null;
-    
+
     try {
       sDay = this.specialDayService.createSpecialDay(END_TIME, START_TIME);
+<<<<<<< HEAD
   }
   catch(IllegalArgumentException exp) {
+=======
+    }
+    catch(IllegalArgumentException exp) {
+>>>>>>> 40180975 (Fix IntTest failures)
       error = exp.getMessage();
+    }
+    assertEquals(error, "The start time cannot be after the end time!");
   }
-  assertEquals(error, "The start time cannot be after the end time!");
-  }
-  
+
   /*
    * Test that makes sure a specialDay isn't created due to null start time
    */
@@ -148,23 +167,28 @@ public class TestSpecialDayService {
   public void testCreateSpecialDayFail2() {
     SpecialDay sDay = new SpecialDay();
     String error = null;
-    
+
     try {
       sDay = this.specialDayService.createSpecialDay(null, START_TIME);
+<<<<<<< HEAD
   }
   catch(IllegalArgumentException exp) {
+=======
+    }
+    catch(IllegalArgumentException exp) {
+>>>>>>> 40180975 (Fix IntTest failures)
       error = exp.getMessage();
+    }
+    assertEquals(error, "Please enter a valid start time!");
   }
-  assertEquals(error, "Please enter a valid start time!");
-  }
-  
+
   /*
    * Test to successfully update a specialDay
    */
   @Test
   public void testUpdateSpecialDay() {
-    SpecialDay sDay = createSpecialDay(); 
-   
+    SpecialDay sDay = createSpecialDay();
+
     try {
       sDay = specialDayService.updateSpecialDay(SPECIALDAY_KEY, START_TIME2, END_TIME2);
     }catch(IllegalArgumentException exp){
@@ -175,7 +199,7 @@ public class TestSpecialDayService {
     assertEquals(START_TIME2, sDay.getStartTimestamp());
     assertEquals(END_TIME2, sDay.getEndTimestamp());
   }
-  
+
   /*
    * Test to make sure customer cannot be updated if specialDayID doesn't exist in system
    */
@@ -183,7 +207,7 @@ public class TestSpecialDayService {
   public void testUpdateSpecialDayFail() {
     SpecialDay sDay = createSpecialDay();
     String error = "";
-    
+
     try {
       sDay = specialDayService.updateSpecialDay(SPECIALDAY_KEY2, START_TIME2, END_TIME2);
     }catch(IllegalArgumentException exp){
@@ -194,7 +218,7 @@ public class TestSpecialDayService {
     assertEquals(END_TIME, sDay.getEndTimestamp());
     assertEquals(error, "Cannot find specialDay with given ID");
   }
-  
+
   /*
    * Tests that checks that a special day cannot be updated if the start time is greater than the end time
    */
@@ -202,7 +226,7 @@ public class TestSpecialDayService {
   public void testUpdateSpecialDayFail2() {
     SpecialDay sDay = createSpecialDay();
     String error = "";
-    
+
     try {
       sDay = specialDayService.updateSpecialDay(SPECIALDAY_KEY, END_TIME2, START_TIME2);
     }catch(IllegalArgumentException exp){
@@ -213,22 +237,22 @@ public class TestSpecialDayService {
     assertEquals(END_TIME, sDay.getEndTimestamp());
     assertEquals(error, "The start time cannot be after the end time!");
   }
-  
+
   /*
    * Check if a day is of type SpecialDay using a specialDayID
    */
   @Test
   public void testIsSpecialDayByID() {
-      boolean result = this.specialDayService.isSpecialDayByID(SPECIALDAY_KEY);
-      assertTrue(result);
+    boolean result = this.specialDayService.isSpecialDayByID(SPECIALDAY_KEY);
+    assertTrue(result);
   }
-  
+
   /*
    * Check if a day is NOT of type SpecialDay using invalid ID
    */
   @Test
   public void testIsSpecialDayByIDFail() {
-      boolean result = this.specialDayService.isSpecialDayByID(150);
-      assertFalse(result);
+    boolean result = this.specialDayService.isSpecialDayByID(150);
+    assertFalse(result);
   }
 }

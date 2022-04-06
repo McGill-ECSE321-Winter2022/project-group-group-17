@@ -62,8 +62,11 @@ public class ItemQuantityControllerTest {
                 .then().statusCode(200)
                 .body("quantityID", equalTo(id))
                 .body("itemNum", equalTo(1));
+<<<<<<< HEAD
 
 
+=======
+        System.out.println("SO");
+>>>>>>> 40180975 (Fix IntTest failures)
     }
-
 }

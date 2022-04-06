@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.OrderRepository;
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
@@ -30,11 +31,16 @@ public class DeliveryOrderControllerTest {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
 
         this.orderRepository.deleteAll();
+
+        this.addressRepository.deleteAll();
 
     }
 

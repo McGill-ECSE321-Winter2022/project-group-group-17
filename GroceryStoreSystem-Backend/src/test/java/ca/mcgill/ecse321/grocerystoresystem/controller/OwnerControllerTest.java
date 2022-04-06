@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
 
+import ca.mcgill.ecse321.grocerystoresystem.dao.AddressRepository;
 import ca.mcgill.ecse321.grocerystoresystem.dao.PersonRepository;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.AfterEach;
@@ -29,12 +30,16 @@ public class OwnerControllerTest {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
 
         this.personRepository.deleteAll();
 
+        this.addressRepository.deleteAll();
     }
 
     @AfterEach

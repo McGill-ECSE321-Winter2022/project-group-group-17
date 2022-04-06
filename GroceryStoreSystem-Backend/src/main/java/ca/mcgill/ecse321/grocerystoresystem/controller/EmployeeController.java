@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 public class EmployeeController {
 
-    @Autowired 
+    @Autowired
     private EmployeeService employeeService;
 
     @PostMapping(value = {"/employee/login"})
@@ -104,11 +104,11 @@ public class EmployeeController {
     }
 
     @PostMapping(value = {"/employee/create/", "/employee/create"})
-    public EmployeeDto createEmployee (@RequestParam String firstname, @RequestParam String lastname, 
-                                        @RequestParam String email, @RequestParam String password, @RequestParam EmployeeStatus empStatus){
+    public EmployeeDto createEmployee (@RequestParam String firstname, @RequestParam String lastname,
+                                       @RequestParam String email, @RequestParam String password, @RequestParam EmployeeStatus empStatus){
         EmployeeDto employee = convertToDto(employeeService.createEmployee(firstname, lastname, email, password, empStatus));
-        return employee; 
-     }
+        return employee;
+    }
 
     @DeleteMapping(value = {"/employee/delete/", "/employee/delete"})
     public boolean deleteEmployeeByID(@RequestParam int id){
@@ -119,35 +119,35 @@ public class EmployeeController {
         catch (NullPointerException n){
             return false;
         }
-     }
+    }
 
-     @DeleteMapping(value={"/employees/delete/", "/employees/delete"})
-     public boolean deleteEmployees() {
-         employeeService.deleteEmployees();
- 
-         return true;
-     }
+    @DeleteMapping(value={"/employees/delete/", "/employees/delete"})
+    public boolean deleteEmployees() {
+        employeeService.deleteEmployees();
+
+        return true;
+    }
 
 
-     @PostMapping(value={"/employee/update/address/", "/employee/update/address"})
-     public EmployeeDto updateAddressByID(@RequestParam int id, @RequestParam int addressID) {
-         try {
-             return convertToDto(employeeService.updateEmployeeAddressByID(id, addressID));
-         }
-         catch(NullPointerException exp) {
-             return null;
-         }
-     }
- 
-     @PostMapping(value = {"/employee/update/password/", "/employee/update/password"})
-     public EmployeeDto updatePasswordByID(@RequestParam int id, @RequestParam String password) {
-         try {
-             return convertToDto(employeeService.updateEmployeePasswordById(id, password));
-         }
-         catch(NullPointerException exp) {
-             return null;
-         }
-     }
+    @PostMapping(value={"/employee/update/address/", "/employee/update/address"})
+    public EmployeeDto updateAddressByID(@RequestParam int id, @RequestParam int addressID) {
+        try {
+            return convertToDto(employeeService.updateEmployeeAddressByID(id, addressID));
+        }
+        catch(NullPointerException exp) {
+            return null;
+        }
+    }
+
+    @PostMapping(value = {"/employee/update/password/", "/employee/update/password"})
+    public EmployeeDto updatePasswordByID(@RequestParam int id, @RequestParam String password) {
+        try {
+            return convertToDto(employeeService.updateEmployeePasswordById(id, password));
+        }
+        catch(NullPointerException exp) {
+            return null;
+        }
+    }
 
     @PostMapping (value = {"/employee/resign/", "/employee/resign"})
     public boolean resignEmployeeDto(@RequestParam int id){
@@ -366,5 +366,5 @@ public class EmployeeController {
 
 
 
-    
+
 }

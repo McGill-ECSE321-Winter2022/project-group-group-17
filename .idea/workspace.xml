@@ -5,29 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94dd66d1-e5bf-4b16-805e-75ee7ab686c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/assets/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/AddShift.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/AddSpecialDay.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/AddStoreHour.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/HelloWorld.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/StoreHours.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/StoreShifts.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/UpdateShift.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/UpdateShiftStatus.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/UpdateSpecialDay.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/UpdateStoreHour.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/store_hours.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/store_shifts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/plugins/vuetify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/views/HomeView.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/vue.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/static/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/ShiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/ShiftController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/SpecialDayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/SpecialDayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/StoreHourController.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/controller/StoreHourController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dto/CustomerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dto/CustomerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dto/EmployeeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/dto/EmployeeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/model/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/CustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/SpecialDayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/main/java/ca/mcgill/ecse321/grocerystoresystem/service/SpecialDayService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/AddressControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/AddressControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/CalendarControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/CalendarControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/DeliveryOrderControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/DeliveryOrderControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/EmployeeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/EmployeeControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/ItemQuantityControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/ItemQuantityControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/OwnerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/OwnerControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/ShiftControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/ShiftControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/StoreHourControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/controller/StoreHourControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestCustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestCustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestSpecialDayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Backend/src/test/java/ca/mcgill/ecse321/grocerystoresystem/service/TestSpecialDayService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/StoreHours.vue" beforeDir="false" afterPath="$PROJECT_DIR$/GroceryStoreSystem-Frontend/src/components/StoreHours.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +77,18 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
   </component>
   <component name="ProjectId" id="26MXtiEnl9Cfhva8Xeg0cB48VCw" />
   <component name="ProjectViewState">

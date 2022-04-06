@@ -12,24 +12,24 @@ public abstract class Person {
 	@GeneratedValue
 	private int personID;
 
-    private String email;
-	
-//	// Person Associations
+	private String email;
+
+	//	// Person Associations
 	@ManyToOne
 	private Address person_address;
-//
-	@OneToMany(targetEntity = Order.class)
+	//
+	@OneToMany(targetEntity = Order.class, fetch = FetchType.EAGER)
 	private List<Order> orders;
-	
+
 	private String firstName;
 	private String lastName;
-	
+
 	private String password;
 	private boolean loginStatus;
-	
-	
+
+
 	public Person() {} ;
-	
+
 	public Person(String firstName, String lastName, String email, String password, boolean loginStatus) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -37,7 +37,7 @@ public abstract class Person {
 		this.password = password;
 		this.loginStatus = loginStatus;
 	}
-	
+
 	public Person(String firstName, String lastName, String email, String password, Address address, boolean loginStatus) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -52,7 +52,7 @@ public abstract class Person {
 	}
 
 	public void setPersonID(int personID) { this.personID = personID; }
-	
+
 	public String getFirstName() {
 		return firstName;
 	}

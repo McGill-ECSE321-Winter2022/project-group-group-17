@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 @RestController
 public class SpecialDayController {
-  
+
   @Autowired
   private SpecialDayService specialDayService;
-  
+
   /**
    * @author Yash Khapre
    * @param specialDayID
@@ -28,16 +28,16 @@ public class SpecialDayController {
    */
   @PostMapping(value = { "/specialday/create", "/specialday/create/"})
   public SpecialDayDto createSpecialDay(@RequestParam("startTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime startTime,
-      @RequestParam("endTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime endTime) {
+                                        @RequestParam("endTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime endTime) {
     SpecialDay sDay = this.specialDayService.createSpecialDay(startTime, endTime);
     return convertToDto(sDay);
   }
-  
+
   @GetMapping(value = { "/specialdays", "/specialdays/" })
   public List<SpecialDayDto> getAllCustomers() {
     return specialDayService.getAllSpecialDays().stream().map(this::convertToDto).collect(Collectors.toList());
-}
-  
+  }
+
   /**
    * @author Yash Khapre
    * @param specialDayID
@@ -47,12 +47,12 @@ public class SpecialDayController {
   public SpecialDayDto getSpecialDay(@RequestParam int id) {
     try {
       return convertToDto(specialDayService.getSpecialDay(id));
-  }
-  catch (NullPointerException exp) {
+    }
+    catch (NullPointerException exp) {
       return null;
+    }
   }
-  }
-  
+
   /**
    * @author Yash Khapre
    * @param calendarID
@@ -62,27 +62,27 @@ public class SpecialDayController {
   public List<SpecialDayDto> getClosedDays(@RequestParam int id) {
     try {
       return specialDayService.getClosedDays(id).stream().map(this::convertToDto).collect(Collectors.toList());
-  }
-  catch (NullPointerException exp) {
+    }
+    catch (NullPointerException exp) {
       return null;
+    }
   }
-  }
-  
+
   /**
    * @author Yash Khapre
    * @param specialDayID
    * Controller method to get all shifts on a specified special day
    */
   @GetMapping(value = { "/specialday/shifts/id", "/specialday/shifts/id/" })
-  public List<ShiftDto> getSpecialShifts(@RequestParam int id) { 
+  public List<ShiftDto> getSpecialShifts(@RequestParam int id) {
     try {
       return specialDayService.getSpecialShifts(id).stream().map(this::convertToDto).collect(Collectors.toList());
-  }
-  catch (NullPointerException exp) {
+    }
+    catch (NullPointerException exp) {
       return null;
+    }
   }
-  }
-  
+
   /**
    * @author Yash Khapre
    * @param specialDayID
@@ -92,12 +92,12 @@ public class SpecialDayController {
   public List<EmployeeDto> getEmployeesOnSpecialShifts(@RequestParam int id) {
     try {
       return specialDayService.getEmployeesOnSpecialShifts(id).stream().map(this::convertToDto).collect(Collectors.toList());
-  }
-  catch (NullPointerException exp) {
+    }
+    catch (NullPointerException exp) {
       return null;
+    }
   }
-  }
-  
+
   /**
    * @author Yash Khaprre
    * @param specialDayID, startTime, endTime
@@ -105,29 +105,29 @@ public class SpecialDayController {
    */
   @PostMapping(value = { "/specialday/update", "/specialday/update/" })
   public SpecialDayDto updateSpecialDay(@RequestParam int id, @RequestParam("startTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime startTime,
-      @RequestParam("endTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime endTime) {
+                                        @RequestParam("endTime") @DateTimeFormat(pattern = "yyyy.MM.dd/HH.mm.ss") LocalDateTime endTime) {
     try {
       return convertToDto(specialDayService.updateSpecialDay(id, startTime, endTime));
-  } catch (NullPointerException | IllegalArgumentException exception) {
+    } catch (NullPointerException | IllegalArgumentException exception) {
       return null;
+    }
   }
-  }
-  
+
   /**
    * @author Yash Khapre
    * @param specialDayID, shiftID, date, startTime, endTime, shiftStatus, personID
    * Update a specific Shift on a specific specialDay
    */
   @PostMapping(value = { "/specialday/updateshift/id", "/specialday/updateshift/id/" })
-  public ShiftDto updateSpecificDayShift(@RequestParam int id, @RequestParam int shiftID, @RequestParam LocalDate date, 
-      @RequestParam LocalTime startTime, @RequestParam LocalTime endTime, @RequestParam ShiftStatus shiftStatus, @RequestParam int personID) {
+  public ShiftDto updateSpecificDayShift(@RequestParam int id, @RequestParam int shiftID, @RequestParam LocalDate date,
+                                         @RequestParam LocalTime startTime, @RequestParam LocalTime endTime, @RequestParam ShiftStatus shiftStatus, @RequestParam int personID) {
     try {
       return convertToDto(specialDayService.updateSpecificDayShift(shiftID, id, date, startTime, endTime, shiftStatus, personID));
-  } catch (NullPointerException | IllegalArgumentException exception) {
+    } catch (NullPointerException | IllegalArgumentException exception) {
       return null;
+    }
   }
-  }
-  
+
   /**
    * @author Yash Khapre
    * @param specialDayID
@@ -137,12 +137,12 @@ public class SpecialDayController {
   public boolean deleteSpecialDay(@RequestParam int id){
     try {
       return specialDayService.deleteSpecialDayByID(id);
-  }
-  catch (NullPointerException exp) {
+    }
+    catch (NullPointerException exp) {
       return false;
+    }
   }
-  }
-  
+
   /**
    * @author Yash Khapre
    * @param specialDayID
@@ -150,9 +150,9 @@ public class SpecialDayController {
    */
   @GetMapping(value = {"/specialday/check/id/", "/specialay/check/id"})
   public boolean isCustomerWithID(@RequestParam int id) {
-      return specialDayService.isSpecialDayByID(id);
+    return specialDayService.isSpecialDayByID(id);
   }
-  
+
   /**
    * @author Yash Khapre
    * @param SpecialDay sDay
@@ -163,8 +163,8 @@ public class SpecialDayController {
       throw new NullPointerException("Cannot find this Special Day!");
     }
     return new SpecialDayDto(sDay.getStartTimestamp(), sDay.getEndTimestamp(), sDay.getSpecialdayID());
-    }
-  
+  }
+
   /**
    * @author Yash Khapre
    * @param Shift s
@@ -175,7 +175,7 @@ public class SpecialDayController {
       throw new NullPointerException("Cannot find this Shift!");
     }
     return new ShiftDto(s.getShiftID(), s.getDate(), s.getStartTime(), s.getEndTime(), s.getShiftStatus(), convertToDto(s.getEmployee()));
-    }
+  }
 
   private EmployeeDto convertToDto(Employee employee) throws NullPointerException{
     if(employee == null) {
@@ -316,5 +316,5 @@ public class SpecialDayController {
     }
     return new ItemQuantityDto(itemQuantity.getItemNum(), itemQuantity.getQuantityID());
   }
-  
+
 }

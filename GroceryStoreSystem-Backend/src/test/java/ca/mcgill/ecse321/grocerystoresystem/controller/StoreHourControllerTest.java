@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.grocerystoresystem.controller;
+import ca.mcgill.ecse321.grocerystoresystem.dao.StoreHourRepository;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,9 +26,14 @@ public class StoreHourControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private StoreHourRepository storeHourRepository;
+
     @BeforeEach
     public void setup() {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
+
+        storeHourRepository.deleteAll();
     }
 
     @AfterEach
