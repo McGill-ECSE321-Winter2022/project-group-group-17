@@ -23,8 +23,14 @@
         android:id="@+id/StoreItemsList"
         android:layout_width="409dp"
         android:layout_height="627dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="103dp" />
+        android:divider="@color/black"
+        android:dividerHeight="2dp"
+        android:listSelector="@color/purple_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <!--Ad the page id so it can interact with the code. Make sure the name is descriptive -->
 

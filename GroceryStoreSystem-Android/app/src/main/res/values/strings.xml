@@ -14,6 +14,19 @@
     <string name="item_name">Item Name</string>
     <string name="add_button">Add</string>
     <string name="remove_button">Delete</string>
-
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="street_name">Street Name</string>
+    <string name="street_number">Street Number</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
+    <string name="address">Address</string>
+    <string name="store_name">Super Grocery</string>
+    <string name="login">Login</string>
 
 </resources>
