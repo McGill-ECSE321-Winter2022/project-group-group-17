@@ -28,5 +28,11 @@
     <string name="address">Address</string>
     <string name="store_name">Super Grocery</string>
     <string name="login">Login</string>
+    <string name="home">Home</string>
+    <string name="shop">Shop</string>
+    <string name="profile">Profile</string>
+    <string name="orders">Orders</string>
+    <string name="cart">Cart</string>
+
 
 </resources>
