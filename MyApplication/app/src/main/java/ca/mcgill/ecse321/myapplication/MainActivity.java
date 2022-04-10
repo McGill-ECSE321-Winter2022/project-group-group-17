@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.grocerystoresystem;
+package ca.mcgill.ecse321.myapplication;
 
 import android.os.Bundle;
 
@@ -13,27 +13,20 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import ca.mcgill.ecse321.grocerystoresystem.databinding.ActivityMainBinding;
+import ca.mcgill.ecse321.myapplication.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
-    String itemList[]={"Apple", "Banana","Apricot"};
-    int itemImages[]= {R.drawable.apple, R.drawable.banana, R.drawable.apricot};
-
-    ListView listView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.browse);
-        listView=(ListView)findViewById(R.id.StoreItemsList);
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -50,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
     }
 
     @Override

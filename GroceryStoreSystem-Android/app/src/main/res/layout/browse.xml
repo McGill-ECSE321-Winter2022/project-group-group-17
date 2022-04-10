@@ -3,4 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/StoreItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/store_items"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.107" />
+
+    <ListView
+        android:id="@+id/StoreItemsList"
+        android:layout_width="409dp"
+        android:layout_height="627dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <!--Ad the page id so it can interact with the code. Make sure the name is descriptive -->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
