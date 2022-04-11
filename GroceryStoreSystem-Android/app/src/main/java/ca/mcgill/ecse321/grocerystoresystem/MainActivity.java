@@ -24,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
-    String itemList[]={"Apple", "Banana","Apricot"};
-    int itemImages[]= {R.drawable.apple, R.drawable.banana, R.drawable.apricot};
-    String itemPrice[] = {"2$","0.49$","3$"};
+    String[] itemList ={"Apple", "Banana","Apricot"};
+    int[] itemImages= {R.drawable.apple, R.drawable.banana, R.drawable.apricot};
+    String[]itemPrice = {"2$","0.49$","3$"};
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.browse);
+        setContentView(R.layout.fragment_browse);
        //This is the list view which is found on the browsing page
         listView=(ListView)findViewById(R.id.StoreItemsList);
         //This sets the required custom list view for this data type
