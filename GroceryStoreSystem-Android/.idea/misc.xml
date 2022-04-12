@@ -3,17 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/drawable/ic_baseline_directions_delivery_24.xml" value="0.2265" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/activity_user.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/browse.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/content_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/deliveryorder_fragment_final.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/fragment_delivery_order.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/fragment_pickup_order.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/list_item.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/pickuporder_fragment_final.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/yashk/OneDrive/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/view_orders.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1475" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/drawable/orders.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/activity_store_items.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/browse.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/customer_home.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/deliveryorder_fragment_final.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/fragment_browse.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/fragment_delivery_order.xml" value="0.16354166666666667" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/fragment_first.xml" value="0.1375" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/fragment_second.xml" value="0.3" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/home.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/pickuporder_fragment_final.xml" value="0.16354166666666667" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/layout/view_orders.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/menu/bottom_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Documents/GitHub/project-group-group-17/GroceryStoreSystem-Android/app/src/main/res/menu/menu_main.xml" value="0.1375" />
       </map>
     </option>
   </component>
