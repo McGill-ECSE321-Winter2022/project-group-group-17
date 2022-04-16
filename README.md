@@ -2,7 +2,7 @@
 
 ## **Project Overview**
 
-The Grocery Store System that our team will develop will allow the people of a small town to easily access the store from the website or application. Using this system, the community will be able to make their own customer accounts so that they can browse available items and make orders for pickup or delivery. Employees can also make accounts for customers, view system orders, manually update the store inventory, and help customers check out in person. The owner will have the same accesses as the employees, as well as the authority to manage employee shifts, determine store opening hours, create inventory for new products, as well as add and remove employees to the  system. 
+The Grocery Store System that our team will develop will allow the people of a small town to easily access the store from the website or application. Using this system, the community will be able to make their own customer accounts so that they can browse available items and make orders for pickup or delivery. Employees can also make accounts for customers, view system orders, manually update the store inventory, and help customers check out in person. The owner will have the same accesses as the employees, as well as the authority to manage employee shifts, determine store opening hours, create inventory for new products, as well as add and remove employees to  the  system. 
 
 [Access Project Description](https://github.com/McGill-ECSE321-Winter2022/project-group-group-17/blob/master/Wiki/Deliverables/Project%20Description.pdf)
 
