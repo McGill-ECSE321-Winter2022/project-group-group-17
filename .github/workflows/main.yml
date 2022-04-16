@@ -31,7 +31,7 @@ jobs:
     - name: push backend
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        heroku_api_key: '678de1b4-6da9-438e-800c-70f13d302580'
+        heroku_api_key: '16e354b8-3361-411f-a0d3-aae8dfd50612'
         heroku_app_name: "grocerystoresys-backend-22ws" 
         heroku_email: "onyekachi.ezekwem@mail.mcgill.ca"
         appdir: "GroceryStoreSystem-Backend"
@@ -43,7 +43,7 @@ jobs:
         - name: push frontend
           uses: akhileshns/heroku-deploy@v3.12.12 
           with:
-            heroku_api_key: '678de1b4-6da9-438e-800c-70f13d302580'
+            heroku_api_key: '16e354b8-3361-411f-a0d3-aae8dfd50612'
             heroku_app_name: "grocerystoresys-frontend-22ws" 
             heroku_email: "onyekachi.ezekwem@mail.mcgill.ca"
             appdir: "GroceryStoreSystem-Frontend"
