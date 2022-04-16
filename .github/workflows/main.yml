@@ -20,7 +20,7 @@ jobs:
         distribution: 'adopt'
         cache: gradle
     - name: Validate Gradle wrapper
-      uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+    - uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
       working-directory: GroceryStoreSystem-Backend
@@ -28,7 +28,7 @@ jobs:
       run: ./gradlew build
       working-directory: GroceryStoreSystem-Backend
     - name: push backend
-      uses: akhileshns/heroku-deploy@v3.12.12
+    - uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: '678de1b4-6da9-438e-800c-70f13d302580'
         heroku_app_name: "grocerystoresys-backend-22ws" 
@@ -40,7 +40,7 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - name: push frontend
-          uses: akhileshns/heroku-deploy@v3.12.12 
+        - uses: akhileshns/heroku-deploy@v3.12.12 
           with:
             heroku_api_key: '678de1b4-6da9-438e-800c-70f13d302580'
             heroku_app_name: "grocerystoresys-frontend-22ws" 
