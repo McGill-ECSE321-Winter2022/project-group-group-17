@@ -53,3 +53,6 @@ test {
 
 	useJUnitPlatform()
 }
+springBoot {
+    mainClassName = 'ca.mcgill.ecse321.grocerystoresystem.GroceryStoreSystemBackendApplication'
+}
