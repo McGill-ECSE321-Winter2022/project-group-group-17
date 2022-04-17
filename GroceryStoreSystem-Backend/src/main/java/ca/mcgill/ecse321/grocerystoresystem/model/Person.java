@@ -18,7 +18,7 @@ public abstract class Person {
 	@ManyToOne
 	private Address person_address;
 //
-	@OneToMany(targetEntity = Order.class)
+	@OneToMany(targetEntity = Order.class, fetch = FetchType.EAGER)
 	private List<Order> orders;
 	
 	private String firstName;
