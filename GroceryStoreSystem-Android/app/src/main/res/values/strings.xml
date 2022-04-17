@@ -30,5 +30,8 @@
     <string name='login_button'>Login</string>
     <string name='sign_up_title'>Sign Up</string>
     <string name='address_title'>Address</string>
+    <string name="shop">Shop</string>
+    <string name="profile">Profile</string>
+    <string name="checkout">Checkout</string>
 
 </resources>
