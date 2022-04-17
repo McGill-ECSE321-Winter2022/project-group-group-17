@@ -31,12 +31,12 @@ The Grocery Store System that our team will develop will allow the people of a s
 ## **Time Spent** ⏱️
 |Name|Sprint 1|Sprint 2| Sprint 3| Sprint 4|
 |----|--------|--------|---------|---------|
-|Mario Bouzakhm | 19 hours | 40 hours | | |
-|Rui Du         | 18 hours | 40 hours | | |
-|Onyekachi Ezekwem| 19 hours| 40 hours | | |
-|Yash Khapre    | 17 hours | 40 hours | | |
-|Tinetendo Makata| 18 hours| 40 hours | | |
-|Amy Qi Wang| 18 hours | 40 hours | | |
+|Mario Bouzakhm | 19 hours | 40 hours |25 hours |25 hours|
+|Rui Du         | 18 hours | 40 hours |10 hours | |
+|Onyekachi Ezekwem| 19 hours| 40 hours |30 hours |20 hours|
+|Yash Khapre    | 17 hours | 40 hours |20 hours |25 hours|
+|Tinetendo Makata| 18 hours| 40 hours |15 hours|40 hours|
+|Amy Qi Wang| 18 hours | 40 hours |30 hours|22 hours|
 
 [Sprint 1 Wiki 🏃🏽‍♀️](https://github.com/McGill-ECSE321-Winter2022/project-group-group-17/wiki/Sprint-1--%F0%9F%8F%83%F0%9F%8F%BD%E2%80%8D%E2%99%80%EF%B8%8F)
 
