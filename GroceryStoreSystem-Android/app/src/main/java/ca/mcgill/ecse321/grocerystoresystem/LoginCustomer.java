@@ -1,21 +1,19 @@
 package ca.mcgill.ecse321.grocerystoresystem;
 
 /**
- * Holds information required to login. It's a singleton!
+ * Holds information for the logged in customer.
  */
 public final class LoginCustomer {
 
+    //Singleton class, since only one customer can be logged in.
     public static final LoginCustomer INSTANCE = new LoginCustomer();
 
     private int id;
 
-    // if userId is null, then no one is logged in (see isLoggedIn())
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-    private String address;
-
 
     private LoginCustomer() {
 
@@ -27,7 +25,7 @@ public final class LoginCustomer {
      * @return true if we have info, false otherwise
      */
     public boolean isLoggedIn() {
-        return email != null;
+        return id == 0;
     }
 
     /**
@@ -56,7 +54,6 @@ public final class LoginCustomer {
         lastName = null;
         password = null;
     }
-
 
     /**
      * Getter for the email
@@ -94,12 +91,5 @@ public final class LoginCustomer {
         return password;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
 }

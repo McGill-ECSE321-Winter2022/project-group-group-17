@@ -34,6 +34,11 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        //This button will take care of:
+        //Registering the user to the system
+        //Adding their address to the system
+        //Adding the address to the user.
         binding.button2.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View view) {
