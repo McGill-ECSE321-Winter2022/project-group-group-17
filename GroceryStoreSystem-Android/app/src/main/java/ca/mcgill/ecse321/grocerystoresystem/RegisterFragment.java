@@ -67,14 +67,16 @@ public class RegisterFragment extends Fragment {
                    final int[] firstSuccess = {0};
                    final int[] userId = {0};
 
+                   //HTTP Request to create a new customer
                    HttpUtils.post(
-                       "/customer/create ", params, new JsonHttpResponseHandler() {
+                       "customer/create ", params, new JsonHttpResponseHandler() {
                                @Override
                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                    try {
                                        // Perform the login by setting the state of login-status
                                        userId[0] = response.getInt("id");
 
+                                       // Logs in the customer in question.
                                        LoginCustomer.INSTANCE.login(userId[0], email, password, firstName, lastName);
 
                                        firstSuccess[0] = 1;
@@ -108,81 +110,84 @@ public class RegisterFragment extends Fragment {
                        }
                    );
 
-//                   final int[] addressId = new int[1];
-//                   final int[] secondSuccess = new int[1];
-//
-//                   RequestParams params2 = new RequestParams();
-//                   params2.add("streetName", street_name);
-//                   params2.add("streetNum", street_number);
-//                   params2.add("city", city);
-//                   params2.add("country", country);
-//                   params2.add("postalCode", postal_code);
-//                   params2.add("isLocal", String.valueOf(isLocal));
+                   final int[] addressId = new int[1];
+                   final int[] secondSuccess = new int[1];
 
-//                   if(firstSuccess[0] == 1) {
-//                       HttpUtils.post(
-//                               "address/create/", params2, new JsonHttpResponseHandler() {
-//                                   @Override
-//                                   public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                                       try {
-//                                           // Perform the login by setting the state of login-status
-//                                           addressId[0] = response.getInt("id");
-//                                           secondSuccess[0] = 1;
-//
-//                                           // Return to the fragment that requested a login.
-//                                           // But we only enter here via login, meaning we need to pop twice!
-//                                       } catch (JSONException ex) {
-//                                           Snackbar.make(binding.getRoot(), "Something went wrong and it's not your fault!\nFile a bug report!", Snackbar.LENGTH_LONG)
-//                                                   .setAction("Error: ", null).show();
-//                                       }
-//                                   }
-//
-//                                   @Override
-//                                   public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                                       // Report the first error to avoid excessive popups
-//                                       //String errorMessage = ApiError.firstOr(ApiError.decodeError(responseString), "Unknown error, try again later");
-//                                       Snackbar.make(binding.getRoot(), responseString, Snackbar.LENGTH_LONG)
-//                                               .setAction("Action", null).show();
-//                                   }
-//
-//                                   @Override
-//                                   public void onFinish() {
-//                                   }
-//                               }
-//                       );
-//                   }
+                   RequestParams params2 = new RequestParams();
+                   params2.add("streetName", street_name);
+                   params2.add("streetNum", street_number);
+                   params2.add("city", city);
+                   params2.add("country", country);
+                   params2.add("postalCode", postal_code);
+                   params2.add("isLocal", String.valueOf(isLocal));
 
-//                   RequestParams params3 = new RequestParams();
-//                   params3.add("id", String.valueOf(userId));
-//                   params3.add("addressID", String.valueOf(addressId));
+                   //If the customer was created
+                   //Create a new address for the fields entered by the user
+                   if(firstSuccess[0] == 1) {
+                       HttpUtils.post(
+                               "address/create/", params2, new JsonHttpResponseHandler() {
+                                   @Override
+                                   public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                       try {
+                                           // Perform the login by setting the state of login-status
+                                           addressId[0] = response.getInt("id");
+                                           secondSuccess[0] = 1;
+
+                                           // Return to the fragment that requested a login.
+                                           // But we only enter here via login, meaning we need to pop twice!
+                                       } catch (JSONException ex) {
+                                           Snackbar.make(binding.getRoot(), "Something went wrong and it's not your fault!\nFile a bug report!", Snackbar.LENGTH_LONG)
+                                                   .setAction("Error: ", null).show();
+                                       }
+                                   }
+
+                                   @Override
+                                   public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                       // Report the first error to avoid excessive popups
+                                       //String errorMessage = ApiError.firstOr(ApiError.decodeError(responseString), "Unknown error, try again later");
+                                       Snackbar.make(binding.getRoot(), responseString, Snackbar.LENGTH_LONG)
+                                               .setAction("Action", null).show();
+                                   }
+
+                                   @Override
+                                   public void onFinish() {
+                                   }
+                               }
+                       );
+                   }
+
+                   RequestParams params3 = new RequestParams();
+                   params3.add("id", String.valueOf(userId));
+                   params3.add("addressID", String.valueOf(addressId));
 
 
-//                   if(secondSuccess[0] == 1) {
-//                       HttpUtils.post(
-//                               "customer/update/address/", params3, new JsonHttpResponseHandler() {
-//                                   @Override
-//                                   public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//
-//                                       final NavController navController = NavHostFragment.findNavController(RegisterFragment.this);
-//                                       navController.popBackStack();
-//                                   }
-//
-//                                   @Override
-//                                   public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                                       // Report the first error to avoid excessive popups
-//                                       //String errorMessage = ApiError.firstOr(ApiError.decodeError(responseString), "Unknown error, try again later");
-//                                       Snackbar.make(binding.getRoot(), responseString, Snackbar.LENGTH_LONG)
-//                                               .setAction("Action", null).show();
-//                                   }
-//
-//                                   @Override
-//                                   public void onFinish() {
-//                                       // re-enable our signup button!
-//                                       binding.button2.setEnabled(true);
-//                                   }
-//                               }
-//                       );
-//                   }
+                    //If the address was created, update the customer profile to have the address realted to it
+                   if(secondSuccess[0] == 1) {
+                       HttpUtils.post(
+                               "customer/update/address/", params3, new JsonHttpResponseHandler() {
+                                   @Override
+                                   public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                                       final NavController navController = NavHostFragment.findNavController(RegisterFragment.this);
+                                       navController.popBackStack();
+                                   }
+
+                                   @Override
+                                   public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                       // Report the first error to avoid excessive popups
+                                       //String errorMessage = ApiError.firstOr(ApiError.decodeError(responseString), "Unknown error, try again later");
+                                       Snackbar.make(binding.getRoot(), responseString, Snackbar.LENGTH_LONG)
+                                               .setAction("Action", null).show();
+                                   }
+
+                                   @Override
+                                   public void onFinish() {
+                                       // re-enable our signup button!
+                                       binding.button2.setEnabled(true);
+                                   }
+                               }
+                       );
+                   }
                }
            }
         );

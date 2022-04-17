@@ -44,9 +44,6 @@ public class LoginFragment extends Fragment {
 
         //Clicking on the login button will trigger a series of HTTP request.
         //The system automatically identifies the type of the user and log them in accordingly.
-
-
-
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View w) {
