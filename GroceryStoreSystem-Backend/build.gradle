@@ -56,3 +56,10 @@ test {
 springBoot {
     mainClassName = 'ca.mcgill.ecse321.grocerystoresystem.GroceryStoreSystemBackendApplication'
 }
+jar{
+	manifest{
+		attributes(
+			'Main-class': 'ca.mcgill.ecse321.grocerystoresystem.GroceryStoreSystemBackendApplication'
+		)
+	}
+}
