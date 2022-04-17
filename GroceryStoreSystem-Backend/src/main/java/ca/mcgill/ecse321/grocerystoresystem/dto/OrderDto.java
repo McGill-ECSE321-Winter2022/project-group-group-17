@@ -49,6 +49,7 @@ public class OrderDto {
         this.isPaid = isPaid;
         this.pickupDate = pickupDate;
         this.orderType = "PickupOrder";
+        this.itemQuantities = itemQuantities;
     }
 
     public int getId() {
