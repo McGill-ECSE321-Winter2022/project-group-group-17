@@ -54,3 +54,5 @@ The Grocery Store System that our team will develop will allow the people of a s
 
 [Sprint 4 Project Report](https://github.com/McGill-ECSE321-Winter2022/project-group-group-17/wiki/Project-Report-(Sprint-4))
 
+[Sprint 4 User Documentation](https://github.com/McGill-ECSE321-Winter2022/project-group-group-17/wiki/User-Documentation)
+
