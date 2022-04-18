@@ -12,7 +12,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import ca.mcgill.ecse321.grocerystoresystem.adapters.ViewPersonalOrdersAdapter;
 import ca.mcgill.ecse321.grocerystoresystem.databinding.ActivityMainBinding;
 
 import android.view.Menu;
@@ -36,13 +40,16 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view_personal_orders);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        ViewPersonalOrdersFragment personalOrdersFragment = new ViewPersonalOrdersFragment();
+        ViewPersonalOrdersAdapter recycler_personal_orders_adapter = new ViewPersonalOrdersAdapter(getApplicationContext(), personalOrdersFragment.getOrdersList());
+
+        recyclerView.setAdapter(recycler_personal_orders_adapter);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
     }
 
     @Override
