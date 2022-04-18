@@ -14,4 +14,25 @@
 
     <string name="order_number">Order #1</string>
 
+
+
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="street_name">Street Name</string>
+    <string name="street_number">Street Number</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="postal_code">Postal Code</string>
+    <string name="sign_up">Sign Up</string>
+
+
+    <string name="login_app_name">Super Grocery Store</string>
+    <string name='login_button'>Login</string>
+    <string name='sign_up_title'>Sign Up</string>
+    <string name='address_title'>Address</string>
+
 </resources>

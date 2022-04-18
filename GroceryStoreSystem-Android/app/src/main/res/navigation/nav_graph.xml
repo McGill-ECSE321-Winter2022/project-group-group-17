@@ -3,31 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
+    app:startDestination="@id/loginFragment">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="ca.mcgill.ecse321.grocerystoresystem.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/loginFragment"
+        android:name="ca.mcgill.ecse321.grocerystoresystem.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
         <action
             android:id="@+id/login_to_personal_orders"
             app:destination="@id/recycler_view_personal_orders" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="ca.mcgill.ecse321.grocerystoresystem.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="ca.mcgill.ecse321.grocerystoresystem.RegisterFragment"
+        android:label="register_fragment"
+        tools:layout="@layout/register_fragment" />
 
     <fragment
         android:id="@+id/recycler_view_personal_orders"

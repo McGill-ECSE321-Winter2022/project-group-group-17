@@ -9,10 +9,11 @@ on:
 jobs:
   backend:
 
-    runs-on: Windows-latest
+    runs-on: Ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+    - uses: ahmadnassri/action-workflow-run-wait@v1
     - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
@@ -27,6 +28,13 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       working-directory: GroceryStoreSystem-Backend
+    - name: push backend
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku_api_key: '16e354b8-3361-411f-a0d3-aae8dfd50612'
+        heroku_app_name: "grocerystoresys-backend-22ws" 
+        heroku_email: "onyekachi.ezekwem@mail.mcgill.ca"
+        appdir: "GroceryStoreSystem-Backend"
   frontend:
       #needs: backend
       runs-on: Ubuntu-latest
@@ -35,8 +43,7 @@ jobs:
         - name: push frontend
           uses: akhileshns/heroku-deploy@v3.12.12 
           with:
-            heroku_api_key: '678de1b4-6da9-438e-800c-70f13d302580'
+            heroku_api_key: '16e354b8-3361-411f-a0d3-aae8dfd50612'
             heroku_app_name: "grocerystoresys-frontend-22ws" 
             heroku_email: "onyekachi.ezekwem@mail.mcgill.ca"
             appdir: "GroceryStoreSystem-Frontend"
-            
