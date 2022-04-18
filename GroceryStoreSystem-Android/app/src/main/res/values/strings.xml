@@ -12,6 +12,6 @@
 
     <string name="myorders_text">My Orders</string>
 
-    <string name="order_number">Order %1$s</string>
+    <string name="order_number">Order #1</string>
 
 </resources>
